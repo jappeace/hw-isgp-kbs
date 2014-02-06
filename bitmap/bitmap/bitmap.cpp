@@ -3,6 +3,7 @@
 
 #include "stdafx.h"
 #include "bitmap.h"
+#include "Block.h"
 
 #define MAX_LOADSTRING 100
 
@@ -127,7 +128,13 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 HBITMAP hBitmap = NULL;
 int positionX = 100;
 int positionY = 100;
-
+bool left = false;
+bool right = false;
+bool up = false;
+bool down = false;
+int xVel = 0;
+int yVel = 0;
+Block *block = new Block(100,100);
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -155,29 +162,39 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		break;
 	case WM_KEYDOWN:
 		if (wParam == VK_RIGHT){
-			positionX += 10;
+			right = true;
 		}
-		if (wParam == VK_RIGHT){
-			positionX -= 10;
+		if (wParam == VK_LEFT){
+			left = true;
 		}
 		if (wParam == VK_UP){
-			positionY -= 5;
+			up = true;
 		}
 		if (wParam == VK_DOWN){
-			positionY += 5;
+			down = true;
 		}
 		
-		RECT rect;
-		GetClientRect(hWnd, &rect);
-		InvalidateRect(hWnd, &rect, true);
-		//UpdateWindow(hWnd);
+		
 
 		break;
 	case WM_KEYUP:
+		if (wParam == VK_RIGHT){
+			right = false;
+		}
+		if (wParam == VK_LEFT){
+			left = false;
+		}
+		if (wParam == VK_UP){
+			up = false;
+		}
+		if (wParam == VK_DOWN){
+			down = false;
+		}
 
 		break;
 	case WM_CREATE:
 		hBitmap = (HBITMAP)LoadImage(hInst, L"c:\\test.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+		SetWindowPos(hWnd, HWND_TOP, 100, 100, 800, 600, SWP_ASYNCWINDOWPOS);
 		break;
 	case WM_PAINT:
 		PAINTSTRUCT 	ps;
@@ -187,7 +204,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         HGDIOBJ 		oldBitmap;
 		
 		hdc = BeginPaint(hWnd, &ps);
-		
 		
 		hdcMem = CreateCompatibleDC(hdc);
         oldBitmap = SelectObject(hdcMem, hBitmap);
@@ -204,7 +220,37 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		PostQuitMessage(0);
 		break;
 	default:
+		//if (up && yVel > -10){ yVel -= 1; }
+		//else if (yVel < 0){ yVel++; }
+		//if (down && yVel < 10){ yVel += 1; }
+		//else if (yVel > 0){ yVel--; }
+
+		if (left && xVel > -10){ xVel -= 1; }
+		else if (xVel < 0){ xVel++; }
+		if (right && xVel < 10){ xVel += 1; }
+		else if (xVel > 0){ xVel--; }
+
+		positionY += yVel;
+		positionX += xVel;
+		
+		if (positionY < 0) { positionY = 0; }
+		if (positionY > 520) { positionY = 520; }
+		if (positionX < 0) { positionX = 0; }
+		if (positionX > 760) { positionX = 760; }
+
+		if (positionY < 520) { yVel += 1; }
+		else { yVel = 0; }
+		if (up && positionY == 520) { yVel = -12; }
+
+		RECT rect;
+		GetClientRect(hWnd, &rect);
+		InvalidateRect(hWnd, &rect, true);
+		//UpdateWindow(hWnd);
+
+		Sleep(20);  
+
 		return DefWindowProc(hWnd, message, wParam, lParam);
+
 	}
 	return 0;
 }
