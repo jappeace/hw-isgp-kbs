@@ -124,8 +124,13 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //  WM_DESTROY	- post a quit message and return
 //
 //
+const int GAME_TIMER_ID = 1337;
+const int GAME_TIMER_INTERVAL = 1000 / 50; //50 cycles per second
+HBITMAP hCharacter = NULL;
+HBRUSH hRectangleBrush = CreateSolidBrush(RGB(0,0,0));
 
-HBITMAP hBitmap = NULL;
+RECT rect;
+
 int positionX = 100;
 int positionY = 100;
 bool left = false;
@@ -136,91 +141,8 @@ int xVel = 0;
 int yVel = 0;
 Block *block = new Block(100,100);
 
-LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
-{
-	int wmId, wmEvent;
-	PAINTSTRUCT ps;
-	HDC hdc;
-
-	switch (message)
-	{
-	case WM_COMMAND:
-		wmId    = LOWORD(wParam);
-		wmEvent = HIWORD(wParam);
-		// Parse the menu selections:
-		switch (wmId)
-		{
-		case IDM_ABOUT:
-			DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
-			break;
-		case IDM_EXIT:
-			DestroyWindow(hWnd);
-			break;
-		default:
-			return DefWindowProc(hWnd, message, wParam, lParam);
-		}
-		break;
-	case WM_KEYDOWN:
-		if (wParam == VK_RIGHT){
-			right = true;
-		}
-		if (wParam == VK_LEFT){
-			left = true;
-		}
-		if (wParam == VK_UP){
-			up = true;
-		}
-		if (wParam == VK_DOWN){
-			down = true;
-		}
-		
-		
-
-		break;
-	case WM_KEYUP:
-		if (wParam == VK_RIGHT){
-			right = false;
-		}
-		if (wParam == VK_LEFT){
-			left = false;
-		}
-		if (wParam == VK_UP){
-			up = false;
-		}
-		if (wParam == VK_DOWN){
-			down = false;
-		}
-
-		break;
-	case WM_CREATE:
-		hBitmap = (HBITMAP)LoadImage(hInst, L"c:\\test.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
-		SetWindowPos(hWnd, HWND_TOP, 100, 100, 800, 600, SWP_ASYNCWINDOWPOS);
-		break;
-	case WM_PAINT:
-		PAINTSTRUCT 	ps;
-    	HDC 			hdc;
-    	BITMAP 			bitmap;
-    	HDC 			hdcMem;
-        HGDIOBJ 		oldBitmap;
-		
-		hdc = BeginPaint(hWnd, &ps);
-		
-		hdcMem = CreateCompatibleDC(hdc);
-        oldBitmap = SelectObject(hdcMem, hBitmap);
-		
-		GetObject(hBitmap, sizeof(bitmap), &bitmap);
-        BitBlt(hdc, positionX, positionY, bitmap.bmWidth, bitmap.bmHeight, hdcMem, 0, 0, SRCCOPY);
-
-        SelectObject(hdcMem, oldBitmap);
-        DeleteDC(hdcMem);
-
-		EndPaint(hWnd, &ps);
-		break;
-	case WM_DESTROY:
-		PostQuitMessage(0);
-		break;
-	default:
-		//if (up && yVel > -10){ yVel -= 1; }
+void GameLogic() {
+			//if (up && yVel > -10){ yVel -= 1; }
 		//else if (yVel < 0){ yVel++; }
 		//if (down && yVel < 10){ yVel += 1; }
 		//else if (yVel > 0){ yVel--; }
@@ -241,13 +163,131 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		if (positionY < 520) { yVel += 1; }
 		else { yVel = 0; }
 		if (up && positionY == 520) { yVel = -12; }
+}
 
-		RECT rect;
+LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	int wmId, wmEvent;
+	PAINTSTRUCT ps;
+	HDC hdc;
+
+	static HDC		hdcBackBuffer;
+	static HBITMAP	hBitmap;
+	static HBITMAP	hOldBitmap;
+
+	switch (message)
+	{
+	case WM_COMMAND:
+		wmId    = LOWORD(wParam);
+		wmEvent = HIWORD(wParam);
+		// Parse the menu selections:
+		switch (wmId)
+		{
+		case IDM_ABOUT:
+			DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
+			break;
+		case IDM_EXIT:
+			DestroyWindow(hWnd);
+			break;
+		default:
+			return DefWindowProc(hWnd, message, wParam, lParam);
+		}
+		break;
+
+	case WM_KEYDOWN:
+		if (wParam == VK_RIGHT){
+			right = true;
+		}
+		if (wParam == VK_LEFT){
+			left = true;
+		}
+		if (wParam == VK_UP){
+			up = true;
+		}
+		if (wParam == VK_DOWN){
+			down = true;
+		}
+		break;
+
+	case WM_KEYUP:
+		if (wParam == VK_RIGHT){
+			right = false;
+		}
+		if (wParam == VK_LEFT){
+			left = false;
+		}
+		if (wParam == VK_UP){
+			up = false;
+		}
+		if (wParam == VK_DOWN){
+			down = false;
+		}
+
+		break;
+	case WM_CREATE:
+		
+		hCharacter = (HBITMAP)LoadImage(hInst, L"c:\\test.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+		SetWindowPos(hWnd, HWND_TOP, 100, 100, 800, 600, SWP_ASYNCWINDOWPOS);
 		GetClientRect(hWnd, &rect);
-		InvalidateRect(hWnd, &rect, true);
-		//UpdateWindow(hWnd);
 
-		Sleep(20);  
+		//create a memory device context
+		hdcBackBuffer = CreateCompatibleDC(NULL);
+
+		//get the DC for the front buffer
+		hdc = GetDC(hWnd);
+
+		hBitmap = CreateCompatibleBitmap(hdc,
+			800,
+			600); //nog waardes halen uit rect
+
+
+		//select the bitmap into the memory device context
+		hOldBitmap = (HBITMAP)SelectObject(hdcBackBuffer, hBitmap);
+
+		//don't forget to release the DC
+		ReleaseDC(hWnd, hdc); 
+
+		::SetTimer(hWnd, GAME_TIMER_ID, GAME_TIMER_INTERVAL, NULL);
+		break;
+
+	case WM_PAINT: {
+
+		hdc = BeginPaint(hWnd, &ps);
+
+		BitBlt(hdcBackBuffer,
+			0,
+			0,
+			800,
+			600,
+			NULL,
+			NULL,
+			NULL,
+			WHITENESS);
+
+		SelectObject(hdcBackBuffer, hRectangleBrush);
+
+		// Draw the rectangle on the back buffer
+		Rectangle(hdcBackBuffer, positionX, positionY, positionX + 20, positionY + 20);
+
+
+		//now blit backbuffer to front
+		BitBlt(ps.hdc, 0, 0, 800, 600, hdcBackBuffer, 0, 0, SRCCOPY);
+		EndPaint(hWnd, &ps);
+		break;
+	}
+
+	case WM_TIMER:
+		switch(wParam) {
+		case GAME_TIMER_ID:
+			GameLogic();
+			InvalidateRect(hWnd, &rect, true);
+			break;
+		}
+		break;
+	case WM_DESTROY:
+		PostQuitMessage(0);
+		break;
+	default:
 
 		return DefWindowProc(hWnd, message, wParam, lParam);
 
