@@ -4,8 +4,8 @@
 
 int APIENTRY WinMain(HINSTANCE hInstance,
                      HINSTANCE hPrevInstance,
-                     LPSTR     lpCmdLine,
-                     int       nCmdShow)
+                     LPSTR lpCmdLine,
+                     int nCmdShow)
 {
 	CSkeleton app;
 
