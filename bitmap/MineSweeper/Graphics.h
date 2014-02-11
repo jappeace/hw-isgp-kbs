@@ -18,6 +18,8 @@ namespace isgp{
 		void drawStr(Point& position, const char* str, int length);
 		void setTextColor(COLORREF color);
 		void setTextBackgroundColor(COLORREF color);
+		void drawRect(Point& one, Point& two);
+		void drawRect(int xone, int yone, int xtwo, int ytwo);
 	private:
 		/**
 		* win 32 uses somthing called a HDC, which is a handle to the 

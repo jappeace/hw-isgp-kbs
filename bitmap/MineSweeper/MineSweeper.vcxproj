@@ -13,6 +13,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{4BA1906D-B039-472E-A5C8-9413D0C75368}</ProjectGuid>
     <RootNamespace>MineSweeper</RootNamespace>
+    <ProjectName>Architecture</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -65,6 +66,7 @@
     <ClCompile Include="AbstractWindow.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Grid.cpp" />
+    <ClCompile Include="Level.cpp" />
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="Size.cpp" />
     <ClCompile Include="Tile.cpp" />
@@ -77,6 +79,8 @@
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="IGridTraveller.h" />
+    <ClInclude Include="IPaintable.h" />
+    <ClInclude Include="Level.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="resource2.h" />

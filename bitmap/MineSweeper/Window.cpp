@@ -6,7 +6,7 @@ const int fieldHeight = 50;
 // Constructors / Destructors      //
 /////////////////////////////////////
 Window::Window() {
-	_mineField = new MineField(fieldWidth,fieldHeight);
+	_level = new Level(fieldWidth,fieldHeight);
 }
 
 Window::~Window()
@@ -21,14 +21,18 @@ INT_PTR CALLBACK dialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 	return NULL;
 }
 void Window::onPaint(Graphics* g){
+	_level->setTileSize(
+		&Size(
+			(_windowSize->right  - _windowSize->left)	/ _level->getSize()->GetWidth(),
+			(_windowSize->bottom - _windowSize->top)	/ _level->getSize()->GetHeight()
+		)
+		);
 	_level->paint(g);
 }
 
 void Window::onCommand(int from, int command){
 	switch(from){
 	case ID_FILE_NEWGAME:
-		delete _mineField;
-		_mineField = new MineField(fieldHeight,fieldWidth);
 		this->repaint();
 		break;
 	case ID_HELP_ABOUT:

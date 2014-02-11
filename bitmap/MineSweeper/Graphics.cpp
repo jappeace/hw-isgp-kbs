@@ -27,4 +27,11 @@ namespace isgp{
 	void Graphics::setTextBackgroundColor(COLORREF color){
 		SetBkColor(*_hdc, color);
 	}
+
+	void Graphics::drawRect(Point& one, Point& two){
+		this->drawRect(one.GetX(), one.GetY(), two.GetX(), two.GetY());
+	}
+	void Graphics::drawRect(int xone, int yone, int xtwo, int ytwo){
+		Rectangle(*_hdc, xone, yone, xtwo, ytwo);
+	}
 }
