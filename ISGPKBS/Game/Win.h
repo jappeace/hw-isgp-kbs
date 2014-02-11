@@ -7,7 +7,7 @@ class CWin
 {
 protected:
 	static HINSTANCE m_hInstance;
-	HWND  m_hWnd;
+	HWND m_hWnd;
 
 	DWORD m_PosX;
 	DWORD m_PosY;
@@ -16,10 +16,10 @@ protected:
 	DWORD m_dwCreationFlags;
 	DWORD m_dwCreationHeight;
 	DWORD m_dwCreationWidth;
-	TCHAR * m_strWindowTitle;
+	TCHAR *m_strWindowTitle;
 	HBRUSH m_hbrWindowColor;
-	HICON  m_hIcon;
-	HMENU  m_hMenu;
+	HICON m_hIcon;
+	HMENU m_hMenu;
 	HACCEL m_hAccelTable;
 
 public:

@@ -41,7 +41,6 @@ CWin::~CWin()
 {
 }
 
-
 //////////////////////////////////////////////////////////////////
 // Functions
 //////////////////////////////////////////////////////////////////
@@ -49,9 +48,9 @@ int CWin::Run()
 {
 	MSG msg;
 
-	while (GetMessage(&msg, NULL, 0, 0)) 
+	while (GetMessage(&msg, NULL, 0, 0))
 	{
-		if (!TranslateAccelerator(msg.hwnd, m_hAccelTable, &msg)) 
+		if (!TranslateAccelerator(msg.hwnd, m_hAccelTable, &msg))
 		{
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
@@ -65,7 +64,7 @@ HRESULT CWin::Create()
 {
 	WNDCLASSEX wcex;
 
-	wcex.cbSize = sizeof(WNDCLASSEX); 
+	wcex.cbSize = sizeof(WNDCLASSEX);
 
 	wcex.style         = CS_HREDRAW | CS_VREDRAW;
 	wcex.lpfnWndProc   = (WNDPROC)WndProc;
@@ -111,8 +110,8 @@ LRESULT CWin::MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	switch (uMsg) 
 	{
 	case WM_COMMAND:
-		wmId    = LOWORD(wParam); 
-		wmEvent = HIWORD(wParam); 
+		wmId    = LOWORD(wParam);
+		wmEvent = HIWORD(wParam);
 		break;
 	case WM_DESTROY:
 		PostQuitMessage(0);
