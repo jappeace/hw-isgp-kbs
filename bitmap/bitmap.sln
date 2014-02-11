@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "bitmap", "bitmap\bitmap.vcxproj", "{5A39EFEA-9EFA-4ACD-8EA0-2479377E5D2B}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MineSweeper", "MineSweeper\MineSweeper.vcxproj", "{4BA1906D-B039-472E-A5C8-9413D0C75368}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -13,6 +15,10 @@ Global
 		{5A39EFEA-9EFA-4ACD-8EA0-2479377E5D2B}.Debug|Win32.Build.0 = Debug|Win32
 		{5A39EFEA-9EFA-4ACD-8EA0-2479377E5D2B}.Release|Win32.ActiveCfg = Release|Win32
 		{5A39EFEA-9EFA-4ACD-8EA0-2479377E5D2B}.Release|Win32.Build.0 = Release|Win32
+		{4BA1906D-B039-472E-A5C8-9413D0C75368}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4BA1906D-B039-472E-A5C8-9413D0C75368}.Debug|Win32.Build.0 = Debug|Win32
+		{4BA1906D-B039-472E-A5C8-9413D0C75368}.Release|Win32.ActiveCfg = Release|Win32
+		{4BA1906D-B039-472E-A5C8-9413D0C75368}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
