@@ -10,8 +10,8 @@ namespace isgp {
 		// TODO: Retrieve actual window size
 		this->_bitmap = CreateCompatibleBitmap(hdc, 800, 600);
 
-
 		//select the bitmap into the memory device context
+		// TODO(Johan): Check if this variable is actually needed for the rendering
 		this->_oldBitmap = (HBITMAP)SelectObject(this->_backBuffer, this->_bitmap);
 
 		//don't forget to release the DC
