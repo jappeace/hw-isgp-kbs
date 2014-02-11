@@ -1,11 +1,10 @@
-// WinClass.cpp : Defines the entry point for the application.
-//
+// WinMain.cpp: Defines the entry point of the program.
 #include "Skeleton.h"
 
-int APIENTRY WinMain(HINSTANCE hInstance,
-                     HINSTANCE hPrevInstance,
-                     LPSTR lpCmdLine,
-                     int nCmdShow)
+int APIENTRY WinMain(HINSTANCE h_instance,
+                     HINSTANCE h_prev_instance,
+                     LPSTR cmd_arguments,
+                     int cmd_show)
 {
 	Skeleton app;
 

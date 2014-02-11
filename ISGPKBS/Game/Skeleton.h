@@ -8,7 +8,6 @@ class Skeleton : public Win
 public:
 	Skeleton();
 	~Skeleton();
-
 	LRESULT MsgProc(HWND, UINT, WPARAM, LPARAM);
 };
 

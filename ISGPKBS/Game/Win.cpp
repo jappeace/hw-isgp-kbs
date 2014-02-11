@@ -1,56 +1,45 @@
 #include "Win.h"
 #include <tchar.h>
 
-//////////////////////////////////////////////////////////////////
-// Static Initialisation
-//////////////////////////////////////////////////////////////////
 static Win * g_pWin       = NULL;
-HINSTANCE Win::m_hInstance = GetModuleHandle(NULL);
+HINSTANCE Win::hinstance_ = GetModuleHandle(NULL);
 
-//////////////////////////////////////////////////////////////////
 // Connectivity WIN32 -> Class
-//////////////////////////////////////////////////////////////////
 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return g_pWin->MsgProc(hWnd, uMsg, wParam, lParam);
 }
 
-//////////////////////////////////////////////////////////////////
-// Constructors/Destructors
-//////////////////////////////////////////////////////////////////
 Win::Win()
 {
 	g_pWin = this;
 
-	this->m_hWnd             = NULL;
-	this->m_dwCreationFlags  = 0L;
-	this->m_dwWindowStyle    = WS_OVERLAPPEDWINDOW;
-	this->m_dwExWindowStyle  = WS_EX_OVERLAPPEDWINDOW;
-	this->m_dwCreationFlags  = SW_SHOW;
-	this->m_PosX             = CW_USEDEFAULT;
-	this->m_PosY             = CW_USEDEFAULT;
-	this->m_dwCreationWidth  = CW_USEDEFAULT;
-	this->m_dwCreationHeight = CW_USEDEFAULT;
-	this->m_hbrWindowColor   = (HBRUSH)(COLOR_WINDOW+1);
-	this->m_hIcon            = LoadIcon(m_hInstance, (LPCTSTR)IDI_APPLICATION);
-	this->m_strWindowTitle   = _T("Win32 OO Skeleton Program...");
-	this->m_hMenu            = NULL;
+	this->hwnd_            = NULL;
+	this->creation_flags_  = 0L;
+	this->window_style_    = WS_OVERLAPPEDWINDOW;
+	this->ex_window_style_ = WS_EX_OVERLAPPEDWINDOW;
+	this->creation_flags_  = SW_SHOW;
+	this->pos_x_           = CW_USEDEFAULT;
+	this->pos_y_           = CW_USEDEFAULT;
+	this->creation_width_  = CW_USEDEFAULT;
+	this->creation_height_ = CW_USEDEFAULT;
+	this->window_color_    = (HBRUSH)(COLOR_WINDOW+1);
+	this->icon_            = LoadIcon(hinstance_, (LPCTSTR)IDI_APPLICATION);
+	this->window_title_    = _T("Win32 OO Skeleton Program...");
+	this->menu_            = NULL;
 }
 
 Win::~Win()
 {
 }
 
-//////////////////////////////////////////////////////////////////
-// Functions
-//////////////////////////////////////////////////////////////////
 int Win::Run()
 {
 	MSG msg;
 
 	while (GetMessage(&msg, NULL, 0, 0))
 	{
-		if (!TranslateAccelerator(msg.hwnd, m_hAccelTable, &msg))
+		if (!TranslateAccelerator(msg.hwnd, accel_table_, &msg))
 		{
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
@@ -70,31 +59,31 @@ HRESULT Win::Create()
 	wcex.lpfnWndProc   = (WNDPROC)WndProc;
 	wcex.cbClsExtra    = 0;
 	wcex.cbWndExtra    = 0;
-	wcex.hInstance     = m_hInstance;
-	wcex.hIcon         = m_hIcon;
+	wcex.hInstance     = hinstance_;
+	wcex.hIcon         = icon_;
 	wcex.hCursor       = LoadCursor(NULL, IDC_ARROW);
-	wcex.hbrBackground = m_hbrWindowColor;
+	wcex.hbrBackground = window_color_;
 	wcex.lpszMenuName  = NULL;
 	wcex.lpszClassName = _T("Skeleton");
 	wcex.hIconSm       = NULL;
 
 	::RegisterClassEx(&wcex);
 
-	m_hWnd = ::CreateWindowEx(m_dwExWindowStyle,
-	                          _T("Skeleton"),
-	                          m_strWindowTitle,
-	                          m_dwWindowStyle,
-	                          m_PosX, m_PosY,
-	                          m_dwCreationWidth, m_dwCreationHeight,
-	                          NULL, m_hMenu, m_hInstance, NULL);
+	hwnd_ = ::CreateWindowEx(ex_window_style_,
+	                         _T("Skeleton"),
+	                         window_title_,
+	                         window_style_,
+	                         pos_x_, pos_y_,
+	                         creation_width_, creation_height_,
+	                         NULL, menu_, hinstance_, NULL);
 
-	if (!m_hWnd)
+	if (!hwnd_)
 	{
 		return FALSE;
 	}
 
-	::ShowWindow(m_hWnd, m_dwCreationFlags);
-	::UpdateWindow(m_hWnd);
+	::ShowWindow(hwnd_, creation_flags_);
+	::UpdateWindow(hwnd_);
 
 	return TRUE;
 }
@@ -104,10 +93,10 @@ LRESULT Win::MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	int wmId;
 	int wmEvent;
 
-	if (!m_hWnd)
-		m_hWnd = hWnd;
+	if (!hwnd_)
+		hwnd_ = hWnd;
 
-	switch (uMsg) 
+	switch (uMsg)
 	{
 	case WM_COMMAND:
 		wmId    = LOWORD(wParam);

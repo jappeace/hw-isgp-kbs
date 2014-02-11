@@ -5,29 +5,28 @@
 
 class Win
 {
-protected:
-	static HINSTANCE m_hInstance;
-	HWND m_hWnd;
-
-	DWORD m_PosX;
-	DWORD m_PosY;
-	DWORD m_dwWindowStyle;
-	DWORD m_dwExWindowStyle;
-	DWORD m_dwCreationFlags;
-	DWORD m_dwCreationHeight;
-	DWORD m_dwCreationWidth;
-	TCHAR *m_strWindowTitle;
-	HBRUSH m_hbrWindowColor;
-	HICON m_hIcon;
-	HMENU m_hMenu;
-	HACCEL m_hAccelTable;
-
 public:
 	Win();
+	virtual ~Win();
 	HRESULT Create();
 	int Run();
-	virtual ~Win();
 	virtual LRESULT MsgProc(HWND, UINT, WPARAM, LPARAM);
+
+protected:
+	static HINSTANCE hinstance_;
+	HWND hwnd_;
+	DWORD pos_x_;
+	DWORD pos_y_;
+	DWORD window_style_;
+	DWORD ex_window_style_;
+	DWORD creation_flags_;
+	DWORD creation_height_;
+	DWORD creation_width_;
+	TCHAR *window_title_;
+	HBRUSH window_color_;
+	HICON icon_;
+	HMENU menu_;
+	HACCEL accel_table_;
 };
 
 #endif
