@@ -4,23 +4,23 @@
 //////////////////////////////////////////////////////////////////
 // Static Initialisation
 //////////////////////////////////////////////////////////////////
-static CWin * g_pCWin       = NULL;
-HINSTANCE CWin::m_hInstance = GetModuleHandle(NULL);
+static Win * g_pWin       = NULL;
+HINSTANCE Win::m_hInstance = GetModuleHandle(NULL);
 
 //////////////////////////////////////////////////////////////////
 // Connectivity WIN32 -> Class
 //////////////////////////////////////////////////////////////////
 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-	return g_pCWin->MsgProc(hWnd, uMsg, wParam, lParam);
+	return g_pWin->MsgProc(hWnd, uMsg, wParam, lParam);
 }
 
 //////////////////////////////////////////////////////////////////
 // Constructors/Destructors
 //////////////////////////////////////////////////////////////////
-CWin::CWin()
+Win::Win()
 {
-	g_pCWin = this;
+	g_pWin = this;
 
 	this->m_hWnd             = NULL;
 	this->m_dwCreationFlags  = 0L;
@@ -37,14 +37,14 @@ CWin::CWin()
 	this->m_hMenu            = NULL;
 }
 
-CWin::~CWin()
+Win::~Win()
 {
 }
 
 //////////////////////////////////////////////////////////////////
 // Functions
 //////////////////////////////////////////////////////////////////
-int CWin::Run()
+int Win::Run()
 {
 	MSG msg;
 
@@ -60,7 +60,7 @@ int CWin::Run()
 	return msg.wParam;
 }
 
-HRESULT CWin::Create()
+HRESULT Win::Create()
 {
 	WNDCLASSEX wcex;
 
@@ -99,7 +99,7 @@ HRESULT CWin::Create()
 	return TRUE;
 }
 
-LRESULT CWin::MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT Win::MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	int wmId;
 	int wmEvent;

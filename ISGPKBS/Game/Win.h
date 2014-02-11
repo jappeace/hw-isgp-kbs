@@ -3,7 +3,7 @@
 
 #include <windows.h>
 
-class CWin
+class Win
 {
 protected:
 	static HINSTANCE m_hInstance;
@@ -23,10 +23,10 @@ protected:
 	HACCEL m_hAccelTable;
 
 public:
-	CWin();
+	Win();
 	HRESULT Create();
 	int Run();
-	virtual ~CWin();
+	virtual ~Win();
 	virtual LRESULT MsgProc(HWND, UINT, WPARAM, LPARAM);
 };
 

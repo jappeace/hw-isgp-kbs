@@ -3,11 +3,11 @@
 /////////////////////////////////////
 // Constructors / Destructors      //
 /////////////////////////////////////
-CSkeleton::CSkeleton()
+Skeleton::Skeleton()
 {
 }
 
-CSkeleton::~CSkeleton()
+Skeleton::~Skeleton()
 {
 }
 
@@ -15,7 +15,7 @@ CSkeleton::~CSkeleton()
 // Member functions                //
 /////////////////////////////////////
 
-LRESULT CSkeleton::MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT Skeleton::MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-	return CWin::MsgProc(hWnd, uMsg, wParam, lParam);
+	return Win::MsgProc(hWnd, uMsg, wParam, lParam);
 }

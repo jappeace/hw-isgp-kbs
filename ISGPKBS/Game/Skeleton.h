@@ -3,11 +3,11 @@
 
 #include "Win.h"
 
-class CSkeleton : public CWin
+class Skeleton : public Win
 {
 public:
-	CSkeleton();
-	~CSkeleton();
+	Skeleton();
+	~Skeleton();
 
 	LRESULT MsgProc(HWND, UINT, WPARAM, LPARAM);
 };

@@ -7,7 +7,7 @@ int APIENTRY WinMain(HINSTANCE hInstance,
                      LPSTR lpCmdLine,
                      int nCmdShow)
 {
-	CSkeleton app;
+	Skeleton app;
 
 	if (!app.Create())
 	{
