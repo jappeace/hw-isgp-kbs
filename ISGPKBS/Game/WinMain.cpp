@@ -13,6 +13,6 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 	{
 		return 0;
 	}
-	
+
 	return app.Run();
 }

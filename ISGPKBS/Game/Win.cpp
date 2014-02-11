@@ -27,8 +27,8 @@ CWin::CWin()
 	this->m_dwWindowStyle    = WS_OVERLAPPEDWINDOW;
 	this->m_dwExWindowStyle  = WS_EX_OVERLAPPEDWINDOW;
 	this->m_dwCreationFlags  = SW_SHOW;
-	this->m_PosX             = CW_USEDEFAULT; 
-	this->m_PosY             = CW_USEDEFAULT; 
+	this->m_PosX             = CW_USEDEFAULT;
+	this->m_PosY             = CW_USEDEFAULT;
 	this->m_dwCreationWidth  = CW_USEDEFAULT;
 	this->m_dwCreationHeight = CW_USEDEFAULT;
 	this->m_hbrWindowColor   = (HBRUSH)(COLOR_WINDOW+1);
