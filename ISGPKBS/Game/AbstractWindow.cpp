@@ -17,10 +17,13 @@ LRESULT CALLBACK WindowProcedure(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPa
 {
 	return g_abstractWindow->MsgProc(hWnd, uMsg, wParam, lParam);
 }
+
+const Size AbstractWindow::WindowSize = Size(800, 600);
+
 //////////////////////////////////////////////////////////////////
 // Constructors/Destructors
 //////////////////////////////////////////////////////////////////
-AbstractWindow::AbstractWindow() : _windowSize(800, 600)
+AbstractWindow::AbstractWindow()
 {
 	g_abstractWindow = this;
 	_hWnd = NULL;
@@ -30,8 +33,8 @@ AbstractWindow::AbstractWindow() : _windowSize(800, 600)
 	_dwCreationFlags		= SW_SHOW;
 	_PosX				= CW_USEDEFAULT;	
 	_PosY				= CW_USEDEFAULT;	
-	_dwCreationWidth		= _windowSize.GetWidth();
-	_dwCreationHeight	= _windowSize.GetHeight();
+	_dwCreationWidth		= WindowSize.GetWidth();
+	_dwCreationHeight	= WindowSize.GetHeight();
 	_hbrWindowColor		= (HBRUSH)(COLOR_WINDOW+1);
 	_hIcon				= LoadIcon(_hInstance, (LPCTSTR)IDI_APPLICATION);
 	_strWindowTitle		= _T("Win32 OO Skeleton Program...");

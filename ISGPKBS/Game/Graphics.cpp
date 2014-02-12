@@ -1,5 +1,6 @@
 #include "Graphics.h"
 #include "StrConverter.h"
+#include "AbstractWindow.h"
 namespace isgp {
 
 	Graphics::Graphics(HWND hWnd) {
@@ -9,7 +10,7 @@ namespace isgp {
 		HDC hdc = GetDC(hWnd);
 
 		// TODO: Retrieve actual window size
-		this->_bitmap = CreateCompatibleBitmap(hdc, 800, 600);
+		this->_bitmap = CreateCompatibleBitmap(hdc, AbstractWindow::WindowSize.GetWidth(), AbstractWindow::WindowSize.GetHeight());
 
 		//select the bitmap into the memory device context
 		SelectObject(this->_backBuffer, this->_bitmap);
@@ -28,7 +29,7 @@ namespace isgp {
 		this->_hdc = BeginPaint(hWnd, ps);
 
 		// Clear the backbuffer.
-		BitBlt(this->_backBuffer,0, 0, 800, 600, NULL, NULL, NULL, WHITENESS);
+		BitBlt(this->_backBuffer,0, 0, AbstractWindow::WindowSize.GetWidth(), AbstractWindow::WindowSize.GetHeight(), NULL, NULL, NULL, WHITENESS);
 	}
 
 	void Graphics::EndRendering(HWND hWnd, PAINTSTRUCT *ps) {
@@ -38,7 +39,7 @@ namespace isgp {
 #endif
 
 		// Blit the new frame to the screen
-		BitBlt(ps->hdc, 0, 0, 800, 600, this->_backBuffer, 0, 0, SRCCOPY);
+		BitBlt(ps->hdc, 0, 0, AbstractWindow::WindowSize.GetWidth(), AbstractWindow::WindowSize.GetHeight(), this->_backBuffer, 0, 0, SRCCOPY);
 
 		// End the drawing state of WIN32
 		EndPaint(hWnd, ps);
