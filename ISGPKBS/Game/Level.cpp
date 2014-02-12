@@ -1,12 +1,11 @@
 #include "Level.h"
 
 namespace isgp{
-
-	Level::Level(int width, int height){
+const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
+	Level::Level(int width, int height) {
 		_grid = new Grid(width, height);
 	}
-	Level::Level(Grid* grid)
-	{
+	Level::Level(Grid* grid) {
 		_grid = grid;
 	}
 
@@ -20,27 +19,20 @@ namespace isgp{
 		_graphics = g;
 		_grid->traverseTiles(this);
 	}
-	void Level::receiveTile(Tile* tile){
+	void Level::receiveTile(Tile* tile) {
 		tile->paint(_graphics);
 #ifdef _DEBUG
 		Point position = *tile->GetPosition();
-		position.SetX(position.GetX() * _tileSize->GetWidth());
-		position.SetY(position.GetY() * _tileSize->GetHeight());
+		position.SetX(position.GetX() * Level::tileSize.GetWidth());
+		position.SetY(position.GetY() * Level::tileSize.GetHeight());
 
 		_graphics->drawRect(
 			position, 
 			Point(
-				position.GetX() + _tileSize->GetWidth(),
-				position.GetY() + _tileSize->GetHeight()
+				position.GetX() + Level::tileSize.GetWidth(),
+				position.GetY() + Level::tileSize.GetHeight()
 			)
 		);
 #endif
-	}
-	void Level::setTileSize(Size* s){
-		_tileSize = s;
-	}
-	
-	Size* Level::getSize() const {
-		return _grid->getSize();
 	}
 }

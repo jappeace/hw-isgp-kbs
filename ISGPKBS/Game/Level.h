@@ -1,6 +1,8 @@
 #pragma once
 #include "Grid.h"
 #include "IPaintable.h"
+#define TileWidth 16
+#define TileHeight 16
 namespace isgp{
 
 	class Level : IPaintable, IGridTraveller
@@ -12,11 +14,10 @@ namespace isgp{
 		void receiveTile(Tile* tile);
 		void paint(Graphics* g);
 		void setTileSize(Size* s);
-        Size* getSize() const;
+		static const Size tileSize;
 	private:
 		Graphics* _graphics; // bridge between paint and receive tile
 		Grid* _grid;
-		Size* _tileSize;
 	};
 
 }
