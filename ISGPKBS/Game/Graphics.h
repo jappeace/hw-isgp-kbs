@@ -18,10 +18,6 @@ namespace isgp {
 		 * The bitmap on which we are actually rendering in the background
 		 */
 		HBITMAP _bitmap;
-		/**
-		 * Not sure what purpose this one has, need to check that
-		 */
-		HBITMAP _oldBitmap;
 
 	public:
 		Graphics(HWND);
