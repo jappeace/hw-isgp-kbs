@@ -26,9 +26,9 @@ namespace isgp {
 		~Graphics(void);
 
 		// Prepares the device context to start rendering
-		void BeginRendering(HWND, PAINTSTRUCT *);
+		void BeginRendering(HWND hwnd, PAINTSTRUCT *ps);
 		// Ends the rendering state and draws the backbuffer onto the screen
-		void EndRendering(HWND, PAINTSTRUCT *);
+		void EndRendering(HWND hwnd, PAINTSTRUCT *ps);
 		void drawStr(Point& position, string str);
 		void drawStr(Point& position, const char* str, int length);
 		void setTextColor(COLORREF color);
