@@ -24,7 +24,6 @@ namespace isgp{
 		tile->paint(_graphics);
 #ifdef _DEBUG
 		Point position = *tile->GetPosition();
-		Point position = *tile->GetPosition();
 		position.SetX(position.GetX() * _tileSize->GetWidth());
 		position.SetY(position.GetY() * _tileSize->GetHeight());
 
