@@ -5,8 +5,8 @@
  * Created on January 31, 2014, 7:26 PM
  */
 
-#ifndef POINT_H
-#define	POINT_H
+#pragma once
+
 namespace isgp {
 	class Point {
 	public:
@@ -16,7 +16,6 @@ namespace isgp {
 		double GetY() const;
 		void SetX(double _x);
 		double GetX() const;
-
 	private:
 		double _x;
 		double _y;
@@ -28,5 +27,3 @@ namespace isgp {
 	// forward operations to the once that actualy do somthing
 	inline bool operator!=(const Point& l, const Point& r){return !operator==(l,r);}
 }
-#endif	/* POINT_H */
-

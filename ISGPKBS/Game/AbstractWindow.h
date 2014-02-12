@@ -1,5 +1,4 @@
-#ifndef WIN_H
-#define WIN_H
+#pragma once
 
 #include <windows.h>
 #include <tchar.h>
@@ -8,7 +7,7 @@
 #include "Size.h"
 
 namespace isgp {
-	/** 
+	/**
 	* This class tries to handle all the win32 open window crap.
 	* that is initilize a window and capture a event loop.
 	
@@ -39,22 +38,20 @@ namespace isgp {
 		Graphics* _graphics;
 		const Size _windowSize;
 	public:
-		 AbstractWindow();
-		 HRESULT Create();
-		 int Run();
-		 virtual ~AbstractWindow();
-		 virtual LRESULT MsgProc(HWND, UINT, WPARAM, LPARAM);
-		 void repaint();
-		 /**
-		 * This method forces subclasses to implement the onpaint
-		 */
-		 virtual void onPaint(Graphics* graphics) = 0; // this also makes the class abstract
+		AbstractWindow();
+		HRESULT Create();
+		int Run();
+		virtual ~AbstractWindow();
+		virtual LRESULT MsgProc(HWND, UINT, WPARAM, LPARAM);
+		void repaint();
+		/**
+		* This method forces subclasses to implement the onpaint
+		*/
+		virtual void onPaint(Graphics* graphics) = 0; // this also makes the class abstract
 
-		 // don't need to implement these functions
-		 virtual void onCommand(int from, int command) {}
-		 virtual void onKeyDown(int which){}
-		 virtual void onKeyUp(int which){}
+		// don't need to implement these functions
+		virtual void onCommand(int from, int command) {}
+		virtual void onKeyDown(int which){}
+		virtual void onKeyUp(int which){}
 	};
-
 }
-#endif

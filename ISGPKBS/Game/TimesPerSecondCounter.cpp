@@ -1,7 +1,6 @@
-#pragma once
-
 #include "TimesPerSecondCounter.h"
 #include <ctime>
+
 namespace isgp {
 	TimesPerSecondCounter::TimesPerSecondCounter(void) : _tempUpdateCount(0), _savedUpdateCount(0)
 	{

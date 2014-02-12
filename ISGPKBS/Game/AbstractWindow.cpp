@@ -43,7 +43,6 @@ AbstractWindow::~AbstractWindow()
 {
 }
 
-
 //////////////////////////////////////////////////////////////////
 // Functions
 //////////////////////////////////////////////////////////////////
@@ -136,7 +135,7 @@ LRESULT AbstractWindow::MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 	return 0;
 }
 
-void AbstractWindow::repaint(){
+void AbstractWindow::repaint() {
 	InvalidateRect(_hWnd, 0, TRUE);
 }
 }

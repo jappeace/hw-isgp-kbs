@@ -5,13 +5,13 @@
  * Created on February 1, 2014, 4:44 PM
  */
 
-#ifndef STRINGCONVERTER_H
-#define	STRINGCONVERTER_H
+#pragma once
 
 #include <sstream>
+
 using namespace std;
+
 namespace isgp {
-	
 	/** becuase strings can be quite though to deal with*/
 	class StrConverter {
 	public:
@@ -30,8 +30,5 @@ namespace isgp {
 			return stream.str();
 		}
 	private:
-
 	};
 }
-#endif	/* STRINGCONVERTER_H */
-

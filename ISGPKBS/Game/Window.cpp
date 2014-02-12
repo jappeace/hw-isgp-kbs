@@ -1,4 +1,5 @@
 #include "Window.h"
+
 namespace isgp {
 // amount of tiles
 const Size g_tiles = Size(50,50);

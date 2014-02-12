@@ -1,4 +1,5 @@
 #include "Point.h"
+
 namespace isgp{
 	Point::Point(): _x(), _y(){}
 	Point::Point(int x, int y){

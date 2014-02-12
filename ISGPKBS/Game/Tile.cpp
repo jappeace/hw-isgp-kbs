@@ -1,4 +1,5 @@
 #include "Tile.h"
+
 namespace isgp{
 	Tile::Tile(Point* p){
 		init(p);

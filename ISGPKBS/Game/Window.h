@@ -1,13 +1,12 @@
-#ifndef Skeleton_H
-#define Skeleton_H
+#pragma once
 
 #include <cstdlib>
 #include "AbstractWindow.h"
 #include "resource2.h"
 #include "Level.h"
+
 namespace isgp {
-	class Window : public AbstractWindow
-	{
+	class Window : public AbstractWindow {
 	public:
 		Window();
 		~Window();
@@ -17,6 +16,4 @@ namespace isgp {
 	private:
 		Level* _level;
 	};
-
 }
-#endif
