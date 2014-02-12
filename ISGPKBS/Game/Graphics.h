@@ -3,6 +3,7 @@
 #include <windows.h>
 #include <string>
 #include "Point.h"
+#include "TimesPerSecondCounter.h"
 using namespace std;
 namespace isgp {
 	class Graphics
@@ -20,6 +21,13 @@ namespace isgp {
 		 * The bitmap on which we are actually rendering in the background
 		 */
 		HBITMAP _bitmap;
+
+#ifdef _DEBUG
+		/**
+		* FPScounter.
+		*/
+		TimesPerSecondCounter _fpsCounter;
+#endif
 
 	public:
 		Graphics(HWND);
