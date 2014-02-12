@@ -15,7 +15,7 @@ namespace isgp {
 
 	void TimesPerSecondCounter::Update() {
 		_tempUpdateCount++;
-		if(clock() - _lastClock > 1000) {
+		if(clock() - _lastClock >= 1000) {
 			_savedUpdateCount = _tempUpdateCount;
 			_tempUpdateCount = 0;
 			_lastClock = clock();
