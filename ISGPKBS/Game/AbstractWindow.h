@@ -36,7 +36,6 @@ namespace isgp {
 		HACCEL _hAccelTable;
 
 		Graphics* _graphics;
-		const Size _windowSize;
 	public:
 		AbstractWindow();
 		HRESULT Create();
@@ -44,6 +43,7 @@ namespace isgp {
 		virtual ~AbstractWindow();
 		virtual LRESULT MsgProc(HWND, UINT, WPARAM, LPARAM);
 		void repaint();
+		static const Size WindowSize;
 		/**
 		* This method forces subclasses to implement the onpaint
 		*/
