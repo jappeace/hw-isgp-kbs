@@ -5,11 +5,9 @@
  * Created on January 31, 2014, 11:20 AM
  */
 
-#ifndef GRID_H
-#define	GRID_H
+#pragma once
 
 #ifndef MAX_TILES
-	// unit test started to fail when the number got to high on construction.
 	#define MAX_TILES 5000
 #endif
 
