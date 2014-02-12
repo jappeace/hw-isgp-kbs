@@ -1,4 +1,5 @@
 #include "Window.h"
+
 namespace isgp {
 // amount of tiles
 const Size g_tiles = Size(50,50);
@@ -23,8 +24,8 @@ INT_PTR CALLBACK dialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 void Window::onPaint(Graphics* g){
 	_level->setTileSize(
 		&Size(
-			_windowSize.GetWidth()	/ _level->getSize()->GetWidth(),
-			_windowSize.GetHeight()	/ _level->getSize()->GetHeight()
+			WindowSize.GetWidth()	/ _level->getSize()->GetWidth(),
+			WindowSize.GetHeight()	/ _level->getSize()->GetHeight()
 		)
 		);
 	_level->paint(g);

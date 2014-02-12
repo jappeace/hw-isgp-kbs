@@ -1,10 +1,11 @@
 #include "Size.h"
-namespace isgp{
-	Size::Size(unsigned  width,unsigned  height){
+
+namespace isgp {
+	Size::Size(unsigned  width,unsigned  height) {
 		_width = width;
 		_height = height;
 	}
-	Size::Size(){
+	Size::Size() {
 		_width =0;
 		_height=0;
 	}

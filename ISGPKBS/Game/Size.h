@@ -5,8 +5,8 @@
  * Created on January 31, 2014, 7:26 PM
  */
 
-#ifndef SIZE_H
-#define	SIZE_H
+#pragma once
+
 namespace isgp {
 	class Size {
 	public:
@@ -21,5 +21,3 @@ namespace isgp {
 		unsigned  _height;
 	};
 }
-#endif	/* SIZE_H */
-

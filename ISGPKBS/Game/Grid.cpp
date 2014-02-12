@@ -1,5 +1,7 @@
 #include "Grid.h"
+
 using namespace std;
+
 namespace isgp {
 
 	void Grid::traverse(unsigned x, unsigned y, IGridTraveller* traveller) {

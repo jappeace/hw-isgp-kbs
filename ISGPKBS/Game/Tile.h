@@ -5,8 +5,9 @@
  * Created on January 31, 2014, 11:16 AM
  */
 
-#ifndef TILE_H
-#define	TILE_H
+#pragma once
+
+#include "Point.h"
 #include <cstdlib>
 #include "Point.h"
 #include "IPaintable.h"
@@ -62,5 +63,3 @@ namespace isgp {
 	// forward operations to the once that actualy do somthing
 	inline bool operator!=(const Tile& l, const Tile& r){return !operator==(l,r);}
 }
-#endif	/* TILE_H */
-
