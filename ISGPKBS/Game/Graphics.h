@@ -5,6 +5,7 @@
 #include <map>
 #include "Point.h"
 #include "TimesPerSecondCounter.h"
+#include "Level.h"
 using namespace std;
 namespace isgp {
 	/** 

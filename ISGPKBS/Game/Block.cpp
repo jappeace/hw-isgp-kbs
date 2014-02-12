@@ -13,7 +13,7 @@ namespace isgp{
 	}
 
 	void Block::paint(Graphics* g){
-
+		
 	}
 
 }

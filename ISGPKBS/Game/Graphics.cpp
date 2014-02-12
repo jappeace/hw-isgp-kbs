@@ -102,7 +102,7 @@ namespace isgp {
 		HBITMAP bitmap = this->loadBitmap(path, offsetx, offsety);
 		HDC bitmap_hdc = CreateCompatibleDC(NULL);
 		SelectObject(bitmap_hdc,bitmap);
-		BitBlt(_hdc, x, y, , AbstractWindow::WindowSize.GetHeight(), bitmap_hdc, 0, 0, SRCCOPY);
+		BitBlt(_hdc, x, y, Level::tileSize.GetWidth(), Level::tileSize.GetHeight(), bitmap_hdc, 0, 0, SRCCOPY);
 	}
 }
 

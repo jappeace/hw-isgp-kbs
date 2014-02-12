@@ -2,12 +2,13 @@
 #include "IGridTraveller.h"
 namespace isgp{
 
-	class Block : IGridTraveller
+	class WorldBlock : IGridTraveller
 	{
 	public:
 		Block(void);
 		~Block(void);
 		void paint(Graphics*);
+	private:
 	};
 
 }
