@@ -26,7 +26,6 @@ namespace isgp {
 		 */
 		static string intToString(int num) {
 			ostringstream stream;
-			string result = "";
 			stream << num;
 			return stream.str();
 		}
