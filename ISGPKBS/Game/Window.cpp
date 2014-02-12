@@ -1,12 +1,12 @@
 #include "Window.h"
 namespace isgp {
-const int fieldWidth = 50;
-const int fieldHeight = 50;
+// amount of tiles
+const Size g_tiles = Size(50,50);
 /////////////////////////////////////
 // Constructors / Destructors      //
 /////////////////////////////////////
 Window::Window() {
-	_level = new Level(fieldWidth,fieldHeight);
+	_level = new Level(g_tiles.GetWidth(),g_tiles.GetHeight());
 }
 
 Window::~Window()
@@ -23,8 +23,8 @@ INT_PTR CALLBACK dialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 void Window::onPaint(Graphics* g){
 	_level->setTileSize(
 		&Size(
-			(_windowSize->right  - _windowSize->left)	/ _level->getSize()->GetWidth(),
-			(_windowSize->bottom - _windowSize->top)	/ _level->getSize()->GetHeight()
+			_windowSize.GetWidth()	/ _level->getSize()->GetWidth(),
+			_windowSize.GetHeight()	/ _level->getSize()->GetHeight()
 		)
 		);
 	_level->paint(g);

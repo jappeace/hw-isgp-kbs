@@ -20,18 +20,18 @@ LRESULT CALLBACK WindowProcedure(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPa
 //////////////////////////////////////////////////////////////////
 // Constructors/Destructors
 //////////////////////////////////////////////////////////////////
-AbstractWindow::AbstractWindow()
+AbstractWindow::AbstractWindow() : _windowSize(800, 600)
 {
 	g_abstractWindow = this;
 	_hWnd = NULL;
 	_dwCreationFlags		= 0L;
-	_dwWindowStyle		= WS_OVERLAPPEDWINDOW;
+	_dwWindowStyle		= WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX;
 	_dwExWindowStyle		= WS_EX_OVERLAPPEDWINDOW;
 	_dwCreationFlags		= SW_SHOW;
 	_PosX				= CW_USEDEFAULT;	
 	_PosY				= CW_USEDEFAULT;	
-	_dwCreationWidth		= CW_USEDEFAULT;
-	_dwCreationHeight	= CW_USEDEFAULT;
+	_dwCreationWidth		= _windowSize.GetWidth();
+	_dwCreationHeight	= _windowSize.GetHeight();
 	_hbrWindowColor		= (HBRUSH)(COLOR_WINDOW+1);
 	_hIcon				= LoadIcon(_hInstance, (LPCTSTR)IDI_APPLICATION);
 	_strWindowTitle		= _T("Win32 OO Skeleton Program...");
@@ -68,6 +68,7 @@ HRESULT AbstractWindow::Create()
 	WNDCLASSEX wcex;
 
 	wcex.cbSize = sizeof(WNDCLASSEX); 
+
 
 	wcex.style			= CS_HREDRAW | CS_VREDRAW;
 	wcex.lpfnWndProc	= (WNDPROC)WindowProcedure;
@@ -121,12 +122,9 @@ LRESULT AbstractWindow::MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 			break;
 
 		case WM_PAINT:
-			_windowSize = new RECT();
-			GetClientRect(hWnd, _windowSize);
 			_graphics->BeginRendering(_hWnd, &paintStructure);
 			onPaint(_graphics);
 			_graphics->EndRendering(_hWnd, &paintStructure);
-			delete _windowSize;
 			break;
 
 		case WM_DESTROY:

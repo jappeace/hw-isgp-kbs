@@ -5,6 +5,7 @@
 #include <tchar.h>
 #include "resource.h"
 #include "Graphics.h"
+#include "Size.h"
 
 namespace isgp {
 	/** 
@@ -35,8 +36,8 @@ namespace isgp {
 		HMENU  _hMenu;
 		HACCEL _hAccelTable;
 
-		LPRECT _windowSize;
 		Graphics* _graphics;
+		const Size _windowSize;
 	public:
 		 AbstractWindow();
 		 HRESULT Create();
