@@ -49,34 +49,34 @@ namespace isgp {
 				try {
 					if (y < height - 2) {
 						_tiles->at(getTileIndex(x, y))->SetTop(
-								_tiles->at(
+							_tiles->at(
 								getTileIndex(x, y + 1)
-								)
-								);
+							)
+						);
 					}
 
 					if (y != 0) {
 						_tiles->at(getTileIndex(x, y))->SetBottom(
-								_tiles->at(
+							_tiles->at(
 								getTileIndex(x, y - 1)
-								)
-								);
+							)
+						);
 					}
 
 					if (x < width - 2) {
 						_tiles->at(getTileIndex(x, y))->SetRight(
-								_tiles->at(
+							_tiles->at(
 								getTileIndex(x + 1, y)
-								)
-								);
+							)
+						);
 					}
 
 					if (x != 0) {
 						_tiles->at(getTileIndex(x, y))->SetLeft(
-								_tiles->at(
+							_tiles->at(
 								getTileIndex(x - 1, y)
-								)
-								);
+							)
+						);
 					}
 				} catch (const out_of_range& oor) {
 
