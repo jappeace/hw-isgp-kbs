@@ -63,14 +63,31 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AbstractWindow.h" />
+    <ClInclude Include="Exceptions.h" />
     <ClInclude Include="Graphics.h" />
-    <ClInclude Include="Skeleton.h" />
-    <ClInclude Include="Win.h" />
+    <ClInclude Include="Grid.h" />
+    <ClInclude Include="IGridTraveller.h" />
+    <ClInclude Include="IPaintable.h" />
+    <ClInclude Include="Level.h" />
+    <ClInclude Include="Point.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="resource1.h" />
+    <ClInclude Include="resource2.h" />
+    <ClInclude Include="Size.h" />
+    <ClInclude Include="StrConverter.h" />
+    <ClInclude Include="Tile.h" />
+    <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AbstractWindow.cpp" />
     <ClCompile Include="Graphics.cpp" />
-    <ClCompile Include="Skeleton.cpp" />
-    <ClCompile Include="Win.cpp" />
+    <ClCompile Include="Grid.cpp" />
+    <ClCompile Include="Level.cpp" />
+    <ClCompile Include="Point.cpp" />
+    <ClCompile Include="Size.cpp" />
+    <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="Window.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

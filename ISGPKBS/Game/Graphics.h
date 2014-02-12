@@ -1,7 +1,9 @@
 #pragma once
 
 #include <windows.h>
-
+#include <string>
+#include "Point.h"
+using namespace std;
 namespace isgp {
 	class Graphics
 	{
@@ -31,5 +33,11 @@ namespace isgp {
 		 * Ends the rendering state and draws the backbuffer onto the screen
 		 */
 		void EndRendering(HWND, PAINTSTRUCT *);
+		void drawStr(Point& position, string str);
+		void drawStr(Point& position, const char* str, int length);
+		void setTextColor(COLORREF color);
+		void setTextBackgroundColor(COLORREF color);
+		void drawRect(Point& one, Point& two);
+		void drawRect(int xone, int yone, int xtwo, int ytwo);
 	};
 }
