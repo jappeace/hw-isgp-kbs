@@ -21,6 +21,7 @@ namespace isgp{
 		_grid->traverseTiles(this);
 	}
 	void Level::receiveTile(Tile* tile){
+		tile->paint(_graphics);
 #ifdef _DEBUG
 		Point position = *tile->GetPosition();
 		position.SetX(position.GetX() * _tileSize->GetWidth());

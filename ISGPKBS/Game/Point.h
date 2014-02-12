@@ -12,12 +12,14 @@ namespace isgp {
 	public:
 		Point();
 		Point(int x, int y);
+		Point(double x, double y);
 		void SetY(double _y);
 		double GetY() const;
 		void SetX(double _x);
 		double GetX() const;
 
 	private:
+		void init(double y, double x);
 		double _x;
 		double _y;
 	};

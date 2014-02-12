@@ -7,10 +7,11 @@
 
 #ifndef TILE_H
 #define	TILE_H
-#include "Point.h"
 #include <cstdlib>
+#include "Point.h"
+#include "IPaintable.h"
 namespace isgp {
-	class Tile {
+	class Tile : IPaintable{
 	public:
 		Tile(Point* p);
 		Tile(int x, int y);
@@ -24,8 +25,11 @@ namespace isgp {
 		void SetTop(Tile* top);
 		Tile* GetTop() const;
         Point* GetPosition() const;
+		void paint(Graphics* g);
+		void setIpaintalbe(IPaintable*);
 	private:
 		void init(Point* p);
+		IPaintable* _paintable;
 		Point* _position;
 		Tile* _top;
 		Tile* _left;

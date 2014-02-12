@@ -1,17 +1,26 @@
 #include "Tile.h"
 namespace isgp{
-	Tile::Tile(Point* p){
+	Tile::Tile(Point* p) {
 		init(p);
 	}
-	Tile::Tile(int x, int y){
+	Tile::Tile(int x, int y) {
 		init(new Point(x, y));
 	}
-	void Tile::init(Point* p){
+	void Tile::init(Point* p) {
 		_position = p;
+		_paintable = NULL;
 		_bottom = NULL;
 		_top = NULL;
 		_left = NULL;
 		_right = NULL;
+	}
+	void Tile::paint(Graphics* g) {
+		if(_paintable){
+			_paintable->paint(g);
+		}
+	}
+	void Tile::setIpaintalbe(IPaintable* paintable){
+		_paintable = paintable;
 	}
 	void Tile::SetBottom(Tile* bottom) {
 		this->_bottom = bottom;
