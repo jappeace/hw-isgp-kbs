@@ -61,7 +61,7 @@ namespace isgp {
 		 * The given function pointer will receive all the tiles in the grid and the cordiantes of them.
 		 */
 		void traverseTiles(IGridTraveller* travellar);
-        Size* getSize() const;
+		Size* getSize() const;
 	private:
 		vector<Tile*>* _tiles;
 		unsigned _tilesLength;
@@ -80,9 +80,9 @@ namespace isgp {
 		/**
 		 * A gaurd for the init function so It won't take etherinity to init the grid but
 		 * just throw an GridToLarge exception
-         * @param width
-         * @param height
-         */
+		 * @param width
+		 * @param height
+		 */
 		void gaurdInit(unsigned width, unsigned height);
 		/**
 		 * comman code for both contructors
@@ -90,14 +90,10 @@ namespace isgp {
 		void init(unsigned width, unsigned height);
 		/**
 		 * this function prevents the same calculation showing up in several places
-         * @param x
-         * @param y
-         * @return the index
-         */
+		 * @param x
+		 * @param y
+		 * @return the index
+		 */
 		unsigned getTileIndex(unsigned x, unsigned y) const;
 	};
 }
-
-
-#endif	/* GRID_H */
-
