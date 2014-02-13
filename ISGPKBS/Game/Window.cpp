@@ -22,12 +22,6 @@ INT_PTR CALLBACK dialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 	return NULL;
 }
 void Window::onPaint(Graphics* g){
-	_level->setTileSize(
-		&Size(
-			WindowSize.GetWidth()	/ _level->getSize()->GetWidth(),
-			WindowSize.GetHeight()	/ _level->getSize()->GetHeight()
-		)
-		);
 	_level->paint(g);
 }
 

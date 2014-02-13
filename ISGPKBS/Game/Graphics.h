@@ -5,7 +5,12 @@
 #include <map>
 #include "Point.h"
 #include "TimesPerSecondCounter.h"
-#include "Level.h"
+// to breack an include loop This class can't use the static Level::tilesize
+// that is why the macro where the size is based on is moved to here
+// this also gives a small speed optimization (less function calls)
+// and yes putting this definition here is quite weird
+#define TILE_WIDTH 16
+#define TILE_HEIGHT 16
 using namespace std;
 namespace isgp {
 	/** 

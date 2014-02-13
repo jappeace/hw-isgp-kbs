@@ -7,11 +7,6 @@ namespace isgp{
 		_position = position;
 	}
 
-
-	WorldBlock::~WorldBlock(void)
-	{
-	}
-
 	void WorldBlock::paint(Graphics* g){
 		g->drawBitmap(_texturePath, _position);
 	}

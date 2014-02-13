@@ -64,7 +64,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AbstractWindow.h" />
-    <ClInclude Include="Block.h" />
     <ClInclude Include="Exceptions.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Grid.h" />
@@ -80,10 +79,10 @@
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TimesPerSecondCounter.h" />
     <ClInclude Include="Window.h" />
+    <ClInclude Include="WorldBlock.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AbstractWindow.cpp" />
-    <ClCompile Include="Block.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="Level.cpp" />
@@ -93,6 +92,7 @@
     <ClCompile Include="TimesPerSecondCounter.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="WinMain.cpp" />
+    <ClCompile Include="WorldBlock.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

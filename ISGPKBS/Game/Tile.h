@@ -6,7 +6,6 @@
  */
 
 #pragma once
-#include "Point.h"
 #include <cstdlib>
 #include "Point.h"
 #include "IPaintable.h"
