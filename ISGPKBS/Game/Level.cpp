@@ -20,7 +20,6 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 		_grid->traverseTiles(this);
 	}
 	void Level::receiveTile(Tile* tile) {
-		tile->paint(_graphics);
 #ifdef _DEBUG
 		Point position = *tile->GetPosition();
 		position.SetX(position.GetX() * Level::tileSize.GetWidth());
@@ -34,5 +33,6 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 			)
 		);
 #endif
+		tile->paint(_graphics);
 	}
 }

@@ -1,7 +1,7 @@
 #pragma once
 #include "IPaintable.h"
 namespace isgp{
-	class WorldBlock : IPaintable
+	class WorldBlock : public IPaintable
 	{
 	public:
 		WorldBlock(Point& position, string texturePath);

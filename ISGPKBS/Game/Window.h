@@ -4,6 +4,7 @@
 #include "AbstractWindow.h"
 #include "resource2.h"
 #include "Level.h"
+#include "WorldBlock.h"
 
 namespace isgp {
 	class Window : public AbstractWindow {

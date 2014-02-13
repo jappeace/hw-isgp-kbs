@@ -101,8 +101,25 @@ namespace isgp {
 	void Graphics::drawBitmap(string path, int x, int y, int offsetx, int offsety) {
 		HBITMAP bitmap = this->loadBitmap(path, offsetx, offsety);
 		HDC bitmap_hdc = CreateCompatibleDC(NULL);
+
+		// link the bitmap to a device context
 		SelectObject(bitmap_hdc,bitmap);
-		BitBlt(_hdc, x, y, TILE_WIDTH, TILE_HEIGHT, bitmap_hdc, 0, 0, SRCCOPY);
+
+		// copy the bitmap on the backbuffer
+		int bltResult =  BitBlt(
+			_backBuffer, 
+			x*TILE_WIDTH, 
+			y*TILE_HEIGHT,
+			TILE_WIDTH, 
+			TILE_HEIGHT, 
+			bitmap_hdc, 
+			0, 
+			0, 
+			SRCCOPY
+		);
+
+		// release the resource
+		DeleteDC(bitmap_hdc);
 	}
 }
 

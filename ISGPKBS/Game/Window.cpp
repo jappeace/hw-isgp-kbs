@@ -7,7 +7,10 @@ const Size g_tiles = Size(50,50);
 // Constructors / Destructors      //
 /////////////////////////////////////
 Window::Window() {
-	_level = new Level(g_tiles.GetWidth(),g_tiles.GetHeight());
+	Grid* g = new Grid(g_tiles.GetWidth(),g_tiles.GetHeight());// level handles destruction of grid
+	_level = new Level(g);
+	Point position = Point(5,5);
+	g->getTileAt(position)->setIpaintalbe(new WorldBlock(position, "C:\\\\smile.bmp"));
 }
 
 Window::~Window()
