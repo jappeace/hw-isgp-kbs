@@ -57,7 +57,6 @@ namespace isgp {
 		void drawRect(int xone, int yone, int xtwo, int ytwo);
 		void drawStr(Point& position, string str);
 		void drawStr(Point& position, const char* str, int length);
->>>>>>> cdcd3768430a47d7915e7412760c3f671f6e2708
 		void setTextColor(COLORREF color);
 		void setTextBackgroundColor(COLORREF color);
 
