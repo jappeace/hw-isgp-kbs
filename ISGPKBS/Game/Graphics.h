@@ -55,16 +55,6 @@ namespace isgp {
 
 		void drawRect(Point& one, Point& two);
 		void drawRect(int xone, int yone, int xtwo, int ytwo);
-		void drawStr(Point& position, string str);
-		void drawStr(Point& position, const char* str, int length);
-		void setTextColor(COLORREF color);
-		void setTextBackgroundColor(COLORREF color);
-
-		void drawStr(Point& position, string str);
-		void drawStr(Point& position, const char* str, int length);
-
-		void drawRect(Point& one, Point& two);
-		void drawRect(int xone, int yone, int xtwo, int ytwo);
 
 		void drawBitmap(string path, Point& position);
 		void drawBitmap(string path, Point& position, Point& offset);
