@@ -20,23 +20,15 @@ namespace isgp {
 	class Graphics
 	{
 	private:
-		/**
-		 * The device context which is visible on the screen
-		 */
+		// The device context which is visible on the screen
 		HDC _hdc;
-		/**
-		 * The hidden device context on which we render to prevent flickering
-		 */
+		// The hidden device context on which we render to prevent flickering
 		HDC _backBuffer;
-		/**
-		 * The bitmap on which we are actually rendering in the background
-		 */
+		// The bitmap on which we are actually rendering in the background
 		HBITMAP _bitmap;
 
 #ifdef _DEBUG
-		/**
-		* FPScounter.
-		*/
+		// FPScounter.
 		TimesPerSecondCounter _fpsCounter;
 #endif
 		map<string, HBITMAP>* _bitmapCache;
@@ -48,15 +40,24 @@ namespace isgp {
 		 * Prepares the device context to start rendering
 		 */
 		void BeginRendering(HWND, PAINTSTRUCT *);
-		/**
-		 * Ends the rendering state and draws the backbuffer onto the screen
-		 */
+		/** * Ends the rendering state and draws the backbuffer onto the screen */
 		void EndRendering(HWND, PAINTSTRUCT *);
 		/** loads a bitmap in the cache */
 		HBITMAP loadBitmap(string path);
 		HBITMAP loadBitmap(string path, int offsetX, int offsetY);
 		HBITMAP loadBitmap(string path, Point& offset);
 
+		void setTextColor(COLORREF color);
+		void setTextBackgroundColor(COLORREF color);
+
+		void drawStr(Point& position, string str);
+		void drawStr(Point& position, const char* str, int length);
+
+		void drawRect(Point& one, Point& two);
+		void drawRect(int xone, int yone, int xtwo, int ytwo);
+		void drawStr(Point& position, string str);
+		void drawStr(Point& position, const char* str, int length);
+>>>>>>> cdcd3768430a47d7915e7412760c3f671f6e2708
 		void setTextColor(COLORREF color);
 		void setTextBackgroundColor(COLORREF color);
 
