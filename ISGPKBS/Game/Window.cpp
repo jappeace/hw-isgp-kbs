@@ -10,7 +10,7 @@ Window::Window() {
 	Grid* g = new Grid(g_tiles.GetWidth(),g_tiles.GetHeight());// level handles destruction of grid
 	_level = new Level(g);
 	Point position = Point(5,5);
-	g->getTileAt(position)->setIpaintalbe(new WorldBlock(position, "C:\\\\smile.bmp"));
+	g->getTileAt(position)->setIpaintalbe(new WorldBlock(position, "C:\\smile.bmp"));
 }
 
 Window::~Window()
