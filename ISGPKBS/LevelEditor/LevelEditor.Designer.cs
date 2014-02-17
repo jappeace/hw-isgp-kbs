@@ -1,6 +1,6 @@
 ﻿namespace LevelEditor
 {
-	partial class Form1
+	partial class LevelEditor
 	{
 		/// <summary>
 		/// Required designer variable.
