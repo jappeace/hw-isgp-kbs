@@ -126,15 +126,46 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //
 
 HBITMAP hBitmap = NULL;
-int positionX = 100;
-int positionY = 100;
+HBITMAP hBitmap2 = NULL;
+int positionX = 384;
+int positionY = 520;
 bool left = false;
 bool right = false;
 bool up = false;
 bool down = false;
-int xVel = 0;
-int yVel = 0;
+float xVel = 0;
+float yVel = 0;
 Block *block = new Block(100,100);
+float camX = 348;
+float camY = 400;
+bool collision = false;
+int camDirection = 0;
+float camFix = 0;
+bool fixCam = false;
+
+void UpdateCamFix(){
+	if (camDirection == 2){ camFix = camFix + (-200 - camFix) * 0.1; }
+	else if (camDirection == 1) { camFix = camFix + (200 - camFix) * 0.05; }
+	else { camFix = camFix + (0 - camFix) * 0.2; }
+}
+
+void UpdateCam(){
+	if (fixCam){
+		UpdateCamFix();
+	}else{
+		camFix = 0;
+	}
+	camX = camX + ((positionX - camX) + camFix) * 0.1;
+	camY = camY + (positionY - camY) * 0.1;
+}
+
+int GetDrawPositionX(int x){
+	return (x - camX) + 384;
+}
+
+int GetDrawPositionY(int y){
+	return (y - camY) + 400;
+}
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -171,7 +202,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			up = true;
 		}
 		if (wParam == VK_DOWN){
-			down = true;
+			fixCam = true;
+		}
+		if (wParam == VK_SPACE){
+			fixCam = false;
+		}
+		if (wParam == VK_LSHIFT){
+			fixCam = true;
 		}
 		
 		
@@ -194,6 +231,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		break;
 	case WM_CREATE:
 		hBitmap = (HBITMAP)LoadImage(hInst, L"c:\\test.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+		hBitmap2 = (HBITMAP)LoadImage(hInst, L"c:\\block.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		SetWindowPos(hWnd, HWND_TOP, 100, 100, 800, 600, SWP_ASYNCWINDOWPOS);
 		break;
 	case WM_PAINT:
@@ -204,12 +242,24 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         HGDIOBJ 		oldBitmap;
 		
 		hdc = BeginPaint(hWnd, &ps);
-		
 		hdcMem = CreateCompatibleDC(hdc);
-        oldBitmap = SelectObject(hdcMem, hBitmap);
 		
+		oldBitmap = SelectObject(hdcMem, hBitmap);
 		GetObject(hBitmap, sizeof(bitmap), &bitmap);
-        BitBlt(hdc, positionX, positionY, bitmap.bmWidth, bitmap.bmHeight, hdcMem, 0, 0, SRCCOPY);
+        //BitBlt(hdc, 384, 400, bitmap.bmWidth, bitmap.bmHeight, hdcMem, 0, 0, SRCCOPY);
+        //BitBlt(hdc, positionX, positionY, bitmap.bmWidth, bitmap.bmHeight, hdcMem, 0, 0, SRCCOPY);
+		BitBlt(hdc, GetDrawPositionX(positionX), GetDrawPositionY(positionY), bitmap.bmWidth, bitmap.bmHeight, hdcMem, 0, 0, SRCCOPY);
+		
+        oldBitmap = SelectObject(hdcMem, hBitmap2);
+		GetObject(hBitmap2, sizeof(bitmap), &bitmap);
+		BitBlt(hdc, GetDrawPositionX(500), GetDrawPositionY(552), bitmap.bmWidth, bitmap.bmHeight, hdcMem, 0, 0, SRCCOPY);
+		BitBlt(hdc, GetDrawPositionX(400), GetDrawPositionY(552), bitmap.bmWidth, bitmap.bmHeight, hdcMem, 0, 0, SRCCOPY);
+		BitBlt(hdc, GetDrawPositionX(300), GetDrawPositionY(552), bitmap.bmWidth, bitmap.bmHeight, hdcMem, 0, 0, SRCCOPY);
+
+		MoveToEx(hdc, GetDrawPositionX(0), GetDrawPositionY(0), NULL);
+		LineTo(hdc, GetDrawPositionX(0), GetDrawPositionY(552));
+		LineTo(hdc, GetDrawPositionX(800), GetDrawPositionY(552));
+		LineTo(hdc, GetDrawPositionX(800), GetDrawPositionY(0));
 
         SelectObject(hdcMem, oldBitmap);
         DeleteDC(hdcMem);
@@ -225,22 +275,32 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		//if (down && yVel < 10){ yVel += 1; }
 		//else if (yVel > 0){ yVel--; }
 
-		if (left && xVel > -10){ xVel -= 1; }
-		else if (xVel < 0){ xVel++; }
-		if (right && xVel < 10){ xVel += 1; }
-		else if (xVel > 0){ xVel--; }
+		if (left && xVel > -10){ 
+			if (collision){ xVel -= 1; }else{ xVel -= 0.5; }
+		}
+		else if (xVel < 0 && collision){ xVel += 0.5; }
+		if (right && xVel < 10){
+			if (collision){ xVel += 1; }else{ xVel += 0.5; }
+		}
+		else if (xVel > 0 && collision){ xVel -= 0.5; }
 
 		positionY += yVel;
 		positionX += xVel;
 		
+		if (xVel >= 9){ camDirection = 1; }
+		else if (xVel <= -9){ camDirection = 2; }
+		else { camDirection = 0; }
+		
 		if (positionY < 0) { positionY = 0; }
-		if (positionY > 520) { positionY = 520; }
+		if (positionY > 520) { positionY = 521; collision = true; } else { collision = false; }
 		if (positionX < 0) { positionX = 0; }
-		if (positionX > 760) { positionX = 760; }
+		if (positionX > 768) { positionX = 768; }
 
-		if (positionY < 520) { yVel += 1; }
+		if (positionY < 521) { yVel += 1; }
 		else { yVel = 0; }
-		if (up && positionY == 520) { yVel = -12; }
+		if (up && positionY >= 520) { yVel = -12; }
+
+		UpdateCam();
 
 		RECT rect;
 		GetClientRect(hWnd, &rect);
