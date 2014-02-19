@@ -1,6 +1,6 @@
 #include "AbstractWindow.h"
 
-
+#include "StrConverter.h"
 namespace isgp {
 //////////////////////////////////////////////////////////////////
 // Static Initialisation
@@ -51,17 +51,26 @@ AbstractWindow::~AbstractWindow()
 //////////////////////////////////////////////////////////////////
 int AbstractWindow::Run()
 {
-	MSG msg;
+	MSG msg = {0};
 
-	while (GetMessage(&msg, NULL, 0, 0)) 
+	while( msg.message!=WM_QUIT )
 	{
-		if (!TranslateAccelerator(msg.hwnd, _hAccelTable, &msg)) 
+		if( PeekMessage( &msg, NULL, 0U, 0U, PM_REMOVE ) )
 		{
-			TranslateMessage(&msg);
-			DispatchMessage(&msg);
+			TranslateMessage( &msg );
+			DispatchMessage( &msg );
+		} 
+		else 
+		{
+			::QueryPerformanceCounter((LARGE_INTEGER*)&_start);
+			_stop = _start;
+			
+			while (_stop - _start < _freq / _maxGameTicksPerSecond) 
+				::QueryPerformanceCounter((LARGE_INTEGER*)&_stop);
+			GameLoop(((_stop - _lastUpdate) * 1000) / (double)_freq);
+			_lastUpdate = _stop;
 		}
-
-	}	
+	}
 	return msg.wParam;
 }
 
@@ -96,7 +105,8 @@ HRESULT AbstractWindow::Create()
 	_graphics = new Graphics(_hWnd);
 	ShowWindow(_hWnd, _dwCreationFlags);
 	UpdateWindow(_hWnd);
-
+	::QueryPerformanceFrequency((LARGE_INTEGER*)&_freq);
+	::QueryPerformanceCounter((LARGE_INTEGER*)&_lastUpdate);
 	return TRUE;
 
 }
@@ -136,6 +146,10 @@ LRESULT AbstractWindow::MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 			return DefWindowProc(hWnd, uMsg, wParam, lParam);
 	}
 	return 0;
+}
+
+void AbstractWindow::GameLoop(double elapsed) { //elapsed time, in MS
+	//update all the game objects now
 }
 
 void AbstractWindow::repaint() {
