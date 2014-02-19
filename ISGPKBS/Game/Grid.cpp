@@ -3,23 +3,22 @@
 using namespace std;
 
 namespace isgp {
-
-	void Grid::traverse(unsigned x, unsigned y, IGridTraveller* traveller) {
-		traveller->receiveTile(getTileAt(x, y));
+	void Grid::Traverse(unsigned x, unsigned y, IGridTraveller* traveller) {
+		traveller->ReceiveTile(GetTileAt(x, y));
 	}
 
-	unsigned Grid::getTileIndex(unsigned x, unsigned y) const {
+	unsigned Grid::GetTileIndex(unsigned x, unsigned y) const {
 		return x + y * _size->GetWidth();
 	}
 
-	void Grid::gaurdInit(unsigned width, unsigned height) {
+	void Grid::GuardInit(unsigned width, unsigned height) {
 		GridToLargeException exception = GridToLargeException(
 				"The max limit of tiles for a grid is set to:" +
-				StrConverter::intToString(MAX_TILES) +
+				StrConverter::IntToString(MAX_TILES) +
 				". To change this number define the macro "
 				"MAX_TILES before including the header file Grid.h -- "
-				"width: " + StrConverter::intToString(width) +
-				", height: " + StrConverter::intToString(height)
+				"width: " + StrConverter::IntToString(width) +
+				", height: " + StrConverter::IntToString(height)
 				, width, height);
 		if (width > MAX_TILES) {
 			throw exception;
@@ -32,9 +31,9 @@ namespace isgp {
 		}
 	}
 
-	void Grid::init(unsigned width, unsigned height) {
+	void Grid::Init(unsigned width, unsigned height) {
 		_tilesLength = (unsigned) (width * height);
-		gaurdInit(width, height);
+		GuardInit(width, height);
 		_size = new Size(width, height);
 		_tiles = new vector<Tile*>();
 		for (unsigned y = 0; y < height; y++) {
@@ -48,33 +47,33 @@ namespace isgp {
 
 				try {
 					if (y < height - 2) {
-						_tiles->at(getTileIndex(x, y))->SetTop(
+						_tiles->at(GetTileIndex(x, y))->SetTop(
 							_tiles->at(
-								getTileIndex(x, y + 1)
+								GetTileIndex(x, y + 1)
 							)
 						);
 					}
 
 					if (y != 0) {
-						_tiles->at(getTileIndex(x, y))->SetBottom(
+						_tiles->at(GetTileIndex(x, y))->SetBottom(
 							_tiles->at(
-								getTileIndex(x, y - 1)
+								GetTileIndex(x, y - 1)
 							)
 						);
 					}
 
 					if (x < width - 2) {
-						_tiles->at(getTileIndex(x, y))->SetRight(
+						_tiles->at(GetTileIndex(x, y))->SetRight(
 							_tiles->at(
-								getTileIndex(x + 1, y)
+								GetTileIndex(x + 1, y)
 							)
 						);
 					}
 
 					if (x != 0) {
-						_tiles->at(getTileIndex(x, y))->SetLeft(
+						_tiles->at(GetTileIndex(x, y))->SetLeft(
 							_tiles->at(
-								getTileIndex(x - 1, y)
+								GetTileIndex(x - 1, y)
 							)
 						);
 					}
@@ -82,8 +81,8 @@ namespace isgp {
 
 					// the default exception is just crap
 					cout << "binding failed at point:"
-							<< " x:" << StrConverter::intToString(x)
-							<< " y:" << StrConverter::intToString(y)
+							<< " x:" << StrConverter::IntToString(x)
+							<< " y:" << StrConverter::IntToString(y)
 							<< endl << "message: "
 							<< oor.what()
 							<< endl;
@@ -94,11 +93,11 @@ namespace isgp {
 	}
 
 	Grid::Grid() {
-		init(C_default_w, C_default_h);
+		Init(C_default_w, C_default_h);
 	}
 
 	Grid::Grid(unsigned width, unsigned height) {
-		init(width, height);
+		Init(width, height);
 	}
 
 	Grid::~Grid() {
@@ -110,21 +109,18 @@ namespace isgp {
 		}
 		_tiles = NULL;
 		_size = NULL;
-
-
 	}
 
 	void sizeMessage(unsigned x, unsigned y) {
-
 		// I used to just log this, but usualy when this happens the aplication crashed anyways,
 		// so this will do fine
 		throw "Unable to find tile at "
-		"x: " + StrConverter::intToString(x)
-				+ "y: " + StrConverter::intToString(y);
+		"x: " + StrConverter::IntToString(x)
+				+ "y: " + StrConverter::IntToString(y);
 	};
 
-	Tile* Grid::getTileAt(unsigned x, unsigned y) const {
-		unsigned desiredIndex = getTileIndex(x, y);
+	Tile* Grid::GetTileAt(unsigned x, unsigned y) const {
+		unsigned desiredIndex = GetTileIndex(x, y);
 		if (desiredIndex < 0) {
 			sizeMessage(x, y);
 		}
@@ -134,29 +130,29 @@ namespace isgp {
 		return _tiles->at(desiredIndex);
 	}
 
-	Tile* Grid::getTileAt(Point& p) const {
-		return getTileAt((int) p.GetX(), (int) p.GetY());
+	Tile* Grid::GetTileAt(Point& p) const {
+		return GetTileAt((int) p.GetX(), (int) p.GetY());
 	}
 
-	void Grid::traverseRow(unsigned y, IGridTraveller* traveller) {
+	void Grid::TraverseRow(unsigned y, IGridTraveller* traveller) {
 		for (unsigned x = 0; x < _size->GetWidth(); x++) {
-			traverse(x, y, traveller);
+			Traverse(x, y, traveller);
 		}
 	}
 
-	void Grid::traverseCollumn(unsigned x, IGridTraveller* traveller) {
+	void Grid::TraverseCollumn(unsigned x, IGridTraveller* traveller) {
 		for (unsigned y = 0; y < _size->GetHeight(); y++) {
-			traverse(x, y, traveller);
+			Traverse(x, y, traveller);
 		}
 	}
 
-	void Grid::traverseTiles(IGridTraveller* traveller) {
+	void Grid::TraverseTiles(IGridTraveller* traveller) {
 		for (unsigned x = 0; x < _size->GetWidth(); x++) {
-			traverseCollumn(x, traveller);
+			TraverseCollumn(x, traveller);
 		}
 	}
 
-	Size* Grid::getSize() const {
+	Size* Grid::GetSize() const {
 		return _size;
 	}
 }

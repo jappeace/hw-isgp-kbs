@@ -1,20 +1,16 @@
-/* 
- * File:   Size.h
- * Author: jappie
- *
- * Created on January 31, 2014, 7:26 PM
- */
-
 #pragma once
 
 namespace isgp {
+	// a positive size of somthing
 	class Size {
 	public:
+		// set size to 0,0
 		Size();
+		// set size to width, height
 		Size(unsigned  width,unsigned  height);
-		void SetHeight(unsigned  _height);
+		void SetHeight(unsigned);
 		unsigned  GetHeight() const;
-		void SetWidth(unsigned  _width);
+		void SetWidth(unsigned);
 		unsigned  GetWidth() const;
 	private:
 		unsigned  _width;

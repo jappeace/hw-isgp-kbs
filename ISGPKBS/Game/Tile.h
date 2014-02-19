@@ -1,20 +1,22 @@
-/* 
- * File:   Tile.h
- * Author: jappie
- *
- * Created on January 31, 2014, 11:16 AM
- */
-
 #pragma once
+
 #include <cstdlib>
 #include "Point.h"
 #include "IPaintable.h"
+
 namespace isgp {
+	// a container class for stuff in the grid.
+	// this class is for easy navigating the grid, when you get a tile you now
+	// its neighbours
 	class Tile : IPaintable{
 	public:
+		// set a tile to the point
 		Tile(Point* p);
+		// set a tile to x,y
 		Tile(int x, int y);
+
 		~Tile();
+
 		void SetBottom(Tile* bottom);
 		Tile* GetBottom() const;
 		void SetRight(Tile* right);
@@ -23,11 +25,11 @@ namespace isgp {
 		Tile* GetLeft() const;
 		void SetTop(Tile* top);
 		Tile* GetTop() const;
-        Point* GetPosition() const;
-		void paint(Graphics* g);
-		void setIpaintalbe(IPaintable*);
+		Point* GetPosition() const;
+		void Paint(Graphics* g);
+		void SetIpaintalbe(IPaintable*);
 	private:
-		void init(Point* p);
+		void Init(Point* p);
 		IPaintable* _paintable;
 		Point* _position;
 		Tile* _top;

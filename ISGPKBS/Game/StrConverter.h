@@ -12,19 +12,15 @@
 using namespace std;
 
 namespace isgp {
-	/** becuase strings can be quite though to deal with*/
+	// becuase strings can be quite though to deal with
 	class StrConverter {
 	public:
 		StrConverter();
 		StrConverter(const StrConverter& orig);
 		virtual ~StrConverter();
 
-		/**
-		 * its kind of hard to go from int to string
-		 * @param num
-		 * @return 
-		 */
-		static string intToString(int num) {
+		// its kind of hard to go from int to string
+		static string IntToString(int num) {
 			ostringstream stream;
 			stream << num;
 			return stream.str();
