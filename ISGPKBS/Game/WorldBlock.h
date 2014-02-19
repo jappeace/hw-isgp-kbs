@@ -1,9 +1,10 @@
 #pragma once
+
 #include "IPaintable.h"
-namespace isgp{
+
+namespace isgp {
 	// a block you can collide with in the level. ground for example
-	class WorldBlock : public IPaintable
-	{
+	class WorldBlock : public IPaintable {
 	public:
 		WorldBlock(Point& position, string texturePath);
 		void Paint(Graphics*);

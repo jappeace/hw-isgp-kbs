@@ -3,7 +3,6 @@
 using namespace std;
 
 namespace isgp {
-
 	void Grid::Traverse(unsigned x, unsigned y, IGridTraveller* traveller) {
 		traveller->ReceiveTile(GetTileAt(x, y));
 	}
@@ -12,14 +11,14 @@ namespace isgp {
 		return x + y * _size->GetWidth();
 	}
 
-	void Grid::GaurdInit(unsigned width, unsigned height) {
+	void Grid::GuardInit(unsigned width, unsigned height) {
 		GridToLargeException exception = GridToLargeException(
 				"The max limit of tiles for a grid is set to:" +
-				StrConverter::intToString(MAX_TILES) +
+				StrConverter::IntToString(MAX_TILES) +
 				". To change this number define the macro "
 				"MAX_TILES before including the header file Grid.h -- "
-				"width: " + StrConverter::intToString(width) +
-				", height: " + StrConverter::intToString(height)
+				"width: " + StrConverter::IntToString(width) +
+				", height: " + StrConverter::IntToString(height)
 				, width, height);
 		if (width > MAX_TILES) {
 			throw exception;
@@ -34,7 +33,7 @@ namespace isgp {
 
 	void Grid::Init(unsigned width, unsigned height) {
 		_tilesLength = (unsigned) (width * height);
-		GaurdInit(width, height);
+		GuardInit(width, height);
 		_size = new Size(width, height);
 		_tiles = new vector<Tile*>();
 		for (unsigned y = 0; y < height; y++) {
@@ -82,8 +81,8 @@ namespace isgp {
 
 					// the default exception is just crap
 					cout << "binding failed at point:"
-							<< " x:" << StrConverter::intToString(x)
-							<< " y:" << StrConverter::intToString(y)
+							<< " x:" << StrConverter::IntToString(x)
+							<< " y:" << StrConverter::IntToString(y)
 							<< endl << "message: "
 							<< oor.what()
 							<< endl;
@@ -110,17 +109,14 @@ namespace isgp {
 		}
 		_tiles = NULL;
 		_size = NULL;
-
-
 	}
 
 	void sizeMessage(unsigned x, unsigned y) {
-
 		// I used to just log this, but usualy when this happens the aplication crashed anyways,
 		// so this will do fine
 		throw "Unable to find tile at "
-		"x: " + StrConverter::intToString(x)
-				+ "y: " + StrConverter::intToString(y);
+		"x: " + StrConverter::IntToString(x)
+				+ "y: " + StrConverter::IntToString(y);
 	};
 
 	Tile* Grid::GetTileAt(unsigned x, unsigned y) const {

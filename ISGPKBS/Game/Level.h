@@ -1,11 +1,11 @@
 #pragma once
+
 #include "Grid.h"
 #include "IPaintable.h"
-namespace isgp{
 
+namespace isgp{
 	// represents a level in the game
-	class Level : IPaintable, IGridTraveller
-	{
+	class Level : IPaintable, IGridTraveller {
 	public:
 		Level(Grid* grid);
 		Level(int width, int height);
@@ -17,5 +17,4 @@ namespace isgp{
 		Graphics* _graphics; // bridge between paint and receive tile
 		Grid* _grid;
 	};
-
 }

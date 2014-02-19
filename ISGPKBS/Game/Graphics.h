@@ -5,20 +5,23 @@
 #include <map>
 #include "Point.h"
 #include "TimesPerSecondCounter.h"
+
 // to breack an include loop This class can't use the static Level::tilesize
 // that is why the macro where the size is based on is moved to here
 // this also gives a small speed optimization (less function calls)
 // and yes putting this definition here is quite weird
+
 #define TILE_WIDTH 16
 #define TILE_HEIGHT 16
+
 using namespace std;
+
 namespace isgp {
 	/** 
 	* this class makes it easier to use win32, it has also some internal speed optimizations,
 	* basicly you should use an instance of this class instead of win32
 	*/
-	class Graphics
-	{
+	class Graphics {
 	private:
 		// The device context which is visible on the screen
 		HDC _hdc;

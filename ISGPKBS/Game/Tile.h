@@ -1,7 +1,9 @@
 #pragma once
+
 #include <cstdlib>
 #include "Point.h"
 #include "IPaintable.h"
+
 namespace isgp {
 	// a container class for stuff in the grid.
 	// this class is for easy navigating the grid, when you get a tile you now
@@ -23,7 +25,7 @@ namespace isgp {
 		Tile* GetLeft() const;
 		void SetTop(Tile* top);
 		Tile* GetTop() const;
-        Point* GetPosition() const;
+		Point* GetPosition() const;
 		void Paint(Graphics* g);
 		void SetIpaintalbe(IPaintable*);
 	private:

@@ -4,9 +4,11 @@ namespace isgp{
 	Tile::Tile(Point* p) {
 		Init(p);
 	}
+
 	Tile::Tile(int x, int y) {
 		Init(new Point(x, y));
 	}
+
 	void Tile::Init(Point* p) {
 		_position = p;
 		_paintable = NULL;
@@ -15,14 +17,17 @@ namespace isgp{
 		_left = NULL;
 		_right = NULL;
 	}
+
 	void Tile::Paint(Graphics* g) {
 		if(_paintable){
 			_paintable->Paint(g);
 		}
 	}
+
 	void Tile::SetIpaintalbe(IPaintable* paintable){
 		_paintable = paintable;
 	}
+
 	void Tile::SetBottom(Tile* bottom) {
 		this->_bottom = bottom;
 	}
@@ -55,9 +60,10 @@ namespace isgp{
 		return _top;
 	}
 
-    Point* Tile::GetPosition() const {
-    	return _position;
-    }
+	Point* Tile::GetPosition() const {
+		return _position;
+	}
+
 	Tile::~Tile(){
 
 		if(_top){

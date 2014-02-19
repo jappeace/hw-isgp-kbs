@@ -1,8 +1,8 @@
 #include "Graphics.h"
 #include "StrConverter.h"
 #include "AbstractWindow.h"
-namespace isgp {
 
+namespace isgp {
 	Graphics::Graphics(HWND hWnd) {
 		_bitmapCache = new map<string,  HBITMAP>();
 
@@ -21,9 +21,7 @@ namespace isgp {
 		ReleaseDC(hWnd, hdc); 
 	}
 
-
-	Graphics::~Graphics(void)
-	{
+	Graphics::~Graphics(void) {
 		if(_bitmapCache) {
 			delete _bitmapCache;
 		}
@@ -40,7 +38,7 @@ namespace isgp {
 	void Graphics::EndRendering(HWND hWnd, PAINTSTRUCT *ps) {
 #ifdef _DEBUG
 		this->_fpsCounter.Update();
-		DrawStr(Point(10, 10), "FPS: " + StrConverter::intToString(this->_fpsCounter.Get()));
+		DrawStr(Point(10, 10), "FPS: " + StrConverter::IntToString(this->_fpsCounter.Get()));
 #endif
 
 		// Blit the new frame to the screen
@@ -74,7 +72,7 @@ namespace isgp {
 		Rectangle(_backBuffer, xone, yone, xtwo, ytwo);
 	}
 	HBITMAP Graphics::LoadBitmapFile(string path, int offsetX, int offsetY) {
-		string key = path + StrConverter::intToString(offsetX) + StrConverter::intToString(offsetY);
+		string key = path + StrConverter::IntToString(offsetX) + StrConverter::IntToString(offsetY);
 		if(_bitmapCache->count(key)) {
 			return _bitmapCache->find(key)->second;
 		}

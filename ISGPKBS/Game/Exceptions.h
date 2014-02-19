@@ -1,17 +1,10 @@
-/* 
- * File:   Exceptions.h
- * Author: jappie
- *
- * Created on February 2, 2014, 2:09 PM
- */
+#pragma once
 
-#ifndef EXCEPTIONS_H
-#define	EXCEPTIONS_H
-/*
- * My idea was to jam all the custom exceptions in here, usualy you won't get that many..
- */
+// My idea was to jam all the custom exceptions in here, usualy you won't get that many..
+
 #include <stdexcept>
 #include <string>
+
 using namespace std;
 namespace isgp {
 
@@ -55,5 +48,3 @@ namespace isgp {
 		};
 	};
 }
-#endif	/* EXCEPTIONS_H */
-
