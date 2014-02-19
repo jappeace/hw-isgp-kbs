@@ -3,21 +3,20 @@
 namespace isgp {
 // amount of tiles
 const Size g_tiles = Size(50,50);
-/////////////////////////////////////
+
 // Constructors / Destructors      //
-/////////////////////////////////////
 Window::Window() {
 	Grid* g = new Grid(g_tiles.GetWidth(),g_tiles.GetHeight());// level handles destruction of grid
 	_level = new Level(g);
 	Point position = Point(5,5);
-	g->GetTileAt(position)->SetIpaintalbe(new WorldBlock(position, "C:\\tiles\\smile.bmp"));
+	g->GetTileAt(position)->SetData(new WorldBlock(position, "C:\\tiles\\smile.bmp"));
 	for(unsigned i = 0; i < 50; i++) {
 		Point position = Point(i, 23);
-		g->GetTileAt(position)->SetIpaintalbe(new WorldBlock(position, "C:\\tiles\\smile.bmp"));
+		g->GetTileAt(position)->SetData(new WorldBlock(position, "C:\\tiles\\smile.bmp"));
 		Point position2 = Point(i, 22);
-		g->GetTileAt(position2)->SetIpaintalbe(new WorldBlock(position2, "C:\\tiles\\smile.bmp"));
+		g->GetTileAt(position2)->SetData(new WorldBlock(position2, "C:\\tiles\\smile.bmp"));
 		Point position3 = Point(i, 21);
-		g->GetTileAt(position2)->SetIpaintalbe(new WorldBlock(position2, "C:\\tiles\\smile.bmp"));
+		g->GetTileAt(position2)->SetData(new WorldBlock(position2, "C:\\tiles\\smile.bmp"));
 	}
 }
 

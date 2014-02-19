@@ -9,4 +9,8 @@ namespace isgp {
 	void WorldBlock::Paint(Graphics* g) {
 		g->DrawBitmap(_texturePath, _position);
 	}
+
+	void WorldBlock::ReceiveTile(Tile* t){
+		_containingTile = t;
+	}
 }

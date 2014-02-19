@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include "Point.h"
 #include "IPaintable.h"
+#include "ITileData.h"
 
 namespace isgp {
 	// a container class for stuff in the grid.
@@ -27,10 +28,10 @@ namespace isgp {
 		Tile* GetTop() const;
 		Point* GetPosition() const;
 		void Paint(Graphics* g);
-		void SetIpaintalbe(IPaintable*);
+		void SetData(ITileData*);
 	private:
 		void Init(Point* p);
-		IPaintable* _paintable;
+		ITileData* _tiledata;
 		Point* _position;
 		Tile* _top;
 		Tile* _left;

@@ -11,7 +11,6 @@ namespace isgp {
 		//get the DC for the front buffer
 		HDC hdc = GetDC(hWnd);
 
-		// TODO: Retrieve actual window size
 		this->_bitmap = CreateCompatibleBitmap(hdc, AbstractWindow::WindowSize.GetWidth(), AbstractWindow::WindowSize.GetHeight());
 
 		//select the bitmap into the memory device context
