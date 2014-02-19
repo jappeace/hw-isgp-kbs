@@ -1,10 +1,3 @@
-/* 
- * File:   IGridTraveler.h
- * Author: jappie
- *
- * Created on January 31, 2014, 8:48 PM
- */
-
 #ifndef IGRIDTRAVELER_H
 #define	IGRIDTRAVELER_H
 

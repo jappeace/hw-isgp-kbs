@@ -108,8 +108,8 @@ namespace isgp {
 		// copy the bitmap on the backbuffer
 		int bltResult =  BitBlt(
 			_backBuffer, 
-			x*TILE_WIDTH, 
-			y*TILE_HEIGHT,
+			x, 
+			y,
 			TILE_WIDTH, 
 			TILE_HEIGHT, 
 			bitmap_hdc, 

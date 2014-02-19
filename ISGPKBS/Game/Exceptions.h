@@ -15,27 +15,43 @@
 using namespace std;
 namespace isgp {
 
-	class GridToLargeException : public std::runtime_error {
+	class AbstractGridException : public std::runtime_error {
 	public:
 
-		GridToLargeException(const string& message, unsigned width, unsigned height)
+		AbstractGridException(const string& message, unsigned width, unsigned height)
 		: std::runtime_error(message) {
 			Init(width, height);
 
 		};
 
-		GridToLargeException(const string& message)
+		AbstractGridException(const string& message)
 		: std::runtime_error(message) {
 			Init(0, 0);
 		};
 
 	private:
-		unsigned _width;
-		unsigned _height;
+		// just to view in debug, does not need to be pulic
+		unsigned _x;
+		unsigned _y;
+	protected:
 		// just keep track of x and y for debuging
-		void Init(unsigned width, unsigned height) {
-			_width = width;
-			_height = height;
+		void Init(unsigned x, unsigned y) {
+			_x = x;
+			_y = y;
+		};
+	};
+	class GridToLargeException : public AbstractGridException {
+	public:
+
+		GridToLargeException(const string& message, unsigned width, unsigned height)
+		: AbstractGridException(message) {
+			AbstractGridException::Init(width, height);
+
+		};
+
+		GridToLargeException(const string& message)
+		: AbstractGridException(message) {
+			Init(0, 0);
 		};
 	};
 }

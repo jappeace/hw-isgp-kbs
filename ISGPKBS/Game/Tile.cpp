@@ -75,6 +75,9 @@ namespace isgp{
 		if(_position){
 			delete _position;
 		}
+		if(_paintable){
+			delete _paintable;
+		}
 		_position = NULL;
 		_top = NULL;
 		_left = NULL;
