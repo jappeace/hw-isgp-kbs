@@ -9,6 +9,8 @@ namespace LevelEditor
 	/// </summary>
 	interface ILevel
 	{
+		int Width { get; }
+		int Height { get; }
 		void SetTile(Point position, TileType tileType);
 		IDictionary<Point, TileType> GetTiles();
 	}

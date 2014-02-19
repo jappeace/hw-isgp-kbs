@@ -1,21 +1,54 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Drawing;
 
 namespace LevelEditor
 {
 	class Level : ILevel
 	{
-		public void SetTile(System.Drawing.Point position, TileType tileType)
+		private int _width;
+		private int _height;
+		private IDictionary<Point, TileType> _tiles;
+
+		/// <summary>
+		/// Width of the level in tiles.
+		/// </summary>
+		public int Width
 		{
-			throw new NotImplementedException();
+			get { return _width; }
 		}
 
-		public IDictionary<System.Drawing.Point, TileType> GetTiles()
+		/// <summary>
+		/// Height of the level in tiles.
+		/// </summary>
+		public int Height
 		{
-			throw new NotImplementedException();
+			get { return _height; }
+		}
+
+		/// <summary>
+		/// Creates an empty level with the specified width and height in tiles.
+		/// </summary>
+		public Level(int width, int height)
+		{
+			_width = width;
+			_height = height;
+			_tiles = new Dictionary<Point, TileType>();
+		}
+
+		/// <summary>
+		/// Creates a tile on the specified position of the specified type.
+		/// </summary>
+		public void SetTile(Point position, TileType tileType)
+		{
+			_tiles.Add(position, tileType);
+		}
+
+		/// <summary>
+		/// Gets a dictionary that contains all non-empty tiles.
+		/// </summary>
+		public IDictionary<Point, TileType> GetTiles()
+		{
+			return _tiles;
 		}
 	}
 }
