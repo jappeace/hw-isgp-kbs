@@ -7,6 +7,7 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 	}
 	Level::Level(Grid* grid) {
 		_grid = grid;
+		_player = new Player(Point(100,100));
 	}
 
 	Level::~Level(void)
@@ -18,6 +19,7 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 	void Level::paint(Graphics* g) {
 		_graphics = g;
 		_grid->traverseTiles(this);
+		_player->paint(g);
 	}
 	void Level::receiveTile(Tile* tile) {
 #ifdef _DEBUG

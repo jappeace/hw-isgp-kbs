@@ -70,6 +70,7 @@
     <ClInclude Include="IGridTraveller.h" />
     <ClInclude Include="IPaintable.h" />
     <ClInclude Include="Level.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="resource1.h" />
@@ -86,6 +87,7 @@
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="Level.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="Size.cpp" />
     <ClCompile Include="Tile.cpp" />

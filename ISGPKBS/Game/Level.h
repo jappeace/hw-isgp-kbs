@@ -1,6 +1,7 @@
 #pragma once
 #include "Grid.h"
 #include "IPaintable.h"
+#include "Player.h"
 namespace isgp{
 
 	class Level : IPaintable, IGridTraveller
@@ -15,6 +16,7 @@ namespace isgp{
 	private:
 		Graphics* _graphics; // bridge between paint and receive tile
 		Grid* _grid;
+		Player* _player;
 	};
 
 }

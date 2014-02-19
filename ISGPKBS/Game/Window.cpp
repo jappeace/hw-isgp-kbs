@@ -43,6 +43,12 @@ void Window::onCommand(int from, int command){
 			MB_OK | MB_ICONEXCLAMATION
 		);
 		break;
+	case WM_KEYDOWN:
+		//onKeyDown(wParam);
+		break;
+	case WM_KEYUP:
+		//onKeyUp(wParam);
+		break;
 	case ID_FILE_EXIT:
 		PostQuitMessage(0);
 		break;
