@@ -2,14 +2,12 @@
 #include <ctime>
 
 namespace isgp {
-	TimesPerSecondCounter::TimesPerSecondCounter(void) : _tempUpdateCount(0), _savedUpdateCount(0)
-	{
+	TimesPerSecondCounter::TimesPerSecondCounter(void)
+		: _tempUpdateCount(0), _savedUpdateCount(0) {
 		_lastClock = clock();
 	}
 
-
-	TimesPerSecondCounter::~TimesPerSecondCounter(void)
-	{
+	TimesPerSecondCounter::~TimesPerSecondCounter(void) {
 	}
 
 	void TimesPerSecondCounter::Update() {

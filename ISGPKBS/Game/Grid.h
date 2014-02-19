@@ -13,13 +13,15 @@
 #include "StrConverter.h"
 #include <stdexcept>
 #include "Exceptions.h"
+
 using namespace std;
+
 namespace isgp {
 	// A class for easaly handaling a grid as a one dimensional array, with O(1) accessing speed for positions,
 	// and O(N), for accesing any set of elements.
 	// it also handy for traversel of indivdual rows/columns or all tiles trough passing an object
 	// which inherits from the interface like IGridTraveller
-	class Grid{
+	class Grid {
 	public:
 		// default constructor will use the C_default_size for initiliztion
 		Grid();
@@ -52,7 +54,7 @@ namespace isgp {
 		
 		// A gaurd for the init function so It won't take etherinity to init the grid but
 		// just throw an GridToLarge exception
-		void GaurdInit(unsigned width, unsigned height);
+		void GuardInit(unsigned width, unsigned height);
 		// comman code for both contructors
 		void Init(unsigned width, unsigned height);
 		// this function prevents the same calculation showing up in several places

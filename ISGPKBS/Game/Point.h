@@ -1,4 +1,5 @@
 #pragma once
+
 namespace isgp {
 	// represents a 2d point (x, y)
 	class Point {
