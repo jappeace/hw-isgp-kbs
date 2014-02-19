@@ -10,8 +10,8 @@ namespace isgp{
 		Level(Grid* grid);
 		Level(int width, int height);
 		~Level(void);
-		void receiveTile(Tile* tile);
-		void paint(Graphics* g);
+		void ReceiveTile(Tile* tile);
+		void Paint(Graphics* g);
 		static const Size tileSize;
 	private:
 		Graphics* _graphics; // bridge between paint and receive tile

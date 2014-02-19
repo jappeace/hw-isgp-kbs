@@ -11,8 +11,8 @@ namespace isgp {
 	public:
 		Window();
 		~Window();
-		void onPaint(Graphics* graphics);
-		void onCommand(int from, int command);
+		void OnPaint(Graphics* graphics);
+		void OnCommand(int from, int command);
 		LRESULT MsgProc(HWND, UINT, WPARAM, LPARAM);
 	private:
 		Level* _level;

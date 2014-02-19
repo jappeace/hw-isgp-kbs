@@ -24,10 +24,10 @@ namespace isgp {
 		void SetTop(Tile* top);
 		Tile* GetTop() const;
         Point* GetPosition() const;
-		void paint(Graphics* g);
-		void setIpaintalbe(IPaintable*);
+		void Paint(Graphics* g);
+		void SetIpaintalbe(IPaintable*);
 	private:
-		void init(Point* p);
+		void Init(Point* p);
 		IPaintable* _paintable;
 		Point* _position;
 		Tile* _top;

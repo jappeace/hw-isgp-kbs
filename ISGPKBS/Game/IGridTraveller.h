@@ -18,7 +18,7 @@ namespace isgp{
 	class IGridTraveller{
 
 	public:
-		virtual void receiveTile(Tile* tile) = 0;
+		virtual void ReceiveTile(Tile* tile) = 0;
 
 	};
 }

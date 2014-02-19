@@ -10,7 +10,7 @@ Window::Window() {
 	Grid* g = new Grid(g_tiles.GetWidth(),g_tiles.GetHeight());// level handles destruction of grid
 	_level = new Level(g);
 	Point position = Point(5,5);
-	g->getTileAt(position)->setIpaintalbe(new WorldBlock(position, "C:\\smile.bmp"));
+	g->GetTileAt(position)->SetIpaintalbe(new WorldBlock(position, "C:\\smile.bmp"));
 }
 
 Window::~Window()
@@ -24,11 +24,11 @@ Window::~Window()
 INT_PTR CALLBACK dialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 	return NULL;
 }
-void Window::onPaint(Graphics* g){
-	_level->paint(g);
+void Window::OnPaint(Graphics* g){
+	_level->Paint(g);
 }
 
-void Window::onCommand(int from, int command){
+void Window::OnCommand(int from, int command){
 	switch(from){
 	case ID_FILE_NEWGAME:
 		this->repaint();

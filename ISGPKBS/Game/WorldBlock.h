@@ -6,7 +6,7 @@ namespace isgp{
 	{
 	public:
 		WorldBlock(Point& position, string texturePath);
-		void paint(Graphics*);
+		void Paint(Graphics*);
 	private:
 		Point _position;
 		// the sprite that will be renderd for this block

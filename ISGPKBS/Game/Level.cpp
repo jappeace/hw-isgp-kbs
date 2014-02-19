@@ -15,17 +15,17 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 			delete _grid;
 		}
 	}
-	void Level::paint(Graphics* g) {
+	void Level::Paint(Graphics* g) {
 		_graphics = g;
-		_grid->traverseTiles(this);
+		_grid->TraverseTiles(this);
 	}
-	void Level::receiveTile(Tile* tile) {
+	void Level::ReceiveTile(Tile* tile) {
 #ifdef _DEBUG
 		Point position = *tile->GetPosition();
 		position.SetX(position.GetX() * Level::tileSize.GetWidth());
 		position.SetY(position.GetY() * Level::tileSize.GetHeight());
 
-		_graphics->drawRect(
+		_graphics->DrawRect(
 			position, 
 			Point(
 				position.GetX() + Level::tileSize.GetWidth(),
@@ -33,6 +33,6 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 			)
 		);
 #endif
-		tile->paint(_graphics);
+		tile->Paint(_graphics);
 	}
 }
