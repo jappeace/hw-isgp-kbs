@@ -3,6 +3,7 @@
 #include "IPaintable.h"
 namespace isgp{
 
+	// represents a level in the game
 	class Level : IPaintable, IGridTraveller
 	{
 	public:

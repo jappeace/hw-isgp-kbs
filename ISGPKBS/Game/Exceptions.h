@@ -20,20 +20,20 @@ namespace isgp {
 
 		GridToLargeException(const string& message, unsigned width, unsigned height)
 		: std::runtime_error(message) {
-			init(width, height);
+			Init(width, height);
 
 		};
 
 		GridToLargeException(const string& message)
 		: std::runtime_error(message) {
-			init(0, 0);
+			Init(0, 0);
 		};
 
 	private:
 		unsigned _width;
 		unsigned _height;
 		// just keep track of x and y for debuging
-		void init(unsigned width, unsigned height) {
+		void Init(unsigned width, unsigned height) {
 			_width = width;
 			_height = height;
 		};
