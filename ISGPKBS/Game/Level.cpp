@@ -19,7 +19,7 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 	void Level::Paint(Graphics* g) {
 		_graphics = g;
 		_grid->TraverseTiles(this);
-		_player->paint(g);
+		_player->Paint(g);
 	}
 	void Level::ReceiveTile(Tile* tile) {
 #ifdef _DEBUG

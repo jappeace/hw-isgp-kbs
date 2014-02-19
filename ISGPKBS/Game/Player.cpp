@@ -54,6 +54,6 @@ namespace isgp{
 	void Player::Paint(Graphics* g) {
 		_graphics = g;
 
-		_graphics->drawRect(Point(100, 100), Point(200, 200));
+		_graphics->DrawRect(Point(100, 100), Point(200, 200));
 	}
 }
