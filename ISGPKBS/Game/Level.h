@@ -1,22 +1,22 @@
 #pragma once
+
 #include "Grid.h"
 #include "IPaintable.h"
 #include "Player.h"
-namespace isgp{
 
-	class Level : IPaintable, IGridTraveller
-	{
+namespace isgp{
+	// represents a level in the game
+	class Level : public IPaintable, public IGridTraveller {
 	public:
 		Level(Grid* grid);
 		Level(int width, int height);
 		~Level(void);
-		void receiveTile(Tile* tile);
-		void paint(Graphics* g);
+		void ReceiveTile(Tile* tile) override;
+		void Paint(Graphics* g) override;
 		static const Size tileSize;
 	private:
 		Graphics* _graphics; // bridge between paint and receive tile
 		Grid* _grid;
 		Player* _player;
 	};
-
 }

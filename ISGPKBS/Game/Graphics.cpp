@@ -1,8 +1,8 @@
 #include "Graphics.h"
 #include "StrConverter.h"
 #include "AbstractWindow.h"
-namespace isgp {
 
+namespace isgp {
 	Graphics::Graphics(HWND hWnd) {
 		_bitmapCache = new map<string,  HBITMAP>();
 
@@ -11,7 +11,6 @@ namespace isgp {
 		//get the DC for the front buffer
 		HDC hdc = GetDC(hWnd);
 
-		// TODO: Retrieve actual window size
 		this->_bitmap = CreateCompatibleBitmap(hdc, AbstractWindow::WindowSize.GetWidth(), AbstractWindow::WindowSize.GetHeight());
 
 		//select the bitmap into the memory device context
@@ -21,9 +20,7 @@ namespace isgp {
 		ReleaseDC(hWnd, hdc); 
 	}
 
-
-	Graphics::~Graphics(void)
-	{
+	Graphics::~Graphics(void) {
 		if(_bitmapCache) {
 			delete _bitmapCache;
 		}
@@ -40,7 +37,7 @@ namespace isgp {
 	void Graphics::EndRendering(HWND hWnd, PAINTSTRUCT *ps) {
 #ifdef _DEBUG
 		this->_fpsCounter.Update();
-		drawStr(Point(10, 10), "FPS: " + StrConverter::intToString(this->_fpsCounter.Get()));
+		DrawStr(Point(10, 10), "FPS: " + StrConverter::IntToString(this->_fpsCounter.Get()));
 #endif
 
 		// Blit the new frame to the screen
@@ -50,31 +47,31 @@ namespace isgp {
 		EndPaint(hWnd, ps);
 	}
 
-	void Graphics::drawStr(Point& position, string str) {
-		this->drawStr(position,str.c_str(), str.length());
+	void Graphics::DrawStr(Point& position, string str) {
+		this->DrawStr(position,str.c_str(), str.length());
 	}
 
-	void Graphics::drawStr(Point& position, const char* str, int length) {
+	void Graphics::DrawStr(Point& position, const char* str, int length) {
 		TextOut(_backBuffer, (int) position.GetX(), (int) position.GetY(), str, length);
 	}
 
-	void Graphics::setTextColor(COLORREF color) {
-		SetTextColor(_backBuffer, color);
+	void Graphics::SetTextColor(COLORREF color) {
+		::SetTextColor(_backBuffer, color);
 	}
 
-	void Graphics::setTextBackgroundColor(COLORREF color) {
+	void Graphics::SetTextBackgroundColor(COLORREF color) {
 		SetBkColor(_backBuffer, color);
 	}
 
-	void Graphics::drawRect(Point& one, Point& two) {
-		this->drawRect((int)one.GetX(),(int) one.GetY(),(int) two.GetX(),(int) two.GetY());
+	void Graphics::DrawRect(Point& one, Point& two) {
+		this->DrawRect((int)one.GetX(),(int) one.GetY(),(int) two.GetX(),(int) two.GetY());
 	}
 
-	void Graphics::drawRect(int xone, int yone, int xtwo, int ytwo) {
+	void Graphics::DrawRect(int xone, int yone, int xtwo, int ytwo) {
 		Rectangle(_backBuffer, xone, yone, xtwo, ytwo);
 	}
-	HBITMAP Graphics::loadBitmap(string path, int offsetX, int offsetY) {
-		string key = path + StrConverter::intToString(offsetX) + StrConverter::intToString(offsetY);
+	HBITMAP Graphics::LoadBitmapFile(string path, int offsetX, int offsetY) {
+		string key = path + StrConverter::IntToString(offsetX) + StrConverter::IntToString(offsetY);
 		if(_bitmapCache->count(key)) {
 			return _bitmapCache->find(key)->second;
 		}
@@ -82,24 +79,24 @@ namespace isgp {
 		(*_bitmapCache)[key] = bitmap;
 		return bitmap;
 	}
-	HBITMAP Graphics::loadBitmap(string path) {
-		return this->loadBitmap(path, 0, 0);	
+	HBITMAP Graphics::LoadBitmapFile(string path) {
+		return this->LoadBitmapFile(path, 0, 0);	
 	}
-	HBITMAP Graphics::loadBitmap(string path, Point& offset) {
-		return this->loadBitmap(path, (int) offset.GetX(), (int) offset.GetY());
+	HBITMAP Graphics::LoadBitmapFile(string path, Point& offset) {
+		return this->LoadBitmapFile(path, (int) offset.GetX(), (int) offset.GetY());
 	}
 
-	void Graphics::drawBitmap(string path, Point& position) {
-		drawBitmap(path,(int) position.GetX(),(int) position.GetY(), 0, 0);
+	void Graphics::DrawBitmap(string path, Point& position) {
+		DrawBitmap(path,(int) position.GetX(),(int) position.GetY(), 0, 0);
 	}
-	void Graphics::drawBitmap(string path, Point& position, Point& offset) {
-		drawBitmap(path,(int) position.GetX(),(int) position.GetY(),(int) offset.GetX(),(int) offset.GetY());
+	void Graphics::DrawBitmap(string path, Point& position, Point& offset) {
+		DrawBitmap(path,(int) position.GetX(),(int) position.GetY(),(int) offset.GetX(),(int) offset.GetY());
 	}
-	void Graphics::drawBitmap(string path, int x, int y) {
-		drawBitmap(path, x, y, 0, 0);
+	void Graphics::DrawBitmap(string path, int x, int y) {
+		DrawBitmap(path, x, y, 0, 0);
 	}
-	void Graphics::drawBitmap(string path, int x, int y, int offsetx, int offsety) {
-		HBITMAP bitmap = this->loadBitmap(path, offsetx, offsety);
+	void Graphics::DrawBitmap(string path, int x, int y, int offsetx, int offsety) {
+		HBITMAP bitmap = this->LoadBitmapFile(path, offsetx, offsety);
 		HDC bitmap_hdc = CreateCompatibleDC(NULL);
 
 		// link the bitmap to a device context
@@ -108,8 +105,8 @@ namespace isgp {
 		// copy the bitmap on the backbuffer
 		int bltResult =  BitBlt(
 			_backBuffer, 
-			x*TILE_WIDTH, 
-			y*TILE_HEIGHT,
+			x, 
+			y,
 			TILE_WIDTH, 
 			TILE_HEIGHT, 
 			bitmap_hdc, 

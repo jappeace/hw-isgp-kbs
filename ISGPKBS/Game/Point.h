@@ -1,21 +1,23 @@
-/* 
- * File:   Point.h
- * Author: jappie
- *
- * Created on January 31, 2014, 7:26 PM
- */
-
 #pragma once
 
 namespace isgp {
+	// represents a 2d point (x, y)
 	class Point {
 	public:
+		// sets a Point to (0,0)
 		Point();
+		// sets a Point to (x, y)
 		Point(int x, int y);
+		// sets a Point to (x, y)
 		Point(double x, double y);
-		void SetY(double _y);
+		
+		// change the y axis of the point
+		void SetY(double y);
+		// change the x axis of the point
+		void SetX(double x);
+		// get the y axis of the point
 		double GetY() const;
-		void SetX(double _x);
+		// get the x axis of the point
 		double GetX() const;
 	private:
 		void init(double y, double x);

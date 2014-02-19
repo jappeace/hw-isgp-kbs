@@ -113,19 +113,19 @@ LRESULT AbstractWindow::MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 	switch (uMsg) 
 	{
 		case WM_COMMAND:
-			onCommand(LOWORD(wParam),HIWORD(wParam));
+			OnCommand(LOWORD(wParam),HIWORD(wParam));
 			break;
 		case WM_KEYDOWN:
-			onKeyDown(wParam);
+			OnKeyDown(wParam);
 			break;
 
 		case WM_KEYUP:
-			onKeyUp(wParam);
+			OnKeyUp(wParam);
 			break;
 
 		case WM_PAINT:
 			_graphics->BeginRendering(_hWnd, &paintStructure);
-			onPaint(_graphics);
+			OnPaint(_graphics);
 			_graphics->EndRendering(_hWnd, &paintStructure);
 			break;
 
