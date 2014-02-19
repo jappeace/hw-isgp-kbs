@@ -67,6 +67,7 @@
     <ClInclude Include="Exceptions.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Grid.h" />
+    <ClInclude Include="behaviourinterface.h" />
     <ClInclude Include="IGridTraveller.h" />
     <ClInclude Include="IPaintable.h" />
     <ClInclude Include="Level.h" />

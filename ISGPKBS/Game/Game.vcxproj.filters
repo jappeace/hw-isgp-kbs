@@ -66,6 +66,9 @@
     <ClInclude Include="WorldBlock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="behaviourinterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Graphics.cpp">
