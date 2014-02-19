@@ -65,7 +65,7 @@ int AbstractWindow::Run()
 			::QueryPerformanceCounter((LARGE_INTEGER*)&_start);
 			_stop = _start;
 			
-			while (_stop - _start < _freq / _maxGameTicksPerSecond) 
+			while (_stop - _start < _freq / _gameloopThrottle) //throttle ticks to X times per second
 				::QueryPerformanceCounter((LARGE_INTEGER*)&_stop);
 			GameLoop(((_stop - _lastUpdate) * 1000) / (double)_freq);
 			_lastUpdate = _stop;
@@ -105,6 +105,7 @@ HRESULT AbstractWindow::Create()
 	_graphics = new Graphics(_hWnd);
 	ShowWindow(_hWnd, _dwCreationFlags);
 	UpdateWindow(_hWnd);
+	_gameloopThrottle = 60;
 	::QueryPerformanceFrequency((LARGE_INTEGER*)&_freq);
 	::QueryPerformanceCounter((LARGE_INTEGER*)&_lastUpdate);
 	return TRUE;

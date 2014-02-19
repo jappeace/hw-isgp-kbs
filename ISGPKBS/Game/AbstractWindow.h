@@ -36,7 +36,7 @@ namespace isgp {
 
 		INT64 _freq;
 		INT64 _start, _stop;
-		int _maxGameTicksPerSecond;
+		double _gameloopThrottle;
 		INT64 _lastUpdate;
 
 	public:
