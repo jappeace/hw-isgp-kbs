@@ -25,7 +25,7 @@ namespace LevelEditor
 
 				// Write width and height to the file.
 				streamWriter.WriteLine(string.Format("width={0}", level.Width));
-				streamWriter.WriteLine(string.Format("width={1}", level.Height));
+				streamWriter.WriteLine(string.Format("width={0}", level.Height));
 				foreach (Point key in tiles.Keys)
 				{
 					streamWriter.WriteLine(TileToString(key, tiles[key]));
