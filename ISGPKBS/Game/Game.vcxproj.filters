@@ -45,9 +45,6 @@
     <ClInclude Include="Size.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="StrConverter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="TimesPerSecondCounter.h">
       <Filter>Header Files</Filter>
     </ClInclude>

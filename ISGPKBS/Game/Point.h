@@ -1,12 +1,4 @@
-/* 
- * File:   Point.h
- * Author: jappie
- *
- * Created on January 31, 2014, 7:26 PM
- */
-
 #pragma once
-
 namespace isgp {
 	// represents a 2d point (x, y)
 	class Point {
@@ -18,11 +10,13 @@ namespace isgp {
 		// sets a Point to (x, y)
 		Point(double x, double y);
 		
-		// change the y acces of the point
+		// change the y axis of the point
 		void SetY(double);
-		// get the y of the point
-		double GetY() const;
+		// change the x axis of the point
 		void SetX(double);
+		// get the y axis of the point
+		double GetY() const;
+		// get the x axis of the point
 		double GetX() const;
 	private:
 		void init(double y, double x);
