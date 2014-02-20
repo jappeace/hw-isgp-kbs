@@ -6,12 +6,13 @@ namespace isgp{
 		_accel = 1;
 		_deAccel = 0.5;
 
-		this->position = position;
+		_position = position;
 		_xVel = 0;
 		_yVel = 0;
 		_leftKey = false;
 		_rightKey = false;
 		_upKey = false;
+		_spaceKey = false;
 		_collision = false;
 	}
 
@@ -41,19 +42,19 @@ namespace isgp{
 			_xVel -= _deAccel;
 		}
 
-		position.SetX(position.GetX() - _xVel);
-		position.SetY(position.GetY() - _yVel);
+		_position.SetX(_position.GetX() + _xVel);
+		_position.SetY(_position.GetY() + _yVel);
 
-		if (position.GetY() > 520) { position.SetY(521); _collision = true; } else { _collision = false; }
+		if (_position.GetY() > 520) { _position.SetY(521); _collision = true; } else { _collision = false; }
 		
-		if (position.GetY() < 521) { _yVel += 1; }
+		if (_position.GetY() < 521) { _yVel += 1; }
 		else { _yVel = 0; }
-		if (_upKey && position.GetY() >= 520) { _yVel = -12; }
+		if (_upKey && _position.GetY() >= 520) { _yVel = -12; }
 	}
 
 	void Player::Paint(Graphics* g) {
 		_graphics = g;
 
-		_graphics->DrawRect(Point(100, 100), Point(200, 200));
+		_graphics->DrawRect(_position, Point(_position.GetX() + 32, _position.GetY() + 32));
 	}
 }
