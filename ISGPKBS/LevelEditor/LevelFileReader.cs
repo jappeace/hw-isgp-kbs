@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 
 namespace LevelEditor
 {
@@ -14,6 +9,11 @@ namespace LevelEditor
 		public LevelFileReader(string fileName)
 		{
 			_streamReader = new StreamReader(fileName);
+		}
+
+		public string ReadLine()
+		{
+			return _streamReader.ReadLine();
 		}
 	}
 }
