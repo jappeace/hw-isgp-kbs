@@ -6,6 +6,30 @@ namespace LevelEditor
 {
 	class LevelExport : ILevelExporter
 	{
+		private ILevelWriter _levelWriter;
+
+		public ILevelWriter LevelWriter
+		{
+			get { return _levelWriter; }
+			set { _levelWriter = value; }
+		}
+
+		/// <summary>
+		/// Constructor for using a LevelFileWriter that uses the filesystem.
+		/// </summary>
+		public LevelExport(string fileName)
+			: this(new LevelFileWriter(fileName))
+		{
+		}
+
+		/// <summary>
+		/// Alternative constructor for dependency injection.
+		/// </summary>
+		public LevelExport(ILevelWriter levelWriter)
+		{
+			LevelWriter = levelWriter;
+		}
+
 		/// <summary>
 		/// Exports the specified level to the specified file. If the file
 		/// already exists, it will be deleted and a new file will be created.
