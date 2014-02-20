@@ -4,7 +4,7 @@ using System.IO;
 
 namespace LevelEditor.IO
 {
-	class LevelExporter : ILevelExporter
+	public class LevelExporter : ILevelExporter
 	{
 		private IWriter _levelWriter;
 
