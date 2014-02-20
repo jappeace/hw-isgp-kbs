@@ -131,7 +131,7 @@ namespace isgp {
 	}
 
 	Tile* Grid::GetTileAt(Point& p) const {
-		return GetTileAt((int) p.GetX(), (int) p.GetY());
+		return GetTileAt((unsigned) p.GetX(), (unsigned) p.GetY());
 	}
 
 	void Grid::TraverseRow(unsigned y, IGridTraveller* traveller) {
