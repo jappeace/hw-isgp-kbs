@@ -2,7 +2,7 @@
 using System.Text;
 using LevelEditor.IO;
 
-namespace LevelEditor.Tests.Unit
+namespace LevelEditor.Tests.Unit.IO
 {
 	class StringReader : IReader
 	{

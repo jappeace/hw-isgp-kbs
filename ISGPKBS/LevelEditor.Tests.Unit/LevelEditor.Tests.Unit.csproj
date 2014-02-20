@@ -50,8 +50,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="StringReader.cs" />
-    <Compile Include="StringWriter.cs" />
+    <Compile Include="IO\StringReader.cs" />
+    <Compile Include="IO\StringWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
