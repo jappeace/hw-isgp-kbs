@@ -35,6 +35,9 @@ void Window::OnPaint(Graphics* g){
 	_level->Paint(g);
 }
 
+void Window::OnKeyDown(int which) {
+	OutputDebugStringW(L"string");
+}
 
 void Window::OnCommand(int from, int command) {
 	switch(from){
@@ -50,12 +53,6 @@ void Window::OnCommand(int from, int command) {
 			"Licensed under GPL v3",
 			MB_OK | MB_ICONEXCLAMATION
 		);
-		break;
-	case WM_KEYDOWN:
-		//onKeyDown(wParam);
-		break;
-	case WM_KEYUP:
-		//onKeyUp(wParam);
 		break;
 	case ID_FILE_EXIT:
 		PostQuitMessage(0);

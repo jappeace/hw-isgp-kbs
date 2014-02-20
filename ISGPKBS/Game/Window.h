@@ -14,6 +14,7 @@ namespace isgp {
 		void OnPaint(Graphics* graphics);
 		void OnCommand(int from, int command);
 		LRESULT MsgProc(HWND, UINT, WPARAM, LPARAM);
+		void OnKeyDown(int which) override;
 	private:
 		Level* _level;
 	};
