@@ -3,14 +3,14 @@
 namespace LevelEditor.IO
 {
 	/// <summary>
-	/// Class that reads the contents of a level from a file.
+	/// Class that reads the contents of a file.
 	/// </summary>
 	class FileReader : IReader
 	{
 		private StreamReader _streamReader;
 
 		/// <summary>
-		/// Create a LevelFileReader object that can read the contents of the
+		/// Create a FileReader object that can read the contents of the
 		/// specified file.
 		/// </summary>
 		public FileReader(string fileName)
@@ -19,7 +19,7 @@ namespace LevelEditor.IO
 		}
 
 		/// <summary>
-		/// Read a line from the level file and move the cursor to the next line.
+		/// Read a line from the file and move the cursor to the next line.
 		/// </summary>
 		public string ReadLine()
 		{

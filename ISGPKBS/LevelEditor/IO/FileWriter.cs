@@ -22,7 +22,7 @@ namespace LevelEditor.IO
 		}
 
 		/// <summary>
-		/// Writes a line to the level file.
+		/// Writes a line to the file.
 		/// </summary>
 		public void WriteLine(string line)
 		{

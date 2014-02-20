@@ -15,7 +15,7 @@ namespace LevelEditor.IO
 		}
 
 		/// <summary>
-		/// Constructor for using a LevelFileWriter that uses the filesystem.
+		/// Constructor for using a FileWriter that uses the filesystem.
 		/// </summary>
 		public LevelExporter(string fileName)
 			: this(new FileWriter(fileName))

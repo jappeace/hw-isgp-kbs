@@ -20,7 +20,7 @@ namespace LevelEditor.IO
 		}
 
 		/// <summary>
-		/// Constructor for using a LevelFileReader that reads from the filesystem.
+		/// Constructor for using a FileReader that reads from the filesystem.
 		/// </summary>
 		public LevelImporter(string fileName)
 			: this(new FileReader(fileName))
