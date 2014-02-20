@@ -5,20 +5,23 @@
 #include <map>
 #include "Point.h"
 #include "TimesPerSecondCounter.h"
+
 // to breack an include loop This class can't use the static Level::tilesize
 // that is why the macro where the size is based on is moved to here
 // this also gives a small speed optimization (less function calls)
 // and yes putting this definition here is quite weird
+
 #define TILE_WIDTH 16
 #define TILE_HEIGHT 16
+
 using namespace std;
+
 namespace isgp {
 	/** 
 	* this class makes it easier to use win32, it has also some internal speed optimizations,
 	* basicly you should use an instance of this class instead of win32
 	*/
-	class Graphics
-	{
+	class Graphics {
 	private:
 		// The device context which is visible on the screen
 		HDC _hdc;
@@ -36,29 +39,27 @@ namespace isgp {
 		Graphics(HWND);
 		~Graphics(void);
 
-		/**
-		 * Prepares the device context to start rendering
-		 */
+		// Prepares the device context to start rendering
 		void BeginRendering(HWND, PAINTSTRUCT *);
-		/** * Ends the rendering state and draws the backbuffer onto the screen */
+		// Ends the rendering state and draws the backbuffer onto the screen
 		void EndRendering(HWND, PAINTSTRUCT *);
-		/** loads a bitmap in the cache */
-		HBITMAP loadBitmap(string path);
-		HBITMAP loadBitmap(string path, int offsetX, int offsetY);
-		HBITMAP loadBitmap(string path, Point& offset);
+		// get a bitmap from the cache or load it from a file and put it in the cache and return
+		HBITMAP LoadBitmapFile(string path);
+		HBITMAP LoadBitmapFile(string path, int offsetX, int offsetY);
+		HBITMAP LoadBitmapFile(string path, Point& offset);
 
-		void setTextColor(COLORREF color);
-		void setTextBackgroundColor(COLORREF color);
+		void SetTextColor(COLORREF color);
+		void SetTextBackgroundColor(COLORREF color);
 
-		void drawStr(Point& position, string str);
-		void drawStr(Point& position, const char* str, int length);
+		void DrawStr(Point& position, string str);
+		void DrawStr(Point& position, const char* str, int length);
 
-		void drawRect(Point& one, Point& two);
-		void drawRect(int xone, int yone, int xtwo, int ytwo);
+		void DrawRect(Point& one, Point& two);
+		void DrawRect(int xone, int yone, int xtwo, int ytwo);
 
-		void drawBitmap(string path, Point& position);
-		void drawBitmap(string path, Point& position, Point& offset);
-		void drawBitmap(string path, int x, int y);
-		void drawBitmap(string path, int x, int y, int offsetx, int offsety);
+		void DrawBitmap(string path, Point& position);
+		void DrawBitmap(string path, Point& position, Point& offset);
+		void DrawBitmap(string path, int x, int y);
+		void DrawBitmap(string path, int x, int y, int offsetx, int offsety);
 	};
 }
