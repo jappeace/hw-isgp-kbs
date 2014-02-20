@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace LevelEditor
 {
-	class Level : ILevel
+	public class Level : ILevel
 	{
 		private int _width;
 		private int _height;
