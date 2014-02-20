@@ -33,6 +33,12 @@ namespace isgp {
 		HACCEL _hAccelTable;
 
 		Graphics* _graphics;
+
+		INT64 _freq;
+		INT64 _start, _stop;
+		double _gameloopThrottle;
+		INT64 _lastUpdate;
+
 	public:
 		AbstractWindow();
 		HRESULT Create();
@@ -40,6 +46,7 @@ namespace isgp {
 		virtual ~AbstractWindow();
 		virtual LRESULT MsgProc(HWND, UINT, WPARAM, LPARAM);
 		void repaint();
+		void GameLoop(double);
 		static const Size WindowSize;
 		// This method forces subclasses to implement the onpaint
 		virtual void OnPaint(Graphics* graphics) = 0; // this also makes the class abstract
