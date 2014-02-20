@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace LevelEditor
+namespace LevelEditor.IO
 {
 	/// <summary>
 	/// Class that reads the contents of a level from a file.

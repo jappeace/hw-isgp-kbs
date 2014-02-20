@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.IO;
 
-namespace LevelEditor
+namespace LevelEditor.IO
 {
 	class LevelExport : ILevelExporter
 	{

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 
-namespace LevelEditor
+namespace LevelEditor.IO
 {
 	/// <summary>
 	/// Imports a level from an external resource.

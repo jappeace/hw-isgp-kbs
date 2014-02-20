@@ -1,4 +1,4 @@
-﻿namespace LevelEditor
+﻿namespace LevelEditor.IO
 {
 	public interface ILevelWriter
 	{
