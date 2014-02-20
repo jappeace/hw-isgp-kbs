@@ -1,6 +1,6 @@
 ﻿namespace LevelEditor
 {
-	interface ILevelExporter
+	public interface ILevelExporter
 	{
 		void ExportLevel(ILevel level, string file);
 	}

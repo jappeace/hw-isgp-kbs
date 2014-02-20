@@ -7,7 +7,7 @@ namespace LevelEditor
 	/// Interface that defines methods for getting and setting information
 	/// about tiles in a level.
 	/// </summary>
-	interface ILevel
+	public interface ILevel
 	{
 		int Width { get; }
 		int Height { get; }

@@ -1,6 +1,6 @@
 ﻿namespace LevelEditor
 {
-	interface ILevelImporter
+	public interface ILevelImporter
 	{
 		ILevel ImportLevel(string file);
 	}
