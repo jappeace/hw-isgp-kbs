@@ -34,7 +34,40 @@ INT_PTR CALLBACK dialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 void Window::OnPaint(Graphics* g){
 	_level->Paint(g);
 }
+void Window::GameLoop(double elapsed) { //elapsed time, in MS
+	//update all the game objects now
+	_level->_player->Update();
+}
 
+void Window::OnKeyDown(int which) {
+	if (which == 37) {
+		_level->_player->_leftKey = true;
+	}
+	if (which == 39) {
+		_level->_player->_rightKey = true;
+	}
+	if (which == 38) {
+		_level->_player->_upKey = true;
+	}
+	if (which == 32) {
+		_level->_player->_spaceKey = true;
+	}
+}
+
+void Window::OnKeyUp(int which) {
+	if (which == 37) {
+		_level->_player->_leftKey = false;
+	}
+	if (which == 39) {
+		_level->_player->_rightKey = false;
+	}
+	if (which == 38) {
+		_level->_player->_upKey = false;
+	}
+	if (which == 32) {
+		_level->_player->_spaceKey = false;
+	}
+}
 
 void Window::OnCommand(int from, int command) {
 	switch(from){

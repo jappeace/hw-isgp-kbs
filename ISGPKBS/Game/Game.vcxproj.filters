@@ -70,6 +70,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ITranslator.h">
+	<Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+	<Filter>Header Files</Filter>
+    </ClInclude>
+
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GridGraphicTranslator.h">
@@ -110,7 +116,15 @@
     <ClCompile Include="WorldBlock.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    
     <ClCompile Include="GridGrahicTranslator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+
+    
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

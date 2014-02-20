@@ -1,6 +1,6 @@
 #include "AbstractWindow.h"
 
-#include "StrConverter.h"
+
 namespace isgp {
 //////////////////////////////////////////////////////////////////
 // Static Initialisation
@@ -17,9 +17,6 @@ LRESULT CALLBACK WindowProcedure(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPa
 {
 	return g_abstractWindow->MsgProc(hWnd, uMsg, wParam, lParam);
 }
-
-const Size AbstractWindow::WindowSize = Size(800, 600);
-
 //////////////////////////////////////////////////////////////////
 // Constructors/Destructors
 //////////////////////////////////////////////////////////////////
@@ -28,55 +25,40 @@ AbstractWindow::AbstractWindow()
 	g_abstractWindow = this;
 	_hWnd = NULL;
 	_dwCreationFlags		= 0L;
-	_dwWindowStyle		= WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX;
+	_dwWindowStyle		= WS_OVERLAPPEDWINDOW;
 	_dwExWindowStyle		= WS_EX_OVERLAPPEDWINDOW;
 	_dwCreationFlags		= SW_SHOW;
 	_PosX				= CW_USEDEFAULT;	
 	_PosY				= CW_USEDEFAULT;	
-	_dwCreationWidth		= WindowSize.GetWidth();
-	_dwCreationHeight	= WindowSize.GetHeight();
+	_dwCreationWidth		= CW_USEDEFAULT;
+	_dwCreationHeight	= CW_USEDEFAULT;
 	_hbrWindowColor		= (HBRUSH)(COLOR_WINDOW+1);
 	_hIcon				= LoadIcon(_hInstance, (LPCTSTR)IDI_APPLICATION);
 	_strWindowTitle		= _T("Win32 OO Skeleton Program...");
 	_hMenu				= NULL; 	
-	_graphics			= NULL;
 }
 
 AbstractWindow::~AbstractWindow()
 {
 }
 
+
 //////////////////////////////////////////////////////////////////
 // Functions
 //////////////////////////////////////////////////////////////////
 int AbstractWindow::Run()
 {
-	MSG msg = {0};
+	MSG msg;
 
-	while( msg.message!=WM_QUIT )
+	while (GetMessage(&msg, NULL, 0, 0)) 
 	{
-		
-		if( PeekMessage( &msg, NULL, 0U, 0U, PM_REMOVE ) )
+		if (!TranslateAccelerator(msg.hwnd, _hAccelTable, &msg)) 
 		{
-			TranslateMessage( &msg );
-			DispatchMessage( &msg );
-		} 
-		else 
-		{
-			::QueryPerformanceCounter((LARGE_INTEGER*)&_start);
-			_stop = _start;
-			
-			while (((_stop - _start) * 1000) / (double)_freq < _engineThrottle) { //throttle
-				::QueryPerformanceCounter((LARGE_INTEGER*)&_stop);
-			}
-			
-
-			GameLoop(((_stop - _lastUpdate) * 1000) / (double)_freq);
-			_lastUpdate = _stop;
-
-			repaint();
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
 		}
-	}
+
+	}	
 	return msg.wParam;
 }
 
@@ -85,7 +67,6 @@ HRESULT AbstractWindow::Create()
 	WNDCLASSEX wcex;
 
 	wcex.cbSize = sizeof(WNDCLASSEX); 
-
 
 	wcex.style			= CS_HREDRAW | CS_VREDRAW;
 	wcex.lpfnWndProc	= (WNDPROC)WindowProcedure;
@@ -108,19 +89,19 @@ HRESULT AbstractWindow::Create()
 	{
 	  return FALSE;
 	}
-	_graphics = new Graphics(_hWnd);
-	ShowWindow(_hWnd, _dwCreationFlags);
-	UpdateWindow(_hWnd);
-	_engineThrottle = 5;
-	::QueryPerformanceFrequency((LARGE_INTEGER*)&_freq);
-	::QueryPerformanceCounter((LARGE_INTEGER*)&_lastUpdate);
+
+	::ShowWindow(_hWnd, _dwCreationFlags);
+	::UpdateWindow(_hWnd);
+
 	return TRUE;
+
 }
 
 LRESULT AbstractWindow::MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-	HDC hdc = HDC();
-	PAINTSTRUCT paintStructure = PAINTSTRUCT();
+	HDC hdc;
+	PAINTSTRUCT paintStructure;
+	Graphics* graphics = NULL;
 
 	if (!_hWnd){
 		_hWnd = hWnd;
@@ -129,20 +110,30 @@ LRESULT AbstractWindow::MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 	switch (uMsg) 
 	{
 		case WM_COMMAND:
-			OnCommand(LOWORD(wParam),HIWORD(wParam));
+			onCommand(LOWORD(wParam),HIWORD(wParam));
 			break;
 		case WM_KEYDOWN:
-			OnKeyDown(wParam);
+			onKeyDown(wParam);
 			break;
 
 		case WM_KEYUP:
-			OnKeyUp(wParam);
+			onKeyUp(wParam);
 			break;
 
 		case WM_PAINT:
-			_graphics->BeginRendering(_hWnd, &paintStructure);
-			OnPaint(_graphics);
-			_graphics->EndRendering(_hWnd, &paintStructure);
+			_windowSize = new RECT();
+			GetClientRect(hWnd, _windowSize);
+			graphics = new Graphics();
+
+			hdc = BeginPaint(hWnd, &paintStructure);
+			graphics->setHDC(&hdc);
+
+			onPaint(graphics);
+
+			EndPaint(hWnd, &paintStructure);
+
+			delete _windowSize;
+			delete graphics;
 			break;
 
 		case WM_DESTROY:
@@ -154,12 +145,7 @@ LRESULT AbstractWindow::MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 	return 0;
 }
 
-void AbstractWindow::GameLoop(double elapsed) { //elapsed time, in MS
-	//update all the game objects now
-	
-}
-
-void AbstractWindow::repaint() {
-	InvalidateRect(_hWnd, 0, FALSE);
+void AbstractWindow::repaint(){
+	InvalidateRect(_hWnd, 0, TRUE);
 }
 }
