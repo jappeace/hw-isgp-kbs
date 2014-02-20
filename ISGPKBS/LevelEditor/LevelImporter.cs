@@ -1,39 +1,63 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LevelEditor
 {
+	/// <summary>
+	/// Imports a level from an external resource.
+	/// </summary>
 	class LevelImporter : ILevelImporter
 	{
+		private ILevelReader _levelReader;
+
+		/// <summary>
+		/// Object used to read the level.
+		/// </summary>
+		public ILevelReader LevelReader
+		{
+			get { return _levelReader; }
+			set { _levelReader = value; }
+		}
+
+		/// <summary>
+		/// Constructor for using a LevelFileReader that reads from the filesystem.
+		/// </summary>
+		public LevelImporter(string fileName)
+			: this(new LevelFileReader(fileName))
+		{
+		}
+
+		/// <summary>
+		/// Alternative constructor for dependency injection.
+		/// </summary>
+		public LevelImporter(ILevelReader levelReader)
+		{
+			LevelReader = levelReader;
+		}
+
 		/// <summary>
 		/// Loads a level file and returns an ILevel object.
 		/// May throw a FileNotFoundException if the file is not found.
 		/// </summary>
-		public ILevel ImportLevel(string file)
+		public ILevel ImportLevel()
 		{
 			ILevel level;
-			var streamReader = new StreamReader(file);
 
 			// Create level with the width and height specified in the file.
-			int width = GetIntValue(streamReader.ReadLine());
-			int height = GetIntValue(streamReader.ReadLine());
+			int width = GetIntValue(LevelReader.ReadLine());
+			int height = GetIntValue(LevelReader.ReadLine());
 			level = new Level(width, height);
 
 			// Read all coordinates and add them as tiles to the level.
 			TileType tileType;
 			Point position;
-			string line = streamReader.ReadLine();
+			string line = LevelReader.ReadLine();
 			while (line != null)
 			{
 				tileType = (TileType)GetIntValue(line);
 				position = GetPosition(line);
 				level.SetTile(position, tileType);
-				line = streamReader.ReadLine();
+				line = LevelReader.ReadLine();
 			}
 
 			return level;
