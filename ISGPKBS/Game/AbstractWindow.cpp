@@ -55,6 +55,7 @@ int AbstractWindow::Run()
 
 	while( msg.message!=WM_QUIT )
 	{
+		repaint();
 		if( PeekMessage( &msg, NULL, 0U, 0U, PM_REMOVE ) )
 		{
 			TranslateMessage( &msg );
@@ -65,12 +66,14 @@ int AbstractWindow::Run()
 			::QueryPerformanceCounter((LARGE_INTEGER*)&_start);
 			_stop = _start;
 			
-			while (_stop - _start < _freq / _gameloopThrottle) { //throttle ticks to X times per second
+			while (((_stop - _start) * 1000) / (double)_freq < _engineThrottle) { //throttle
 				::QueryPerformanceCounter((LARGE_INTEGER*)&_stop);
 			}
+			
 
 			GameLoop(((_stop - _lastUpdate) * 1000) / (double)_freq);
 			_lastUpdate = _stop;
+			
 		}
 	}
 	return msg.wParam;
@@ -107,11 +110,10 @@ HRESULT AbstractWindow::Create()
 	_graphics = new Graphics(_hWnd);
 	ShowWindow(_hWnd, _dwCreationFlags);
 	UpdateWindow(_hWnd);
-	_gameloopThrottle = 50;
+	_engineThrottle = 5;
 	::QueryPerformanceFrequency((LARGE_INTEGER*)&_freq);
 	::QueryPerformanceCounter((LARGE_INTEGER*)&_lastUpdate);
 	return TRUE;
-
 }
 
 LRESULT AbstractWindow::MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
@@ -153,10 +155,10 @@ LRESULT AbstractWindow::MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 
 void AbstractWindow::GameLoop(double elapsed) { //elapsed time, in MS
 	//update all the game objects now
-	repaint();
+	
 }
 
 void AbstractWindow::repaint() {
-	InvalidateRect(_hWnd, 0, TRUE);
+	InvalidateRect(_hWnd, 0, FALSE);
 }
 }
