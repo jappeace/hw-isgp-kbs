@@ -1,7 +1,7 @@
 #include "Graphics.h"
 #include "StrConverter.h"
 #include "AbstractWindow.h"
-
+#include "GridGraphicTranslator.h"
 namespace isgp {
 	Graphics::Graphics(HWND hWnd) {
 		_bitmapCache = new map<string,  HBITMAP>();

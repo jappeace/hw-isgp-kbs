@@ -1,13 +1,17 @@
 #include "WorldBlock.h"
-
+#include "GridGraphicTranslator.h"
 namespace isgp {
-	WorldBlock::WorldBlock(Point& position, string texturePath):
+	ITranslator* WorldBlock::_worldblockTranslator = new GridGraphicTranslator();
+	WorldBlock::WorldBlock(string texturePath):
 		_texturePath(texturePath) {
-		_position = position;
 	}
 
 	void WorldBlock::Paint(Graphics* g) {
-		g->DrawBitmap(_texturePath, _position);
+		g->DrawBitmap(_texturePath, 
+				_worldblockTranslator->translate(
+					*_containingTile->GetPosition()
+				)
+			);
 	}
 
 	void WorldBlock::ReceiveTile(Tile* t){

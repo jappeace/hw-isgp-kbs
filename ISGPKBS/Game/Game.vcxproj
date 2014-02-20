@@ -67,9 +67,11 @@
     <ClInclude Include="Exceptions.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Grid.h" />
+    <ClInclude Include="GridGraphicTranslator.h" />
     <ClInclude Include="IGridTraveller.h" />
     <ClInclude Include="IPaintable.h" />
     <ClInclude Include="ITileData.h" />
+    <ClInclude Include="ITranslator.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="resource.h" />
@@ -86,6 +88,7 @@
     <ClCompile Include="AbstractWindow.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Grid.cpp" />
+    <ClCompile Include="GridGrahicTranslator.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="Size.cpp" />
