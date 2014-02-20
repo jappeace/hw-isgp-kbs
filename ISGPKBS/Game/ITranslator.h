@@ -3,6 +3,7 @@
 namespace isgp{
 	class ITranslator {
 	public:
-		virtual Point Translate(Point p) = 0;
+		virtual Point FromTo(Point p) = 0;
+		virtual Point ToFrom(Point p) = 0;
 	};
 }
