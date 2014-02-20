@@ -2,6 +2,6 @@
 {
 	public interface ILevelWriter
 	{
-		void WriteLine();
+		void WriteLine(string line);
 	}
 }
