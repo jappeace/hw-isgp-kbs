@@ -1,5 +1,5 @@
 #include "Window.h"
-
+#include "GridGraphicTranslator.h"
 namespace isgp {
 // amount of tiles
 const Size g_tiles = Size(50,50);
@@ -36,7 +36,21 @@ void Window::OnPaint(Graphics* g){
 }
 void Window::GameLoop(double elapsed) { //elapsed time, in MS
 	//update all the game objects now
+
 	_level->_player->Update();
+}
+
+short LEFT = 1;
+short UP = 2;
+short RIGHT = 4;
+short DOWN = 8;
+
+short CheckCollision(Player *player, Grid grid) {
+	GridGraphicTranslator graphicTranslator = GridGraphicTranslator();
+	vector<Tile> includedTiles;
+	
+	//Tile topTile = graphicTranslator.translate();
+	
 }
 
 void Window::OnKeyDown(int which) {
