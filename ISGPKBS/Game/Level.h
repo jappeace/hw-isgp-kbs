@@ -5,13 +5,13 @@
 
 namespace isgp{
 	// represents a level in the game
-	class Level : IPaintable, IGridTraveller {
+	class Level : public IPaintable, public IGridTraveller {
 	public:
 		Level(Grid* grid);
 		Level(int width, int height);
 		~Level(void);
-		void ReceiveTile(Tile* tile);
-		void Paint(Graphics* g);
+		void ReceiveTile(Tile* tile) override;
+		void Paint(Graphics* g) override;
 		static const Size tileSize;
 	private:
 		Graphics* _graphics; // bridge between paint and receive tile

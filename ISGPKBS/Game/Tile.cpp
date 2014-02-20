@@ -11,7 +11,7 @@ namespace isgp{
 
 	void Tile::Init(Point* p) {
 		_position = p;
-		_paintable = NULL;
+		_tiledata = NULL;
 		_bottom = NULL;
 		_top = NULL;
 		_left = NULL;
@@ -19,13 +19,14 @@ namespace isgp{
 	}
 
 	void Tile::Paint(Graphics* g) {
-		if(_paintable){
-			_paintable->Paint(g);
+		if(_tiledata){
+			_tiledata->Paint(g);
 		}
 	}
 
-	void Tile::SetIpaintalbe(IPaintable* paintable){
-		_paintable = paintable;
+	void Tile::SetData(ITileData* paintable){
+		paintable->ReceiveTile(this);
+		_tiledata = paintable;
 	}
 
 	void Tile::SetBottom(Tile* bottom) {
@@ -81,10 +82,14 @@ namespace isgp{
 		if(_position){
 			delete _position;
 		}
-		_position = NULL;
+		if(_tiledata){
+			delete _tiledata;
+		}
 		_top = NULL;
 		_left = NULL;
 		_right = NULL;
 		_bottom = NULL;
+		_position = NULL;
+		_tiledata = NULL;
 	}
 }

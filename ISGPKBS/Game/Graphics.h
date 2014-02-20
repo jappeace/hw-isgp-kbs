@@ -11,8 +11,6 @@
 // this also gives a small speed optimization (less function calls)
 // and yes putting this definition here is quite weird
 
-#define TILE_WIDTH 16
-#define TILE_HEIGHT 16
 
 using namespace std;
 

@@ -1,7 +1,7 @@
 #include "Graphics.h"
 #include "StrConverter.h"
 #include "AbstractWindow.h"
-
+#include "GridGraphicTranslator.h"
 namespace isgp {
 	Graphics::Graphics(HWND hWnd) {
 		_bitmapCache = new map<string,  HBITMAP>();
@@ -11,7 +11,6 @@ namespace isgp {
 		//get the DC for the front buffer
 		HDC hdc = GetDC(hWnd);
 
-		// TODO: Retrieve actual window size
 		this->_bitmap = CreateCompatibleBitmap(hdc, AbstractWindow::WindowSize.GetWidth(), AbstractWindow::WindowSize.GetHeight());
 
 		//select the bitmap into the memory device context
@@ -106,8 +105,8 @@ namespace isgp {
 		// copy the bitmap on the backbuffer
 		int bltResult =  BitBlt(
 			_backBuffer, 
-			x*TILE_WIDTH, 
-			y*TILE_HEIGHT,
+			x, 
+			y,
 			TILE_WIDTH, 
 			TILE_HEIGHT, 
 			bitmap_hdc, 

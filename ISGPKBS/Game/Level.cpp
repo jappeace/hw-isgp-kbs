@@ -1,5 +1,5 @@
 #include "Level.h"
-
+#include "GridGraphicTranslator.h"
 namespace isgp{
 const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 	Level::Level(int width, int height) {
