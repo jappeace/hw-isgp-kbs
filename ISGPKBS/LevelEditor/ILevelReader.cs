@@ -1,6 +1,6 @@
 ﻿namespace LevelEditor
 {
-	interface ILevelReader
+	public interface ILevelReader
 	{
 		string ReadLine();
 	}
