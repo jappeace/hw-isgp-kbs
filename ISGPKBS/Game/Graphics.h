@@ -37,6 +37,9 @@ namespace isgp {
 		Graphics(HWND);
 		~Graphics(void);
 
+		//ITranslator* _cam; leander
+		//void SetCam(ITranslator*);
+
 		// Prepares the device context to start rendering
 		void BeginRendering(HWND, PAINTSTRUCT *);
 		// Ends the rendering state and draws the backbuffer onto the screen

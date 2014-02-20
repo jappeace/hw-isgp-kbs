@@ -5,6 +5,7 @@
 #include "resource2.h"
 #include "Level.h"
 #include "WorldBlock.h"
+#include "Camera.h"
 
 namespace isgp {
 	class Window : public AbstractWindow {
@@ -17,6 +18,8 @@ namespace isgp {
 		void OnKeyDown(int which) override;
 		void OnKeyUp(int which) override;
 		void GameLoop(double) override;
+		void AfterCreate() override;
+		Camera* _cam;
 	private:
 		Level* _level;
 	};

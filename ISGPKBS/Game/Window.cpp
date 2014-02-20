@@ -28,6 +28,10 @@ Window::~Window()
 // Member functions                  //
 /////////////////////////////////////
 
+void Window::AfterCreate() {
+	_cam = new Camera(_level->_player);
+}
+
 INT_PTR CALLBACK dialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 	return NULL;
 }

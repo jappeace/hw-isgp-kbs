@@ -47,6 +47,10 @@ namespace isgp {
 		EndPaint(hWnd, ps);
 	}
 
+	/*void Graphics::SetCam(ITranslator* cam) {
+		_cam = cam;
+	}*/
+
 	void Graphics::DrawStr(Point& position, string str) {
 		this->DrawStr(position,str.c_str(), str.length());
 	}
