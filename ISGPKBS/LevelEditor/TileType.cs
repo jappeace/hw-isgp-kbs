@@ -3,7 +3,7 @@
 	/// <summary>
 	/// Enumeration of tile types with their integer representation.
 	/// </summary>
-	enum TileType
+	public enum TileType
 	{
 		Start = 0,
 		Finish = 1,
