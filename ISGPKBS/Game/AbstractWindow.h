@@ -46,7 +46,7 @@ namespace isgp {
 		virtual ~AbstractWindow();
 		virtual LRESULT MsgProc(HWND, UINT, WPARAM, LPARAM);
 		void repaint();
-		void GameLoop(double);
+		virtual void GameLoop(double);
 		static const Size WindowSize;
 		// This method forces subclasses to implement the onpaint
 		virtual void OnPaint(Graphics* graphics) = 0; // this also makes the class abstract

@@ -12,9 +12,9 @@ namespace isgp {
 		Point(double x, double y);
 		
 		// change the y axis of the point
-		void SetY(double);
+		void SetY(double y);
 		// change the x axis of the point
-		void SetX(double);
+		void SetX(double x);
 		// get the y axis of the point
 		double GetY() const;
 		// get the x axis of the point
