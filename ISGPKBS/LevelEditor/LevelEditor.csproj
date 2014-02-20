@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="ILevel.cs" />
     <Compile Include="ILevelExporter.cs" />
+    <Compile Include="ILevelImporter.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="LevelEditor.cs">
       <SubType>Form</SubType>
