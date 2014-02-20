@@ -34,26 +34,16 @@ namespace LevelEditor.IO
 		/// Exports the specified level to the specified file. If the file
 		/// already exists, it will be deleted and a new file will be created.
 		/// </summary>
-		public void ExportLevel(ILevel level, string file)
+		public void ExportLevel(ILevel level)
 		{
 			IDictionary<Point, TileType> tiles = level.GetTiles();
 
-			// Delete the level file if it already exists.
-			if (File.Exists(file))
+			// Write width and height to the file.
+			LevelWriter.WriteLine(string.Format("width={0}", level.Width));
+			LevelWriter.WriteLine(string.Format("width={0}", level.Height));
+			foreach (Point key in tiles.Keys)
 			{
-				File.Delete(file);
-			}
-
-			using (var streamWriter = new StreamWriter(file))
-			{
-
-				// Write width and height to the file.
-				streamWriter.WriteLine(string.Format("width={0}", level.Width));
-				streamWriter.WriteLine(string.Format("width={0}", level.Height));
-				foreach (Point key in tiles.Keys)
-				{
-					streamWriter.WriteLine(TileToString(key, tiles[key]));
-				}
+				LevelWriter.WriteLine(TileToString(key, tiles[key]));
 			}
 		}
 
