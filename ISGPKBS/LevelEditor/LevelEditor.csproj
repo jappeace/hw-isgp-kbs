@@ -48,6 +48,7 @@
     <Compile Include="ILevelExporter.cs" />
     <Compile Include="ILevelImporter.cs" />
     <Compile Include="ILevelReader.cs" />
+    <Compile Include="ILevelWriter.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="LevelEditor.cs">
       <SubType>Form</SubType>
