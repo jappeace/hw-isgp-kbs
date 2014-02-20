@@ -37,6 +37,7 @@ void Window::OnPaint(Graphics* g){
 void Window::GameLoop(double elapsed) { //elapsed time, in MS
 	//update all the game objects now
 	_level->_player->Update();
+	AbstractWindow::GameLoop(elapsed);
 }
 
 void Window::OnKeyDown(int which) {
