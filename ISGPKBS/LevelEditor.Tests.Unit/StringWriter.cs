@@ -3,7 +3,7 @@ using LevelEditor.IO;
 
 namespace LevelEditor.Tests.Unit
 {
-	class LevelStringWriter : ILevelWriter
+	class StringWriter : IWriter
 	{
 		private StringBuilder _stringBuilder;
 
@@ -15,7 +15,7 @@ namespace LevelEditor.Tests.Unit
 			}
 		}
 
-		public LevelStringWriter()
+		public StringWriter()
 		{
 			_stringBuilder = new StringBuilder();
 		}

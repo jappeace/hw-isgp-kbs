@@ -5,7 +5,7 @@ namespace LevelEditor.IO
 	/// <summary>
 	/// Class that reads the contents of a level from a file.
 	/// </summary>
-	class LevelFileReader : ILevelReader
+	class FileReader : IReader
 	{
 		private StreamReader _streamReader;
 
@@ -13,7 +13,7 @@ namespace LevelEditor.IO
 		/// Create a LevelFileReader object that can read the contents of the
 		/// specified file.
 		/// </summary>
-		public LevelFileReader(string fileName)
+		public FileReader(string fileName)
 		{
 			_streamReader = new StreamReader(fileName);
 		}

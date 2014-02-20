@@ -8,12 +8,12 @@ namespace LevelEditor.IO
 	/// </summary>
 	class LevelImporter : ILevelImporter
 	{
-		private ILevelReader _levelReader;
+		private IReader _levelReader;
 
 		/// <summary>
 		/// Object used to read the level.
 		/// </summary>
-		public ILevelReader LevelReader
+		public IReader LevelReader
 		{
 			get { return _levelReader; }
 			set { _levelReader = value; }
@@ -23,14 +23,14 @@ namespace LevelEditor.IO
 		/// Constructor for using a LevelFileReader that reads from the filesystem.
 		/// </summary>
 		public LevelImporter(string fileName)
-			: this(new LevelFileReader(fileName))
+			: this(new FileReader(fileName))
 		{
 		}
 
 		/// <summary>
 		/// Alternative constructor for dependency injection.
 		/// </summary>
-		public LevelImporter(ILevelReader levelReader)
+		public LevelImporter(IReader levelReader)
 		{
 			LevelReader = levelReader;
 		}

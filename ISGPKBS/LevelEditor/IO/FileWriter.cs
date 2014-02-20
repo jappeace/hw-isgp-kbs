@@ -5,14 +5,14 @@ namespace LevelEditor.IO
 	/// <summary>
 	/// Class that handles writing to a file.
 	/// </summary>
-	class LevelFileWriter : ILevelWriter
+	class FileWriter : IWriter
 	{
 		private StreamWriter _streamWriter;
 
 		/// <summary>
 		/// Creates an object that is capable of writing to the specified file.
 		/// </summary>
-		public LevelFileWriter(string fileName)
+		public FileWriter(string fileName)
 		{
 			if (File.Exists(fileName))
 			{

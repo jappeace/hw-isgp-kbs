@@ -4,11 +4,11 @@ using System.IO;
 
 namespace LevelEditor.IO
 {
-	class LevelExport : ILevelExporter
+	class LevelExporter : ILevelExporter
 	{
-		private ILevelWriter _levelWriter;
+		private IWriter _levelWriter;
 
-		public ILevelWriter LevelWriter
+		public IWriter LevelWriter
 		{
 			get { return _levelWriter; }
 			set { _levelWriter = value; }
@@ -17,15 +17,15 @@ namespace LevelEditor.IO
 		/// <summary>
 		/// Constructor for using a LevelFileWriter that uses the filesystem.
 		/// </summary>
-		public LevelExport(string fileName)
-			: this(new LevelFileWriter(fileName))
+		public LevelExporter(string fileName)
+			: this(new FileWriter(fileName))
 		{
 		}
 
 		/// <summary>
 		/// Alternative constructor for dependency injection.
 		/// </summary>
-		public LevelExport(ILevelWriter levelWriter)
+		public LevelExporter(IWriter levelWriter)
 		{
 			LevelWriter = levelWriter;
 		}

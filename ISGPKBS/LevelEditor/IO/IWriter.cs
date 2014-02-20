@@ -1,6 +1,6 @@
 ﻿namespace LevelEditor.IO
 {
-	public interface ILevelWriter
+	public interface IWriter
 	{
 		void WriteLine(string line);
 	}

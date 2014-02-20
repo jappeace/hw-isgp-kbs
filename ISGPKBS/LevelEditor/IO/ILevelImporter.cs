@@ -2,7 +2,7 @@
 {
 	public interface ILevelImporter
 	{
-		ILevelReader LevelReader { get; set; }
+		IReader LevelReader { get; set; }
 		ILevel ImportLevel();
 	}
 }

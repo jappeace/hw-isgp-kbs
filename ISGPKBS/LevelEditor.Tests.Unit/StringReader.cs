@@ -4,11 +4,11 @@ using LevelEditor.IO;
 
 namespace LevelEditor.Tests.Unit
 {
-	class LevelStringReader : ILevelReader
+	class StringReader : IReader
 	{
 		private StreamReader _streamReader;
 
-		public LevelStringReader(string levelString)
+		public StringReader(string levelString)
 		{
 			byte[] levelBytes = Encoding.ASCII.GetBytes(levelString);
 			MemoryStream memoryStream = new MemoryStream(levelBytes);

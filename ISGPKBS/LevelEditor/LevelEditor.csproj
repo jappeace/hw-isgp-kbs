@@ -47,8 +47,8 @@
     <Compile Include="ILevel.cs" />
     <Compile Include="IO\ILevelExporter.cs" />
     <Compile Include="IO\ILevelImporter.cs" />
-    <Compile Include="IO\ILevelReader.cs" />
-    <Compile Include="IO\ILevelWriter.cs" />
+    <Compile Include="IO\IReader.cs" />
+    <Compile Include="IO\IWriter.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="LevelEditor.cs">
       <SubType>Form</SubType>
@@ -56,9 +56,9 @@
     <Compile Include="LevelEditor.Designer.cs">
       <DependentUpon>LevelEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="IO\LevelExport.cs" />
-    <Compile Include="IO\LevelFileReader.cs" />
-    <Compile Include="IO\LevelFileWriter.cs" />
+    <Compile Include="IO\LevelExporter.cs" />
+    <Compile Include="IO\FileReader.cs" />
+    <Compile Include="IO\FileWriter.cs" />
     <Compile Include="IO\LevelImporter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
