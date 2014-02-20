@@ -75,6 +75,9 @@
     <ClInclude Include="GridGraphicTranslator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ILevelFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Graphics.cpp">

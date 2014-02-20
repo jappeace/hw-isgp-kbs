@@ -8,7 +8,7 @@ namespace isgp {
 
 	void WorldBlock::Paint(Graphics* g) {
 		g->DrawBitmap(_texturePath, 
-				_worldblockTranslator->translate(
+				_worldblockTranslator->Translate(
 					*_containingTile->GetPosition()
 				)
 			);
