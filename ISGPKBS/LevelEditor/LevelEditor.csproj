@@ -58,6 +58,7 @@
     </Compile>
     <Compile Include="LevelExport.cs" />
     <Compile Include="LevelFileReader.cs" />
+    <Compile Include="LevelFileWriter.cs" />
     <Compile Include="LevelImporter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
