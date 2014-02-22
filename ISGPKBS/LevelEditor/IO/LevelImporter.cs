@@ -6,7 +6,7 @@ namespace LevelEditor.IO
 	/// <summary>
 	/// Imports a level from an external resource.
 	/// </summary>
-	class LevelImporter : ILevelImporter
+	public class LevelImporter : ILevelImporter
 	{
 		private IReader _levelReader;
 
