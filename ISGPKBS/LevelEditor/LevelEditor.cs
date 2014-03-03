@@ -8,6 +8,8 @@ namespace LevelEditor
 	/// </summary>
 	public partial class LevelEditor : Form
 	{
+		private ILevel _level;
+
 		public LevelEditor()
 		{
 			InitializeComponent();
