@@ -6,6 +6,7 @@
 namespace isgp{
 	class GridGraphicTranslator : public ITranslator{
 	public:
-		Point translate(Point p) override;
+		Point FromTo(Point p) override;
+		Point ToFrom(Point p) override;
 	};
 }

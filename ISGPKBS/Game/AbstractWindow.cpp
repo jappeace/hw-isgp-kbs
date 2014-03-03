@@ -114,6 +114,9 @@ HRESULT AbstractWindow::Create()
 	_engineThrottle = 5;
 	::QueryPerformanceFrequency((LARGE_INTEGER*)&_freq);
 	::QueryPerformanceCounter((LARGE_INTEGER*)&_lastUpdate);
+
+	AfterCreate();
+
 	return TRUE;
 }
 

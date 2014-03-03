@@ -59,8 +59,8 @@ namespace isgp{
 
 		if (_position.GetY() > 520) { _position.SetY(521); _collision = true; } else { _collision = false; }
 		
-		//if (_position.GetY() < 521) { _yVel += 1; } else { _yVel = 0; }
-		if (_upKey && _position.GetY() >= 520) { _yVel = -12; }
+		//if (_position.GetY() < 513) { _yVel += 1; } else { _yVel = 0; }
+		if (_upKey && _position.GetY() >= 512) { _yVel = -12; }
 	}
 
 	void Player::AddToVelocityY(double y) {
