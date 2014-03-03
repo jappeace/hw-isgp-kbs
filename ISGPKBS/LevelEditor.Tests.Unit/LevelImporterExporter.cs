@@ -12,7 +12,7 @@ namespace LevelEditor.Tests.Unit
 		{
 			// Create simple levelstring.
 			string levelString = "width=10\r\nheight=10\r\n";
-			levelString += "1,2=1\r\n5,3=0";
+			levelString += "1,2=1\r\n5,3=0\r\n";
 
 			// Import from levelstring to ILevel object.
 			ILevelImporter importer = new LevelImporter(new StringReader(levelString));
