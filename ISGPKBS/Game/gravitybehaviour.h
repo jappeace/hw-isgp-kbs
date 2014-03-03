@@ -1,6 +1,7 @@
 #pragma once
 
 #include "behaviourinterface.h"
+#include "Player.h"
 
 namespace isgp {
 
@@ -9,9 +10,12 @@ namespace isgp {
 	class GravityBehaviour : public BehaviourInterface
 	{
 	public:
-		GravityBehaviour(void);
+		GravityBehaviour(Player* player);
 		~GravityBehaviour(void);
 
 		void Update(const double ms);
+
+	private:
+		Player* _player;
 	};
 }

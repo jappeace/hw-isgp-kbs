@@ -1,3 +1,4 @@
+#include "gravitybehaviour.h"
 #include "Player.h"
 
 namespace isgp{
@@ -14,11 +15,18 @@ namespace isgp{
 		_upKey = false;
 		_spaceKey = false;
 		_collision = false;
+		_behaviours = new vector<BehaviourInterface*>();
+		_behaviours->push_back(new GravityBehaviour(this));
 	}
 
 
 	Player::~Player(void) {
-
+		// Delete references in vector
+		for (BehaviourInterface* behaviour = _behaviours->front(); behaviour != _behaviours->back(); ++behaviour) {
+			delete behaviour;
+		}
+		// Delete vector
+		delete _behaviours;
 	}
 
 	void Player::Update() {
@@ -45,11 +53,18 @@ namespace isgp{
 		_position.SetX(_position.GetX() + _xVel);
 		_position.SetY(_position.GetY() + _yVel);
 
+		for (unsigned int i = 0; i < _behaviours->size(); ++i) {
+			_behaviours->at(i)->Update(50);
+		}
+
 		if (_position.GetY() > 520) { _position.SetY(521); _collision = true; } else { _collision = false; }
 		
-		if (_position.GetY() < 521) { _yVel += 1; }
-		else { _yVel = 0; }
+		//if (_position.GetY() < 521) { _yVel += 1; } else { _yVel = 0; }
 		if (_upKey && _position.GetY() >= 520) { _yVel = -12; }
+	}
+
+	void Player::AddToVelocityY(double y) {
+		_yVel += y;
 	}
 
 	void Player::Paint(Graphics* g) {
