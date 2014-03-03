@@ -1,23 +1,13 @@
 #include "Window.h"
+#include "SimpleLevelFactory.h"
 
 namespace isgp {
-// amount of tiles
-const Size g_tiles = Size(50,50);
 
 // Constructors / Destructors      //
 Window::Window() {
-	Grid* g = new Grid(g_tiles.GetWidth(),g_tiles.GetHeight());// level handles destruction of grid
-	_level = new Level(g);
-	Point position = Point(5,5);
-	g->GetTileAt(position)->SetData(new WorldBlock("C:\\tiles\\smile.bmp"));
-	for(unsigned i = 0; i < 50; i++) {
-		Point position = Point(i, 23);
-		g->GetTileAt(position)->SetData(new WorldBlock("C:\\tiles\\smile.bmp"));
-		Point position2 = Point(i, 22);
-		g->GetTileAt(position2)->SetData(new WorldBlock("C:\\tiles\\smile.bmp"));
-		Point position3 = Point(i, 21);
-		g->GetTileAt(position2)->SetData(new WorldBlock("C:\\tiles\\smile.bmp"));
-	}
+	ILevelFactory* factory = new SimpleLevelFactory();
+	_level = factory->CreateLevel();
+	delete factory;
 }
 
 Window::~Window()

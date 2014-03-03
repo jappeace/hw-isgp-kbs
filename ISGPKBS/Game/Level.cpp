@@ -1,7 +1,14 @@
 #include "Level.h"
 #include "GridGraphicTranslator.h"
 namespace isgp{
+// default amount of tiles in level
+const Size Level::defaultTileAmount = Size(10,10);
+
+// tile size, should equal the width and height of spritesheet tiles
 const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
+	Level::Level(){
+		_grid = new Grid(defaultTileAmount.GetWidth(), defaultTileAmount.GetHeight());
+	}
 	Level::Level(int width, int height) {
 		_grid = new Grid(width, height);
 	}
@@ -34,5 +41,8 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 		);
 #endif
 		tile->Paint(_graphics);
+	}
+	Grid* Level::GetGrid() const{
+		return _grid;
 	}
 }
