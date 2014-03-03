@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using LevelEditor.IO;
+﻿using LevelEditor.IO;
 using LevelEditor.Tests.Unit.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -11,15 +10,21 @@ namespace LevelEditor.Tests.Unit
 		[TestMethod]
 		public void Import_ExportedLevel_SameLevel()
 		{
-			ILevel level = new Level(10, 10);
-			level.SetTile(new Point(3, 2), TileType.Brick);
-			level.SetTile(new Point(5, 9), TileType.Start);
-			StringWriter stringWriter = new StringWriter();
-			ILevelExporter levelExporter = new LevelExporter(stringWriter);
-			levelExporter.ExportLevel(level);
-			StringReader stringReader = new StringReader(stringWriter.LevelString);
-			ILevelImporter levelImporter = new LevelImporter(stringReader);
-			ILevel importedLevel = levelImporter.ImportLevel();
+			// Create simple levelstring.
+			string levelString = "width=10\r\nheight=10\r\n";
+			levelString += "1,2=1\r\n5,3=0";
+
+			// Import from levelstring to ILevel object.
+			ILevelImporter importer = new LevelImporter(new StringReader(levelString));
+			ILevel level = importer.ImportLevel();
+
+			// Export from imported ILevel to string.
+			StringWriter writer = new StringWriter();
+			ILevelExporter exporter = new LevelExporter(writer);
+			exporter.ExportLevel(level);
+
+			// Levelstrings should be exactly the same.
+			Assert.AreEqual(writer.LevelString, levelString);
 		}
 	}
 }
