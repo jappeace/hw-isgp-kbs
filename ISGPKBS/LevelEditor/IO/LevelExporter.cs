@@ -40,7 +40,7 @@ namespace LevelEditor.IO
 
 			// Write width and height to the file.
 			LevelWriter.WriteLine(string.Format("width={0}", level.Width));
-			LevelWriter.WriteLine(string.Format("width={0}", level.Height));
+			LevelWriter.WriteLine(string.Format("height={0}", level.Height));
 			foreach (Point key in tiles.Keys)
 			{
 				LevelWriter.WriteLine(TileToString(key, tiles[key]));
