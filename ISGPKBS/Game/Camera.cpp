@@ -18,8 +18,8 @@ namespace isgp{
 	Point Camera::ToFrom(Point p) {
 		Point tmp = Point(0,0);
 		
-		tmp.SetX((_player->_position.GetX() - _position.GetX()) + 384);
-		tmp.SetY((_player->_position.GetY() - _position.GetY()) + 384);
+		tmp.SetX((p.GetX() - _position.GetX()) + 348);
+		tmp.SetY((p.GetY() - _position.GetY()) + 348);
 
 		return tmp;
 	}
@@ -27,8 +27,8 @@ namespace isgp{
 	Point Camera::FromTo(Point p) {
 		Point tmp = Point(0,0);
 		
-		tmp.SetX((_player->_position.GetX() - _position.GetX()) + 384);
-		tmp.SetY((_player->_position.GetY() - _position.GetY()) + 384);
+		tmp.SetX((p.GetX() - _position.GetX()) + 348);
+		tmp.SetY((p.GetY() - _position.GetY()) + 348);
 
 		return tmp;
 	}
