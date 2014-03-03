@@ -40,7 +40,7 @@
     <ClCompile Include="WorldBlock.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="gravitybehaviour.cpp">
+    <ClCompile Include="Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -108,10 +108,10 @@
     <ClInclude Include="AbstractWindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="gravitybehaviour.h">
+    <ClInclude Include="ILevelFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="behaviourinterface.h">
+    <ClInclude Include="Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -5,6 +5,8 @@
 
 namespace isgp {
 	Graphics::Graphics(HWND hWnd) {
+		_cam = NULL;
+		
 		_bitmapCache = new map<string,  HBITMAP>();
 
 		this->_backBuffer = CreateCompatibleDC(NULL);
@@ -69,9 +71,13 @@ namespace isgp {
 	}
 
 	void Graphics::DrawRect(Point& one, Point& two) {
-		Point one1 = _cam->FromTo(one);
-		Point two1 = _cam->FromTo(two);
-		this->DrawRect((int)one1.GetX(),(int) one1.GetY(),(int) two1.GetX(),(int) two1.GetY());
+		if (_cam != NULL) {
+			Point one1 = _cam->FromTo(one);
+			Point two1 = _cam->FromTo(two);
+			this->DrawRect((int)one1.GetX(),(int) one1.GetY(),(int) two1.GetX(),(int) two1.GetY());
+		} else {
+			this->DrawRect((int)one.GetX(),(int) one.GetY(),(int) two.GetX(),(int) two.GetY());
+		}
 	}
 
 	void Graphics::DrawRect(int xone, int yone, int xtwo, int ytwo) {
