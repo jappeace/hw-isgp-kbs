@@ -69,6 +69,7 @@
     <ClInclude Include="Grid.h" />
     <ClInclude Include="GridGraphicTranslator.h" />
     <ClInclude Include="IGridTraveller.h" />
+    <ClInclude Include="ILevelFactory.h" />
     <ClInclude Include="IPaintable.h" />
     <ClInclude Include="ITileData.h" />
     <ClInclude Include="ITranslator.h" />
@@ -78,6 +79,7 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="resource1.h" />
     <ClInclude Include="resource2.h" />
+    <ClInclude Include="SimpleLevelFactory.h" />
     <ClInclude Include="Size.h" />
     <ClInclude Include="StrConverter.h" />
     <ClInclude Include="Tile.h" />
@@ -89,10 +91,11 @@
     <ClCompile Include="AbstractWindow.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Grid.cpp" />
-    <ClCompile Include="GridGrahicTranslator.cpp" />
+    <ClCompile Include="GridGraphicTranslator.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Point.cpp" />
+    <ClCompile Include="SimpleLevelFactory.cpp" />
     <ClCompile Include="Size.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TimesPerSecondCounter.cpp" />

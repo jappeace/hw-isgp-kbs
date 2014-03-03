@@ -8,6 +8,7 @@ namespace isgp{
 	// represents a level in the game
 	class Level : public IPaintable, public IGridTraveller {
 	public:
+		Level();
 		Level(Grid* grid);
 		Level(int width, int height);
 		~Level(void);

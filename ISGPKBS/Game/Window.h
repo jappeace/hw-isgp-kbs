@@ -3,7 +3,7 @@
 #include <cstdlib>
 #include "AbstractWindow.h"
 #include "resource2.h"
-#include "Level.h"
+#include "ILevelFactory.h"
 #include "WorldBlock.h"
 
 namespace isgp {

@@ -14,7 +14,7 @@ namespace isgp {
 		void ReceiveTile(Tile* tile);
 	private:
 		// the sprite that will be renderd for this block
-		static ITranslator* _worldblockTranslator;
+		static ITranslator* _gridToGraphics;
 		string _texturePath;
 		Tile* _containingTile;
 	};
