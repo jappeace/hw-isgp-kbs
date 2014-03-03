@@ -9,6 +9,6 @@ namespace isgp {
 		// Executes the implemented behaviour.
 		// The executing will keep in mind how many milliseconds have passed.
 		// This method must be overridden in a child class
-		virtual void Update(const long ms) = 0;
+		virtual void Update(const double ms) = 0;
 	};
 }

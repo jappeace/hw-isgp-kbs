@@ -12,6 +12,6 @@ namespace isgp {
 		GravityBehaviour(void);
 		~GravityBehaviour(void);
 
-		void Update(const long ms);
+		void Update(const double ms);
 	};
 }
