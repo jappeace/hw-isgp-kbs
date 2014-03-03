@@ -1,5 +1,5 @@
 #include "Grid.h"
-
+#include <algorithm>
 using namespace std;
 
 namespace isgp {
@@ -155,4 +155,23 @@ namespace isgp {
 	Size* Grid::GetSize() const {
 		return _size;
 	}
+
+
+
+	std::vector<Tile*> Grid::GetSurroundingTiles(vector<Tile*> tiles) const {
+		std::vector<Tile*> allTiles;
+		allTiles.reserve(tiles.size() * 4);
+		for(unsigned i = 0; i < tiles.size(); i++) {
+			Tile* t = tiles.at(i);
+			std::vector<Tile*> surrounding = t->GetSurroundingTiles();
+			allTiles.insert(allTiles.end(), surrounding.begin(), surrounding.end());
+		}
+		std::sort(allTiles.begin(), allTiles.end());
+		std::sort(tiles.begin(), tiles.end());
+		std::vector<Tile*> difference;
+		std::set_difference(allTiles.begin(), allTiles.end(), tiles.begin(), tiles.end(), std::back_inserter(difference));
+		return difference;
+	}
+
+
 }

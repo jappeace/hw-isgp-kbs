@@ -17,6 +17,7 @@ namespace isgp {
 		void OnKeyDown(int which) override;
 		void OnKeyUp(int which) override;
 		void GameLoop(double) override;
+		short CheckCollision(Player *player, Grid *grid);
 	private:
 		Level* _level;
 	};

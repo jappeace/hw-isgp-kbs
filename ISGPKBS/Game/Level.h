@@ -15,8 +15,9 @@ namespace isgp{
 		void Paint(Graphics* g) override;
 		static const Size tileSize;
 		Player* _player;
+		Grid* _grid;
 	private:
 		Graphics* _graphics; // bridge between paint and receive tile
-		Grid* _grid;
+		
 	};
 }

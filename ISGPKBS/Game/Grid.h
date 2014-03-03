@@ -41,6 +41,7 @@ namespace isgp {
 		// The given function pointer will receive all the tiles in the grid and the cordiantes of them.
 		void TraverseTiles(IGridTraveller* travellar);
 		Size* GetSize() const;
+		std::vector<Tile*> GetSurroundingTiles(vector<Tile*>) const;
 	private:
 		vector<Tile*>* _tiles;
 		unsigned _tilesLength;

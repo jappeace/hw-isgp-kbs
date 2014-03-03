@@ -19,6 +19,12 @@ namespace isgp {
 		StrConverter(const StrConverter& orig);
 		virtual ~StrConverter();
 
+		static string DoubleToString(double num) {
+			ostringstream stream;
+			stream << num;
+			return stream.str();
+		}
+
 		// its kind of hard to go from int to string
 		static string IntToString(int num) {
 			ostringstream stream;

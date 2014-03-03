@@ -46,6 +46,8 @@ namespace isgp {
 		HBITMAP LoadBitmapFile(string path, int offsetX, int offsetY);
 		HBITMAP LoadBitmapFile(string path, Point& offset);
 
+		void SetColor(COLORREF color);
+
 		void SetTextColor(COLORREF color);
 		void SetTextBackgroundColor(COLORREF color);
 

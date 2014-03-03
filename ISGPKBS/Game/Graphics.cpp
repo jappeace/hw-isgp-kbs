@@ -86,6 +86,11 @@ namespace isgp {
 		return this->LoadBitmapFile(path, (int) offset.GetX(), (int) offset.GetY());
 	}
 
+	void Graphics::SetColor(COLORREF color) {
+		HPEN greenPen=CreatePen(PS_SOLID, 1, color);
+		SelectObject(this->_backBuffer, greenPen);
+	}
+
 	void Graphics::DrawBitmap(string path, Point& position) {
 		DrawBitmap(path,(int) position.GetX(),(int) position.GetY(), 0, 0);
 	}

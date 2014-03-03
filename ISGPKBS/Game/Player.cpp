@@ -1,5 +1,6 @@
 #include "Player.h"
-
+#include <vector>
+#include "tile.h"
 namespace isgp{
 	Player::Player(Point position) {
 		_maxVel = 10;

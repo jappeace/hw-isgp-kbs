@@ -4,6 +4,7 @@
 #include "Point.h"
 #include "IPaintable.h"
 #include "ITileData.h"
+#include <vector>
 
 namespace isgp {
 	// a container class for stuff in the grid.
@@ -27,6 +28,7 @@ namespace isgp {
 		void SetTop(Tile* top);
 		Tile* GetTop() const;
 		Point* GetPosition() const;
+		std::vector<Tile*> GetSurroundingTiles() const;
 		void Paint(Graphics* g);
 		void SetData(ITileData*);
 	private:
@@ -38,6 +40,9 @@ namespace isgp {
 		Tile* _right;
 		Tile* _bottom;
 	};
+	inline int operator<(const Tile& one, const Tile& two) {
+		return one.GetPosition()->GetX() * one.GetPosition()->GetY() < two.GetPosition()->GetX() * two.GetPosition()->GetY();
+	}
 	inline bool operator==(const Tile& l, const Tile& r){
 		if(l.GetPosition() != r.GetPosition()){
 			return false;
