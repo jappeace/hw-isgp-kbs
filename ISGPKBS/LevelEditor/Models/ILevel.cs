@@ -12,6 +12,7 @@ namespace LevelEditor.Models
 		int Width { get; }
 		int Height { get; }
 		void SetTile(Point position, TileType tileType);
+		void RemoveTile(Point position);
 		IDictionary<Point, TileType> GetTiles();
 	}
 }

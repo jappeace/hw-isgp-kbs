@@ -37,6 +37,8 @@ namespace LevelEditor.Models
 
 		/// <summary>
 		/// Creates a tile on the specified position of the specified type.
+		/// If a tile exists on the specified position, the tile will be
+		/// replaced.
 		/// </summary>
 		public void SetTile(Point position, TileType tileType)
 		{
@@ -45,6 +47,15 @@ namespace LevelEditor.Models
 				_tiles.Remove(position);
 			}
 			_tiles.Add(position, tileType);
+		}
+
+		/// <summary>
+		/// Removes a tile on the specified position. Does nothing if no
+		/// tile exists on the specified position.
+		/// </summary>
+		public void RemoveTile(Point position)
+		{
+			_tiles.Remove(position);
 		}
 
 		/// <summary>
