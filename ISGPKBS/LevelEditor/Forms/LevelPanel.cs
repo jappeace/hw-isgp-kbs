@@ -38,7 +38,14 @@ namespace LevelEditor.Forms
 			AutoScroll = true;
 			BackColor = Color.Red;
 			_gridPen = new Pen(Color.Black, GridLineWidth);
+			Scroll += OnScroll;
 		}
+
+		private void OnScroll(object sender, ScrollEventArgs args)
+		{
+			Invalidate();
+		}
+
 
 		/// <summary>
 		/// Draws the level on the panel if the level isn't null.
@@ -47,6 +54,7 @@ namespace LevelEditor.Forms
 		{
 			if (Level != null)
 			{
+				e.Graphics.TranslateTransform(AutoScrollPosition.X, AutoScrollPosition.Y);
 				DrawGrid(e.Graphics);
 			}
 		}
@@ -56,8 +64,6 @@ namespace LevelEditor.Forms
 		/// </summary>
 		private void DrawGrid(Graphics g)
 		{
-			g.FillEllipse(new SolidBrush(Color.Red), 1000, 100, 1000, 100);
-
 			// Draw horizontal lines.
 			for (int i = 0; i < Level.Height; i++)
 			{
