@@ -53,5 +53,15 @@ namespace LevelEditor.Forms
 			}
 			spriteBox.Image = bitmap;
 		}
+
+		private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			// TODO: Save level.
+		}
+
+		private void loadLevelToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			// TODO: Load level.
+		}
 	}
 }
