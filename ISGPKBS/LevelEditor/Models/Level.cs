@@ -39,14 +39,18 @@ namespace LevelEditor.Models
 		/// Creates a tile on the specified position of the specified type.
 		/// If a tile exists on the specified position, the tile will be
 		/// replaced.
+		/// If position is outside the level, no tile will be set.
 		/// </summary>
 		public void SetTile(Point position, TileType tileType)
 		{
-			if (_tiles.ContainsKey(position))
+			if (position.X < Width && position.Y < Height)
 			{
-				_tiles.Remove(position);
+				if (_tiles.ContainsKey(position))
+				{
+					_tiles.Remove(position);
+				}
+				_tiles.Add(position, tileType);
 			}
-			_tiles.Add(position, tileType);
 		}
 
 		/// <summary>
