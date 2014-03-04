@@ -11,11 +11,11 @@ Window::Window() {
 	Point position = Point(5,5);
 	g->GetTileAt(position)->SetData(new WorldBlock("C:\\tiles\\smile.bmp"));
 	for(unsigned i = 0; i < 50; i++) {
-		Point position = Point(i, 23);
+		Point position = Point(i, 22);
 		g->GetTileAt(position)->SetData(new WorldBlock("C:\\tiles\\smile.bmp"));
-		Point position2 = Point(i, 22);
+		Point position2 = Point(i, 23);
 		g->GetTileAt(position2)->SetData(new WorldBlock("C:\\tiles\\smile.bmp"));
-		Point position3 = Point(i, 21);
+		Point position3 = Point(i, 24);
 		g->GetTileAt(position2)->SetData(new WorldBlock("C:\\tiles\\smile.bmp"));
 	}
 }
@@ -38,7 +38,7 @@ void Window::OnPaint(Graphics* g){
 	GridGraphicTranslator graphicTranslator = GridGraphicTranslator();
 	Point topTilePoint = graphicTranslator.ToFrom(_level->_player->_position);
 	
-	vector<Tile*> maaktNietUit;
+	/*vector<Tile*> maaktNietUit;
 	maaktNietUit.push_back(_level->_grid->GetTileAt(topTilePoint)->GetTop());
 	maaktNietUit.push_back(_level->_grid->GetTileAt(topTilePoint));
 	vector<Tile*> includedTiles = _level->_grid->GetSurroundingTiles(maaktNietUit);
@@ -53,7 +53,7 @@ void Window::OnPaint(Graphics* g){
 		includedTiles.at(i)->Paint(g);
 	}
 
-	g->SetColor(RGB(0, 0, 0));
+	g->SetColor(RGB(0, 0, 0));*/
 #endif
 }
 void Window::GameLoop(double elapsed) { //elapsed time, in MS

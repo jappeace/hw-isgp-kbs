@@ -8,6 +8,7 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 	Level::Level(Grid* grid) {
 		_grid = grid;
 		_player = new Player(Point(100,100));
+		_player->SetGrid(_grid);
 	}
 
 	Level::~Level(void)

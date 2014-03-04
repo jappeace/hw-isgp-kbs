@@ -31,6 +31,8 @@ namespace isgp {
 		std::vector<Tile*> GetSurroundingTiles() const;
 		void Paint(Graphics* g);
 		void SetData(ITileData*);
+		ITileData* GetData();
+		bool HasData();
 	private:
 		void Init(Point* p);
 		ITileData* _tiledata;

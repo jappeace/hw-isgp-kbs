@@ -1,5 +1,6 @@
 #include "Grid.h"
 #include <algorithm>
+#include "GridGraphicTranslator.h"
 using namespace std;
 
 namespace isgp {
@@ -171,6 +172,21 @@ namespace isgp {
 		std::vector<Tile*> difference;
 		std::set_difference(allTiles.begin(), allTiles.end(), tiles.begin(), tiles.end(), std::back_inserter(difference));
 		return difference;
+	}
+
+	vector<Tile*> Grid::GetTilesInRectangle(Point topLeft, Point bottomRight) const {
+		GridGraphicTranslator translator = GridGraphicTranslator();
+		vector<Tile*> includedTiles;
+
+		Tile* topLeftTile = GetTileAt(translator.ToFrom(topLeft));
+		Tile* topRightTile = GetTileAt(translator.ToFrom(bottomRight));
+
+		for(double i = topLeftTile->GetPosition()->GetX(); i <= topRightTile->GetPosition()->GetX(); i++) {
+			for(double j = topLeftTile->GetPosition()->GetY(); j <= topRightTile->GetPosition()->GetY(); j++) {
+				includedTiles.push_back(GetTileAt((int)i, (int)j));
+			}
+		}
+		return includedTiles;
 	}
 
 

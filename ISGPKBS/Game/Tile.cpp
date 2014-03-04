@@ -28,6 +28,15 @@ namespace isgp{
 	void Tile::SetData(ITileData* paintable){
 		paintable->ReceiveTile(this);
 		_tiledata = paintable;
+		_tiledata->IsSolid = true;
+	}
+
+	bool Tile::HasData() {
+		return _tiledata ? true : false;
+	}
+
+	ITileData* Tile::GetData() {
+		return _tiledata;
 	}
 
 	void Tile::SetBottom(Tile* bottom) {

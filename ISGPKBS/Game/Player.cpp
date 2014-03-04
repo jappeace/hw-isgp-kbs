@@ -1,7 +1,10 @@
+#pragma once
+
 #include "Player.h"
 #include <vector>
 #include "tile.h"
-
+#include "Entity.h"
+#include "GridGraphicTranslator.h"
 namespace isgp{
 
 	Player::Player(Point position) {
@@ -16,23 +19,6 @@ namespace isgp{
 		_upKey = false;
 		_spaceKey = false;
 		_collision = false;
-	}
-
-
-
-	enum Collision {
-		None = 0x01,
-		Left = 0x02,
-		Up = 0x04,
-		Right = 0x08,
-		Down = 0x10
-	};
-
-	int CheckCollision(Point topLeft, Point bottomRight) {
-		int returnVal = 0;
-		//returnVal |= Left;
-		//returnVal |= Down;
-		return returnVal;
 	}
 
 	void Player::Update() {
@@ -56,30 +42,69 @@ namespace isgp{
 			_velocity.x -= _deAccel;
 		}
 
-		int collision = CheckCollision(Point(_position.GetX() + _velocity.x, _position.GetY() + _velocity.y), 
+		collision = CheckCollision(Point(_position.GetX() + _velocity.x, _position.GetY() + _velocity.y), 
 										Point(_position.GetX() + _velocity.y + 16, _position.GetY() + _velocity.y + 32));
 		
 		if((_velocity.x < 0 && !(collision & Left)) || _velocity.x > 0 && !(collision & Right)) {
 			_position.SetX(_position.GetX() + _velocity.x);
 		}
-
-
-		if(_velocity.y < 0 && !(collision & Up) || _velocity.y > 0 && !(collision & Down)) {
-			_position.SetY(_position.GetY() + _velocity.y);
+		
+		if(!(collision & Down)) {
+			_velocity.y = 4;
+			if(_velocity.y > 0) {
+				_position.SetY(_position.GetY() + _velocity.y);
+			}
+			OutputDebugString("Nothing");
+		} else {
+			OutputDebugString("collide");
 		}
 		
+		/*if(_velocity.y < 0 && !(collision & Up)) {
+			_position.SetY(_position.GetY() + _velocity.y);
+		}*/
+		//if(_velocity.y > 0 && !(collision & Up) || _velocity.y < 0 && !(collision & Down)) {
+			
+		//}
 		
-
-		if (_position.GetY() > 520) { _position.SetY(521); _collision = true; } else { _collision = false; }
 		
-		if (_position.GetY() < 521) { _velocity.y += 1; }
-		else { _velocity.y = 0; }
 		if (_upKey && _position.GetY() >= 520) { _velocity.y = -12; }
+		if(_position.GetY() >= 520) {_position.SetY(0);}
 	}
 
 	void Player::Paint(Graphics* g) {
 		_graphics = g;
 
+		
+
+		Point topLeft = this->_position;
+		Point bottomRight = Point(this->_position.GetX() + 16, this->_position.GetY() + 32);
+		GridGraphicTranslator translator = GridGraphicTranslator();
+		vector<Tile*> includedTiles = _grid->GetTilesInRectangle(topLeft, bottomRight);
+		
+		g->SetColor(RGB(255, 0, 0));
+		for(unsigned int i = 0; i < includedTiles.size(); i++) {
+			Tile* t = includedTiles.at(i);
+			Point* p = &translator.FromTo(*t->GetPosition());
+			includedTiles.at(i)->Paint(g);
+			g->DrawRect((int)p->GetX(), (int)p->GetY(), (int)p->GetX() + 16, (int)p->GetY() + 16);
+		}
+
+		g->SetColor(RGB(0, 255, 0));
+		for(unsigned int i = 0; i < CollidingTiles.size(); i++) {
+			Tile* t = CollidingTiles.at(i);
+			Point* p = &translator.FromTo(*t->GetPosition());
+			CollidingTiles.at(i)->Paint(g);
+			g->DrawRect((int)p->GetX(), (int)p->GetY(), (int)p->GetX() + 16, (int)p->GetY() + 16);
+		}
+
+		g->SetColor(RGB(0, 0, 0));
+
 		_graphics->DrawRect(_position, Point(_position.GetX() + 16, _position.GetY() + 32));
+		
+		g->DrawStr(Point(10, 40), collision & Up ? "Up: true" : "Up: false");
+		g->DrawStr(Point(10, 55), collision & Down ? "Down: true" : "Down: false");
+		g->DrawStr(Point(10, 70), collision & Left ? "Left: true" : "Left: false");
+		g->DrawStr(Point(10, 85), collision & Right ? "Right: true" : "Right: false");
+
 	}
 }

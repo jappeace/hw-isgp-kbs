@@ -9,6 +9,7 @@ namespace isgp {
 		Player(Point);
 		void Paint(Graphics* g) override;
 		void Update() override;
+		int collision;
 		bool _leftKey, _rightKey, _upKey, _spaceKey, _collision;
 	private:
 		Graphics* _graphics;
