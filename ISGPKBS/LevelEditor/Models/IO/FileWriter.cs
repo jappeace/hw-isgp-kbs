@@ -28,5 +28,13 @@ namespace LevelEditor.Models.IO
 		{
 			_streamWriter.WriteLine(line);
 		}
+
+		/// <summary>
+		/// Closes the filewriter.
+		/// </summary>
+		public void Close()
+		{
+			_streamWriter.Close();
+		}
 	}
 }

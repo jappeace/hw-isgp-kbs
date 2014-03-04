@@ -44,6 +44,7 @@ namespace LevelEditor.Models.IO
 			{
 				LevelWriter.WriteLine(TileToString(key, tiles[key]));
 			}
+			LevelWriter.Close();
 		}
 
 		/// <summary>

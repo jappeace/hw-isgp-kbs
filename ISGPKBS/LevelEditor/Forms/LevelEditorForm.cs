@@ -3,6 +3,7 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using LevelEditor.Models;
+using LevelEditor.Models.IO;
 
 namespace LevelEditor.Forms
 {
@@ -54,6 +55,10 @@ namespace LevelEditor.Forms
 			spriteBox.Image = bitmap;
 		}
 
+		/// <summary>
+		/// Show a filedialog to save the level. An error will show if there
+		/// is no level to save.
+		/// </summary>
 		private void saveToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			if (levelPanel.Level != null)
@@ -61,7 +66,11 @@ namespace LevelEditor.Forms
 				FileDialog dialog = new SaveFileDialog();
 				dialog.AddExtension = true;
 				dialog.Filter = "Level files (*.level)|*.level";
-				dialog.ShowDialog();
+				if (dialog.ShowDialog() == DialogResult.OK)
+				{
+					ILevelExporter levelExporter = new LevelExporter(dialog.FileName);
+					levelExporter.ExportLevel(levelPanel.Level);
+				}
 			}
 			else
 			{
@@ -71,9 +80,18 @@ namespace LevelEditor.Forms
 			}
 		}
 
+		/// <summary>
+		/// Shows a filedialog to load a level.
+		/// </summary>
 		private void loadLevelToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			// TODO: Load level.
+			FileDialog dialog = new OpenFileDialog();
+			dialog.Filter = "Level files (*.level)|*.level";
+			if (dialog.ShowDialog() == DialogResult.OK)
+			{
+				ILevelImporter levelImporter = new LevelImporter(dialog.FileName);
+				levelPanel.Level = levelImporter.ImportLevel();
+			}
 		}
 	}
 }

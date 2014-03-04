@@ -24,5 +24,10 @@ namespace LevelEditor.Tests.Unit.IO
 		{
 			_stringBuilder.AppendLine(line);
 		}
+
+		public void Close()
+		{
+			// Nothing needs to be closed.
+		}
 	}
 }

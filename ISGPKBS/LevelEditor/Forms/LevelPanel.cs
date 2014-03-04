@@ -21,10 +21,7 @@ namespace LevelEditor.Forms
 					AutoScrollMinSize = new Size(
 						value.Width * GridSize, value.Height * GridSize);
 					_level = value;
-					_level.SetTile(new Point(4, 4), TileType.Grass);
-					_level.SetTile(new Point(4, 5), TileType.Grass);
-					_level.SetTile(new Point(5, 5), TileType.Grass);
-					_level.SetTile(new Point(5, 4), TileType.Grass);
+					Invalidate();
 				}
 			}
 		}
