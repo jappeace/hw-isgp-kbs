@@ -25,8 +25,9 @@ namespace LevelEditor.Forms
 			var newLevelDialog = new NewLevelDialog();
 			if (newLevelDialog.ShowDialog() == DialogResult.OK)
 			{
-				_level = new Level(newLevelDialog.MapWidth,
+				levelPanel.Level = new Level(newLevelDialog.MapWidth,
 					newLevelDialog.MapHeight);
+				levelPanel.Invalidate();
 			}
 		}
 	}

@@ -44,6 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\LevelPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Models\ILevel.cs" />
     <Compile Include="Models\IO\ILevelExporter.cs" />
     <Compile Include="Models\IO\ILevelImporter.cs" />

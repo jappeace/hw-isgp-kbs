@@ -28,7 +28,6 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.levelPanel = new System.Windows.Forms.Panel();
 			this.menuStrip = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.newLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -40,23 +39,11 @@
 			this.spriteBox = new System.Windows.Forms.PictureBox();
 			this.tileTypeLabel = new System.Windows.Forms.Label();
 			this.spritePicker = new System.Windows.Forms.ComboBox();
+			this.levelPanel = new LevelEditor.Forms.LevelPanel();
 			this.menuStrip.SuspendLayout();
 			this.settingsGroup.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.spriteBox)).BeginInit();
 			this.SuspendLayout();
-			// 
-			// levelPanel
-			// 
-			this.levelPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.levelPanel.AutoScroll = true;
-			this.levelPanel.AutoScrollMinSize = new System.Drawing.Size(1920, 1080);
-			this.levelPanel.BackColor = System.Drawing.SystemColors.ControlLight;
-			this.levelPanel.Location = new System.Drawing.Point(12, 27);
-			this.levelPanel.Name = "levelPanel";
-			this.levelPanel.Size = new System.Drawing.Size(565, 530);
-			this.levelPanel.TabIndex = 0;
 			// 
 			// menuStrip
 			// 
@@ -82,20 +69,20 @@
 			// newLevelToolStripMenuItem
 			// 
 			this.newLevelToolStripMenuItem.Name = "newLevelToolStripMenuItem";
-			this.newLevelToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.newLevelToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
 			this.newLevelToolStripMenuItem.Text = "New";
 			this.newLevelToolStripMenuItem.Click += new System.EventHandler(this.newLevelToolStripMenuItem_Click);
 			// 
 			// loadLevelToolStripMenuItem
 			// 
 			this.loadLevelToolStripMenuItem.Name = "loadLevelToolStripMenuItem";
-			this.loadLevelToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.loadLevelToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
 			this.loadLevelToolStripMenuItem.Text = "Load";
 			// 
 			// saveToolStripMenuItem
 			// 
 			this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-			this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.saveToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
 			this.saveToolStripMenuItem.Text = "Save";
 			// 
 			// helpToolStripMenuItem
@@ -149,17 +136,30 @@
 			this.spritePicker.Size = new System.Drawing.Size(185, 21);
 			this.spritePicker.TabIndex = 0;
 			// 
-			// LevelEditor
+			// levelPanel
+			// 
+			this.levelPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.levelPanel.AutoScroll = true;
+			this.levelPanel.BackColor = System.Drawing.SystemColors.Window;
+			this.levelPanel.Level = null;
+			this.levelPanel.Location = new System.Drawing.Point(12, 27);
+			this.levelPanel.Name = "levelPanel";
+			this.levelPanel.Size = new System.Drawing.Size(565, 530);
+			this.levelPanel.TabIndex = 3;
+			// 
+			// LevelEditorForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(792, 569);
-			this.Controls.Add(this.settingsGroup);
 			this.Controls.Add(this.levelPanel);
+			this.Controls.Add(this.settingsGroup);
 			this.Controls.Add(this.menuStrip);
 			this.MainMenuStrip = this.menuStrip;
 			this.MinimumSize = new System.Drawing.Size(800, 600);
-			this.Name = "LevelEditor";
+			this.Name = "LevelEditorForm";
 			this.Text = "Megadude++ Leveleditor";
 			this.menuStrip.ResumeLayout(false);
 			this.menuStrip.PerformLayout();
@@ -173,7 +173,6 @@
 
 		#endregion
 
-		private System.Windows.Forms.Panel levelPanel;
 		private System.Windows.Forms.MenuStrip menuStrip;
 		private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
@@ -185,6 +184,7 @@
 		private System.Windows.Forms.ComboBox spritePicker;
 		private System.Windows.Forms.Label tileTypeLabel;
 		private System.Windows.Forms.PictureBox spriteBox;
+		private LevelPanel levelPanel;
 
 	}
 }
