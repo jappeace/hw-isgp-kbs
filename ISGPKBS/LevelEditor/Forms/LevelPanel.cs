@@ -68,6 +68,10 @@ namespace LevelEditor.Forms
 
 		private Point PanelToGridLocation(Point panelLocation)
 		{
+			// Adjust coordinates according to the position of the scrollbar.
+			panelLocation.X -= AutoScrollPosition.X;
+			panelLocation.Y -= AutoScrollPosition.Y;
+
 			Point gridLocation = new Point();
 			gridLocation.X = panelLocation.X / GridSize;
 			gridLocation.Y = panelLocation.Y / GridSize;
