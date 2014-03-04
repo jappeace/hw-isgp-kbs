@@ -1,28 +1,43 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LevelEditor
 {
 	public partial class NewLevelDialog : Form
 	{
+		/// <summary>
+		/// Width set by the user.
+		/// </summary>
+		public int Width
+		{
+			get { return (int)widthNum.Value; }
+		}
+
+		/// <summary>
+		/// Height set by the user.
+		/// </summary>
+		public int Height
+		{
+			get { return (int)heightNum.Value; }
+		}
+
 		public NewLevelDialog()
 		{
 			InitializeComponent();
 		}
 
+		/// <summary>
+		/// Action fired when the user clicks on "Create level"
+		/// </summary>
 		private void createBtn_Click(object sender, EventArgs e)
 		{
 			DialogResult = DialogResult.OK;
 			Dispose();
 		}
 
+		/// <summary>
+		/// Action fired when the user clicks on "Cancel"
+		/// </summary>
 		private void cancelBtn_Click(object sender, EventArgs e)
 		{
 			DialogResult = DialogResult.Cancel;

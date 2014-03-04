@@ -31,15 +31,15 @@
 			this.levelPanel = new System.Windows.Forms.Panel();
 			this.menuStrip = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.newLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.loadLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.settingsGroup = new System.Windows.Forms.GroupBox();
-			this.spritePicker = new System.Windows.Forms.ComboBox();
-			this.tileTypeLabel = new System.Windows.Forms.Label();
 			this.spriteBox = new System.Windows.Forms.PictureBox();
+			this.tileTypeLabel = new System.Windows.Forms.Label();
+			this.spritePicker = new System.Windows.Forms.ComboBox();
 			this.menuStrip.SuspendLayout();
 			this.settingsGroup.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.spriteBox)).BeginInit();
@@ -79,25 +79,12 @@
 			this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
 			this.fileToolStripMenuItem.Text = "File";
 			// 
-			// helpToolStripMenuItem
-			// 
-			this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutToolStripMenuItem});
-			this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-			this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-			this.helpToolStripMenuItem.Text = "Help";
-			// 
-			// aboutToolStripMenuItem
-			// 
-			this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-			this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.aboutToolStripMenuItem.Text = "About";
-			// 
 			// newLevelToolStripMenuItem
 			// 
 			this.newLevelToolStripMenuItem.Name = "newLevelToolStripMenuItem";
 			this.newLevelToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.newLevelToolStripMenuItem.Text = "New";
+			this.newLevelToolStripMenuItem.Click += new System.EventHandler(this.newLevelToolStripMenuItem_Click);
 			// 
 			// loadLevelToolStripMenuItem
 			// 
@@ -111,6 +98,20 @@
 			this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.saveToolStripMenuItem.Text = "Save";
 			// 
+			// helpToolStripMenuItem
+			// 
+			this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
+			this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+			this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+			this.helpToolStripMenuItem.Text = "Help";
+			// 
+			// aboutToolStripMenuItem
+			// 
+			this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+			this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+			this.aboutToolStripMenuItem.Text = "About";
+			// 
 			// settingsGroup
 			// 
 			this.settingsGroup.Controls.Add(this.spriteBox);
@@ -123,13 +124,13 @@
 			this.settingsGroup.TabStop = false;
 			this.settingsGroup.Text = "Settings";
 			// 
-			// spritePicker
+			// spriteBox
 			// 
-			this.spritePicker.FormattingEnabled = true;
-			this.spritePicker.Location = new System.Drawing.Point(6, 36);
-			this.spritePicker.Name = "spritePicker";
-			this.spritePicker.Size = new System.Drawing.Size(185, 21);
-			this.spritePicker.TabIndex = 0;
+			this.spriteBox.Location = new System.Drawing.Point(6, 64);
+			this.spriteBox.Name = "spriteBox";
+			this.spriteBox.Size = new System.Drawing.Size(64, 64);
+			this.spriteBox.TabIndex = 2;
+			this.spriteBox.TabStop = false;
 			// 
 			// tileTypeLabel
 			// 
@@ -140,13 +141,13 @@
 			this.tileTypeLabel.TabIndex = 1;
 			this.tileTypeLabel.Text = "Tile type";
 			// 
-			// spriteBox
+			// spritePicker
 			// 
-			this.spriteBox.Location = new System.Drawing.Point(6, 64);
-			this.spriteBox.Name = "spriteBox";
-			this.spriteBox.Size = new System.Drawing.Size(64, 64);
-			this.spriteBox.TabIndex = 2;
-			this.spriteBox.TabStop = false;
+			this.spritePicker.FormattingEnabled = true;
+			this.spritePicker.Location = new System.Drawing.Point(6, 36);
+			this.spritePicker.Name = "spritePicker";
+			this.spritePicker.Size = new System.Drawing.Size(185, 21);
+			this.spritePicker.TabIndex = 0;
 			// 
 			// LevelEditor
 			// 
