@@ -40,6 +40,10 @@ namespace LevelEditor.Models
 		/// </summary>
 		public void SetTile(Point position, TileType tileType)
 		{
+			if (_tiles.ContainsKey(position))
+			{
+				_tiles.Remove(position);
+			}
 			_tiles.Add(position, tileType);
 		}
 
