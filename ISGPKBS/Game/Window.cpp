@@ -18,6 +18,11 @@ Window::~Window()
 // Member functions                  //
 /////////////////////////////////////
 
+void Window::AfterCreate() {
+	_cam = new Camera(_level->_player);
+	_graphics->SetCam(_cam);
+}
+
 INT_PTR CALLBACK dialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 	return NULL;
 }
@@ -27,6 +32,8 @@ void Window::OnPaint(Graphics* g){
 void Window::GameLoop(double elapsed) { //elapsed time, in MS
 	//update all the game objects now
 	_level->_player->Update();
+	_cam->Update();
+
 	AbstractWindow::GameLoop(elapsed);
 }
 
