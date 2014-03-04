@@ -101,6 +101,7 @@
 			// 
 			// settingsGroup
 			// 
+			this.settingsGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.settingsGroup.Controls.Add(this.spriteBox);
 			this.settingsGroup.Controls.Add(this.tileTypeLabel);
 			this.settingsGroup.Controls.Add(this.spritePicker);
@@ -113,6 +114,7 @@
 			// 
 			// spriteBox
 			// 
+			this.spriteBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.spriteBox.Location = new System.Drawing.Point(172, 38);
 			this.spriteBox.Name = "spriteBox";
 			this.spriteBox.Size = new System.Drawing.Size(16, 16);
@@ -121,6 +123,7 @@
 			// 
 			// tileTypeLabel
 			// 
+			this.tileTypeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.tileTypeLabel.AutoSize = true;
 			this.tileTypeLabel.Location = new System.Drawing.Point(7, 20);
 			this.tileTypeLabel.Name = "tileTypeLabel";
@@ -130,6 +133,7 @@
 			// 
 			// spritePicker
 			// 
+			this.spritePicker.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.spritePicker.FormattingEnabled = true;
 			this.spritePicker.Location = new System.Drawing.Point(6, 36);
 			this.spritePicker.Name = "spritePicker";
@@ -147,6 +151,7 @@
 			this.levelPanel.Level = null;
 			this.levelPanel.Location = new System.Drawing.Point(12, 27);
 			this.levelPanel.Name = "levelPanel";
+			this.levelPanel.SelectedType = LevelEditor.Models.TileType.Start;
 			this.levelPanel.Size = new System.Drawing.Size(565, 530);
 			this.levelPanel.TabIndex = 3;
 			// 
