@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace LevelEditor
+namespace LevelEditor.Forms
 {
 	public partial class NewLevelDialog : Form
 	{

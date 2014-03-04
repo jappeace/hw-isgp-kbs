@@ -1,4 +1,4 @@
-﻿namespace LevelEditor
+﻿namespace LevelEditor.Forms
 {
 	partial class NewLevelDialog
 	{

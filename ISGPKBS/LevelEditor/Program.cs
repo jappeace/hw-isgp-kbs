@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using LevelEditor.Forms;
 
 namespace LevelEditor
 {
@@ -13,7 +14,7 @@ namespace LevelEditor
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new LevelEditor());
+			Application.Run(new LevelEditorForm());
 		}
 	}
 }
