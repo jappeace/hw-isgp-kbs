@@ -109,6 +109,12 @@ namespace isgp {
 		DrawBitmap(path, x, y, 0, 0);
 	}
 	void Graphics::DrawBitmap(string path, int x, int y, int offsetx, int offsety) {
+		if (_cam != NULL) {
+			Point one1 = _cam->FromTo(Point(x,y));
+			x = (int)one1.GetX();
+			y = (int)one1.GetY();
+		}
+		
 		HBITMAP bitmap = this->LoadBitmapFile(path, offsetx, offsety);
 		HDC bitmap_hdc = CreateCompatibleDC(NULL);
 

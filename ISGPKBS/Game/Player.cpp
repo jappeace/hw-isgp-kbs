@@ -3,9 +3,9 @@
 
 namespace isgp{
 	Player::Player(Point position) {
-		_maxVel = 10;
-		_accel = 60;
-		_deAccel = 30;
+		_maxVel = 7;
+		_accel = 40;
+		_deAccel = 20;
 
 		_position = position;
 		_xVel = 0;
@@ -63,18 +63,18 @@ namespace isgp{
 			_behaviours->at(i)->Update(milisec);
 		}
 
-		if (_position.GetY() > 520) { 
-			_position.SetY(521);
+		if (_position.GetY() > 220) { 
+			_position.SetY(221);
 			_collision = true;
 		} else {
 			_collision = false;
 		}
 		
-		if (_upKey && _position.GetY() >= 512) {
-			_yVel = -200 * elapsed;
+		if (_upKey && _position.GetY() >= 221) {
+			_yVel = -500 * elapsed;
 		}
 	}
-
+	
 	void Player::AddToVelocityY(double y) {
 		_yVel += y;
 	}
