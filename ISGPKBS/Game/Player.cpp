@@ -63,14 +63,14 @@ namespace isgp{
 			_behaviours->at(i)->Update(milisec);
 		}
 
-		if (_position.GetY() > 220) { 
-			_position.SetY(221);
+		if (_position.GetY() > 220.0) { 
+			_position.SetY(221.0);
 			_collision = true;
 		} else {
 			_collision = false;
 		}
 		
-		if (_upKey && _position.GetY() >= 221) {
+		if (_upKey && _position.GetY() >= 221.0) {
 			_yVel = -500 * elapsed;
 		}
 	}
