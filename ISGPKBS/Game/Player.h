@@ -10,12 +10,14 @@ namespace isgp {
 	{
 	public:
 		Player(Point);
+		~Player();
 		void Paint(Graphics* g) override;
 		void Update(const double);
 		void AddToVelocityY(double y);
 		Point _position;
 		bool _leftKey, _rightKey, _upKey, _spaceKey, _collision;
 		double _xVel, _yVel, _maxVel;
+		int collision;
 	private:
 		vector<BehaviourInterface*>* _behaviours;
 		Graphics* _graphics;

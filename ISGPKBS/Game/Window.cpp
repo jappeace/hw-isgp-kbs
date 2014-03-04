@@ -71,13 +71,13 @@ void Window::GameLoop(double elapsed) { //elapsed time, in MS
 	_cam->Update();
 
 	AbstractWindow::GameLoop(elapsed);
-
+}
 
 short Window::CheckCollision(Player *player, Grid *grid) {
 	GridGraphicTranslator graphicTranslator = GridGraphicTranslator();
 	Point topTilePoint = graphicTranslator.FromTo(player->_position);
 
-	vector<Tile*> includedTiles = _level->_grid->GetTileAt(topTilePoint)->GetSurroundingTiles();
+	vector<Tile*> includedTiles = _level->GetGrid()->GetTileAt(topTilePoint)->GetSurroundingTiles();
 
 	return -1;
 }

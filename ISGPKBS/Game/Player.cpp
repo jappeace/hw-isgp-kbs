@@ -49,7 +49,6 @@ namespace isgp{
 			_xVel += _deAccel * elapsed;
 		}
 		
-		if (_rightKey && _velocity.x < _maxVel) { 
 		if (_rightKey && _xVel < _maxVel) { 
 			if (_collision) {
 				_xVel += _accel * elapsed;
