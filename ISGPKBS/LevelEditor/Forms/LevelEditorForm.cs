@@ -56,7 +56,19 @@ namespace LevelEditor.Forms
 
 		private void saveToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			// TODO: Save level.
+			if (levelPanel.Level != null)
+			{
+				FileDialog dialog = new SaveFileDialog();
+				dialog.AddExtension = true;
+				dialog.Filter = "Level files (*.level)|*.level";
+				dialog.ShowDialog();
+			}
+			else
+			{
+				// No level to save.
+				MessageBox.Show("There is nothing to save!", "Cannot save level",
+					MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
 		}
 
 		private void loadLevelToolStripMenuItem_Click(object sender, EventArgs e)
