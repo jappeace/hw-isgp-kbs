@@ -15,6 +15,12 @@ namespace LevelEditor.Forms
 		public LevelEditorForm()
 		{
 			InitializeComponent();
+			Init();
+		}
+
+		private void Init()
+		{
+			spritePicker.DataSource = Enum.GetNames(typeof(TileType));
 		}
 
 		/// <summary>

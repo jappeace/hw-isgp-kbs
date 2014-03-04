@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\BitmapCollection.cs" />
     <Compile Include="Forms\LevelPanel.cs">
       <SubType>Component</SubType>
     </Compile>
