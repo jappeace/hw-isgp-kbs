@@ -16,5 +16,17 @@ namespace LevelEditor
 		{
 			InitializeComponent();
 		}
+
+		private void createBtn_Click(object sender, EventArgs e)
+		{
+			DialogResult = DialogResult.OK;
+			Dispose();
+		}
+
+		private void cancelBtn_Click(object sender, EventArgs e)
+		{
+			DialogResult = DialogResult.Cancel;
+			Dispose();
+		}
 	}
 }

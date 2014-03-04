@@ -30,10 +30,12 @@
 		{
 			this.widthLabel = new System.Windows.Forms.Label();
 			this.heightLabel = new System.Windows.Forms.Label();
-			this.widthBox = new System.Windows.Forms.TextBox();
-			this.heightBox = new System.Windows.Forms.TextBox();
-			this.button1 = new System.Windows.Forms.Button();
-			this.button2 = new System.Windows.Forms.Button();
+			this.createBtn = new System.Windows.Forms.Button();
+			this.cancelBtn = new System.Windows.Forms.Button();
+			this.widthNum = new System.Windows.Forms.NumericUpDown();
+			this.heightNum = new System.Windows.Forms.NumericUpDown();
+			((System.ComponentModel.ISupportInitialize)(this.widthNum)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.heightNum)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// widthLabel
@@ -54,54 +56,58 @@
 			this.heightLabel.TabIndex = 1;
 			this.heightLabel.Text = "Height";
 			// 
-			// widthBox
+			// createBtn
 			// 
-			this.widthBox.Location = new System.Drawing.Point(90, 12);
-			this.widthBox.Name = "widthBox";
-			this.widthBox.Size = new System.Drawing.Size(100, 20);
-			this.widthBox.TabIndex = 2;
+			this.createBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.createBtn.Location = new System.Drawing.Point(115, 67);
+			this.createBtn.Name = "createBtn";
+			this.createBtn.Size = new System.Drawing.Size(75, 23);
+			this.createBtn.TabIndex = 4;
+			this.createBtn.Text = "Create level";
+			this.createBtn.UseVisualStyleBackColor = true;
+			this.createBtn.Click += new System.EventHandler(this.createBtn_Click);
 			// 
-			// heightBox
+			// cancelBtn
 			// 
-			this.heightBox.Location = new System.Drawing.Point(90, 35);
-			this.heightBox.Name = "heightBox";
-			this.heightBox.Size = new System.Drawing.Size(100, 20);
-			this.heightBox.TabIndex = 3;
+			this.cancelBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.cancelBtn.Location = new System.Drawing.Point(33, 67);
+			this.cancelBtn.Name = "cancelBtn";
+			this.cancelBtn.Size = new System.Drawing.Size(75, 23);
+			this.cancelBtn.TabIndex = 5;
+			this.cancelBtn.Text = "Cancel";
+			this.cancelBtn.UseVisualStyleBackColor = true;
+			this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click);
 			// 
-			// button1
+			// widthNum
 			// 
-			this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.button1.Location = new System.Drawing.Point(115, 67);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(75, 23);
-			this.button1.TabIndex = 4;
-			this.button1.Text = "Create level";
-			this.button1.UseVisualStyleBackColor = true;
+			this.widthNum.Location = new System.Drawing.Point(70, 12);
+			this.widthNum.Name = "widthNum";
+			this.widthNum.Size = new System.Drawing.Size(120, 20);
+			this.widthNum.TabIndex = 6;
 			// 
-			// button2
+			// heightNum
 			// 
-			this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.button2.Location = new System.Drawing.Point(33, 67);
-			this.button2.Name = "button2";
-			this.button2.Size = new System.Drawing.Size(75, 23);
-			this.button2.TabIndex = 5;
-			this.button2.Text = "Cancel";
-			this.button2.UseVisualStyleBackColor = true;
+			this.heightNum.Location = new System.Drawing.Point(70, 36);
+			this.heightNum.Name = "heightNum";
+			this.heightNum.Size = new System.Drawing.Size(120, 20);
+			this.heightNum.TabIndex = 7;
 			// 
 			// NewLevelDialog
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(202, 97);
-			this.Controls.Add(this.button2);
-			this.Controls.Add(this.button1);
-			this.Controls.Add(this.heightBox);
-			this.Controls.Add(this.widthBox);
+			this.Controls.Add(this.heightNum);
+			this.Controls.Add(this.widthNum);
+			this.Controls.Add(this.cancelBtn);
+			this.Controls.Add(this.createBtn);
 			this.Controls.Add(this.heightLabel);
 			this.Controls.Add(this.widthLabel);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.Name = "NewLevelDialog";
 			this.Text = "New level";
+			((System.ComponentModel.ISupportInitialize)(this.widthNum)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.heightNum)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -111,9 +117,9 @@
 
 		private System.Windows.Forms.Label widthLabel;
 		private System.Windows.Forms.Label heightLabel;
-		private System.Windows.Forms.TextBox widthBox;
-		private System.Windows.Forms.TextBox heightBox;
-		private System.Windows.Forms.Button button1;
-		private System.Windows.Forms.Button button2;
+		private System.Windows.Forms.Button createBtn;
+		private System.Windows.Forms.Button cancelBtn;
+		private System.Windows.Forms.NumericUpDown widthNum;
+		private System.Windows.Forms.NumericUpDown heightNum;
 	}
 }
