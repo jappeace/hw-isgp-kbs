@@ -41,7 +41,7 @@ void Window::OnPaint(Graphics* g){
 }
 void Window::GameLoop(double elapsed) { //elapsed time, in MS
 	//update all the game objects now
-	_level->_player->Update();
+	_level->_player->Update(elapsed);
 	_cam->Update();
 
 	AbstractWindow::GameLoop(elapsed);

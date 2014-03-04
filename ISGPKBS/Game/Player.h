@@ -12,7 +12,7 @@ namespace isgp {
 		Player(Point position);
 		~Player(void);
 		void Paint(Graphics* g) override;
-		void Update();
+		void Update(const double);
 		void AddToVelocityY(double y);
 		Point _position;
 		bool _leftKey, _rightKey, _upKey, _spaceKey, _collision;
