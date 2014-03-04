@@ -60,12 +60,19 @@ namespace isgp{
 		_position.SetY(_position.GetY() + (_yVel));
 
 		for (unsigned int i = 0; i < _behaviours->size(); ++i) {
-			_behaviours->at(i)->Update(50);
+			_behaviours->at(i)->Update(milisec);
 		}
 
-		if (_position.GetY() > 520) { _position.SetY(521); _collision = true; } else { _collision = false; }
+		if (_position.GetY() > 520) { 
+			_position.SetY(521);
+			_collision = true;
+		} else {
+			_collision = false;
+		}
 		
-		if (_upKey && _position.GetY() >= 512) { _yVel = -600 * elapsed; }
+		if (_upKey && _position.GetY() >= 512) {
+			_yVel = -200 * elapsed;
+		}
 	}
 
 	void Player::AddToVelocityY(double y) {
