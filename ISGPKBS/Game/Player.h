@@ -1,20 +1,18 @@
 #pragma once
 
 #include "IPaintable.h"
-
+#include "Entity.h"
 namespace isgp {
-	class Player : public IPaintable
+	class Player : public Entity
 	{
 	public:
-		Player(Point position);
-		~Player(void);
+		Player(Point);
 		void Paint(Graphics* g) override;
-		void Update();
-		Point _position;
+		void Update() override;
 		bool _leftKey, _rightKey, _upKey, _spaceKey, _collision;
 	private:
 		Graphics* _graphics;
-		double _xVel, _yVel, _maxVel, _accel, _deAccel;
+		double _maxVel, _accel, _deAccel;
 	};
 }
 

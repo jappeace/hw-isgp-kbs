@@ -28,6 +28,7 @@ namespace isgp {
 		// The bitmap on which we are actually rendering in the background
 		HBITMAP _bitmap;
 
+		HPEN _pen;
 #ifdef _DEBUG
 		// FPScounter.
 		TimesPerSecondCounter _fpsCounter;

@@ -87,8 +87,10 @@ namespace isgp {
 	}
 
 	void Graphics::SetColor(COLORREF color) {
-		HPEN greenPen=CreatePen(PS_SOLID, 1, color);
-		SelectObject(this->_backBuffer, greenPen);
+		if(_pen)
+			DeleteObject(_pen);
+		_pen = CreatePen(PS_SOLID, 1, color);
+		SelectObject(this->_backBuffer, _pen);
 	}
 
 	void Graphics::DrawBitmap(string path, Point& position) {

@@ -8,7 +8,7 @@ const Size g_tiles = Size(50,50);
 Window::Window() {
 	Grid* g = new Grid(g_tiles.GetWidth(),g_tiles.GetHeight());// level handles destruction of grid
 	_level = new Level(g);
-	/*Point position = Point(5,5);
+	Point position = Point(5,5);
 	g->GetTileAt(position)->SetData(new WorldBlock("C:\\tiles\\smile.bmp"));
 	for(unsigned i = 0; i < 50; i++) {
 		Point position = Point(i, 23);
@@ -17,7 +17,7 @@ Window::Window() {
 		g->GetTileAt(position2)->SetData(new WorldBlock("C:\\tiles\\smile.bmp"));
 		Point position3 = Point(i, 21);
 		g->GetTileAt(position2)->SetData(new WorldBlock("C:\\tiles\\smile.bmp"));
-	}*/
+	}
 }
 
 Window::~Window()
@@ -39,17 +39,20 @@ void Window::OnPaint(Graphics* g){
 	Point topTilePoint = graphicTranslator.ToFrom(_level->_player->_position);
 	
 	vector<Tile*> maaktNietUit;
+	maaktNietUit.push_back(_level->_grid->GetTileAt(topTilePoint)->GetTop());
 	maaktNietUit.push_back(_level->_grid->GetTileAt(topTilePoint));
-	maaktNietUit.push_back(_level->_grid->GetTileAt(topTilePoint)->GetBottom());
 	vector<Tile*> includedTiles = _level->_grid->GetSurroundingTiles(maaktNietUit);
 
-	g->SetColor(RGB(255, 0, 255));
+
+
+	g->SetColor(RGB(255, 0, 0));
 	for(unsigned int i = 0; i < includedTiles.size(); i++) {
 		Tile* t = includedTiles.at(i);
 		Point* p = &graphicTranslator.FromTo(*t->GetPosition());
 		g->DrawRect((int)p->GetX(), (int)p->GetY(), (int)p->GetX() + 16, (int)p->GetY() + 16);
 		includedTiles.at(i)->Paint(g);
 	}
+
 	g->SetColor(RGB(0, 0, 0));
 #endif
 }
@@ -57,12 +60,9 @@ void Window::GameLoop(double elapsed) { //elapsed time, in MS
 	//update all the game objects now
 
 	_level->_player->Update();
+
 }
 
-short LEFT = 1;
-short UP = 2;
-short RIGHT = 4;
-short DOWN = 8;
 
 short Window::CheckCollision(Player *player, Grid *grid) {
 	GridGraphicTranslator graphicTranslator = GridGraphicTranslator();
