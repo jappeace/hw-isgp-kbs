@@ -17,9 +17,11 @@ namespace LevelEditor
 
 		private void newLevelToolStripMenuItem_Click(object sender, System.EventArgs e)
 		{
-			Form newLevelDialog = new NewLevelDialog();
+			var newLevelDialog = new NewLevelDialog();
 			if (newLevelDialog.ShowDialog() == DialogResult.OK)
 			{
+				MessageBox.Show(newLevelDialog.MapWidth + "");
+				MessageBox.Show(newLevelDialog.MapHeight + "");
 			}
 		}
 	}

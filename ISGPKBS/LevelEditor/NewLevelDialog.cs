@@ -8,7 +8,7 @@ namespace LevelEditor
 		/// <summary>
 		/// Width set by the user.
 		/// </summary>
-		public int Width
+		public int MapWidth
 		{
 			get { return (int)widthNum.Value; }
 		}
@@ -16,7 +16,7 @@ namespace LevelEditor
 		/// <summary>
 		/// Height set by the user.
 		/// </summary>
-		public int Height
+		public int MapHeight
 		{
 			get { return (int)heightNum.Value; }
 		}
