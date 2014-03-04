@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 
-namespace LevelEditor
+namespace LevelEditor.Models
 {
 	public class Level : ILevel
 	{

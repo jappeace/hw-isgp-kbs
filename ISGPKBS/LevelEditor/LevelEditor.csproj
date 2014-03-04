@@ -44,22 +44,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ILevel.cs" />
-    <Compile Include="IO\ILevelExporter.cs" />
-    <Compile Include="IO\ILevelImporter.cs" />
-    <Compile Include="IO\IReader.cs" />
-    <Compile Include="IO\IWriter.cs" />
-    <Compile Include="Level.cs" />
+    <Compile Include="Models\ILevel.cs" />
+    <Compile Include="Models\IO\ILevelExporter.cs" />
+    <Compile Include="Models\IO\ILevelImporter.cs" />
+    <Compile Include="Models\IO\IReader.cs" />
+    <Compile Include="Models\IO\IWriter.cs" />
+    <Compile Include="Models\Level.cs" />
     <Compile Include="LevelEditor.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="LevelEditor.Designer.cs">
       <DependentUpon>LevelEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="IO\LevelExporter.cs" />
-    <Compile Include="IO\FileReader.cs" />
-    <Compile Include="IO\FileWriter.cs" />
-    <Compile Include="IO\LevelImporter.cs" />
+    <Compile Include="Models\IO\LevelExporter.cs" />
+    <Compile Include="Models\IO\FileReader.cs" />
+    <Compile Include="Models\IO\FileWriter.cs" />
+    <Compile Include="Models\IO\LevelImporter.cs" />
     <Compile Include="NewLevelDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -68,8 +68,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tile.cs" />
-    <Compile Include="TileType.cs" />
+    <Compile Include="Models\Tile.cs" />
+    <Compile Include="Models\TileType.cs" />
     <EmbeddedResource Include="LevelEditor.resx">
       <DependentUpon>LevelEditor.cs</DependentUpon>
     </EmbeddedResource>
@@ -98,6 +98,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

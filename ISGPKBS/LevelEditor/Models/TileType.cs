@@ -1,4 +1,4 @@
-﻿namespace LevelEditor
+﻿namespace LevelEditor.Models
 {
 	/// <summary>
 	/// Enumeration of tile types with their integer representation.

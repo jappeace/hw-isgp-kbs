@@ -1,4 +1,5 @@
-﻿using LevelEditor.IO;
+﻿using LevelEditor.Models;
+using LevelEditor.Models.IO;
 using LevelEditor.Tests.Unit.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

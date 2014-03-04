@@ -1,4 +1,4 @@
-﻿namespace LevelEditor.IO
+﻿namespace LevelEditor.Models.IO
 {
 	public interface ILevelImporter
 	{

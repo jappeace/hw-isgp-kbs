@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
 
-namespace LevelEditor.IO
+namespace LevelEditor.Models.IO
 {
 	public class LevelExporter : ILevelExporter
 	{

@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace LevelEditor
+namespace LevelEditor.Models
 {
 	/// <summary>
 	/// This class represents a tile and contains information about its
