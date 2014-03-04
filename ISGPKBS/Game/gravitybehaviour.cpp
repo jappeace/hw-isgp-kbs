@@ -16,7 +16,7 @@ namespace isgp {
 		}
 
 		// Calculate downward motion
-		const double GRAVITATIONAL_PULL = (double) 20;
+		const double GRAVITATIONAL_PULL = (double) 2000;
 		const double TIME_MULTIPLIER = ms / (double) 1000;
 
 		// The calculation needs to keep in mind that the applied gravity will get removed by 1 unit per second.

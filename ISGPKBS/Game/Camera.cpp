@@ -12,10 +12,10 @@ namespace isgp{
 	}
 
 	void Camera::Update() {
-		double camFix2 = 200 * (_player->_xVel * 0.1);
+		double camFix2 = 200 * (_player->_xVel * 0.0015);
 
 		_camFix = _camFix + (camFix2 - _camFix) * 0.025;
-		
+
 		_position.SetX(_position.GetX() + ((_player->_position.GetX() - _position.GetX()) + _camFix) * 0.1);
 		_position.SetY(_position.GetY() + (_player->_position.GetY() - _position.GetY()) * 0.1);
 	}
