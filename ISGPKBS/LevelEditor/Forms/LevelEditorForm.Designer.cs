@@ -113,9 +113,9 @@
 			// 
 			// spriteBox
 			// 
-			this.spriteBox.Location = new System.Drawing.Point(6, 64);
+			this.spriteBox.Location = new System.Drawing.Point(172, 38);
 			this.spriteBox.Name = "spriteBox";
-			this.spriteBox.Size = new System.Drawing.Size(64, 64);
+			this.spriteBox.Size = new System.Drawing.Size(16, 16);
 			this.spriteBox.TabIndex = 2;
 			this.spriteBox.TabStop = false;
 			// 
@@ -133,8 +133,9 @@
 			this.spritePicker.FormattingEnabled = true;
 			this.spritePicker.Location = new System.Drawing.Point(6, 36);
 			this.spritePicker.Name = "spritePicker";
-			this.spritePicker.Size = new System.Drawing.Size(185, 21);
+			this.spritePicker.Size = new System.Drawing.Size(160, 21);
 			this.spritePicker.TabIndex = 0;
+			this.spritePicker.SelectedIndexChanged += new System.EventHandler(this.spritePicker_SelectedIndexChanged);
 			// 
 			// levelPanel
 			// 

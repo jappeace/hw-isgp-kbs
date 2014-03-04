@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 using LevelEditor.Models;
 
@@ -35,6 +36,21 @@ namespace LevelEditor.Forms
 					newLevelDialog.MapHeight);
 				levelPanel.Invalidate();
 			}
+		}
+
+		private void spritePicker_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			TileType selectedType = (TileType)Enum.Parse(typeof(TileType), spritePicker.Text);
+			Bitmap bitmap;
+			try
+			{
+				bitmap = BitmapCollection.GetBitmapForType(selectedType);
+			}
+			catch (FileNotFoundException)
+			{
+				bitmap = new Bitmap(64, 64);
+			}
+			spriteBox.Image = bitmap;
 		}
 	}
 }

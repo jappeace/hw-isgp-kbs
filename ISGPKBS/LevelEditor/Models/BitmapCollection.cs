@@ -40,6 +40,7 @@ namespace LevelEditor.Models
 		/// </summary>
 		private BitmapCollection()
 		{
+			BitmapDictionary = new Dictionary<TileType, Bitmap>();
 			string fileName;
 			foreach (TileType tileType in Enum.GetValues(typeof(TileType)))
 			{
