@@ -14,43 +14,39 @@ namespace isgp {
 		int collision = 0;
 		vector<Tile*> includedTiles = _grid->GetTilesInRectangle(topLeft, bottomRight);
 		GridGraphicTranslator translator = GridGraphicTranslator();
+		const double diffWidth = TILE_WIDTH / 2;
+		const double diffHeight =  TILE_HEIGHT / 2;
 		for(unsigned i = 0; i < includedTiles.size(); i++) {
 			Tile* currentTile = includedTiles.at(i);
 			if(currentTile->HasData() && currentTile->GetData()->IsSolid) {
-				Point absoluteTilePosition = translator.FromTo(*currentTile->GetPosition());
-				
+				Point absoluteTilePositionTL = translator.FromTo(*currentTile->GetPosition());
+
+				Point tileCenter = Point(absoluteTilePositionTL.GetX() + diffWidth, absoluteTilePositionTL.GetY() + diffHeight);
+
+				double diffX = topLeft.GetX() - tileCenter.GetX();
+				if(abs(diffX) < diffWidth){
+					collision |= Left;
+					CollidingTiles.push_back(currentTile);
+				}
+				diffX = bottomRight.GetX() - tileCenter.GetX();
+				if(abs(diffX) < diffWidth){
+					collision |= Right;
+					CollidingTiles.push_back(currentTile);
+				}
+
+				double diffY = topLeft.GetY() - tileCenter.GetY();
+				if(abs(diffY) < diffHeight){
+					collision |= Up;
+					CollidingTiles.push_back(currentTile);
+				}
+				diffY = bottomRight.GetY() - tileCenter.GetY();
+				if(abs(diffY) < diffHeight){
+					collision |= Down;
+					CollidingTiles.push_back(currentTile);
+				}
 				//TopLeft bottomRight = player 
-				//absoluteTilePosition = tile, + tile width & height = boundaries
-
-				    double pL = topLeft.GetX(),             //left
-						   pR = bottomRight.GetX(),    //right
-						   pT = topLeft.GetY(),             //top
-						   pB = bottomRight.GetY();   //bottom
-
-					double tL = absoluteTilePosition.GetX(),               //left
-						   tR = tL + TILE_WIDTH,      //right
-						   tT = absoluteTilePosition.GetY(),               //top
-						   tB = tT + TILE_HEIGHT;     //bottom
-
-					if(pR > tL && pL < tL) {             // Player on left
-						collision |= Left;
-						CollidingTiles.push_back(currentTile);
-					}
-					if(pL < tR && pR > tR) {            // Player on Right
-						collision |= Right;
-						CollidingTiles.push_back(currentTile);
-					}
-					if(pT < tT && pT > tB){
-						collision |= Down;
-						CollidingTiles.push_back(currentTile);
-					}
-					if(pT > tT && pB < tT) {            // Player on Bottom
-						
-					}
-					if(pB < tB && pT > tB) {            // Player on Top
-						collision |= Up;
-						CollidingTiles.push_back(currentTile);
-					}
+				
+				
 			}
 		}
 

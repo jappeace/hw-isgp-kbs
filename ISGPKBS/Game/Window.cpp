@@ -10,7 +10,7 @@ Window::Window() {
 	_level = new Level(g);
 	Point position = Point(5,5);
 	g->GetTileAt(position)->SetData(new WorldBlock("C:\\tiles\\smile.bmp"));
-	for(unsigned i = 0; i < 50; i++) {
+	for(unsigned i = 20; i < 50; i++) {
 		Point position = Point(i, 22);
 		g->GetTileAt(position)->SetData(new WorldBlock("C:\\tiles\\smile.bmp"));
 		Point position2 = Point(i, 23);

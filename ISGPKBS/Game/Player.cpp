@@ -22,53 +22,7 @@ namespace isgp{
 	}
 
 	void Player::Update() {
-		if (_leftKey && _velocity.x > -_maxVel) { 
-			if (_collision) {
-				_velocity.x -= _accel;
-			} else { 
-				_velocity.x -= _deAccel;
-			}
-		} else if (_velocity.x < 0 && _collision) {
-			_velocity.x += _deAccel;
-		}
-		
-		if (_rightKey && _velocity.x < _maxVel) { 
-			if (_collision) {
-				_velocity.x += _accel;
-			} else { 
-				_velocity.x += _deAccel;
-			}
-		} else if (_velocity.x > 0 && _collision) {
-			_velocity.x -= _deAccel;
-		}
 
-		collision = CheckCollision(Point(_position.GetX() + _velocity.x, _position.GetY() + _velocity.y), 
-										Point(_position.GetX() + _velocity.y + 16, _position.GetY() + _velocity.y + 32));
-		
-		if((_velocity.x < 0 && !(collision & Left)) || _velocity.x > 0 && !(collision & Right)) {
-			_position.SetX(_position.GetX() + _velocity.x);
-		}
-		
-		if(!(collision & Down)) {
-			_velocity.y = 4;
-			if(_velocity.y > 0) {
-				_position.SetY(_position.GetY() + _velocity.y);
-			}
-			OutputDebugString("Nothing");
-		} else {
-			OutputDebugString("collide");
-		}
-		
-		/*if(_velocity.y < 0 && !(collision & Up)) {
-			_position.SetY(_position.GetY() + _velocity.y);
-		}*/
-		//if(_velocity.y > 0 && !(collision & Up) || _velocity.y < 0 && !(collision & Down)) {
-			
-		//}
-		
-		
-		if (_upKey && _position.GetY() >= 520) { _velocity.y = -12; }
-		if(_position.GetY() >= 520) {_position.SetY(0);}
 	}
 
 	void Player::Paint(Graphics* g) {
