@@ -41,6 +41,7 @@ namespace LevelEditor.Forms
 		private void spritePicker_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			TileType selectedType = (TileType)Enum.Parse(typeof(TileType), spritePicker.Text);
+			levelPanel.SelectedType = selectedType;
 			Bitmap bitmap;
 			try
 			{

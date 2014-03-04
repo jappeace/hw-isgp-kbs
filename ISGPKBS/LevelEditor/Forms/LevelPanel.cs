@@ -29,6 +29,8 @@ namespace LevelEditor.Forms
 			}
 		}
 
+		public TileType SelectedType { get; set; }
+
 		private ILevel _level;
 		private Pen _gridPen;
 
@@ -44,6 +46,32 @@ namespace LevelEditor.Forms
 			BackColor = Color.Red;
 			_gridPen = new Pen(Color.Black, GridLineWidth);
 			Scroll += OnScroll;
+			MouseClick += levelPanel_MouseClick;
+		}
+
+		private void levelPanel_MouseClick(object sender, MouseEventArgs e)
+		{
+			if (Level != null)
+			{
+				Point gridLocation = PanelToGridLocation(e.Location);
+				if (e.Button == MouseButtons.Left)
+				{
+					Level.SetTile(gridLocation, SelectedType);
+				}
+				else if (e.Button == MouseButtons.Right)
+				{
+					// TODO: Delete tile from level.
+				}
+				Invalidate();
+			}
+		}
+
+		private Point PanelToGridLocation(Point panelLocation)
+		{
+			Point gridLocation = new Point();
+			gridLocation.X = panelLocation.X / GridSize;
+			gridLocation.Y = panelLocation.Y / GridSize;
+			return gridLocation;
 		}
 
 		private void OnScroll(object sender, ScrollEventArgs args)
