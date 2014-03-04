@@ -15,14 +15,14 @@ namespace isgp{
 		_upKey = false;
 		_spaceKey = false;
 		_collision = false;
-		_behaviours = new vector<BehaviourInterface*>();
+		_behaviours = new vector<IBehaviour*>();
 		_behaviours->push_back(new GravityBehaviour(this));
 	}
 
 
 	Player::~Player(void) {
 		// Delete references in vector
-		for (BehaviourInterface* behaviour = _behaviours->front(); behaviour != _behaviours->back(); ++behaviour) {
+		for (IBehaviour* behaviour = _behaviours->front(); behaviour != _behaviours->back(); ++behaviour) {
 			delete behaviour;
 		}
 		// Delete vector

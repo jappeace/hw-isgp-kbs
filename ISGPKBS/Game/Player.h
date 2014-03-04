@@ -2,7 +2,7 @@
 
 #include <vector>
 
-#include "behaviourinterface.h"
+#include "IBehaviour.h"
 #include "IPaintable.h"
 
 namespace isgp {
@@ -17,7 +17,7 @@ namespace isgp {
 		Point _position;
 		bool _leftKey, _rightKey, _upKey, _spaceKey, _collision;
 	private:
-		vector<BehaviourInterface*>* _behaviours;
+		vector<IBehaviour*>* _behaviours;
 		Graphics* _graphics;
 		double _xVel, _yVel, _maxVel, _accel, _deAccel;
 	};

@@ -3,7 +3,7 @@
 namespace isgp {
 	// The default interface which allows an object to have certain behaviours.
 	// This interface does not define a behaviour by itself.
-	class BehaviourInterface
+	class IBehaviour
 	{
 	public:
 		// Executes the implemented behaviour.

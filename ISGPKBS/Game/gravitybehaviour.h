@@ -1,13 +1,13 @@
 #pragma once
 
-#include "behaviourinterface.h"
+#include "IBehaviour.h"
 #include "Player.h"
 
 namespace isgp {
 
 	// Gravity Behaviour is a child of "BehaviourInterface".
 	// The Gravity Behaviour will force the object to be pulled downward by gravity.
-	class GravityBehaviour : public BehaviourInterface
+	class GravityBehaviour : public IBehaviour
 	{
 	public:
 		GravityBehaviour(Player* player);
