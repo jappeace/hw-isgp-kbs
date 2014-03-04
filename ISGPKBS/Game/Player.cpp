@@ -3,9 +3,9 @@
 
 namespace isgp{
 	Player::Player(Point position) {
-		_maxVel = 7;
-		_accel = 40;
-		_deAccel = 20;
+		_maxVel = 500;
+		_accel = 2200;
+		_deAccel = 1100;
 
 		_position = position;
 		_xVel = 0;
@@ -56,22 +56,22 @@ namespace isgp{
 			_xVel = 0;
 		}
 
-		_position.SetX(_position.GetX() + (_xVel));
-		_position.SetY(_position.GetY() + (_yVel));
+		_position.SetX(_position.GetX() + (_xVel * elapsed));
+		_position.SetY(_position.GetY() + (_yVel * elapsed));
 
 		for (unsigned int i = 0; i < _behaviours->size(); ++i) {
 			_behaviours->at(i)->Update(milisec);
 		}
 
-		if (_position.GetY() > 220) { 
-			_position.SetY(221);
+		if (_position.GetY() > 220.0) { 
+			_position.SetY(221.0);
 			_collision = true;
 		} else {
 			_collision = false;
 		}
 		
-		if (_upKey && _position.GetY() >= 221) {
-			_yVel = -500 * elapsed;
+		if (_upKey && _position.GetY() >= 221.0) {
+			_yVel = -650;
 		}
 	}
 	
@@ -81,7 +81,11 @@ namespace isgp{
 
 	void Player::Paint(Graphics* g) {
 		_graphics = g;
-
+		
 		_graphics->DrawRect(_position, Point(_position.GetX() + 32, _position.GetY() + 32));
+		
+#ifdef _DEBUG
+		_graphics->DrawStaticRect(Point(395, 395), Point(405, 405));
+#endif
 	}
 }

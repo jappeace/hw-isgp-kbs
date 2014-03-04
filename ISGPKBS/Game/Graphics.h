@@ -55,9 +55,10 @@ namespace isgp {
 
 		void DrawStr(Point& position, string str);
 		void DrawStr(Point& position, const char* str, int length);
-
+		
 		void DrawRect(Point& one, Point& two);
 		void DrawRect(int xone, int yone, int xtwo, int ytwo);
+		void DrawStaticRect(Point& one, Point& two);
 
 		void DrawBitmap(string path, Point& position);
 		void DrawBitmap(string path, Point& position, Point& offset);

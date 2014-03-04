@@ -14,5 +14,7 @@ namespace isgp{
 	private:
 		Player* _player;
 		Point _position;
+		int _direction;
+		double _camFix;
 	};
 }
