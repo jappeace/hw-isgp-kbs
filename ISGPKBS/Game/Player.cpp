@@ -81,7 +81,11 @@ namespace isgp{
 
 	void Player::Paint(Graphics* g) {
 		_graphics = g;
-
+		
 		_graphics->DrawRect(_position, Point(_position.GetX() + 32, _position.GetY() + 32));
+		
+#ifdef _DEBUG
+		_graphics->DrawStaticRect(Point(395, 395), Point(405, 405));
+#endif
 	}
 }

@@ -16,10 +16,11 @@ namespace isgp {
 		void AddToVelocityY(double y);
 		Point _position;
 		bool _leftKey, _rightKey, _upKey, _spaceKey, _collision;
+		double _xVel, _yVel, _maxVel;
 	private:
 		vector<BehaviourInterface*>* _behaviours;
 		Graphics* _graphics;
-		double _xVel, _yVel, _maxVel, _accel, _deAccel;
+		double _accel, _deAccel;
 	};
 }
 

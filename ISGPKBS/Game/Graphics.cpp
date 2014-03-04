@@ -80,6 +80,10 @@ namespace isgp {
 		}
 	}
 
+	void Graphics::DrawStaticRect(Point& one, Point& two) {
+		this->DrawRect((int)one.GetX(),(int) one.GetY(),(int) two.GetX(),(int) two.GetY());
+	}
+
 	void Graphics::DrawRect(int xone, int yone, int xtwo, int ytwo) {
 		Rectangle(_backBuffer, xone, yone, xtwo, ytwo);
 	}

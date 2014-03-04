@@ -60,6 +60,7 @@ int AbstractWindow::Run()
 		{
 			TranslateMessage( &msg );
 			DispatchMessage( &msg );
+			//GetClientRect
 		} 
 		else 
 		{
