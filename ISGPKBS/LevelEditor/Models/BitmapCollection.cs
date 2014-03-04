@@ -33,12 +33,20 @@ namespace LevelEditor.Models
 		public IDictionary<TileType, Bitmap> BitmapDictionary { get; set; }
 
 		private static BitmapCollection _instance;
+		private const string SpritesFolder = @"sprites\";
 
 		/// <summary>
 		/// Private constructor for singleton.
 		/// </summary>
 		private BitmapCollection()
 		{
+			string fileName;
+			foreach (TileType tileType in Enum.GetValues(typeof(TileType)))
+			{
+				fileName = string.Format("{0}{1}.bmp",
+					SpritesFolder, Enum.GetName(typeof(TileType), tileType));
+				BitmapDictionary.Add(tileType, (Bitmap)Bitmap.FromFile(fileName));
+			}
 		}
 
 		/// <summary>
