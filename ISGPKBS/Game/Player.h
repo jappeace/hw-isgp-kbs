@@ -1,5 +1,8 @@
 #pragma once
 
+#include <vector>
+
+#include "behaviourinterface.h"
 #include "IPaintable.h"
 #include "Entity.h"
 namespace isgp {
@@ -8,12 +11,15 @@ namespace isgp {
 	public:
 		Player(Point);
 		void Paint(Graphics* g) override;
-		void Update() override;
-		int collision;
+		void Update(const double);
+		void AddToVelocityY(double y);
+		Point _position;
 		bool _leftKey, _rightKey, _upKey, _spaceKey, _collision;
+		double _xVel, _yVel, _maxVel;
 	private:
+		vector<BehaviourInterface*>* _behaviours;
 		Graphics* _graphics;
-		double _maxVel, _accel, _deAccel;
+		double _accel, _deAccel;
 	};
 }
 

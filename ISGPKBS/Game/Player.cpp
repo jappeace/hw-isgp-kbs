@@ -1,4 +1,6 @@
 #pragma once
+#include "gravitybehaviour.h"
+#include "Player.h"
 
 #include "Player.h"
 #include <vector>
@@ -8,9 +10,9 @@
 namespace isgp{
 
 	Player::Player(Point position) {
-		_maxVel = 10;
-		_accel = 1;
-		_deAccel = 0.5;
+		_maxVel = 500;
+		_accel = 2200;
+		_deAccel = 1100;
 
 		_position = position;
 		_velocity = Vector2D(0, 0);
@@ -19,62 +21,84 @@ namespace isgp{
 		_upKey = false;
 		_spaceKey = false;
 		_collision = false;
+		_behaviours = new vector<BehaviourInterface*>();
+		_behaviours->push_back(new GravityBehaviour(this));
 	}
 
-	void Player::Update() {
-				if (_leftKey && _velocity.x > -_maxVel) { 
+
+	Player::~Player(void) {
+		// Delete references in vector
+		for (BehaviourInterface* behaviour = _behaviours->front(); behaviour != _behaviours->back(); ++behaviour) {
+			delete behaviour;
+		}
+		// Delete vector
+		delete _behaviours;
+	}
+
+	void Player::Update(const double milisec) {
+		double elapsed = milisec / 1000;
+
+		if (_leftKey && _xVel > -_maxVel) { 
 			if (_collision) {
-				_velocity.x -= _accel;
+				_xVel -= _accel * elapsed;
 			} else { 
-				_velocity.x -= _deAccel;
+				_xVel -= _deAccel * elapsed;
 			}
 		} else if (_velocity.x < 0 && _collision) {
-			_velocity.x += _deAccel;
+		} else if (_xVel < 0 && _collision) {
+			_xVel += _deAccel * elapsed;
 		}
 		
 		if (_rightKey && _velocity.x < _maxVel) { 
+		if (_rightKey && _xVel < _maxVel) { 
 			if (_collision) {
-				_velocity.x += _accel;
+				_xVel += _accel * elapsed;
 			} else { 
-				_velocity.x += _deAccel;
+				_xVel += _deAccel * elapsed;
 			}
-		} else if (_velocity.x > 0 && _collision) {
-			_velocity.x -= _deAccel;
+		} else if (_xVel > 0 && _collision) {
+			_xVel -= _deAccel * elapsed;
 		}
 
-		collision = CheckCollision(Point(_position.GetX() + _velocity.x, _position.GetY() + _velocity.y), 
-										Point(_position.GetX() + _velocity.y + 16, _position.GetY() + _velocity.y + 32));
-		
-		if((_velocity.x < 0 && !(collision & Left)) || _velocity.x > 0 && !(collision & Right)) {
-			_position.SetX(_position.GetX() + _velocity.x);
+		if (!_leftKey && !_rightKey && _collision && _xVel < 1 && _xVel > -1) {
+			_xVel = 0;
 		}
 		
-		if(!(collision & Down)) {
-			_velocity.y = 4;
-			if(_velocity.y > 0) {
-				_position.SetY(_position.GetY() + _velocity.y);
-			}
-			
+
+		_position.SetX(_position.GetX() + (_xVel * elapsed));
+		_position.SetY(_position.GetY() + (_yVel * elapsed));
+
+		for (unsigned int i = 0; i < _behaviours->size(); ++i) {
+			_behaviours->at(i)->Update(milisec);
+		}
+
+		if (_position.GetY() > 220.0) { 
+			_position.SetY(221.0);
+			_collision = true;
 		} else {
-			
+			_collision = false;
 		}
 		
-		/*if(_velocity.y < 0 && !(collision & Up)) {
-			_position.SetY(_position.GetY() + _velocity.y);
-		}*/
-		//if(_velocity.y > 0 && !(collision & Up) || _velocity.y < 0 && !(collision & Down)) {
-			
-		//}
-		
-		
+		if (_upKey && _position.GetY() >= 221.0) {
+			_yVel = -650;
+		}
+	}
+	
+	void Player::AddToVelocityY(double y) {
+		_yVel += y;
 		if (_upKey && _position.GetY() >= 520) { _velocity.y = -12; }
 		if(_position.GetY() >= 520) {_position.SetY(0);}
 	}
 
 	void Player::Paint(Graphics* g) {
 		_graphics = g;
+		
 
 		
+		
+#ifdef _DEBUG
+		_graphics->DrawStaticRect(Point(395, 395), Point(405, 405));
+#endif
 
 		Point topLeft = this->_position;
 		Point bottomRight = Point(this->_position.GetX() + 16, this->_position.GetY() + 32);

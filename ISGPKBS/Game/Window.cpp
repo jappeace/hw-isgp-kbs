@@ -1,4 +1,5 @@
 #include "Window.h"
+#include "SimpleLevelFactory.h"
 #include "GridGraphicTranslator.h"
 namespace isgp {
 // amount of tiles
@@ -6,6 +7,9 @@ const Size g_tiles = Size(50,50);
 
 // Constructors / Destructors      //
 Window::Window() {
+	ILevelFactory* factory = new SimpleLevelFactory();
+	_level = factory->CreateLevel();
+	delete factory;
 	Grid* g = new Grid(g_tiles.GetWidth(),g_tiles.GetHeight());// level handles destruction of grid
 	_level = new Level(g);
 	Point position = Point(5,5);
@@ -27,6 +31,11 @@ Window::~Window()
 /////////////////////////////////////
 // Member functions                  //
 /////////////////////////////////////
+
+void Window::AfterCreate() {
+	_cam = new Camera(_level->_player);
+	_graphics->SetCam(_cam);
+}
 
 INT_PTR CALLBACK dialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 	return NULL;
@@ -58,10 +67,10 @@ void Window::OnPaint(Graphics* g){
 }
 void Window::GameLoop(double elapsed) { //elapsed time, in MS
 	//update all the game objects now
+	_level->_player->Update(elapsed);
+	_cam->Update();
 
-	_level->_player->Update();
-
-}
+	AbstractWindow::GameLoop(elapsed);
 
 
 short Window::CheckCollision(Player *player, Grid *grid) {

@@ -5,6 +5,7 @@
 #include <map>
 #include "Point.h"
 #include "TimesPerSecondCounter.h"
+#include "ITranslator.h"
 
 // to breack an include loop This class can't use the static Level::tilesize
 // that is why the macro where the size is based on is moved to here
@@ -38,6 +39,9 @@ namespace isgp {
 		Graphics(HWND);
 		~Graphics(void);
 
+		ITranslator* _cam;
+		void SetCam(ITranslator*);
+
 		// Prepares the device context to start rendering
 		void BeginRendering(HWND, PAINTSTRUCT *);
 		// Ends the rendering state and draws the backbuffer onto the screen
@@ -54,9 +58,10 @@ namespace isgp {
 
 		void DrawStr(Point& position, string str);
 		void DrawStr(Point& position, const char* str, int length);
-
+		
 		void DrawRect(Point& one, Point& two);
 		void DrawRect(int xone, int yone, int xtwo, int ytwo);
+		void DrawStaticRect(Point& one, Point& two);
 
 		void DrawBitmap(string path, Point& position);
 		void DrawBitmap(string path, Point& position, Point& offset);
