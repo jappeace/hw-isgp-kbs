@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace LevelEditor
@@ -15,13 +16,16 @@ namespace LevelEditor
 			InitializeComponent();
 		}
 
-		private void newLevelToolStripMenuItem_Click(object sender, System.EventArgs e)
+		/// <summary>
+		/// Event for new level menu item. Allows user to create a new level.
+		/// </summary>
+		private void newLevelToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			var newLevelDialog = new NewLevelDialog();
 			if (newLevelDialog.ShowDialog() == DialogResult.OK)
 			{
-				MessageBox.Show(newLevelDialog.MapWidth + "");
-				MessageBox.Show(newLevelDialog.MapHeight + "");
+				_level = new Level(newLevelDialog.MapWidth,
+					newLevelDialog.MapHeight);
 			}
 		}
 	}
