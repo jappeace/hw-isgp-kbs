@@ -60,7 +60,7 @@ namespace LevelEditor.Forms
 				}
 				else if (e.Button == MouseButtons.Right)
 				{
-					// TODO: Delete tile from level.
+					Level.RemoveTile(gridLocation);
 				}
 				Invalidate();
 			}
