@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 using LevelEditor.Models;
 
@@ -20,6 +21,10 @@ namespace LevelEditor.Forms
 					AutoScrollMinSize = new Size(
 						value.Width * GridSize, value.Height * GridSize);
 					_level = value;
+					_level.SetTile(new Point(4, 4), TileType.Grass);
+					_level.SetTile(new Point(4, 5), TileType.Grass);
+					_level.SetTile(new Point(5, 5), TileType.Grass);
+					_level.SetTile(new Point(5, 4), TileType.Grass);
 				}
 			}
 		}
@@ -27,8 +32,8 @@ namespace LevelEditor.Forms
 		private ILevel _level;
 		private Pen _gridPen;
 
-		private const int GridSize = 16;
 		private const int GridLineWidth = 1;
+		private const int GridSize = 16 + GridLineWidth;
 
 		public LevelPanel()
 		{
@@ -56,6 +61,7 @@ namespace LevelEditor.Forms
 			{
 				e.Graphics.TranslateTransform(AutoScrollPosition.X, AutoScrollPosition.Y);
 				DrawGrid(e.Graphics);
+				DrawTiles(e.Graphics);
 			}
 		}
 
@@ -85,6 +91,21 @@ namespace LevelEditor.Forms
 			// Draw right line.
 			g.DrawLine(_gridPen, Level.Width * GridSize, 0,
 				Level.Width * GridSize, Level.Height * GridSize);
+		}
+
+		private void DrawTiles(Graphics g)
+		{
+			IDictionary<Point, TileType> tiles = Level.GetTiles();
+			Point gridLocation;
+			Bitmap bitmap;
+			foreach (Point point in tiles.Keys)
+			{
+				gridLocation = new Point(point.X * GridSize, point.Y * GridSize);
+				gridLocation.X += (GridLineWidth + 1) / 2;
+				gridLocation.Y += (GridLineWidth + 1) / 2;
+				bitmap = BitmapCollection.GetBitmapForType(tiles[point]);
+				g.DrawImage(bitmap, gridLocation);
+			}
 		}
 	}
 }
