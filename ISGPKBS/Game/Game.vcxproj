@@ -67,7 +67,9 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Exceptions.h" />
     <ClInclude Include="Graphics.h" />
+    <ClInclude Include="gravitybehaviour.h" />
     <ClInclude Include="Grid.h" />
+    <ClInclude Include="behaviourinterface.h" />
     <ClInclude Include="GridGraphicTranslator.h" />
     <ClInclude Include="IGridTraveller.h" />
     <ClInclude Include="ILevelFactory.h" />
@@ -92,6 +94,7 @@
     <ClCompile Include="AbstractWindow.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Graphics.cpp" />
+    <ClCompile Include="gravitybehaviour.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="GridGraphicTranslator.cpp" />
     <ClCompile Include="Level.cpp" />

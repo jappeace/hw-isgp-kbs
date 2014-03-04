@@ -1,3 +1,4 @@
+#include "gravitybehaviour.h"
 #include "Player.h"
 
 namespace isgp{
@@ -14,11 +15,18 @@ namespace isgp{
 		_upKey = false;
 		_spaceKey = false;
 		_collision = false;
+		_behaviours = new vector<BehaviourInterface*>();
+		_behaviours->push_back(new GravityBehaviour(this));
 	}
 
 
 	Player::~Player(void) {
-
+		// Delete references in vector
+		for (BehaviourInterface* behaviour = _behaviours->front(); behaviour != _behaviours->back(); ++behaviour) {
+			delete behaviour;
+		}
+		// Delete vector
+		delete _behaviours;
 	}
 
 	void Player::Update(const double milisec) {
@@ -51,11 +59,24 @@ namespace isgp{
 		_position.SetX(_position.GetX() + (_xVel));
 		_position.SetY(_position.GetY() + (_yVel));
 
-		if (_position.GetY() > 512) { _position.SetY(512); _collision = true; } else { _collision = false; }
+		for (unsigned int i = 0; i < _behaviours->size(); ++i) {
+			_behaviours->at(i)->Update(milisec);
+		}
+
+		if (_position.GetY() > 520) { 
+			_position.SetY(521);
+			_collision = true;
+		} else {
+			_collision = false;
+		}
 		
-		if (_position.GetY() < 513) { _yVel += 60 * elapsed; }
-		else { _yVel = 0; }
-		if (_upKey && _position.GetY() >= 512) { _yVel = -600 * elapsed; }
+		if (_upKey && _position.GetY() >= 512) {
+			_yVel = -200 * elapsed;
+		}
+	}
+
+	void Player::AddToVelocityY(double y) {
+		_yVel += y;
 	}
 
 	void Player::Paint(Graphics* g) {
