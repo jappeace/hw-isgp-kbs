@@ -81,16 +81,46 @@
 			// widthNum
 			// 
 			this.widthNum.Location = new System.Drawing.Point(70, 12);
+			this.widthNum.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+			this.widthNum.Minimum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
 			this.widthNum.Name = "widthNum";
 			this.widthNum.Size = new System.Drawing.Size(120, 20);
 			this.widthNum.TabIndex = 6;
+			this.widthNum.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
 			// 
 			// heightNum
 			// 
 			this.heightNum.Location = new System.Drawing.Point(70, 36);
+			this.heightNum.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+			this.heightNum.Minimum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
 			this.heightNum.Name = "heightNum";
 			this.heightNum.Size = new System.Drawing.Size(120, 20);
 			this.heightNum.TabIndex = 7;
+			this.heightNum.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
 			// 
 			// NewLevelDialog
 			// 
