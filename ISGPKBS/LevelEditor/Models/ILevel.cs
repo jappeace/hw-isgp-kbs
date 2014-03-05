@@ -13,8 +13,8 @@ namespace LevelEditor.Models
 		int Height { get; }
 		Point Start { get; set; }
 		Point Finish { get; set; }
-		void SetTile(Point position, TileType tileType);
+		void SetTile(Point position, GridObjectType tileType);
 		void RemoveTile(Point position);
-		IDictionary<Point, TileType> GetTiles();
+		IDictionary<Point, GridObjectType> GetTiles();
 	}
 }

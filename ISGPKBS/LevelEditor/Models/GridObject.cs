@@ -6,19 +6,19 @@ namespace LevelEditor.Models
 	/// This class represents a tile and contains information about its
 	/// position in the map and the type of the tile.
 	/// </summary>
-	class Tile
+	class GridObject
 	{
 		/// <summary>
 		/// Type of the tile.
 		/// </summary>
-		public TileType Type { get; set; }
+		public GridObjectType Type { get; set; }
 
 		/// <summary>
 		/// Position of the tile in the map.
 		/// </summary>
 		public Point Position { get; set; }
 
-		public Tile(TileType type, Point position)
+		public GridObject(GridObjectType type, Point position)
 		{
 			Type = type;
 			Position = position;

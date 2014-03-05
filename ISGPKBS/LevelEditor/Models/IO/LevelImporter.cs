@@ -54,12 +54,12 @@ namespace LevelEditor.Models.IO
 				level.Finish = GetPosition(GetStringValue(LevelReader.ReadLine()));
 
 				// Read all coordinates and add them as tiles to the level.
-				TileType tileType;
+				GridObjectType tileType;
 				Point position;
 				string line = LevelReader.ReadLine();
 				while (line != null)
 				{
-					tileType = (TileType)GetIntValue(line);
+					tileType = (GridObjectType)GetIntValue(line);
 					position = GetPosition(line);
 					level.SetTile(position, tileType);
 					line = LevelReader.ReadLine();

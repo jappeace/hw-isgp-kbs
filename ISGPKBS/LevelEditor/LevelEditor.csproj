@@ -44,6 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Behaviour\Action.cs" />
+    <Compile Include="Models\Behaviour\Behaviour.cs" />
+    <Compile Include="Models\Behaviour\Condition.cs" />
     <Compile Include="Models\BitmapCollection.cs" />
     <Compile Include="Forms\LevelPanel.cs">
       <SubType>Component</SubType>
@@ -72,8 +75,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Models\Tile.cs" />
-    <Compile Include="Models\TileType.cs" />
+    <Compile Include="Models\GridObject.cs" />
+    <Compile Include="Models\GridObjectType.cs" />
     <EmbeddedResource Include="Forms\LevelEditorForm.resx">
       <DependentUpon>LevelEditorForm.cs</DependentUpon>
     </EmbeddedResource>

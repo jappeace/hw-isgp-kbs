@@ -23,7 +23,7 @@ namespace LevelEditor.Forms
 		private void Init()
 		{
 			KeyPreview = true;
-			spritePicker.DataSource = Enum.GetNames(typeof(TileType));
+			spritePicker.DataSource = Enum.GetNames(typeof(GridObjectType));
 		}
 
 		/// <summary>
@@ -36,7 +36,7 @@ namespace LevelEditor.Forms
 
 		private void spritePicker_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			TileType selectedType = (TileType)Enum.Parse(typeof(TileType), spritePicker.Text);
+			GridObjectType selectedType = (GridObjectType)Enum.Parse(typeof(GridObjectType), spritePicker.Text);
 			levelPanel.SelectedType = selectedType;
 			Bitmap bitmap;
 			try

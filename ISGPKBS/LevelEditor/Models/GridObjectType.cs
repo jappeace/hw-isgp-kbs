@@ -3,11 +3,10 @@
 	/// <summary>
 	/// Enumeration of tile types with their integer representation.
 	/// </summary>
-	public enum TileType
+	public enum GridObjectType
 	{
-		Start = 0,
-		Finish = 1,
-		Brick = 2,
-		Grass = 3
+		Player,
+		Obstruction,
+		Scenery
 	}
 }

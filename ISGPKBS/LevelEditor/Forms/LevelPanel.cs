@@ -26,7 +26,7 @@ namespace LevelEditor.Forms
 			}
 		}
 
-		public TileType SelectedType { get; set; }
+		public GridObjectType SelectedType { get; set; }
 
 		private ILevel _level;
 		private Pen _gridPen;
@@ -124,7 +124,7 @@ namespace LevelEditor.Forms
 
 		private void DrawTiles(Graphics g)
 		{
-			IDictionary<Point, TileType> tiles = Level.GetTiles();
+			IDictionary<Point, GridObjectType> tiles = Level.GetTiles();
 			Point gridLocation;
 			Bitmap bitmap;
 			foreach (Point point in tiles.Keys)
@@ -138,12 +138,12 @@ namespace LevelEditor.Forms
 			gridLocation = new Point(Level.Start.X * GridSize, Level.Start.Y * GridSize);
 			gridLocation.X += (GridLineWidth + 1) / 2;
 			gridLocation.Y += (GridLineWidth + 1) / 2;
-			bitmap = BitmapCollection.GetBitmapForType(TileType.Start);
+			bitmap = BitmapCollection.GetBitmapForType(GridObjectType.Start);
 			g.DrawImage(bitmap, gridLocation);
 			gridLocation = new Point(Level.Finish.X * GridSize, Level.Finish.Y * GridSize);
 			gridLocation.X += (GridLineWidth + 1) / 2;
 			gridLocation.Y += (GridLineWidth + 1) / 2;
-			bitmap = BitmapCollection.GetBitmapForType(TileType.Finish);
+			bitmap = BitmapCollection.GetBitmapForType(GridObjectType.Finish);
 			g.DrawImage(bitmap, gridLocation);
 		}
 	}

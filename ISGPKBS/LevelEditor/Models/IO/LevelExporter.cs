@@ -35,7 +35,7 @@ namespace LevelEditor.Models.IO
 		/// </summary>
 		public void ExportLevel(ILevel level)
 		{
-			IDictionary<Point, TileType> tiles = level.GetTiles();
+			IDictionary<Point, GridObjectType> tiles = level.GetTiles();
 
 			// Write width and height to the file.
 			LevelWriter.WriteLine(string.Format("width={0}", level.Width));
@@ -56,7 +56,7 @@ namespace LevelEditor.Models.IO
 		/// <summary>
 		/// Creates a line for a tile.
 		/// </summary>
-		private string TileToString(Point position, TileType type)
+		private string TileToString(Point position, GridObjectType type)
 		{
 			return string.Format("{0},{1}={2}", position.X, position.Y, (int)type);
 		}

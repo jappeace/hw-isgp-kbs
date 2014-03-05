@@ -9,7 +9,7 @@ namespace LevelEditor.Models
 		private int _height;
 		private Point _start;
 		private Point _finish;
-		private IDictionary<Point, TileType> _tiles;
+		private IDictionary<Point, GridObjectType> _tiles;
 
 		/// <summary>
 		/// Width of the level in tiles.
@@ -54,7 +54,7 @@ namespace LevelEditor.Models
 			_height = height;
 			Start = new Point(0, 0);
 			Start = new Point(1, 0);
-			_tiles = new Dictionary<Point, TileType>();
+			_tiles = new Dictionary<Point, GridObjectType>();
 		}
 
 		/// <summary>
@@ -65,15 +65,15 @@ namespace LevelEditor.Models
 		/// If TileType is a start/finish, the start/finish position will be
 		/// changed.
 		/// </summary>
-		public void SetTile(Point position, TileType tileType)
+		public void SetTile(Point position, GridObjectType tileType)
 		{
 			if (position.X < Width && position.Y < Height)
 			{
-				if (tileType == TileType.Start)
+				if (tileType == GridObjectType.Start)
 				{
 					Start = position;
 				}
-				else if (tileType == TileType.Finish)
+				else if (tileType == GridObjectType.Finish)
 				{
 					Finish = position;
 				}
@@ -100,7 +100,7 @@ namespace LevelEditor.Models
 		/// <summary>
 		/// Gets a dictionary that contains all non-empty tiles.
 		/// </summary>
-		public IDictionary<Point, TileType> GetTiles()
+		public IDictionary<Point, GridObjectType> GetTiles()
 		{
 			return _tiles;
 		}
