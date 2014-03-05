@@ -39,7 +39,7 @@ namespace isgp{
 
 	void Player::Update(const double milisec) {
 		double elapsed = milisec / 1000;
-
+		collision = CheckCollision(this->_position, Point(this->_position.GetX() + 16, this->_position.GetY() + 32));
 		if (_leftKey && _xVel > -_maxVel) { 
 			if (_collision) {
 				_xVel -= _accel * elapsed;
@@ -91,8 +91,6 @@ namespace isgp{
 	void Player::Paint(Graphics* g) {
 		_graphics = g;
 		
-		
-		_graphics->DrawRect(_position, Point(_position.GetX() + 32, _position.GetY() + 32));
 
 		Point topLeft = this->_position;
 		Point bottomRight = Point(this->_position.GetX() + 16, this->_position.GetY() + 32);
@@ -108,7 +106,8 @@ namespace isgp{
 			Tile* t = includedTiles.at(i);
 			Point* p = &translator.FromTo(*t->GetPosition());
 			includedTiles.at(i)->Paint(g);
-			g->DrawRect((int)p->GetX(), (int)p->GetY(), (int)p->GetX() + 16, (int)p->GetY() + 16);
+
+			g->DrawRect(Point((int)p->GetX(), (int)p->GetY()), Point((int)p->GetX() + 16, (int)p->GetY() + 16));
 		}
 
 		g->SetColor(RGB(0, 255, 0));
@@ -116,7 +115,7 @@ namespace isgp{
 			Tile* t = CollidingTiles.at(i);
 			Point* p = &translator.FromTo(*t->GetPosition());
 			CollidingTiles.at(i)->Paint(g);
-			g->DrawRect((int)p->GetX(), (int)p->GetY(), (int)p->GetX() + 16, (int)p->GetY() + 16);
+			g->DrawRect(Point((int)p->GetX(), (int)p->GetY()), Point((int)p->GetX() + 16, (int)p->GetY() + 16));
 		}
 
 		g->SetColor(RGB(0, 0, 0));
