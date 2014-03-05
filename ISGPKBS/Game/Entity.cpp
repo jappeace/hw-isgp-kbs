@@ -26,23 +26,23 @@ namespace isgp {
 				double diffX = topLeft.GetX() - tileCenter.GetX();
 				if(abs(diffX) < diffWidth){
 					collision |= Left;
-					CollidingTiles.push_back(currentTile);
 				}
 				diffX = bottomRight.GetX() - tileCenter.GetX();
 				if(abs(diffX) < diffWidth){
 					collision |= Right;
-					CollidingTiles.push_back(currentTile);
 				}
 
 				double diffY = topLeft.GetY() - tileCenter.GetY();
 				if(abs(diffY) < diffHeight){
 					collision |= Up;
-					CollidingTiles.push_back(currentTile);
 				}
 				diffY = bottomRight.GetY() - tileCenter.GetY();
 				if(abs(diffY) < diffHeight){
 					collision |= Down;
+				}
+				if(collision != None) {
 					CollidingTiles.push_back(currentTile);
+
 				}
 				//TopLeft bottomRight = player 
 				
