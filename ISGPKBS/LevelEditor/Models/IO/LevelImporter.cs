@@ -64,11 +64,12 @@ namespace LevelEditor.Models.IO
 					level.SetTile(position, tileType);
 					line = LevelReader.ReadLine();
 				}
-
+				LevelReader.Close();
 				return level;
 			}
 			catch (Exception)
 			{
+				LevelReader.Close();
 				throw new ArgumentException("Not a valid level file");
 			}
 		}

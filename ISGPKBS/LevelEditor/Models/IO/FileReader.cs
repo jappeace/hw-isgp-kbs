@@ -25,5 +25,13 @@ namespace LevelEditor.Models.IO
 		{
 			return _streamReader.ReadLine();
 		}
+
+		/// <summary>
+		/// Closes the streamreader.
+		/// </summary>
+		public void Close()
+		{
+			_streamReader.Close();
+		}
 	}
 }
