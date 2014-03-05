@@ -90,7 +90,15 @@ namespace LevelEditor.Forms
 			if (dialog.ShowDialog() == DialogResult.OK)
 			{
 				ILevelImporter levelImporter = new LevelImporter(dialog.FileName);
-				levelPanel.Level = levelImporter.ImportLevel();
+				try
+				{
+					levelPanel.Level = levelImporter.ImportLevel();
+				}
+				catch (ArgumentException ex)
+				{
+					MessageBox.Show(ex.Message, "Cannot load level",
+						MessageBoxButtons.OK, MessageBoxIcon.Error);
+				}
 			}
 		}
 	}
