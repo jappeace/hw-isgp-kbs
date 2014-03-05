@@ -1,4 +1,4 @@
-﻿namespace LevelEditor.Models.Behaviour
+﻿namespace LevelEditor.Models
 {
 	/// <summary>
 	/// Enumeration of all actions.

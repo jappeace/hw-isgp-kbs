@@ -1,4 +1,6 @@
-﻿using System.Drawing;
+﻿using System.Collections.Generic;
+using LevelEditor.Models.Behaviour;
+using System.Drawing;
 
 namespace LevelEditor.Models
 {
@@ -12,6 +14,8 @@ namespace LevelEditor.Models
 		/// Type of the tile.
 		/// </summary>
 		public GridObjectType Type { get; set; }
+
+		public IEnumerable<Behaviour> Behaviour { get; set; }
 
 		/// <summary>
 		/// Position of the tile in the map.

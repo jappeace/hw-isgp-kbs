@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace LevelEditor.Models.Behaviour
+namespace LevelEditor.Models
 {
 	class Behaviour
 	{

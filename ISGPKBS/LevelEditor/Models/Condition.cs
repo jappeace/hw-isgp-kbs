@@ -1,4 +1,4 @@
-﻿namespace LevelEditor.Models.Behaviour
+﻿namespace LevelEditor.Models
 {
 	/// <summary>
 	/// Enumerations of all available conditions.
