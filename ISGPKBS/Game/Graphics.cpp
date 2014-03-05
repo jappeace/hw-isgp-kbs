@@ -71,13 +71,7 @@ namespace isgp {
 	}
 
 	void Graphics::DrawRect(Point& one, Point& two) {
-		if (_cam != NULL) {
-			Point one1 = _cam->FromTo(one);
-			Point two1 = _cam->FromTo(two);
-			this->DrawRect((int)one1.GetX(),(int) one1.GetY(),(int) two1.GetX(),(int) two1.GetY());
-		} else {
-			this->DrawRect((int)one.GetX(),(int) one.GetY(),(int) two.GetX(),(int) two.GetY());
-		}
+		this->DrawRect((int)one.GetX(),(int) one.GetY(),(int) two.GetX(),(int) two.GetY());
 	}
 
 	void Graphics::DrawStaticRect(Point& one, Point& two) {
@@ -85,7 +79,14 @@ namespace isgp {
 	}
 
 	void Graphics::DrawRect(int xone, int yone, int xtwo, int ytwo) {
-		Rectangle(_backBuffer, xone, yone, xtwo, ytwo);
+		if (_cam != NULL) {
+			Point one1 = _cam->FromTo(Point(xone, yone));
+			Point two1 = _cam->FromTo(Point(xtwo, ytwo));
+			Rectangle(_backBuffer, (int)one1.GetX(), (int)one1.GetY(), (int)two1.GetX(), (int)two1.GetY());
+		} else {
+			Rectangle(_backBuffer, xone, yone, xtwo, ytwo);
+			this->DrawRect(xone, yone, xtwo, ytwo);
+		}
 	}
 	HBITMAP Graphics::LoadBitmapFile(string path, int offsetX, int offsetY) {
 		string key = path + StrConverter::IntToString(offsetX) + StrConverter::IntToString(offsetY);
