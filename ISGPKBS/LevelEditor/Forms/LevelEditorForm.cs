@@ -22,6 +22,7 @@ namespace LevelEditor.Forms
 
 		private void Init()
 		{
+			KeyPreview = true;
 			spritePicker.DataSource = Enum.GetNames(typeof(TileType));
 		}
 
@@ -30,13 +31,7 @@ namespace LevelEditor.Forms
 		/// </summary>
 		private void newLevelToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			var newLevelDialog = new NewLevelDialog();
-			if (newLevelDialog.ShowDialog() == DialogResult.OK)
-			{
-				levelPanel.Level = new Level(newLevelDialog.MapWidth,
-					newLevelDialog.MapHeight);
-				levelPanel.Invalidate();
-			}
+			NewLevelDialog();
 		}
 
 		private void spritePicker_SelectedIndexChanged(object sender, EventArgs e)
@@ -55,11 +50,21 @@ namespace LevelEditor.Forms
 			spriteBox.Image = bitmap;
 		}
 
+		private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			SaveLevelDialog();
+		}
+
+		private void loadLevelToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			LoadLevelDialog();
+		}
+
 		/// <summary>
 		/// Show a filedialog to save the level. An error will show if there
 		/// is no level to save.
 		/// </summary>
-		private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+		private void SaveLevelDialog()
 		{
 			if (levelPanel.Level != null)
 			{
@@ -82,8 +87,9 @@ namespace LevelEditor.Forms
 
 		/// <summary>
 		/// Shows a filedialog to load a level.
+		/// Will show an error message if the file is not a valid level file.
 		/// </summary>
-		private void loadLevelToolStripMenuItem_Click(object sender, EventArgs e)
+		private void LoadLevelDialog()
 		{
 			FileDialog dialog = new OpenFileDialog();
 			dialog.Filter = "Level files (*.level)|*.level";
@@ -98,6 +104,40 @@ namespace LevelEditor.Forms
 				{
 					MessageBox.Show(ex.Message, "Cannot load level",
 						MessageBoxButtons.OK, MessageBoxIcon.Error);
+				}
+			}
+		}
+
+		private void NewLevelDialog()
+		{
+			var newLevelDialog = new NewLevelForm();
+			if (newLevelDialog.ShowDialog() == DialogResult.OK)
+			{
+				levelPanel.Level = new Level(newLevelDialog.MapWidth,
+					newLevelDialog.MapHeight);
+				levelPanel.Invalidate();
+			}
+		}
+
+		/// <summary>
+		/// Keyboard hotkeys
+		/// </summary>
+		private void LevelEditorForm_KeyDown(object sender, KeyEventArgs e)
+		{
+			// Control key must be pressed.
+			if (e.Control)
+			{
+				switch (e.KeyCode)
+				{
+					case Keys.S:
+						SaveLevelDialog();
+						break;
+					case Keys.O:
+						LoadLevelDialog();
+						break;
+					case Keys.N:
+						NewLevelDialog();
+						break;
 				}
 			}
 		}

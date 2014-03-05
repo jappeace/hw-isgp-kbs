@@ -1,6 +1,6 @@
 ﻿namespace LevelEditor.Forms
 {
-	partial class NewLevelDialog
+	partial class NewLevelForm
 	{
 		/// <summary>
 		/// Required designer variable.

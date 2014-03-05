@@ -52,6 +52,7 @@
 			this.menuStrip.Size = new System.Drawing.Size(792, 24);
 			this.menuStrip.TabIndex = 1;
 			this.menuStrip.Text = "menuStrip1";
+			this.menuStrip.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LevelEditorForm_KeyDown);
 			// 
 			// fileToolStripMenuItem
 			// 
@@ -154,6 +155,7 @@
 			this.MinimumSize = new System.Drawing.Size(800, 600);
 			this.Name = "LevelEditorForm";
 			this.Text = "Megadude++ Leveleditor";
+			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LevelEditorForm_KeyDown);
 			this.menuStrip.ResumeLayout(false);
 			this.menuStrip.PerformLayout();
 			this.settingsGroup.ResumeLayout(false);

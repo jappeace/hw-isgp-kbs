@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace LevelEditor.Forms
 {
-	public partial class NewLevelDialog : Form
+	public partial class NewLevelForm : Form
 	{
 		/// <summary>
 		/// Width set by the user.
@@ -21,7 +21,7 @@ namespace LevelEditor.Forms
 			get { return (int)heightNum.Value; }
 		}
 
-		public NewLevelDialog()
+		public NewLevelForm()
 		{
 			InitializeComponent();
 		}
