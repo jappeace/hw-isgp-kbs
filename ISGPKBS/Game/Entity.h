@@ -9,9 +9,10 @@ class Entity : public IPaintable
 {
 public:
 	virtual void Paint(Graphics* g) override = 0;
-	virtual void Update() = 0;
+	virtual void Update(const double) = 0;
 	int CheckCollision(Point topLeft, Point bottomRight);
 	Point _position;
+	int collision;
 	void SetGrid(Grid* grid);
 	vector<Tile*> CollidingTiles;
 

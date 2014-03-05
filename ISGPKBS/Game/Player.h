@@ -10,6 +10,7 @@ namespace isgp {
 	{
 	public:
 		Player(Point);
+		~Player(void);
 		void Paint(Graphics* g) override;
 		void Update(const double);
 		void AddToVelocityY(double y);
