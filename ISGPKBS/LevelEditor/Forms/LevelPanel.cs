@@ -135,6 +135,16 @@ namespace LevelEditor.Forms
 				bitmap = BitmapCollection.GetBitmapForType(tiles[point]);
 				g.DrawImage(bitmap, gridLocation);
 			}
+			gridLocation = new Point(Level.Start.X * GridSize, Level.Start.Y * GridSize);
+			gridLocation.X += (GridLineWidth + 1) / 2;
+			gridLocation.Y += (GridLineWidth + 1) / 2;
+			bitmap = BitmapCollection.GetBitmapForType(TileType.Start);
+			g.DrawImage(bitmap, gridLocation);
+			gridLocation = new Point(Level.Finish.X * GridSize, Level.Finish.Y * GridSize);
+			gridLocation.X += (GridLineWidth + 1) / 2;
+			gridLocation.Y += (GridLineWidth + 1) / 2;
+			bitmap = BitmapCollection.GetBitmapForType(TileType.Finish);
+			g.DrawImage(bitmap, gridLocation);
 		}
 	}
 }
