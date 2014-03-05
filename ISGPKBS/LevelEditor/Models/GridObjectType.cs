@@ -1,7 +1,7 @@
 ﻿namespace LevelEditor.Models
 {
 	/// <summary>
-	/// Enumeration of tile types with their integer representation.
+	/// Enumeration of gridobject types.
 	/// </summary>
 	public enum GridObjectType
 	{
