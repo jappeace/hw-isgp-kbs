@@ -15,6 +15,7 @@ namespace isgp{
 		_upKey = false;
 		_spaceKey = false;
 		_collision = false;
+		_facingRight = true;
 		_behaviours = new vector<IBehaviour*>();
 		_behaviours->push_back(new GravityBehaviour(this));
 	}
@@ -73,6 +74,11 @@ namespace isgp{
 		if (_upKey && _position.GetY() >= 221.0) {
 			_yVel = -650;
 		}
+
+		// Update Facing
+		if (_xVel != 0) {
+			_facingRight = _xVel > 0;
+		}
 	}
 	
 	void Player::AddToVelocityY(double y) {
@@ -82,9 +88,15 @@ namespace isgp{
 	void Player::Paint(Graphics* g) {
 		_graphics = g;
 		
-		_graphics->DrawRect(_position, Point(_position.GetX() + 32, _position.GetY() + 32));
-		
+		_graphics->DrawRect(_position, Point(_position.GetX() + 32, _position.GetY() + 32));		
 #ifdef _DEBUG
+		// Facing info
+		if (_facingRight) {
+			_graphics->DrawRect(Point(_position.GetX() + 32, _position.GetY() + 8), Point(_position.GetX() + 40, _position.GetY() + 16));
+		} else {
+			_graphics->DrawRect(Point(_position.GetX(), _position.GetY() + 8), Point(_position.GetX() - 8, _position.GetY() + 16));
+		}
+
 		_graphics->DrawStaticRect(Point(395, 395), Point(405, 405));
 #endif
 	}
