@@ -20,6 +20,7 @@ protected:
 	Vector2D _velocity;
 	Grid* _grid;
 
+public:
 	enum Collision {
 		None = 0,
 		Left = 1,

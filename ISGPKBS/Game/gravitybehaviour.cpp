@@ -1,5 +1,5 @@
 #include "gravitybehaviour.h"
-
+#include "Entity.h"
 namespace isgp {
 
 	GravityBehaviour::GravityBehaviour(Player* player) {
@@ -10,7 +10,7 @@ namespace isgp {
 	}
 
 	void GravityBehaviour::Update(const double ms) {
-		if (_player->_collision) {
+		if (_player->collision & Entity::Down) {
 			// The character is on a platform so we don't apply gravity to that.
 			return;
 		}

@@ -18,12 +18,12 @@ namespace isgp{
 		result->_player = new Player(Point(4,4));
 		result->_player->SetGrid(g);
 		//g->GetTileAt(position)->SetData(new WorldBlock("C:\\tiles\\smile.bmp"));
-		g->TraverseRow(4, this);
-		g->TraverseRow(5, this);
-		g->TraverseRow(6, this);
-		g->TraverseRow(7, this);
-		g->TraverseRow(1, this);
-		g->TraverseRow(2, this);
+		g->TraverseRow(10, this);
+		//g->TraverseRow(5, this);
+		//g->TraverseRow(6, this);
+		//g->TraverseRow(7, this);
+		//g->TraverseRow(1, this);
+		//g->TraverseRow(2, this);
 		return result;
 	}
 	void SimpleLevelFactory::ReceiveTile(Tile* tile){

@@ -64,9 +64,13 @@ namespace isgp{
 		if (!_leftKey && !_rightKey && _collision && _xVel < 1 && _xVel > -1) {
 			_xVel = 0;
 		}
-
+		if(collision & Down && _yVel < 0) {
+			//_position.SetY(_position.GetY() + (_yVel * elapsed));
+		} else {
+			_position.SetY(_position.GetY() + (_yVel * elapsed));
+		}
 		_position.SetX(_position.GetX() + (_xVel * elapsed));
-		_position.SetY(_position.GetY() + (_yVel * elapsed));
+		
 
 		for (unsigned int i = 0; i < _behaviours->size(); ++i) {
 			_behaviours->at(i)->Update(milisec);
