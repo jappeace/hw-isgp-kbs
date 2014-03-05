@@ -57,5 +57,7 @@ namespace isgp {
 		virtual void OnKeyDown(int which){}
 		// handles events when a key is released
 		virtual void OnKeyUp(int which){}
+
+		virtual void AfterCreate() = 0;
 	};
 }

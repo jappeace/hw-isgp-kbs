@@ -3,8 +3,9 @@
 #include <cstdlib>
 #include "AbstractWindow.h"
 #include "resource2.h"
-#include "Level.h"
+#include "ILevelFactory.h"
 #include "WorldBlock.h"
+#include "Camera.h"
 
 namespace isgp {
 	class Window : public AbstractWindow {
@@ -17,7 +18,9 @@ namespace isgp {
 		void OnKeyDown(int which) override;
 		void OnKeyUp(int which) override;
 		void GameLoop(double) override;
+		void AfterCreate() override;
 		short CheckCollision(Player *player, Grid *grid);
+		Camera* _cam;
 	private:
 		Level* _level;
 	};

@@ -2,8 +2,11 @@
 #include "StrConverter.h"
 #include "AbstractWindow.h"
 #include "GridGraphicTranslator.h"
+
 namespace isgp {
 	Graphics::Graphics(HWND hWnd) {
+		_cam = NULL;
+		
 		_bitmapCache = new map<string,  HBITMAP>();
 
 		this->_backBuffer = CreateCompatibleDC(NULL);
@@ -47,6 +50,10 @@ namespace isgp {
 		EndPaint(hWnd, ps);
 	}
 
+	void Graphics::SetCam(ITranslator* cam) {
+		_cam = cam;
+	}
+
 	void Graphics::DrawStr(Point& position, string str) {
 		this->DrawStr(position,str.c_str(), str.length());
 	}
@@ -64,6 +71,16 @@ namespace isgp {
 	}
 
 	void Graphics::DrawRect(Point& one, Point& two) {
+		if (_cam != NULL) {
+			Point one1 = _cam->FromTo(one);
+			Point two1 = _cam->FromTo(two);
+			this->DrawRect((int)one1.GetX(),(int) one1.GetY(),(int) two1.GetX(),(int) two1.GetY());
+		} else {
+			this->DrawRect((int)one.GetX(),(int) one.GetY(),(int) two.GetX(),(int) two.GetY());
+		}
+	}
+
+	void Graphics::DrawStaticRect(Point& one, Point& two) {
 		this->DrawRect((int)one.GetX(),(int) one.GetY(),(int) two.GetX(),(int) two.GetY());
 	}
 
@@ -103,6 +120,12 @@ namespace isgp {
 		DrawBitmap(path, x, y, 0, 0);
 	}
 	void Graphics::DrawBitmap(string path, int x, int y, int offsetx, int offsety) {
+		if (_cam != NULL) {
+			Point one1 = _cam->FromTo(Point(x,y));
+			x = (int)one1.GetX();
+			y = (int)one1.GetY();
+		}
+		
 		HBITMAP bitmap = this->LoadBitmapFile(path, offsetx, offsety);
 		HDC bitmap_hdc = CreateCompatibleDC(NULL);
 
