@@ -25,7 +25,7 @@ namespace LevelEditor.Tests.Unit
 			exporter.ExportLevel(level);
 
 			// Levelstrings should be exactly the same.
-			Assert.AreEqual(writer.LevelString, levelString);
+			Assert.AreEqual(levelString, writer.LevelString);
 		}
 	}
 }
