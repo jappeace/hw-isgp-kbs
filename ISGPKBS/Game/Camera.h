@@ -8,9 +8,9 @@ namespace isgp{
 	public:
 		Camera(Player*);
 		~Camera(void);
-		void Update();
-		Point FromTo(Point p) override;
-		Point ToFrom(Point p) override;
+		void Update(double);
+		Point FromTo(Point) override;
+		Point ToFrom(Point) override;
 	private:
 		Player* _player;
 		Point _position;

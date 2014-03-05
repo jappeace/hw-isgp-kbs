@@ -52,7 +52,7 @@ namespace isgp{
 			_xVel -= _deAccel * elapsed;
 		}
 
-		if (!_leftKey && !_rightKey && _collision && _xVel < 10 && _xVel > -10) {
+		if (!_leftKey && !_rightKey && _collision && _xVel < 20 && _xVel > -20) {
 			_xVel = 0;
 		}
 
