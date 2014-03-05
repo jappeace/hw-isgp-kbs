@@ -69,21 +69,21 @@
 			// newLevelToolStripMenuItem
 			// 
 			this.newLevelToolStripMenuItem.Name = "newLevelToolStripMenuItem";
-			this.newLevelToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.newLevelToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
 			this.newLevelToolStripMenuItem.Text = "New";
 			this.newLevelToolStripMenuItem.Click += new System.EventHandler(this.newLevelToolStripMenuItem_Click);
 			// 
 			// loadLevelToolStripMenuItem
 			// 
 			this.loadLevelToolStripMenuItem.Name = "loadLevelToolStripMenuItem";
-			this.loadLevelToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.loadLevelToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
 			this.loadLevelToolStripMenuItem.Text = "Load";
 			this.loadLevelToolStripMenuItem.Click += new System.EventHandler(this.loadLevelToolStripMenuItem_Click);
 			// 
 			// saveToolStripMenuItem
 			// 
 			this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-			this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.saveToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
 			this.saveToolStripMenuItem.Text = "Save";
 			this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
 			// 
@@ -103,7 +103,8 @@
 			// 
 			// settingsGroup
 			// 
-			this.settingsGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.settingsGroup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.settingsGroup.Controls.Add(this.spriteBox);
 			this.settingsGroup.Controls.Add(this.tileTypeLabel);
 			this.settingsGroup.Controls.Add(this.spritePicker);
@@ -149,7 +150,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.levelPanel.AutoScroll = true;
-			this.levelPanel.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+			this.levelPanel.BackColor = System.Drawing.SystemColors.ControlLightLight;
 			this.levelPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.levelPanel.Level = null;
 			this.levelPanel.Location = new System.Drawing.Point(12, 27);
