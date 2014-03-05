@@ -55,11 +55,12 @@ int AbstractWindow::Run()
 
 	while( msg.message!=WM_QUIT )
 	{
-		repaint();
+		
 		if( PeekMessage( &msg, NULL, 0U, 0U, PM_REMOVE ) )
 		{
 			TranslateMessage( &msg );
 			DispatchMessage( &msg );
+			//GetClientRect
 		} 
 		else 
 		{
@@ -73,7 +74,8 @@ int AbstractWindow::Run()
 
 			GameLoop(((_stop - _lastUpdate) * 1000) / (double)_freq);
 			_lastUpdate = _stop;
-			
+
+			repaint();
 		}
 	}
 	return msg.wParam;
@@ -113,6 +115,9 @@ HRESULT AbstractWindow::Create()
 	_engineThrottle = 5;
 	::QueryPerformanceFrequency((LARGE_INTEGER*)&_freq);
 	::QueryPerformanceCounter((LARGE_INTEGER*)&_lastUpdate);
+
+	AfterCreate();
+
 	return TRUE;
 }
 
