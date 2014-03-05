@@ -36,7 +36,7 @@ namespace isgp {
 
 		INT64 _freq;
 		INT64 _start, _stop;
-		double _gameloopThrottle;
+		double _engineThrottle; //Engine throttle in MS
 		INT64 _lastUpdate;
 
 	public:
