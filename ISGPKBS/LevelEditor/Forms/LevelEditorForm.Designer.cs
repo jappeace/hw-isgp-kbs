@@ -67,21 +67,24 @@
 			// newLevelToolStripMenuItem
 			// 
 			this.newLevelToolStripMenuItem.Name = "newLevelToolStripMenuItem";
-			this.newLevelToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+			this.newLevelToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl + N";
+			this.newLevelToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.newLevelToolStripMenuItem.Text = "New";
 			this.newLevelToolStripMenuItem.Click += new System.EventHandler(this.newLevelToolStripMenuItem_Click);
 			// 
 			// loadLevelToolStripMenuItem
 			// 
 			this.loadLevelToolStripMenuItem.Name = "loadLevelToolStripMenuItem";
-			this.loadLevelToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+			this.loadLevelToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl + O";
+			this.loadLevelToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.loadLevelToolStripMenuItem.Text = "Load";
 			this.loadLevelToolStripMenuItem.Click += new System.EventHandler(this.loadLevelToolStripMenuItem_Click);
 			// 
 			// saveToolStripMenuItem
 			// 
 			this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-			this.saveToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+			this.saveToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl + S";
+			this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.saveToolStripMenuItem.Text = "Save";
 			this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
 			// 
