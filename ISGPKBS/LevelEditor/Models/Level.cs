@@ -7,6 +7,8 @@ namespace LevelEditor.Models
 	{
 		private int _width;
 		private int _height;
+		private Point _start;
+		private Point _finish;
 		private IDictionary<Point, TileType> _tiles;
 
 		/// <summary>
@@ -26,12 +28,32 @@ namespace LevelEditor.Models
 		}
 
 		/// <summary>
+		/// Position of the starting point.
+		/// </summary>
+		public Point Start
+		{
+			get { return _start; }
+			set { _start = value; }
+		}
+
+		/// <summary>
+		/// Position of the starting point.
+		/// </summary>
+		public Point Finish
+		{
+			get { return _finish; }
+			set { _finish = value; }
+		}
+
+		/// <summary>
 		/// Creates an empty level with the specified width and height in tiles.
 		/// </summary>
 		public Level(int width, int height)
 		{
 			_width = width;
 			_height = height;
+			Start = new Point(0, 0);
+			Start = new Point(1, 0);
 			_tiles = new Dictionary<Point, TileType>();
 		}
 
@@ -40,16 +62,29 @@ namespace LevelEditor.Models
 		/// If a tile exists on the specified position, the tile will be
 		/// replaced.
 		/// If position is outside the level, no tile will be set.
+		/// If TileType is a start/finish, the start/finish position will be
+		/// changed.
 		/// </summary>
 		public void SetTile(Point position, TileType tileType)
 		{
 			if (position.X < Width && position.Y < Height)
 			{
-				if (_tiles.ContainsKey(position))
+				if (tileType == TileType.Start)
 				{
-					_tiles.Remove(position);
+					Start = position;
 				}
-				_tiles.Add(position, tileType);
+				else if (tileType == TileType.Finish)
+				{
+					Finish = position;
+				}
+				else if (Start != position && Finish != position)
+				{
+					if (_tiles.ContainsKey(position))
+					{
+						_tiles.Remove(position);
+					}
+					_tiles.Add(position, tileType);
+				}
 			}
 		}
 
