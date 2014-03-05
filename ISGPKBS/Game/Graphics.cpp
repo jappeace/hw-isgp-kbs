@@ -4,6 +4,7 @@
 #include "GridGraphicTranslator.h"
 
 namespace isgp {
+
 	Graphics::Graphics(HWND hWnd) {
 		_cam = NULL;
 		
@@ -87,39 +88,30 @@ namespace isgp {
 	void Graphics::DrawRect(int xone, int yone, int xtwo, int ytwo) {
 		Rectangle(_backBuffer, xone, yone, xtwo, ytwo);
 	}
-	HBITMAP Graphics::LoadBitmapFile(string path, int offsetX, int offsetY) {
-		string key = path + StrConverter::IntToString(offsetX) + StrConverter::IntToString(offsetY);
-		if(_bitmapCache->count(key)) {
-			return _bitmapCache->find(key)->second;
-		}
-		HBITMAP bitmap = (HBITMAP)LoadImage(NULL, path.c_str(), IMAGE_BITMAP, offsetX, offsetY, LR_LOADFROMFILE);
-		(*_bitmapCache)[key] = bitmap;
-		return bitmap;
-	}
+
 	HBITMAP Graphics::LoadBitmapFile(string path) {
-		return this->LoadBitmapFile(path, 0, 0);	
-	}
-	HBITMAP Graphics::LoadBitmapFile(string path, Point& offset) {
-		return this->LoadBitmapFile(path, (int) offset.GetX(), (int) offset.GetY());
+		if(_bitmapCache->count(path)) {
+			// Return cached item
+			return _bitmapCache->find(path)->second;
+		}
+
+		HBITMAP bitmap = (HBITMAP)LoadImage(NULL, path.c_str(), IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+		(*_bitmapCache)[path] = bitmap;
+		return bitmap;
 	}
 
 	void Graphics::DrawBitmap(string path, Point& position) {
-		DrawBitmap(path,(int) position.GetX(),(int) position.GetY(), 0, 0);
+		this->DrawBitmap(path, position, Size(TILE_WIDTH, TILE_HEIGHT));
 	}
-	void Graphics::DrawBitmap(string path, Point& position, Point& offset) {
-		DrawBitmap(path,(int) position.GetX(),(int) position.GetY(),(int) offset.GetX(),(int) offset.GetY());
-	}
-	void Graphics::DrawBitmap(string path, int x, int y) {
-		DrawBitmap(path, x, y, 0, 0);
-	}
-	void Graphics::DrawBitmap(string path, int x, int y, int offsetx, int offsety) {
+
+	void Graphics::DrawBitmap(string path, Point& position, Size& size) {
+		Point correctedPoint = position;
+
 		if (_cam != NULL) {
-			Point one1 = _cam->FromTo(Point(x,y));
-			x = (int)one1.GetX();
-			y = (int)one1.GetY();
+			correctedPoint = _cam->FromTo(position);
 		}
 		
-		HBITMAP bitmap = this->LoadBitmapFile(path, offsetx, offsety);
+		HBITMAP bitmap = this->LoadBitmapFile(path);
 		HDC bitmap_hdc = CreateCompatibleDC(NULL);
 
 		// link the bitmap to a device context
@@ -128,10 +120,10 @@ namespace isgp {
 		// copy the bitmap on the backbuffer
 		int bltResult =  BitBlt(
 			_backBuffer, 
-			x, 
-			y,
-			TILE_WIDTH, 
-			TILE_HEIGHT, 
+			(int) correctedPoint.GetX(), 
+			(int) correctedPoint.GetY(),
+			size.GetWidth(), 
+			size.GetHeight(), 
 			bitmap_hdc, 
 			0, 
 			0, 
