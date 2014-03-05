@@ -40,6 +40,12 @@ namespace LevelEditor.Models.IO
 			// Write width and height to the file.
 			LevelWriter.WriteLine(string.Format("width={0}", level.Width));
 			LevelWriter.WriteLine(string.Format("height={0}", level.Height));
+			// Write the start/finish points.
+			LevelWriter.WriteLine(string.Format("start={0},{1}",
+				level.Start.X, level.Start.Y));
+			LevelWriter.WriteLine(string.Format("finish={0},{1}",
+				level.Finish.X, level.Finish.Y));
+			// Write the position and tiletypes of all nonempty tiles.
 			foreach (Point key in tiles.Keys)
 			{
 				LevelWriter.WriteLine(TileToString(key, tiles[key]));
