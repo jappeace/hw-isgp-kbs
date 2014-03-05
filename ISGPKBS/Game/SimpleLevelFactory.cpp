@@ -16,7 +16,8 @@ namespace isgp{
 		Point position = Point(5,5);
 		Grid * g = result->GetGrid();
 		result->_player = new Player(Point(4,4));
-		g->GetTileAt(position)->SetData(new WorldBlock("C:\\tiles\\smile.bmp"));
+		result->_player->SetGrid(g);
+		//g->GetTileAt(position)->SetData(new WorldBlock("C:\\tiles\\smile.bmp"));
 		g->TraverseRow(4, this);
 		g->TraverseRow(5, this);
 		g->TraverseRow(6, this);

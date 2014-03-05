@@ -2,19 +2,22 @@
 #include "GridGraphicTranslator.h"
 namespace isgp{
 // default amount of tiles in level
-const Size Level::defaultTileAmount = Size(10,10);
+const Size Level::defaultTileAmount = Size(100,100);
 
 // tile size, should equal the width and height of spritesheet tiles
 const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 	Level::Level(){
-		_grid = new Grid(defaultTileAmount.GetWidth(), defaultTileAmount.GetHeight());
+		init(new Grid(defaultTileAmount.GetWidth(), defaultTileAmount.GetHeight()));
 	}
-	Level::Level(int width, int height) {
-		_grid = new Grid(width, height);
+	Level::Level(int width, int height){
+		init(new Grid(width, height));
 	}
 	Level::Level(Grid* grid) {
+		init(grid);
+	}
+	void Level::init(Grid* grid){
 		_grid = grid;
-		_player = new Player(Point(100,100));
+		_player = new Player(Point(1,1));
 		_player->SetGrid(_grid);
 	}
 

@@ -178,7 +178,8 @@ namespace isgp {
 		GridGraphicTranslator translator = GridGraphicTranslator();
 		vector<Tile*> includedTiles;
 
-		Tile* topLeftTile = GetTileAt(translator.ToFrom(topLeft));
+		Point p = translator.ToFrom(topLeft);
+		Tile* topLeftTile = GetTileAt(p);
 		Tile* topRightTile = GetTileAt(translator.ToFrom(bottomRight));
 
 		for(double i = topLeftTile->GetPosition()->GetX(); i <= topRightTile->GetPosition()->GetX(); i++) {
