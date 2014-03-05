@@ -38,31 +38,31 @@ void Window::GameLoop(double elapsed) { //elapsed time, in MS
 }
 
 void Window::OnKeyDown(int which) {
-	if (which == 37) {
+	if (which == VK_LEFT) {
 		_level->_player->_leftKey = true;
 	}
-	if (which == 39) {
+	if (which == VK_RIGHT) {
 		_level->_player->_rightKey = true;
 	}
-	if (which == 38) {
+	if (which == VK_UP) {
 		_level->_player->_upKey = true;
 	}
-	if (which == 32) {
+	if (which == VK_SPACE) {
 		_level->_player->_spaceKey = true;
 	}
 }
 
 void Window::OnKeyUp(int which) {
-	if (which == 37) {
+	if (which == VK_LEFT) {
 		_level->_player->_leftKey = false;
 	}
-	if (which == 39) {
+	if (which == VK_RIGHT) {
 		_level->_player->_rightKey = false;
 	}
-	if (which == 38) {
+	if (which == VK_UP) {
 		_level->_player->_upKey = false;
 	}
-	if (which == 32) {
+	if (which == VK_SPACE) {
 		_level->_player->_spaceKey = false;
 	}
 }

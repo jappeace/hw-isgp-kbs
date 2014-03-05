@@ -22,6 +22,7 @@ namespace isgp{
 		_position.SetY(_position.GetY() + (_player->_position.GetY() - _position.GetY()) * (4 * elapsed));
 	}
 
+	// From static to dynamic
 	Point Camera::ToFrom(Point p) {
 		Point tmp = Point(0,0);
 		
@@ -31,12 +32,8 @@ namespace isgp{
 		return tmp;
 	}
 
+	// From static to dynamic
 	Point Camera::FromTo(Point p) {
-		Point tmp = Point(0,0);
-		
-		tmp.SetX((p.GetX() - _position.GetX()) + 384);
-		tmp.SetY((p.GetY() - _position.GetY()) + 384);
-
-		return tmp;
+		return ToFrom(p);
 	}
 }
