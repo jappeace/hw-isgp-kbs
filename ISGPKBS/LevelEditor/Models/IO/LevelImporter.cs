@@ -47,6 +47,9 @@ namespace LevelEditor.Models.IO
 			int width = GetIntValue(LevelReader.ReadLine());
 			int height = GetIntValue(LevelReader.ReadLine());
 			level = new Level(width, height);
+			// Set start and finish point
+			level.Start = GetPosition(GetStringValue(LevelReader.ReadLine()));
+			level.Finish = GetPosition(GetStringValue(LevelReader.ReadLine()));
 
 			// Read all coordinates and add them as tiles to the level.
 			TileType tileType;
