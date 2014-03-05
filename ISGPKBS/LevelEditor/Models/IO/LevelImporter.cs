@@ -41,29 +41,36 @@ namespace LevelEditor.Models.IO
 		/// </summary>
 		public ILevel ImportLevel()
 		{
-			ILevel level;
-
-			// Create level with the width and height specified in the file.
-			int width = GetIntValue(LevelReader.ReadLine());
-			int height = GetIntValue(LevelReader.ReadLine());
-			level = new Level(width, height);
-			// Set start and finish point
-			level.Start = GetPosition(GetStringValue(LevelReader.ReadLine()));
-			level.Finish = GetPosition(GetStringValue(LevelReader.ReadLine()));
-
-			// Read all coordinates and add them as tiles to the level.
-			TileType tileType;
-			Point position;
-			string line = LevelReader.ReadLine();
-			while (line != null)
+			try
 			{
-				tileType = (TileType)GetIntValue(line);
-				position = GetPosition(line);
-				level.SetTile(position, tileType);
-				line = LevelReader.ReadLine();
-			}
+				ILevel level;
 
-			return level;
+				// Create level with the width and height specified in the file.
+				int width = GetIntValue(LevelReader.ReadLine());
+				int height = GetIntValue(LevelReader.ReadLine());
+				level = new Level(width, height);
+				// Set start and finish point
+				level.Start = GetPosition(GetStringValue(LevelReader.ReadLine()));
+				level.Finish = GetPosition(GetStringValue(LevelReader.ReadLine()));
+
+				// Read all coordinates and add them as tiles to the level.
+				TileType tileType;
+				Point position;
+				string line = LevelReader.ReadLine();
+				while (line != null)
+				{
+					tileType = (TileType)GetIntValue(line);
+					position = GetPosition(line);
+					level.SetTile(position, tileType);
+					line = LevelReader.ReadLine();
+				}
+
+				return level;
+			}
+			catch (Exception)
+			{
+				throw new ArgumentException("Not a valid level file");
+			}
 		}
 
 		/// <summary>
