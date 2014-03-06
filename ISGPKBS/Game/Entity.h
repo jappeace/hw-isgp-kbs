@@ -3,8 +3,12 @@
 #include "Vector2D.h"
 #include "Point.h"
 #include "Graphics.h"
+#include <vector>
+#include "Tile.h"
+#include "GridGraphicTranslator.h"
 #include "Grid.h"
 namespace isgp {
+
 class Entity : public IPaintable
 {
 public:

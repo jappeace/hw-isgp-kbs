@@ -1,12 +1,4 @@
-#pragma once
-#include "gravitybehaviour.h"
 #include "Player.h"
-
-#include "Player.h"
-#include <vector>
-#include "tile.h"
-#include "Entity.h"
-#include "GridGraphicTranslator.h"
 namespace isgp{
 
 	Player::Player(Point position) {
@@ -39,7 +31,7 @@ namespace isgp{
 
 	void Player::Update(const double milisec) {
 		double elapsed = milisec / 1000;
-		collision = CheckCollision(this->_position, Point(this->_position.GetX() + 16, this->_position.GetY() + 32));
+		//collision = CheckCollision(this->_position, Point(this->_position.GetX() + 16, this->_position.GetY() + 32));
 		if (_leftKey && _xVel > -_maxVel) { 
 			if (_collision) {
 				_xVel -= _accel * elapsed;
@@ -64,13 +56,13 @@ namespace isgp{
 		if (!_leftKey && !_rightKey && _collision && _xVel < 1 && _xVel > -1) {
 			_xVel = 0;
 		}
-		if(collision & Down && _yVel < 0) {
-			//_position.SetY(_position.GetY() + (_yVel * elapsed));
-		} else {
+
+		if(_grid->CanDoMove(this->_position, (_xVel * elapsed), 0.0)) {
+			_position.SetX(_position.GetX() + (_xVel * elapsed));
+		}
+		if(_grid->CanDoMove(this->_position, 0.0, (_yVel * elapsed))) {
 			_position.SetY(_position.GetY() + (_yVel * elapsed));
 		}
-		_position.SetX(_position.GetX() + (_xVel * elapsed));
-		
 
 		for (unsigned int i = 0; i < _behaviours->size(); ++i) {
 			_behaviours->at(i)->Update(milisec);
@@ -94,7 +86,8 @@ namespace isgp{
 
 	void Player::Paint(Graphics* g) {
 		_graphics = g;
-		
+		static const double GRAVITATIONAL_PULL = (double) 2000;
+		const double TIME_MULTIPLIER = ms / (double) 1000;
 
 		Point topLeft = this->_position;
 		Point bottomRight = Point(this->_position.GetX() + 16, this->_position.GetY() + 32);

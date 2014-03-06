@@ -1,9 +1,8 @@
 #pragma once
 
 #include "IBehaviour.h"
-#include "Player.h"
-
 namespace isgp {
+	class Player;
 
 	// Gravity Behaviour is a child of "BehaviourInterface".
 	// The Gravity Behaviour will force the object to be pulled downward by gravity.

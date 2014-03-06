@@ -1,11 +1,8 @@
 #pragma once
-
-#include <vector>
-
-#include "IBehaviour.h"
-#include "IPaintable.h"
+#include "GravityBehaviour.h"
 #include "Entity.h"
 namespace isgp {
+
 	class Player : public Entity
 	{
 	public:

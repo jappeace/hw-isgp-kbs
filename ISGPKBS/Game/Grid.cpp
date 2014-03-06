@@ -1,6 +1,5 @@
 #include "Grid.h"
-#include <algorithm>
-#include "GridGraphicTranslator.h"
+
 using namespace std;
 
 namespace isgp {
@@ -120,6 +119,18 @@ namespace isgp {
 				+ "y: " + StrConverter::IntToString(y);
 	};
 
+	bool Grid::CanDoMove(Point location, double velocityX, double velocityY) const {//Vector2D velocity
+		GridGraphicTranslator translator = GridGraphicTranslator();
+		Point locationTranslated = Point(location.GetX(), location.GetY());
+
+		locationTranslated.SetX(locationTranslated.GetX() + velocityX);
+		locationTranslated.SetY(locationTranslated.GetY() + velocityY);
+
+		Point moveToTile = translator.ToFrom(locationTranslated);
+		Tile* tile = this->GetTileAt(moveToTile);
+		return tile->HasData() && tile->GetData()->IsSolid;
+	}
+
 	Tile* Grid::GetTileAt(unsigned x, unsigned y) const {
 		unsigned desiredIndex = GetTileIndex(x, y);
 		if (desiredIndex < 0) {
@@ -128,6 +139,7 @@ namespace isgp {
 		if (desiredIndex >= _tilesLength) {
 			sizeMessage(x, y);
 		}
+		
 		return _tiles->at(desiredIndex);
 	}
 

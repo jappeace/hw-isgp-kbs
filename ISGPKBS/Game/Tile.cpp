@@ -32,7 +32,9 @@ namespace isgp{
 	}
 
 	bool Tile::HasData() {
-		return _tiledata ? true : false;
+		if(_tiledata)
+			return true;
+		return false;
 	}
 
 	ITileData* Tile::GetData() {

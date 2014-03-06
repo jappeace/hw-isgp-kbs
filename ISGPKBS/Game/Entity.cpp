@@ -1,5 +1,5 @@
 #include "Entity.h"
-#include "GridGraphicTranslator.h"
+
 namespace isgp {
 
 	void Entity::SetGrid(Grid* grid) {
@@ -24,9 +24,9 @@ namespace isgp {
 				Point tileCenter = Point(absoluteTilePositionTL.GetX() + diffWidth, absoluteTilePositionTL.GetY() + diffHeight);
 
 				double diffX = topLeft.GetX() - tileCenter.GetX();
-				if(abs(diffX) < diffWidth){
-					collision |= Left;
-				}
+				//if(abs(diffX) < diffWidth && bottomRight.GetX() <){
+				//	collision |= Left;
+				//}
 				diffX = bottomRight.GetX() - tileCenter.GetX();
 				if(abs(diffX) < diffWidth){
 					collision |= Right;
