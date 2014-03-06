@@ -1,5 +1,6 @@
 #pragma once
 
+#include <vector>
 #include <cstdlib>
 #include "Point.h"
 #include "IPaintable.h"
@@ -29,6 +30,7 @@ namespace isgp {
 		Point* GetPosition() const;
 		void Paint(Graphics* g);
 		void SetData(ITileData*);
+		vector<Tile*> GetSurroundingTiles() const;
 	private:
 		void Init(Point* p);
 		ITileData* _tiledata;

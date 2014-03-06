@@ -155,4 +155,35 @@ namespace isgp {
 	Size* Grid::GetSize() const {
 		return _size;
 	}
+
+	vector<Tile*> Grid::GetSurroundingTiles(vector<Tile*> tiles) const {
+		vector<Tile*> allTiles;
+		allTiles.reserve(tiles.size() * 4);
+		for(unsigned i = 0; i < tiles.size(); i++) {
+			Tile* t = tiles.at(i);
+			std::vector<Tile*> surrounding = t->GetSurroundingTiles();
+			allTiles.insert(allTiles.end(), surrounding.begin(), surrounding.end());
+		}
+		std::sort(allTiles.begin(), allTiles.end());
+		std::sort(tiles.begin(), tiles.end());
+		std::vector<Tile*> difference;
+		std::set_difference(allTiles.begin(), allTiles.end(), tiles.begin(), tiles.end(), std::back_inserter(difference));
+		return difference;
+	}
+
+	vector<Tile*> Grid::GetTilesInRectangle(Point topLeft, Point bottomRight) const {
+		GridGraphicTranslator translator = GridGraphicTranslator();
+		vector<Tile*> includedTiles;
+
+		Point p = translator.ToFrom(topLeft);
+		Tile* topLeftTile = GetTileAt(p);
+		Tile* topRightTile = GetTileAt(translator.ToFrom(bottomRight));
+
+		for(double i = topLeftTile->GetPosition()->GetX(); i <= topRightTile->GetPosition()->GetX(); i++) {
+			for(double j = topLeftTile->GetPosition()->GetY(); j <= topRightTile->GetPosition()->GetY(); j++) {
+				includedTiles.push_back(GetTileAt((int)i, (int)j));
+			}
+		}
+		return includedTiles;
+	}
 }

@@ -13,6 +13,8 @@
 #include "StrConverter.h"
 #include <stdexcept>
 #include "Exceptions.h"
+#include <algorithm>
+#include "GridGraphicTranslator.h"
 
 using namespace std;
 
@@ -41,6 +43,9 @@ namespace isgp {
 		// The given function pointer will receive all the tiles in the grid and the cordiantes of them.
 		void TraverseTiles(IGridTraveller* travellar);
 		Size* GetSize() const;
+		vector<Tile*> GetSurroundingTiles(vector<Tile*>) const;
+		vector<Tile*> GetTilesInRectangle(Point topLeft, Point bottomRight) const;
+
 	private:
 		vector<Tile*>* _tiles;
 		unsigned _tilesLength;

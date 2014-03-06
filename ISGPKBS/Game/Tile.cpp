@@ -61,6 +61,15 @@ namespace isgp{
 		return _top;
 	}
 
+	vector<Tile*> Tile::GetSurroundingTiles() const {
+		vector<Tile*> tiles;
+		tiles.push_back(this->GetLeft());
+		tiles.push_back(this->GetTop());
+		tiles.push_back(this->GetRight());
+		tiles.push_back(this->GetBottom());
+		return tiles;
+	}
+
 	Point* Tile::GetPosition() const {
 		return _position;
 	}
