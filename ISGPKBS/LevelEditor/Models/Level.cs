@@ -3,6 +3,9 @@ using System.Drawing;
 
 namespace LevelEditor.Models
 {
+	/// <summary>
+	/// A level with information about its contents.
+	/// </summary>
 	public class Level : ILevel
 	{
 		private int _width;

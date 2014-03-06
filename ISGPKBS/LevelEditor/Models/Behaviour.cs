@@ -2,6 +2,9 @@
 
 namespace LevelEditor.Models
 {
+	/// <summary>
+	/// The behaviour of a gridobject with conditions and actions.
+	/// </summary>
 	public class Behaviour
 	{
 		/// <summary>
