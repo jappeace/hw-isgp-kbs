@@ -110,13 +110,7 @@ namespace LevelEditor.Forms
 
 		private void NewLevelDialog()
 		{
-			var newLevelDialog = new NewLevelForm();
-			if (newLevelDialog.ShowDialog() == DialogResult.OK)
-			{
-				levelPanel.Level = new Level(newLevelDialog.MapWidth,
-					newLevelDialog.MapHeight);
-				levelPanel.Invalidate();
-			}
+			throw new NotImplementedException();
 		}
 
 		/// <summary>

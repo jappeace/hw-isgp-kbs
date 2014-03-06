@@ -41,37 +41,7 @@ namespace LevelEditor.Models.IO
 		/// </summary>
 		public ILevel ImportLevel()
 		{
-			try
-			{
-				ILevel level;
-
-				// Create level with the width and height specified in the file.
-				int width = GetIntValue(LevelReader.ReadLine());
-				int height = GetIntValue(LevelReader.ReadLine());
-				level = new Level(width, height);
-				// Set start and finish point
-				level.Start = GetPosition(GetStringValue(LevelReader.ReadLine()));
-				level.Finish = GetPosition(GetStringValue(LevelReader.ReadLine()));
-
-				// Read all coordinates and add them as tiles to the level.
-				GridObjectType tileType;
-				Point position;
-				string line = LevelReader.ReadLine();
-				while (line != null)
-				{
-					tileType = (GridObjectType)GetIntValue(line);
-					position = GetPosition(line);
-					level.SetTile(position, tileType);
-					line = LevelReader.ReadLine();
-				}
-				LevelReader.Close();
-				return level;
-			}
-			catch (Exception)
-			{
-				LevelReader.Close();
-				throw new ArgumentException("Not a valid level file");
-			}
+			throw new NotImplementedException();
 		}
 
 		/// <summary>

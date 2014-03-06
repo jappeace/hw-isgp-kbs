@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using LevelEditor.Models;
@@ -48,19 +49,7 @@ namespace LevelEditor.Forms
 
 		private void levelPanel_MouseClick(object sender, MouseEventArgs e)
 		{
-			if (Level != null)
-			{
-				Point gridLocation = PanelToGridLocation(e.Location);
-				if (e.Button == MouseButtons.Left)
-				{
-					Level.SetTile(gridLocation, SelectedType);
-				}
-				else if (e.Button == MouseButtons.Right)
-				{
-					Level.RemoveGridObjectsAt(gridLocation);
-				}
-				Invalidate();
-			}
+			throw new NotImplementedException();
 		}
 
 		private Point PanelToGridLocation(Point panelLocation)
@@ -124,27 +113,7 @@ namespace LevelEditor.Forms
 
 		private void DrawTiles(Graphics g)
 		{
-			IDictionary<Point, GridObjectType> tiles = Level.GetTiles();
-			Point gridLocation;
-			Bitmap bitmap;
-			foreach (Point point in tiles.Keys)
-			{
-				gridLocation = new Point(point.X * GridSize, point.Y * GridSize);
-				gridLocation.X += (GridLineWidth + 1) / 2;
-				gridLocation.Y += (GridLineWidth + 1) / 2;
-				bitmap = BitmapCollection.GetBitmapForType(tiles[point]);
-				g.DrawImage(bitmap, gridLocation);
-			}
-			gridLocation = new Point(Level.Start.X * GridSize, Level.Start.Y * GridSize);
-			gridLocation.X += (GridLineWidth + 1) / 2;
-			gridLocation.Y += (GridLineWidth + 1) / 2;
-			bitmap = BitmapCollection.GetBitmapForType(GridObjectType.Start);
-			g.DrawImage(bitmap, gridLocation);
-			gridLocation = new Point(Level.Finish.X * GridSize, Level.Finish.Y * GridSize);
-			gridLocation.X += (GridLineWidth + 1) / 2;
-			gridLocation.Y += (GridLineWidth + 1) / 2;
-			bitmap = BitmapCollection.GetBitmapForType(GridObjectType.Finish);
-			g.DrawImage(bitmap, gridLocation);
+			throw new NotImplementedException();
 		}
 	}
 }

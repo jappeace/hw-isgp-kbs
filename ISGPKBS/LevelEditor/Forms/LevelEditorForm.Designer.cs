@@ -142,7 +142,6 @@
 			this.levelPanel.Level = null;
 			this.levelPanel.Location = new System.Drawing.Point(12, 27);
 			this.levelPanel.Name = "levelPanel";
-			this.levelPanel.SelectedType = LevelEditor.Models.GridObjectType.Start;
 			this.levelPanel.Size = new System.Drawing.Size(565, 530);
 			this.levelPanel.TabIndex = 3;
 			// 
