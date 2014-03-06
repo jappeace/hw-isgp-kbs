@@ -34,13 +34,8 @@
 			this.loadLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.settingsGroup = new System.Windows.Forms.GroupBox();
-			this.spriteBox = new System.Windows.Forms.PictureBox();
-			this.tileTypeLabel = new System.Windows.Forms.Label();
-			this.spritePicker = new System.Windows.Forms.ComboBox();
 			this.levelPanel = new LevelEditor.Forms.LevelPanel();
 			this.menuStrip.SuspendLayout();
-			this.settingsGroup.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.spriteBox)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// menuStrip
@@ -68,7 +63,7 @@
 			// 
 			this.newLevelToolStripMenuItem.Name = "newLevelToolStripMenuItem";
 			this.newLevelToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl + N";
-			this.newLevelToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.newLevelToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
 			this.newLevelToolStripMenuItem.Text = "New";
 			this.newLevelToolStripMenuItem.Click += new System.EventHandler(this.newLevelToolStripMenuItem_Click);
 			// 
@@ -76,7 +71,7 @@
 			// 
 			this.loadLevelToolStripMenuItem.Name = "loadLevelToolStripMenuItem";
 			this.loadLevelToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl + O";
-			this.loadLevelToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.loadLevelToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
 			this.loadLevelToolStripMenuItem.Text = "Load";
 			this.loadLevelToolStripMenuItem.Click += new System.EventHandler(this.loadLevelToolStripMenuItem_Click);
 			// 
@@ -84,7 +79,7 @@
 			// 
 			this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
 			this.saveToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl + S";
-			this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.saveToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
 			this.saveToolStripMenuItem.Text = "Save";
 			this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
 			// 
@@ -92,44 +87,12 @@
 			// 
 			this.settingsGroup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.settingsGroup.Controls.Add(this.spriteBox);
-			this.settingsGroup.Controls.Add(this.tileTypeLabel);
-			this.settingsGroup.Controls.Add(this.spritePicker);
-			this.settingsGroup.Location = new System.Drawing.Point(583, 27);
+			this.settingsGroup.Location = new System.Drawing.Point(519, 27);
 			this.settingsGroup.Name = "settingsGroup";
-			this.settingsGroup.Size = new System.Drawing.Size(197, 530);
+			this.settingsGroup.Size = new System.Drawing.Size(261, 530);
 			this.settingsGroup.TabIndex = 2;
 			this.settingsGroup.TabStop = false;
 			this.settingsGroup.Text = "Settings";
-			// 
-			// spriteBox
-			// 
-			this.spriteBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.spriteBox.Location = new System.Drawing.Point(172, 38);
-			this.spriteBox.Name = "spriteBox";
-			this.spriteBox.Size = new System.Drawing.Size(16, 16);
-			this.spriteBox.TabIndex = 2;
-			this.spriteBox.TabStop = false;
-			// 
-			// tileTypeLabel
-			// 
-			this.tileTypeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.tileTypeLabel.AutoSize = true;
-			this.tileTypeLabel.Location = new System.Drawing.Point(7, 20);
-			this.tileTypeLabel.Name = "tileTypeLabel";
-			this.tileTypeLabel.Size = new System.Drawing.Size(47, 13);
-			this.tileTypeLabel.TabIndex = 1;
-			this.tileTypeLabel.Text = "Tile type";
-			// 
-			// spritePicker
-			// 
-			this.spritePicker.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.spritePicker.FormattingEnabled = true;
-			this.spritePicker.Location = new System.Drawing.Point(6, 36);
-			this.spritePicker.Name = "spritePicker";
-			this.spritePicker.Size = new System.Drawing.Size(160, 21);
-			this.spritePicker.TabIndex = 0;
-			this.spritePicker.SelectedIndexChanged += new System.EventHandler(this.spritePicker_SelectedIndexChanged);
 			// 
 			// levelPanel
 			// 
@@ -142,7 +105,8 @@
 			this.levelPanel.Level = null;
 			this.levelPanel.Location = new System.Drawing.Point(12, 27);
 			this.levelPanel.Name = "levelPanel";
-			this.levelPanel.Size = new System.Drawing.Size(565, 530);
+			this.levelPanel.SelectedType = LevelEditor.Models.GridObjectType.NPC;
+			this.levelPanel.Size = new System.Drawing.Size(501, 530);
 			this.levelPanel.TabIndex = 3;
 			// 
 			// LevelEditorForm
@@ -160,9 +124,6 @@
 			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LevelEditorForm_KeyDown);
 			this.menuStrip.ResumeLayout(false);
 			this.menuStrip.PerformLayout();
-			this.settingsGroup.ResumeLayout(false);
-			this.settingsGroup.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.spriteBox)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -176,9 +137,6 @@
 		private System.Windows.Forms.ToolStripMenuItem loadLevelToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
 		private System.Windows.Forms.GroupBox settingsGroup;
-		private System.Windows.Forms.ComboBox spritePicker;
-		private System.Windows.Forms.Label tileTypeLabel;
-		private System.Windows.Forms.PictureBox spriteBox;
 		private LevelPanel levelPanel;
 
 	}

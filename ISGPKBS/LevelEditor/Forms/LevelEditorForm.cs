@@ -23,7 +23,6 @@ namespace LevelEditor.Forms
 		private void Init()
 		{
 			KeyPreview = true;
-			spritePicker.DataSource = Enum.GetNames(typeof(GridObjectType));
 		}
 
 		/// <summary>
@@ -32,22 +31,6 @@ namespace LevelEditor.Forms
 		private void newLevelToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			NewLevelDialog();
-		}
-
-		private void spritePicker_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			GridObjectType selectedType = (GridObjectType)Enum.Parse(typeof(GridObjectType), spritePicker.Text);
-			levelPanel.SelectedType = selectedType;
-			Bitmap bitmap;
-			try
-			{
-				bitmap = BitmapCollection.GetBitmapForType(selectedType);
-			}
-			catch (FileNotFoundException)
-			{
-				bitmap = new Bitmap(64, 64);
-			}
-			spriteBox.Image = bitmap;
 		}
 
 		private void saveToolStripMenuItem_Click(object sender, EventArgs e)
