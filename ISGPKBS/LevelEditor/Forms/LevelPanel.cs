@@ -57,7 +57,7 @@ namespace LevelEditor.Forms
 				}
 				else if (e.Button == MouseButtons.Right)
 				{
-					Level.RemoveTile(gridLocation);
+					Level.RemoveGridObjectsAt(gridLocation);
 				}
 				Invalidate();
 			}

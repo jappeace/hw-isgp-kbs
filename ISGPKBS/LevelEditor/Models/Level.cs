@@ -92,7 +92,7 @@ namespace LevelEditor.Models
 		/// Removes a tile on the specified position. Does nothing if no
 		/// tile exists on the specified position.
 		/// </summary>
-		public void RemoveTile(Point position)
+		public void RemoveGridObjectsAt(Point position)
 		{
 			_tiles.Remove(position);
 		}
