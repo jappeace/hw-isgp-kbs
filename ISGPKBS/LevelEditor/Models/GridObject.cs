@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using LevelEditor.Models.Behaviour;
 using System.Drawing;
 
 namespace LevelEditor.Models

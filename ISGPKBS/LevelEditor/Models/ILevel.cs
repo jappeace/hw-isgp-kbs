@@ -14,6 +14,5 @@ namespace LevelEditor.Models
 		Point Start { get; set; }
 		void SetTile(Point position, GridObjectType tileType);
 		void RemoveGridObjectsAt(Point position);
-		IEnumerable<GridObject> GetTiles();
 	}
 }
