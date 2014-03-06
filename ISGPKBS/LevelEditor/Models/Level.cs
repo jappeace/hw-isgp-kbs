@@ -8,11 +8,11 @@ namespace LevelEditor.Models
 		private int _width;
 		private int _height;
 		private Point _start;
-		private Point _finish;
-		private IDictionary<Point, GridObjectType> _tiles;
+		private IDictionary<Point, IDictionary<Layer, GridObject>> _gridObjects;
+		private SpriteSet _spriteSet;
 
 		/// <summary>
-		/// Width of the level in tiles.
+		/// Width of the map in tiles.
 		/// </summary>
 		public int Width
 		{
@@ -20,7 +20,7 @@ namespace LevelEditor.Models
 		}
 
 		/// <summary>
-		/// Height of the level in tiles.
+		/// Height of the map in tiles.
 		/// </summary>
 		public int Height
 		{
@@ -28,7 +28,7 @@ namespace LevelEditor.Models
 		}
 
 		/// <summary>
-		/// Position of the starting point.
+		/// Startposition of the player.
 		/// </summary>
 		public Point Start
 		{
@@ -37,72 +37,31 @@ namespace LevelEditor.Models
 		}
 
 		/// <summary>
-		/// Position of the starting point.
+		/// Collection of all gridobjects.
 		/// </summary>
-		public Point Finish
+		public IDictionary<Point, IDictionary<Layer, GridObject>> GridObjects
 		{
-			get { return _finish; }
-			set { _finish = value; }
+			get { return _gridObjects; }
+			set { _gridObjects = value; }
 		}
 
 		/// <summary>
-		/// Creates an empty level with the specified width and height in tiles.
+		/// Spriteset for the map.
 		/// </summary>
-		public Level(int width, int height)
+		public SpriteSet SpriteSet
+		{
+			get { return _spriteSet; }
+			set { _spriteSet = value; }
+		}
+
+		/// <summary>
+		/// Creates a level with the given width, height and spriteset.
+		/// </summary>
+		public Level(int width, int height, SpriteSet spriteSet)
 		{
 			_width = width;
 			_height = height;
-			Start = new Point(0, 0);
-			Start = new Point(1, 0);
-			_tiles = new Dictionary<Point, GridObjectType>();
-		}
-
-		/// <summary>
-		/// Creates a tile on the specified position of the specified type.
-		/// If a tile exists on the specified position, the tile will be
-		/// replaced.
-		/// If position is outside the level, no tile will be set.
-		/// If TileType is a start/finish, the start/finish position will be
-		/// changed.
-		/// </summary>
-		public void SetTile(Point position, GridObjectType tileType)
-		{
-			if (position.X < Width && position.Y < Height)
-			{
-				if (tileType == GridObjectType.Start)
-				{
-					Start = position;
-				}
-				else if (tileType == GridObjectType.Finish)
-				{
-					Finish = position;
-				}
-				else if (Start != position && Finish != position)
-				{
-					if (_tiles.ContainsKey(position))
-					{
-						_tiles.Remove(position);
-					}
-					_tiles.Add(position, tileType);
-				}
-			}
-		}
-
-		/// <summary>
-		/// Removes a tile on the specified position. Does nothing if no
-		/// tile exists on the specified position.
-		/// </summary>
-		public void RemoveGridObjectsAt(Point position)
-		{
-			_tiles.Remove(position);
-		}
-
-		/// <summary>
-		/// Gets a dictionary that contains all non-empty tiles.
-		/// </summary>
-		public IDictionary<Point, GridObjectType> GetTiles()
-		{
-			return _tiles;
+			_spriteSet = spriteSet;
 		}
 	}
 }

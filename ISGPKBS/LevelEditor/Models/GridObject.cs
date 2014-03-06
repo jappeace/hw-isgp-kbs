@@ -7,7 +7,7 @@ namespace LevelEditor.Models
 	/// This class represents a gridobject and contains information about its
 	/// position in the map, its behaviour and its type.
 	/// </summary>
-	class GridObject
+	public class GridObject
 	{
 		/// <summary>
 		/// Type of the tile.

@@ -2,7 +2,7 @@
 
 namespace LevelEditor.Models
 {
-	class Behaviour
+	public class Behaviour
 	{
 		/// <summary>
 		/// All conditions that must be true for the actions to be executed.

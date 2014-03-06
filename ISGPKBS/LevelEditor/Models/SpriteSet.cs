@@ -1,6 +1,6 @@
 ﻿namespace LevelEditor.Models
 {
-	class SpriteSet
+	public class SpriteSet
 	{
 		public SpriteSet(string fileName)
 		{

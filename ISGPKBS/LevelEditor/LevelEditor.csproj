@@ -55,11 +55,13 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Models\Condition.cs" />
+    <Compile Include="Models\GridPosition.cs" />
     <Compile Include="Models\ILevel.cs" />
     <Compile Include="Models\IO\ILevelExporter.cs" />
     <Compile Include="Models\IO\ILevelImporter.cs" />
     <Compile Include="Models\IO\IReader.cs" />
     <Compile Include="Models\IO\IWriter.cs" />
+    <Compile Include="Models\Layer.cs" />
     <Compile Include="Models\Level.cs" />
     <Compile Include="Forms\LevelEditorForm.cs">
       <SubType>Form</SubType>

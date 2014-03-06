@@ -3,7 +3,7 @@
 	/// <summary>
 	/// Enumeration of all actions.
 	/// </summary>
-	enum Action
+	public enum Action
 	{
 		KillPlayer = 0,
 		MoveToPlayer = 1
