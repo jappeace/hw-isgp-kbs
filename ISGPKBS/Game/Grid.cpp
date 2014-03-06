@@ -7,7 +7,7 @@ namespace isgp {
 		traveller->ReceiveTile(GetTileAt(x, y));
 	}
 
-	unsigned Grid::GetTileIndex(unsigned x, unsigned y) const {
+	int Grid::GetTileIndex(unsigned x, unsigned y) const {
 		return x + y * _size->GetWidth();
 	}
 
@@ -124,7 +124,7 @@ namespace isgp {
 		if (desiredIndex < 0) {
 			sizeMessage(x, y);
 		}
-		if (desiredIndex >= _tilesLength) {
+		if (desiredIndex > _tilesLength) {
 			sizeMessage(x, y);
 		}
 		return _tiles->at(desiredIndex);
@@ -154,6 +154,21 @@ namespace isgp {
 
 	Size* Grid::GetSize() const {
 		return _size;
+	}
+
+	bool Grid::CanDoMove(Point location, double velocityX, double velocityY) const {//Vector2D velocity
+		GridGraphicTranslator translator = GridGraphicTranslator();
+		Point locationTranslated = Point(location.GetX(), location.GetY());
+
+		locationTranslated.SetX(locationTranslated.GetX() + velocityX);
+		locationTranslated.SetY(locationTranslated.GetY() + velocityY);
+
+		Point moveToTile = translator.ToFrom(locationTranslated);
+		int desiredIndex = GetTileIndex((int)moveToTile.GetX(), (int)moveToTile.GetY());
+		if(desiredIndex < 0 || (unsigned)desiredIndex > _tilesLength)
+			return false;
+		Tile* tile = this->GetTileAt(moveToTile);
+		return tile->HasData();
 	}
 
 	vector<Tile*> Grid::GetSurroundingTiles(vector<Tile*> tiles) const {
