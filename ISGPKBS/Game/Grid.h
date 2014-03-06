@@ -7,7 +7,7 @@
 #include <vector>
 #include "Tile.h"
 #include "Size.h"
-#include "Point.h"
+#include "Vector2D.h"
 #include "IGridTraveller.h"
 #include <iostream>
 #include "StrConverter.h"
@@ -34,7 +34,7 @@ namespace isgp {
 		// retrieve tile at postiotion
 		Tile* GetTileAt(unsigned x, unsigned y) const;
 		// shorthand for getTileAt(int x, int y)
-		Tile* GetTileAt(Point& p) const;
+		Tile* GetTileAt(Vector2D& p) const;
 
 		// The given function pointer will receive all the tiles and coordinates in the specified row
 		void TraverseRow(unsigned y, IGridTraveller* travellar);
@@ -44,7 +44,7 @@ namespace isgp {
 		void TraverseTiles(IGridTraveller* travellar);
 		Size* GetSize() const;
 		vector<Tile*> GetSurroundingTiles(vector<Tile*>) const;
-		vector<Tile*> GetTilesInRectangle(Point topLeft, Point bottomRight) const;
+		vector<Tile*> GetTilesInRectangle(Vector2D topLeft, Vector2D bottomRight) const;
 
 	private:
 		vector<Tile*>* _tiles;

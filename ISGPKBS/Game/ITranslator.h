@@ -1,9 +1,9 @@
 #pragma once
-#include "Point.h"
+#include "Vector2D.h"
 namespace isgp{
 	class ITranslator {
 	public:
-		virtual Point FromTo(Point p) = 0;
-		virtual Point ToFrom(Point p) = 0;
+		virtual Vector2D FromTo(Vector2D p) = 0;
+		virtual Vector2D ToFrom(Vector2D p) = 0;
 	};
 }

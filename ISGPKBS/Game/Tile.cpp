@@ -1,15 +1,15 @@
 #include "Tile.h"
 
 namespace isgp{
-	Tile::Tile(Point* p) {
+	Tile::Tile(Vector2D* p) {
 		Init(p);
 	}
 
 	Tile::Tile(int x, int y) {
-		Init(new Point(x, y));
+		Init(new Vector2D(x, y));
 	}
 
-	void Tile::Init(Point* p) {
+	void Tile::Init(Vector2D* p) {
 		_position = p;
 		_tiledata = NULL;
 		_bottom = NULL;
@@ -70,7 +70,7 @@ namespace isgp{
 		return tiles;
 	}
 
-	Point* Tile::GetPosition() const {
+	Vector2D* Tile::GetPosition() const {
 		return _position;
 	}
 

@@ -40,7 +40,7 @@ namespace isgp {
 	void Graphics::EndRendering(HWND hWnd, PAINTSTRUCT *ps) {
 #ifdef _DEBUG
 		this->_fpsCounter.Update();
-		DrawStr(Point(10, 10), "FPS: " + StrConverter::IntToString(this->_fpsCounter.Get()));
+		DrawStr(Vector2D(10, 10), "FPS: " + StrConverter::IntToString(this->_fpsCounter.Get()));
 #endif
 
 		// Blit the new frame to the screen
@@ -54,12 +54,12 @@ namespace isgp {
 		_cam = cam;
 	}
 
-	void Graphics::DrawStr(Point& position, string str) {
+	void Graphics::DrawStr(Vector2D& position, string str) {
 		this->DrawStr(position,str.c_str(), str.length());
 	}
 
-	void Graphics::DrawStr(Point& position, const char* str, int length) {
-		TextOut(_backBuffer, (int) position.GetX(), (int) position.GetY(), str, length);
+	void Graphics::DrawStr(Vector2D& position, const char* str, int length) {
+		TextOut(_backBuffer, (int) position.X(), (int) position.Y(), str, length);
 	}
 
 	void Graphics::SetTextColor(COLORREF color) {
@@ -70,18 +70,18 @@ namespace isgp {
 		SetBkColor(_backBuffer, color);
 	}
 
-	void Graphics::DrawRect(Point& one, Point& two) {
+	void Graphics::DrawRect(Vector2D& one, Vector2D& two) {
 		if (_cam != NULL) {
-			Point one1 = _cam->FromTo(one);
-			Point two1 = _cam->FromTo(two);
-			this->DrawRect((int)one1.GetX(),(int) one1.GetY(),(int) two1.GetX(),(int) two1.GetY());
+			Vector2D one1 = _cam->FromTo(one);
+			Vector2D two1 = _cam->FromTo(two);
+			this->DrawRect((int)one1.X(),(int) one1.Y(),(int) two1.X(),(int) two1.Y());
 		} else {
-			this->DrawRect((int)one.GetX(),(int) one.GetY(),(int) two.GetX(),(int) two.GetY());
+			this->DrawRect((int)one.X(),(int) one.Y(),(int) two.X(),(int) two.Y());
 		}
 	}
 
-	void Graphics::DrawStaticRect(Point& one, Point& two) {
-		this->DrawRect((int)one.GetX(),(int) one.GetY(),(int) two.GetX(),(int) two.GetY());
+	void Graphics::DrawStaticRect(Vector2D& one, Vector2D& two) {
+		this->DrawRect((int)one.X(),(int) one.Y(),(int) two.X(),(int) two.Y());
 	}
 
 	void Graphics::DrawRect(int xone, int yone, int xtwo, int ytwo) {
@@ -99,24 +99,24 @@ namespace isgp {
 	HBITMAP Graphics::LoadBitmapFile(string path) {
 		return this->LoadBitmapFile(path, 0, 0);	
 	}
-	HBITMAP Graphics::LoadBitmapFile(string path, Point& offset) {
-		return this->LoadBitmapFile(path, (int) offset.GetX(), (int) offset.GetY());
+	HBITMAP Graphics::LoadBitmapFile(string path, Vector2D& offset) {
+		return this->LoadBitmapFile(path, (int) offset.X(), (int) offset.Y());
 	}
 
-	void Graphics::DrawBitmap(string path, Point& position) {
-		DrawBitmap(path,(int) position.GetX(),(int) position.GetY(), 0, 0);
+	void Graphics::DrawBitmap(string path, Vector2D& position) {
+		DrawBitmap(path,(int) position.X(),(int) position.Y(), 0, 0);
 	}
-	void Graphics::DrawBitmap(string path, Point& position, Point& offset) {
-		DrawBitmap(path,(int) position.GetX(),(int) position.GetY(),(int) offset.GetX(),(int) offset.GetY());
+	void Graphics::DrawBitmap(string path, Vector2D& position, Vector2D& offset) {
+		DrawBitmap(path,(int) position.X(),(int) position.Y(),(int) offset.X(),(int) offset.Y());
 	}
 	void Graphics::DrawBitmap(string path, int x, int y) {
 		DrawBitmap(path, x, y, 0, 0);
 	}
 	void Graphics::DrawBitmap(string path, int x, int y, int offsetx, int offsety) {
 		if (_cam != NULL) {
-			Point one1 = _cam->FromTo(Point(x,y));
-			x = (int)one1.GetX();
-			y = (int)one1.GetY();
+			Vector2D one1 = _cam->FromTo(Vector2D(x,y));
+			x = (int)one1.X();
+			y = (int)one1.Y();
 		}
 		
 		HBITMAP bitmap = this->LoadBitmapFile(path, offsetx, offsety);
@@ -142,4 +142,3 @@ namespace isgp {
 		DeleteDC(bitmap_hdc);
 	}
 }
-

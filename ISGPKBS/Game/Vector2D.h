@@ -8,6 +8,7 @@ class Vector2D
 public:
 	Vector2D(int x, int y);
 	Vector2D(double x, double y);
+	Vector2D(double both);
 	Vector2D(void);
 	~Vector2D(void);
 	double X() const;
@@ -33,4 +34,36 @@ private:
 	// constructors call this
 	void init(double x, double y);
 };
+inline bool operator==(const Vector2D& lhs,const Vector2D& rhs){
+	/* do actual comparison */ 
+	return lhs.X() == rhs.X() && lhs.Y() == rhs.Y();
+}
+inline bool operator!=(const Vector2D& lhs, const Vector2D& rhs){return !operator==(lhs,rhs);}
+inline bool operator< (const Vector2D& lhs, const Vector2D& rhs){
+	/* do actual comparison */
+	return lhs.X() * lhs.Y() < rhs.X() * rhs.Y();
+}
+inline bool operator> (const Vector2D& lhs, const Vector2D& rhs){return  operator< (rhs,lhs);}
+inline bool operator<=(const Vector2D& lhs, const Vector2D& rhs){return !operator> (lhs,rhs);}
+inline bool operator>=(const Vector2D& lhs, const Vector2D& rhs){return !operator< (lhs,rhs);}
+inline Vector2D operator+(Vector2D lhs, const Vector2D& rhs)
+{
+	lhs += rhs;
+	return lhs;
+}
+inline Vector2D operator-(Vector2D lhs, const Vector2D& rhs)
+{
+	lhs -= rhs;
+	return lhs;
+}
+inline Vector2D operator*(Vector2D lhs, const Vector2D& rhs)
+{
+	lhs *= rhs;
+	return lhs;
+}
+inline Vector2D operator/(Vector2D lhs, const Vector2D& rhs)
+{
+	lhs /= rhs;
+	return lhs;
+}
 }

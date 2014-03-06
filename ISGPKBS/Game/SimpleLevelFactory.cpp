@@ -13,9 +13,9 @@ namespace isgp{
 
 	Level* SimpleLevelFactory::CreateLevel(){
 		Level* result = new Level();
-		Point position = Point(5,5);
+		Vector2D position = Vector2D(5,5);
 		Grid * g = result->GetGrid();
-		result->_player = new Player(Point(4,4));
+		result->_player = new Player(Vector2D(4,4));
 		g->GetTileAt(position)->SetData(new WorldBlock("C:\\tiles\\smile.bmp"));
 		g->TraverseRow(4, this);
 		g->TraverseRow(5, this);

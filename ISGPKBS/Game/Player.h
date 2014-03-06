@@ -9,12 +9,12 @@ namespace isgp {
 	class Player : public IPaintable
 	{
 	public:
-		Player(Point position);
+		Player(Vector2D position);
 		~Player(void);
 		void Paint(Graphics* g) override;
 		void Update(const double);
 		void AddToVelocityY(double y);
-		Point _position;
+		Vector2D _position;
 		bool _leftKey, _rightKey, _upKey, _spaceKey, _collision;
 		double _xVel, _yVel, _maxVel;
 	private:

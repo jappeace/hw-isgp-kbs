@@ -18,22 +18,26 @@ namespace isgp{
 
 		_camFix = _camFix + (camFix2 - _camFix) * (3 * elapsed);
 
-		_position.SetX(_position.GetX() + ((_player->_position.GetX() - _position.GetX()) + _camFix) * (4 * elapsed));
-		_position.SetY(_position.GetY() + (_player->_position.GetY() - _position.GetY()) * (4 * elapsed));
+		_position.X(
+			_position.X() + 
+			(_player->_position.X() - _position.X() + _camFix))
+		);
+		_position.Y(_position.Y() + (_player->_position.Y() - _position.Y()));
+		_position *= Vector2D(4 * elapsed);
 	}
 
 	// From static to dynamic
-	Point Camera::ToFrom(Point p) {
-		Point tmp = Point(0,0);
+	Vector2D Camera::ToFrom(Vector2D p) {
+		Vector2D tmp = Vector2D(0,0);
 		
-		tmp.SetX((p.GetX() - _position.GetX()) + 384);
-		tmp.SetY((p.GetY() - _position.GetY()) + 384);
+		tmp.X((p.X() - _position.X()) + 384);
+		tmp.Y((p.Y() - _position.Y()) + 384);
 
 		return tmp;
 	}
 
 	// From static to dynamic
-	Point Camera::FromTo(Point p) {
+	Vector2D Camera::FromTo(Vector2D p) {
 		return ToFrom(p);
 	}
 }

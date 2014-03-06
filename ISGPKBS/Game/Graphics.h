@@ -3,7 +3,7 @@
 #include <windows.h>
 #include <string>
 #include <map>
-#include "Point.h"
+#include "Vector2D.h"
 #include "TimesPerSecondCounter.h"
 #include "ITranslator.h"
 
@@ -48,20 +48,20 @@ namespace isgp {
 		// get a bitmap from the cache or load it from a file and put it in the cache and return
 		HBITMAP LoadBitmapFile(string path);
 		HBITMAP LoadBitmapFile(string path, int offsetX, int offsetY);
-		HBITMAP LoadBitmapFile(string path, Point& offset);
+		HBITMAP LoadBitmapFile(string path, Vector2D& offset);
 
 		void SetTextColor(COLORREF color);
 		void SetTextBackgroundColor(COLORREF color);
 
-		void DrawStr(Point& position, string str);
-		void DrawStr(Point& position, const char* str, int length);
+		void DrawStr(Vector2D& position, string str);
+		void DrawStr(Vector2D& position, const char* str, int length);
 		
-		void DrawRect(Point& one, Point& two);
+		void DrawRect(Vector2D& one, Vector2D& two);
 		void DrawRect(int xone, int yone, int xtwo, int ytwo);
-		void DrawStaticRect(Point& one, Point& two);
+		void DrawStaticRect(Vector2D& one, Vector2D& two);
 
-		void DrawBitmap(string path, Point& position);
-		void DrawBitmap(string path, Point& position, Point& offset);
+		void DrawBitmap(string path, Vector2D& position);
+		void DrawBitmap(string path, Vector2D& position, Vector2D& offset);
 		void DrawBitmap(string path, int x, int y);
 		void DrawBitmap(string path, int x, int y, int offsetx, int offsety);
 	};

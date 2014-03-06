@@ -130,8 +130,8 @@ namespace isgp {
 		return _tiles->at(desiredIndex);
 	}
 
-	Tile* Grid::GetTileAt(Point& p) const {
-		return GetTileAt((unsigned) p.GetX(), (unsigned) p.GetY());
+	Tile* Grid::GetTileAt(Vector2D& p) const {
+		return GetTileAt((unsigned) p.X(), (unsigned) p.Y());
 	}
 
 	void Grid::TraverseRow(unsigned y, IGridTraveller* traveller) {
@@ -171,16 +171,16 @@ namespace isgp {
 		return difference;
 	}
 
-	vector<Tile*> Grid::GetTilesInRectangle(Point topLeft, Point bottomRight) const {
+	vector<Tile*> Grid::GetTilesInRectangle(Vector2D topLeft, Vector2D bottomRight) const {
 		GridGraphicTranslator translator = GridGraphicTranslator();
 		vector<Tile*> includedTiles;
 
-		Point p = translator.ToFrom(topLeft);
+		Vector2D p = translator.ToFrom(topLeft);
 		Tile* topLeftTile = GetTileAt(p);
 		Tile* topRightTile = GetTileAt(translator.ToFrom(bottomRight));
 
-		for(double i = topLeftTile->GetPosition()->GetX(); i <= topRightTile->GetPosition()->GetX(); i++) {
-			for(double j = topLeftTile->GetPosition()->GetY(); j <= topRightTile->GetPosition()->GetY(); j++) {
+		for(double i = topLeftTile->GetPosition()->X(); i <= topRightTile->GetPosition()->X(); i++) {
+			for(double j = topLeftTile->GetPosition()->Y(); j <= topRightTile->GetPosition()->Y(); j++) {
 				includedTiles.push_back(GetTileAt((int)i, (int)j));
 			}
 		}
