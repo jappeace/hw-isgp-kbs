@@ -134,7 +134,7 @@ namespace isgp {
 			// Image offset
 			0, 0, 
 			// Operation
-			SRCCOPY);
+			SRCAND);
 
 		// link the bitmap to a device context
 		SelectObject(bitmap_hdc, sprite.GetBitmap());
