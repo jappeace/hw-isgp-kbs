@@ -21,6 +21,8 @@ namespace isgp {
 		vector<IBehaviour*>* _behaviours;
 		Graphics* _graphics;
 		double _accel, _deAccel;
+		// If the player is facing right
+		bool _facingRight;
 	};
 }
 

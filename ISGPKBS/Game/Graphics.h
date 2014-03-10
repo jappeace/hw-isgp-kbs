@@ -6,6 +6,8 @@
 #include "Point.h"
 #include "TimesPerSecondCounter.h"
 #include "ITranslator.h"
+#include "Size.h"
+#include "Sprite.h"
 
 // to breack an include loop This class can't use the static Level::tilesize
 // that is why the macro where the size is based on is moved to here
@@ -33,7 +35,7 @@ namespace isgp {
 		// FPScounter.
 		TimesPerSecondCounter _fpsCounter;
 #endif
-		map<string, HBITMAP>* _bitmapCache;
+		map<string, Sprite>* _bitmapCache;
 	public:
 		Graphics(HWND);
 		~Graphics(void);
@@ -46,9 +48,7 @@ namespace isgp {
 		// Ends the rendering state and draws the backbuffer onto the screen
 		void EndRendering(HWND, PAINTSTRUCT *);
 		// get a bitmap from the cache or load it from a file and put it in the cache and return
-		HBITMAP LoadBitmapFile(string path);
-		HBITMAP LoadBitmapFile(string path, int offsetX, int offsetY);
-		HBITMAP LoadBitmapFile(string path, Point& offset);
+		Sprite LoadBitmapFile(string path);
 
 		void SetTextColor(COLORREF color);
 		void SetTextBackgroundColor(COLORREF color);
@@ -60,9 +60,15 @@ namespace isgp {
 		void DrawRect(int xone, int yone, int xtwo, int ytwo);
 		void DrawStaticRect(Point& one, Point& two);
 
+		// Draws a bitmap at the given position with the default tile size
 		void DrawBitmap(string path, Point& position);
+		// Draws a bitmap at the given position with the default tile size
+		// The source rectangle starts at the given offset
 		void DrawBitmap(string path, Point& position, Point& offset);
-		void DrawBitmap(string path, int x, int y);
-		void DrawBitmap(string path, int x, int y, int offsetx, int offsety);
+		// Draws a bitmap at the given location with the given size
+		void DrawBitmap(string path, Point& position, Size& size);
+		// Draws a bitmap at the given location with the given size
+		// The source rectangle starts at the given offset
+		void DrawBitmap(string path, Point& position, Point& offset, Size& size);
 	};
 }

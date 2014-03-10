@@ -86,6 +86,7 @@
     <ClInclude Include="resource2.h" />
     <ClInclude Include="SimpleLevelFactory.h" />
     <ClInclude Include="Size.h" />
+    <ClInclude Include="Sprite.h" />
     <ClInclude Include="StrConverter.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TimesPerSecondCounter.h" />
@@ -106,6 +107,7 @@
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="SimpleLevelFactory.cpp" />
     <ClCompile Include="Size.cpp" />
+    <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TimesPerSecondCounter.cpp" />
     <ClCompile Include="Window.cpp" />
