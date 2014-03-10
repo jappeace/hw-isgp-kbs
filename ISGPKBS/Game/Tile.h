@@ -30,6 +30,7 @@ namespace isgp {
 		Vector2D* GetPosition() const;
 		void Paint(Graphics* g);
 		void SetData(ITileData*);
+		bool HasData() const;
 		vector<Tile*> GetSurroundingTiles() const;
 	private:
 		void Init(Vector2D* p);

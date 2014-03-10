@@ -61,6 +61,10 @@ namespace isgp{
 		return _top;
 	}
 
+	bool Tile::HasData() const {
+		return _tiledata == NULL;
+	}
+
 	vector<Tile*> Tile::GetSurroundingTiles() const {
 		vector<Tile*> tiles;
 		tiles.push_back(this->GetLeft());
