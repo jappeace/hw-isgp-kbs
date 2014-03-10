@@ -32,37 +32,38 @@ void Window::OnPaint(Graphics* g){
 void Window::GameLoop(double elapsed) { //elapsed time, in MS
 	//update all the game objects now
 	_level->_player->Update(elapsed);
-	_cam->Update();
+	_level->_enemy->Update(elapsed);
+	_cam->Update(elapsed);
 
 	AbstractWindow::GameLoop(elapsed);
 }
 
 void Window::OnKeyDown(int which) {
-	if (which == 37) {
+	if (which == VK_LEFT) {
 		_level->_player->_leftKey = true;
 	}
-	if (which == 39) {
+	if (which == VK_RIGHT) {
 		_level->_player->_rightKey = true;
 	}
-	if (which == 38) {
+	if (which == VK_UP) {
 		_level->_player->_upKey = true;
 	}
-	if (which == 32) {
+	if (which == VK_SPACE) {
 		_level->_player->_spaceKey = true;
 	}
 }
 
 void Window::OnKeyUp(int which) {
-	if (which == 37) {
+	if (which == VK_LEFT) {
 		_level->_player->_leftKey = false;
 	}
-	if (which == 39) {
+	if (which == VK_RIGHT) {
 		_level->_player->_rightKey = false;
 	}
-	if (which == 38) {
+	if (which == VK_UP) {
 		_level->_player->_upKey = false;
 	}
-	if (which == 32) {
+	if (which == VK_SPACE) {
 		_level->_player->_spaceKey = false;
 	}
 }

@@ -19,7 +19,6 @@ namespace isgp{
 		_behaviours->push_back(new GravityBehaviour(this));
 	}
 
-
 	Player::~Player(void) {
 		// Delete references in vector
 		for (IBehaviour* behaviour = _behaviours->front(); behaviour != _behaviours->back(); ++behaviour) {
@@ -52,7 +51,7 @@ namespace isgp{
 			_xVel -= _deAccel * elapsed;
 		}
 
-		if (!_leftKey && !_rightKey && _collision && _xVel < 1 && _xVel > -1) {
+		if (!_leftKey && !_rightKey && _collision && _xVel < 20 && _xVel > -20) {
 			_xVel = 0;
 		}
 
