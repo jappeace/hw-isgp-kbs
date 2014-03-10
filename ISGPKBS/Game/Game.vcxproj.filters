@@ -53,6 +53,12 @@
     <ClCompile Include="Gravitybehaviour.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Ghost.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics.h">
@@ -131,6 +137,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Gravitybehaviour.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Ghost.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -64,6 +64,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AbstractWindow.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Ghost.h" />
     <ClInclude Include="IBehaviour.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Exceptions.h" />
@@ -93,6 +95,8 @@
   <ItemGroup>
     <ClCompile Include="AbstractWindow.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Ghost.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Gravitybehaviour.cpp" />
     <ClCompile Include="Grid.cpp" />
