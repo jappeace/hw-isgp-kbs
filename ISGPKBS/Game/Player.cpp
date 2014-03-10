@@ -55,11 +55,11 @@ namespace isgp{
 		if (!_leftKey && !_rightKey && _collision && _xVel < 20 && _xVel > -20) {
 			_xVel = 0;
 		}
-		if(_grid->CanDoMove(this->_position, (_xVel * elapsed), 0.0)) {
-			_position.SetX(_position.GetX() + (_xVel * elapsed));
+		if(_grid->CanDoMove(this->_position, Vector2D((_xVel * elapsed), 0.0))) {
+			_position.X(_position.X() + (_xVel * elapsed));
 		}
-		if(_grid->CanDoMove(this->_position, 0.0, (_yVel * elapsed))) {
-			_position.SetY(_position.GetY() + (_yVel * elapsed));
+		if(_grid->CanDoMove(this->_position, Vector2D(0.0, (_yVel * elapsed)))) {
+			_position.Y(_position.Y() + (_yVel * elapsed));
 		}
 
 		for (unsigned int i = 0; i < _behaviours->size(); ++i) {
@@ -79,13 +79,13 @@ namespace isgp{
 	}
 
 	void Player::MoveTo(int x, int y) {
-		if(_grid->CanDoMove(this->_position, x, 0)) {
+		if(_grid->CanDoMove(this->_position, Vector2D(x, 0))) {
 
 		}
 	}
 	
 	void Player::AddToVelocityY(double y) {
-		if(_grid->CanDoMove(this->_position, 0.0, y)) {
+		if(_grid->CanDoMove(this->_position, Vector2D(0.0, y))) {
 			_yVel += y;
 		} else {
 			int a = 2;
@@ -95,7 +95,7 @@ namespace isgp{
 	void Player::Paint(Graphics* g) {
 		_graphics = g;
 		
-		_graphics->DrawRect(_position, Point(_position.GetX() + 16, _position.GetY() + 32));
+		_graphics->DrawRect(_position, Vector2D(_position.X() + 16, _position.Y() + 32));
 		
 #ifdef _DEBUG
 		_graphics->DrawStaticRect(Vector2D(395, 395), Vector2D(405, 405));

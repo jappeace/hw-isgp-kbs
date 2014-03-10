@@ -156,15 +156,14 @@ namespace isgp {
 		return _size;
 	}
 
-	bool Grid::CanDoMove(Point location, double velocityX, double velocityY) const {//Vector2D velocity
+	bool Grid::CanDoMove(Vector2D location, Vector2D velocity) const {//Vector2D velocity
 		GridGraphicTranslator translator = GridGraphicTranslator();
-		Point locationTranslated = Point(location.GetX(), location.GetY());
+		Vector2D locationTranslated = Vector2D(location.X(), location.Y());
 
-		locationTranslated.SetX(locationTranslated.GetX() + velocityX);
-		locationTranslated.SetY(locationTranslated.GetY() + velocityY);
+		locationTranslated += velocity;
 
-		Point moveToTile = translator.ToFrom(locationTranslated);
-		int desiredIndex = GetTileIndex((int)moveToTile.GetX(), (int)moveToTile.GetY());
+		Vector2D moveToTile = translator.ToFrom(locationTranslated);
+		int desiredIndex = GetTileIndex((int)moveToTile.X(), (int)moveToTile.Y());
 		if(desiredIndex < 0 || (unsigned)desiredIndex > _tilesLength)
 			return false;
 		Tile* tile = this->GetTileAt(moveToTile);

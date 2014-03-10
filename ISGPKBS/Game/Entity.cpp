@@ -6,7 +6,7 @@ namespace isgp {
 		this->_grid = grid;
 	}
 
-	int Entity::CheckCollision(Point topLeft, Point bottomRight) {
+	int Entity::CheckCollision(Vector2D topLeft, Vector2D bottomRight) {
 		if(!_grid) {
 			return None;
 		}
@@ -19,24 +19,24 @@ namespace isgp {
 		for(unsigned i = 0; i < includedTiles.size(); i++) {
 			Tile* currentTile = includedTiles.at(i);
 			if(currentTile->HasData() ) {
-				Point absoluteTilePositionTL = translator.FromTo(*currentTile->GetPosition());
+				Vector2D absoluteTilePositionTL = translator.FromTo(*currentTile->GetPosition());
 
-				Point tileCenter = Point(absoluteTilePositionTL.GetX() + diffWidth, absoluteTilePositionTL.GetY() + diffHeight);
+				Vector2D tileCenter = Vector2D(absoluteTilePositionTL.X() + diffWidth, absoluteTilePositionTL.Y() + diffHeight);
 
-				double diffX = topLeft.GetX() - tileCenter.GetX();
+				double diffX = topLeft.X() - tileCenter.X();
 				if(abs(diffX) < diffWidth){
 					collision |= Left;
 				}
-				diffX = bottomRight.GetX() - tileCenter.GetX();
+				diffX = bottomRight.X() - tileCenter.X();
 				if(abs(diffX) < diffWidth){
 					collision |= Right;
 				}
 
-				double diffY = topLeft.GetY() - tileCenter.GetY();
+				double diffY = topLeft.Y() - tileCenter.Y();
 				if(abs(diffY) < diffHeight){
 					collision |= Up;
 				}
-				diffY = bottomRight.GetY() - tileCenter.GetY();
+				diffY = bottomRight.Y() - tileCenter.Y();
 				if(abs(diffY) < diffHeight){
 					collision |= Down;
 				}

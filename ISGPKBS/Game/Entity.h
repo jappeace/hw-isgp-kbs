@@ -1,6 +1,6 @@
 #pragma once
 #include "IPaintable.h"
-#include "Point.h"
+#include "Vector2D.h"
 #include "Graphics.h"
 #include "Grid.h"
 namespace isgp {
@@ -9,8 +9,8 @@ class Entity : public IPaintable
 public:
 	virtual void Paint(Graphics* g) override = 0;
 	virtual void Update(const double) = 0;
-	int CheckCollision(Point topLeft, Point bottomRight);
-	Point _position;
+	int CheckCollision(Vector2D topLeft, Vector2D bottomRight);
+	Vector2D _position;
 	int collision;
 	void SetGrid(Grid* grid);
 	vector<Tile*> CollidingTiles;

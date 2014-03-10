@@ -43,7 +43,7 @@ namespace isgp {
 		// The given function pointer will receive all the tiles in the grid and the cordiantes of them.
 		void TraverseTiles(IGridTraveller* travellar);
 		Size* GetSize() const;
-		bool Grid::CanDoMove(Point location, double velocityX, double velocityY) const;
+		bool Grid::CanDoMove(Vector2D location, Vector2D velocity) const;
 		vector<Tile*> GetSurroundingTiles(vector<Tile*>) const;
 		vector<Tile*> GetTilesInRectangle(Vector2D topLeft, Vector2D bottomRight) const;
 
