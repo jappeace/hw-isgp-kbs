@@ -88,7 +88,8 @@ namespace isgp{
 	void Player::Paint(Graphics* g) {
 		_graphics = g;
 		
-		_graphics->DrawRect(_position, Point(_position.GetX() + 32, _position.GetY() + 32));		
+		//_graphics->DrawRect(_position, Point(_position.GetX() + 32, _position.GetY() + 32));		
+		_graphics->DrawBitmap(".\\tiles\\megaman.bmp", _position, Size(32, 32));
 #ifdef _DEBUG
 		// Facing info
 		if (_facingRight) {

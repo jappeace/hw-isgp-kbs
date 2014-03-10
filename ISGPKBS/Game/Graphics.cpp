@@ -1,14 +1,15 @@
-#include "Graphics.h"
-#include "StrConverter.h"
 #include "AbstractWindow.h"
+#include "Graphics.h"
 #include "GridGraphicTranslator.h"
+#include "Sprite.h"
+#include "StrConverter.h"
 
 namespace isgp {
 
 	Graphics::Graphics(HWND hWnd) {
 		_cam = NULL;
 		
-		_bitmapCache = new map<string,  HBITMAP>();
+		_bitmapCache = new map<string, Sprite>();
 
 		this->_backBuffer = CreateCompatibleDC(NULL);
 
@@ -89,15 +90,18 @@ namespace isgp {
 		Rectangle(_backBuffer, xone, yone, xtwo, ytwo);
 	}
 
-	HBITMAP Graphics::LoadBitmapFile(string path) {
+	Sprite Graphics::LoadBitmapFile(string path) {
 		if(_bitmapCache->count(path)) {
 			// Return cached item
 			return _bitmapCache->find(path)->second;
 		}
 
 		HBITMAP bitmap = (HBITMAP)LoadImage(NULL, path.c_str(), IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
-		(*_bitmapCache)[path] = bitmap;
-		return bitmap;
+		Sprite sprite = Sprite(bitmap);
+
+		(*_bitmapCache)[path] = sprite;
+
+		return sprite;
 	}
 
 	void Graphics::DrawBitmap(string path, Point& position) {
@@ -111,24 +115,44 @@ namespace isgp {
 			correctedPoint = _cam->FromTo(position);
 		}
 		
-		HBITMAP bitmap = this->LoadBitmapFile(path);
+		Sprite sprite = this->LoadBitmapFile(path);
 		HDC bitmap_hdc = CreateCompatibleDC(NULL);
 
 		// link the bitmap to a device context
-		SelectObject(bitmap_hdc,bitmap);
+		SelectObject(bitmap_hdc, sprite.GetMask());
 
-		// copy the bitmap on the backbuffer
-		int bltResult =  BitBlt(
+		// OR the image on the mask to apply transparancy
+		BitBlt(
+			// Dest Context
 			_backBuffer, 
-			(int) correctedPoint.GetX(), 
-			(int) correctedPoint.GetY(),
-			size.GetWidth(), 
-			size.GetHeight(), 
+			// Posotion
+			(int) correctedPoint.GetX(), (int) correctedPoint.GetY(),
+			// Size
+			size.GetWidth(), size.GetHeight(), 
+			// Source Context
 			bitmap_hdc, 
-			0, 
-			0, 
-			SRCCOPY
-		);
+			// Image offset
+			0, 0, 
+			// Operation
+			SRCCOPY);
+
+		// link the bitmap to a device context
+		SelectObject(bitmap_hdc, sprite.GetBitmap());
+
+		// OR the image on the mask to apply transparancy
+		BitBlt(
+			// Dest Context
+			_backBuffer, 
+			// Posotion
+			(int) correctedPoint.GetX(), (int) correctedPoint.GetY(),
+			// Size
+			size.GetWidth(), size.GetHeight(), 
+			// Source Context
+			bitmap_hdc, 
+			// Image offset
+			0, 0, 
+			// Operation
+			SRCPAINT);
 
 		// release the resource
 		DeleteDC(bitmap_hdc);
