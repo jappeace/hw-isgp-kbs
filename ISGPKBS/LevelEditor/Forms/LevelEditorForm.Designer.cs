@@ -35,7 +35,10 @@
 			this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.settingsGroup = new System.Windows.Forms.GroupBox();
 			this.levelPanel = new LevelEditor.Forms.LevelPanel();
+			this.spritePickerPanel1 = new LevelEditor.Forms.SpritePickerPanel();
+			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.menuStrip.SuspendLayout();
+			this.settingsGroup.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// menuStrip
@@ -87,6 +90,8 @@
 			// 
 			this.settingsGroup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.settingsGroup.Controls.Add(this.groupBox1);
+			this.settingsGroup.Controls.Add(this.spritePickerPanel1);
 			this.settingsGroup.Location = new System.Drawing.Point(519, 27);
 			this.settingsGroup.Name = "settingsGroup";
 			this.settingsGroup.Size = new System.Drawing.Size(261, 530);
@@ -109,6 +114,23 @@
 			this.levelPanel.Size = new System.Drawing.Size(501, 530);
 			this.levelPanel.TabIndex = 3;
 			// 
+			// spritePickerPanel1
+			// 
+			this.spritePickerPanel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+			this.spritePickerPanel1.Location = new System.Drawing.Point(6, 19);
+			this.spritePickerPanel1.Name = "spritePickerPanel1";
+			this.spritePickerPanel1.Size = new System.Drawing.Size(249, 137);
+			this.spritePickerPanel1.TabIndex = 0;
+			// 
+			// groupBox1
+			// 
+			this.groupBox1.Location = new System.Drawing.Point(6, 187);
+			this.groupBox1.Name = "groupBox1";
+			this.groupBox1.Size = new System.Drawing.Size(200, 100);
+			this.groupBox1.TabIndex = 1;
+			this.groupBox1.TabStop = false;
+			this.groupBox1.Text = "groupBox1";
+			// 
 			// LevelEditorForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -124,6 +146,7 @@
 			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LevelEditorForm_KeyDown);
 			this.menuStrip.ResumeLayout(false);
 			this.menuStrip.PerformLayout();
+			this.settingsGroup.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -138,6 +161,8 @@
 		private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
 		private System.Windows.Forms.GroupBox settingsGroup;
 		private LevelPanel levelPanel;
+		private SpritePickerPanel spritePickerPanel1;
+		private System.Windows.Forms.GroupBox groupBox1;
 
 	}
 }
