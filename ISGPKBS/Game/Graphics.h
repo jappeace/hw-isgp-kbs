@@ -62,7 +62,13 @@ namespace isgp {
 
 		// Draws a bitmap at the given position with the default tile size
 		void DrawBitmap(string path, Point& position);
+		// Draws a bitmap at the given position with the default tile size
+		// The source rectangle starts at the given offset
+		void DrawBitmap(string path, Point& position, Point& offset);
 		// Draws a bitmap at the given location with the given size
 		void DrawBitmap(string path, Point& position, Size& size);
+		// Draws a bitmap at the given location with the given size
+		// The source rectangle starts at the given offset
+		void DrawBitmap(string path, Point& position, Point& offset, Size& size);
 	};
 }

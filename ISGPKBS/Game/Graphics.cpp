@@ -107,8 +107,16 @@ namespace isgp {
 	void Graphics::DrawBitmap(string path, Point& position) {
 		this->DrawBitmap(path, position, Size(TILE_WIDTH, TILE_HEIGHT));
 	}
+	
+	void Graphics::DrawBitmap(string path, Point& position, Point& offset) {
+		this->DrawBitmap(path, position, offset, Size(TILE_WIDTH, TILE_HEIGHT));
+	}
 
 	void Graphics::DrawBitmap(string path, Point& position, Size& size) {
+		this->DrawBitmap(path, position, Point(0, 0), size);
+	}
+
+	void Graphics::DrawBitmap(string path, Point& position, Point& offset, Size& size) {
 		Point correctedPoint = position;
 
 		if (_cam != NULL) {
@@ -132,7 +140,7 @@ namespace isgp {
 			// Source Context
 			bitmap_hdc, 
 			// Image offset
-			0, 0, 
+			(int) offset.GetX(), (int) offset.GetY(),
 			// Operation
 			SRCAND);
 
@@ -150,7 +158,7 @@ namespace isgp {
 			// Source Context
 			bitmap_hdc, 
 			// Image offset
-			0, 0, 
+			(int) offset.GetX(), (int) offset.GetY(),
 			// Operation
 			SRCPAINT);
 
