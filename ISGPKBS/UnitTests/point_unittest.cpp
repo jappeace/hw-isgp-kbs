@@ -53,6 +53,11 @@ namespace UnitTests
 			p = p * Vector2D(2, 3);
 			Assert::AreEqual(20.0, p.X());
 			Assert::AreEqual(54.0, p.Y());
+
+			p *= Vector2D(2);
+			Assert::AreEqual(40.0, p.X());
+			Assert::AreEqual(108.0, p.Y());
+
 		}
 	};
 }
