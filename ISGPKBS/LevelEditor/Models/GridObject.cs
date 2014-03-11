@@ -15,11 +15,6 @@ namespace LevelEditor.Models
 		public GridObjectType Type { get; set; }
 
 		/// <summary>
-		/// Collection of behaviour for this gridobject.
-		/// </summary>
-		public IEnumerable<Behaviour> Behaviour { get; set; }
-
-		/// <summary>
 		/// Topleft coordinate in the spriteset in pixels where the sprite for
 		/// this gridobject starts.
 		/// </summary>
@@ -28,7 +23,6 @@ namespace LevelEditor.Models
 		public GridObject(GridObjectType type)
 		{
 			Type = type;
-			Behaviour = new List<Behaviour>();
 			SpriteSetLocation = new Point();
 		}
 	}

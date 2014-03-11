@@ -62,6 +62,7 @@ namespace LevelEditor.Models.IO
 						break;
 				}
 			}
+			return level;
 		}
 
 		/// <summary>
