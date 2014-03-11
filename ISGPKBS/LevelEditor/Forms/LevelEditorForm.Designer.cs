@@ -108,6 +108,7 @@
 			// 
 			// actionBox
 			// 
+			this.actionBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.actionBox.Controls.Add(this.rmBtn);
 			this.actionBox.Controls.Add(this.addBtn);
 			this.actionBox.Controls.Add(this.pointBtn);
@@ -120,6 +121,7 @@
 			// 
 			// rmBtn
 			// 
+			this.rmBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.rmBtn.AutoSize = true;
 			this.rmBtn.Location = new System.Drawing.Point(7, 68);
 			this.rmBtn.Name = "rmBtn";
@@ -131,6 +133,7 @@
 			// 
 			// addBtn
 			// 
+			this.addBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.addBtn.AutoSize = true;
 			this.addBtn.Location = new System.Drawing.Point(7, 44);
 			this.addBtn.Name = "addBtn";
@@ -142,6 +145,7 @@
 			// 
 			// pointBtn
 			// 
+			this.pointBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.pointBtn.AutoSize = true;
 			this.pointBtn.Location = new System.Drawing.Point(7, 20);
 			this.pointBtn.Name = "pointBtn";
@@ -168,6 +172,7 @@
 			// 
 			// typeBox
 			// 
+			this.typeBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.typeBox.Controls.Add(this.ghostRadio);
 			this.typeBox.Controls.Add(this.tileRadio);
 			this.typeBox.Location = new System.Drawing.Point(7, 126);
@@ -179,6 +184,7 @@
 			// 
 			// tileRadio
 			// 
+			this.tileRadio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.tileRadio.AutoSize = true;
 			this.tileRadio.Location = new System.Drawing.Point(7, 20);
 			this.tileRadio.Name = "tileRadio";
@@ -190,6 +196,7 @@
 			// 
 			// ghostRadio
 			// 
+			this.ghostRadio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.ghostRadio.AutoSize = true;
 			this.ghostRadio.Location = new System.Drawing.Point(7, 44);
 			this.ghostRadio.Name = "ghostRadio";
