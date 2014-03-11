@@ -8,7 +8,7 @@ Window::Window() {
 	ILevelFactory* factory = new SimpleLevelFactory();
 	_level = factory->CreateLevel();
 	delete factory;
-	_gameState = Playing;
+	_gameState = GameOver;
 }
 
 Window::~Window()
@@ -57,6 +57,14 @@ void Window::OnKeyDown(int which) {
 	if (which == VK_SPACE) {
 		_level->_player->_spaceKey = true;
 	}
+#ifdef _DEBUG
+	if (which == VK_ESCAPE) {
+		_gameState = GameOver;
+	}
+	if (which == VK_RETURN) {
+		_gameState = Playing;
+	}
+#endif
 }
 
 void Window::OnKeyUp(int which) {
