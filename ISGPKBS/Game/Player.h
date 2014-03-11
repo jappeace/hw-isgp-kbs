@@ -24,10 +24,10 @@ namespace isgp {
 	private:
 		vector<IBehaviour*>* _behaviours;
 		double _maxVel;
-		Graphics* _graphics;
 		double _accel, 
 			_deAccel;
 		Animation* _animation;
+		bool _facingRight;
 	};
 }
 
