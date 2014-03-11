@@ -36,15 +36,33 @@ namespace LevelEditor.Models.IO
 		/// </summary>
 		public void ExportLevel(ILevel level)
 		{
-			throw new NotImplementedException();
+			LevelWriter.WriteLine(string.Format("width={0}", level.Width));
+			LevelWriter.WriteLine(string.Format("height={0}", level.Height));
+			LevelWriter.WriteLine(string.Format("start={0},{1}",
+				level.Start.X, level.Start.Y));
+			foreach (KeyValuePair<Point, GridObject> pair in level.GridObjects)
+			{
+				LevelWriter.WriteLine(TileToString(pair.Key, pair.Value));
+			}
+			LevelWriter.Close();
 		}
 
 		/// <summary>
 		/// Creates a line for a tile.
 		/// </summary>
-		private string TileToString(Point position, GridObjectType type)
+		private string TileToString(Point position, GridObject obj)
 		{
-			return string.Format("{0},{1}={2}", position.X, position.Y, (int)type);
+			string typeName = string.Empty;
+			switch (obj.Type)
+			{
+				case GridObjectType.Tile:
+					typeName = "tile";
+					break;
+				case GridObjectType.Ghost:
+					typeName = "ghost";
+					break;
+			}
+			return string.Format("{0},{1}={2}", position.X, position.Y, typeName);
 		}
 	}
 }

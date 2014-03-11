@@ -64,6 +64,7 @@ namespace LevelEditor.Models.IO
 				level.SetGridObject(gridObjectPos, new GridObject(gridObjectType));
 				tileLine = LevelReader.ReadLine();
 			}
+			LevelReader.Close();
 			return level;
 		}
 

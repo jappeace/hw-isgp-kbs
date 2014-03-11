@@ -138,6 +138,11 @@ namespace LevelEditor.Forms
 			ChangeMouseAction();
 		}
 
+		private void startRadio_CheckedChanged(object sender, EventArgs e)
+		{
+			ChangeMouseAction();
+		}
+
 		private void ChangeMouseAction()
 		{
 			if (!selectRadio.Checked)
@@ -152,6 +157,10 @@ namespace LevelEditor.Forms
 			else if (addRadio.Checked)
 			{
 				levelPanel.MouseAction = MouseAction.Add;
+			}
+			else if (startRadio.Checked)
+			{
+				levelPanel.MouseAction = MouseAction.Start;
 			}
 			else
 			{

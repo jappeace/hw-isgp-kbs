@@ -75,6 +75,10 @@ namespace LevelEditor.Forms
 				_level.SetGridObject(PanelToGridLocation(e.Location),
 					new GridObject(GridObjectType.Tile));
 			}
+			if (MouseAction == MouseAction.Start)
+			{
+				Level.Start = PanelToGridLocation(e.Location);
+			}
 			Invalidate();
 		}
 
@@ -161,6 +165,9 @@ namespace LevelEditor.Forms
 					pair.Key.Y * GridSize + GridLineWidth,
 					GridSize - GridLineWidth, GridSize - GridLineWidth);
 			}
+			g.FillRectangle(new SolidBrush(Color.Green), Level.Start.X * GridSize + GridLineWidth,
+				Level.Start.Y * GridSize + GridLineWidth,
+				GridSize - GridLineWidth, GridSize - GridLineWidth);
 		}
 	}
 }
