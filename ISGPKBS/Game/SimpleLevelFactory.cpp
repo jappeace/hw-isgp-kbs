@@ -17,6 +17,7 @@ namespace isgp{
 		Grid * g = result->GetGrid();
 		result->_player = new Player(Point(4,4));
 		result->_enemy = new Ghost(Point(100,100), result->_player);
+		result->_enemy2 = new Patrol(Point(100,221), 200, result->_player);
 		g->GetTileAt(position)->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
 		g->TraverseRow(4, this);
 		g->TraverseRow(5, this);

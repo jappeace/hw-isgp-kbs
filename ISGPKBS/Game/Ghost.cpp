@@ -3,6 +3,7 @@
 namespace isgp {
 	Ghost::Ghost(Point point, Player* player) : Enemy(point, player) {
 		_aVel = 0;
+		_facingRight = true;
 	}
 
 	void Ghost::Update(double milisec) {
@@ -12,7 +13,7 @@ namespace isgp {
 		if (range < 26) {
 			_xVel = -_xVel;
 			_yVel = -_yVel;
-		}else if (range < 600) {
+		}else if (range < 700) {
 			if (_aVel < 700) {
 				_aVel += (2000 * elapsed);
 			}
@@ -37,7 +38,23 @@ namespace isgp {
 			}
 		}
 
+		if (_xVel > 0.0) {
+			_facingRight = true;
+		}else{
+			_facingRight = false;
+		}
+
 		_position.SetX(_position.GetX() + (_xVel * elapsed));
 		_position.SetY(_position.GetY() + (_yVel * elapsed));
+	}
+
+	void Ghost::Paint(Graphics* g) {
+		_graphics = g;
+
+		if (_facingRight) {
+			g->DrawBitmap(".\\tiles\\boo.bmp", this->_position, Size(32, 32));
+		}else{
+			g->DrawBitmap(".\\tiles\\boo.bmp", this->_position, Point(32, 0), Size(32, 32));
+		}
 	}
 }

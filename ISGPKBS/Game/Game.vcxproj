@@ -80,6 +80,7 @@
     <ClInclude Include="ITileData.h" />
     <ClInclude Include="ITranslator.h" />
     <ClInclude Include="Level.h" />
+    <ClInclude Include="Patrol.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="resource.h" />
@@ -105,6 +106,7 @@
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="GridGraphicTranslator.cpp" />
     <ClCompile Include="Level.cpp" />
+    <ClCompile Include="Patrol.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="SimpleLevelFactory.cpp" />
