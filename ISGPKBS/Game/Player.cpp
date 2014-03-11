@@ -77,6 +77,10 @@ namespace isgp{
 		}
 		_position += (*_velocity) * Vector2D(elapsed);
 
+		if(_upKey && (collision & Down)) {
+			_velocity->Y(-220);
+		}
+
 	}
 
 	void Player::MoveTo(int x, int y) {
