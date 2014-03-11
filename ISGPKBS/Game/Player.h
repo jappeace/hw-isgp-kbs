@@ -7,9 +7,9 @@
 #include "IPaintable.h"
 #include "Grid.h"
 #include "Entity.h"
+
 namespace isgp {
-	class Player : public Entity
-	{
+	class Player : public Entity {
 	public:
 		Player(Vector2D position);
 		~Player(void);
@@ -17,17 +17,13 @@ namespace isgp {
 		void Update(const double);
 		void AddToVelocityY(double y);
 		bool _leftKey, _rightKey, _upKey, _spaceKey;
-		
 		void MoveTo(int x, int y);
-
-		
 	private:
 		vector<IBehaviour*>* _behaviours;
 		double _maxVel;
-		double _accel, 
-			_deAccel;
+		double _accel;
+		double _deAccel;
 		Animation* _animation;
 		bool _facingRight;
 	};
 }
-
