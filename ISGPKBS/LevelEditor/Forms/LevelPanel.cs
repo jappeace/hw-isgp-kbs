@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using LevelEditor.Models;
@@ -26,41 +27,64 @@ namespace LevelEditor.Forms
 			}
 		}
 
-		public TileType SelectedType { get; set; }
+		public GridObjectType SelectedType { get; set; }
+		public MouseAction MouseAction { get; set; }
+
+		public Point SelectedPoint { get; set; }
 
 		private ILevel _level;
 		private Pen _gridPen;
+		private Pen _selectedPen;
 
 		private const int GridLineWidth = 1;
 		private const int GridSize = 16 + GridLineWidth;
 
 		public LevelPanel()
 		{
+			MouseAction = MouseAction.Select;
 			// Enable double buffering for a smoother user experience.
 			DoubleBuffered = true;
 			// Enable scrollbars.
 			AutoScroll = true;
 			BackColor = Color.Red;
 			_gridPen = new Pen(Color.Black, GridLineWidth);
+			_selectedPen = new Pen(Color.Blue, GridLineWidth * 2);
 			Scroll += OnScroll;
 			MouseClick += levelPanel_MouseClick;
 		}
 
 		private void levelPanel_MouseClick(object sender, MouseEventArgs e)
 		{
-			if (Level != null)
+			if (_level == null)
 			{
-				Point gridLocation = PanelToGridLocation(e.Location);
-				if (e.Button == MouseButtons.Left)
-				{
-					Level.SetTile(gridLocation, SelectedType);
-				}
-				else if (e.Button == MouseButtons.Right)
-				{
-					Level.RemoveTile(gridLocation);
-				}
-				Invalidate();
+				return;
 			}
+			if (MouseAction == MouseAction.Select)
+			{
+				Point pos = PanelToGridLocation(e.Location);
+				if (pos.X < Level.Width && pos.Y < Level.Height)
+				{
+					SelectedPoint = PanelToGridLocation(e.Location);
+				}
+			}
+			if (MouseAction == MouseAction.Remove)
+			{
+				_level.RemoveGridObject(PanelToGridLocation(e.Location));
+			}
+			if (MouseAction == MouseAction.Add)
+			{
+				_level.SetGridObject(PanelToGridLocation(e.Location),
+					new GridObject(SelectedType));
+			}
+			if (MouseAction == MouseAction.Start)
+			{
+				Level.Start = PanelToGridLocation(e.Location);
+			}
+			if (MouseAction == MouseAction.Finish)
+			{
+				Level.Finish = PanelToGridLocation(e.Location);
+			}
+			Invalidate();
 		}
 
 		private Point PanelToGridLocation(Point panelLocation)
@@ -120,31 +144,42 @@ namespace LevelEditor.Forms
 			// Draw right line.
 			g.DrawLine(_gridPen, Level.Width * GridSize, 0,
 				Level.Width * GridSize, Level.Height * GridSize);
+
+			// Draw selection.
+			if (SelectedPoint.X != -1)
+			{
+				g.DrawRectangle(_selectedPen, SelectedPoint.X * GridSize,
+					SelectedPoint.Y * GridSize, GridSize, GridSize);
+			}
 		}
 
 		private void DrawTiles(Graphics g)
 		{
-			IDictionary<Point, TileType> tiles = Level.GetTiles();
-			Point gridLocation;
-			Bitmap bitmap;
-			foreach (Point point in tiles.Keys)
+			Brush tileBrush;
+			foreach (KeyValuePair<Point, GridObject> pair in Level.GridObjects)
 			{
-				gridLocation = new Point(point.X * GridSize, point.Y * GridSize);
-				gridLocation.X += (GridLineWidth + 1) / 2;
-				gridLocation.Y += (GridLineWidth + 1) / 2;
-				bitmap = BitmapCollection.GetBitmapForType(tiles[point]);
-				g.DrawImage(bitmap, gridLocation);
+				if (pair.Value.Type == GridObjectType.Tile)
+				{
+					tileBrush = new SolidBrush(Color.Black);
+				}
+				else if (pair.Value.Type == GridObjectType.Ghost)
+				{
+					tileBrush = new SolidBrush(Color.Gray);
+				}
+				else
+				{
+					tileBrush = new SolidBrush(Color.Brown);
+				}
+				g.FillRectangle(tileBrush, pair.Key.X * GridSize + GridLineWidth,
+					pair.Key.Y * GridSize + GridLineWidth,
+					GridSize - GridLineWidth, GridSize - GridLineWidth);
 			}
-			gridLocation = new Point(Level.Start.X * GridSize, Level.Start.Y * GridSize);
-			gridLocation.X += (GridLineWidth + 1) / 2;
-			gridLocation.Y += (GridLineWidth + 1) / 2;
-			bitmap = BitmapCollection.GetBitmapForType(TileType.Start);
-			g.DrawImage(bitmap, gridLocation);
-			gridLocation = new Point(Level.Finish.X * GridSize, Level.Finish.Y * GridSize);
-			gridLocation.X += (GridLineWidth + 1) / 2;
-			gridLocation.Y += (GridLineWidth + 1) / 2;
-			bitmap = BitmapCollection.GetBitmapForType(TileType.Finish);
-			g.DrawImage(bitmap, gridLocation);
+			g.FillRectangle(new SolidBrush(Color.Green), Level.Start.X * GridSize + GridLineWidth,
+				Level.Start.Y * GridSize + GridLineWidth,
+				GridSize - GridLineWidth, GridSize - GridLineWidth);
+			g.FillRectangle(new SolidBrush(Color.Red), Level.Finish.X * GridSize + GridLineWidth,
+				Level.Finish.Y * GridSize + GridLineWidth,
+				GridSize - GridLineWidth, GridSize - GridLineWidth);
 		}
 	}
 }

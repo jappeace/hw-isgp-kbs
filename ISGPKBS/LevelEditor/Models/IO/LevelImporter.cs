@@ -41,37 +41,35 @@ namespace LevelEditor.Models.IO
 		/// </summary>
 		public ILevel ImportLevel()
 		{
-			try
+			int width = GetIntValue(LevelReader.ReadLine());
+			int height = GetIntValue(LevelReader.ReadLine());
+			ILevel level = new Level(width, height);
+			level.Start = GetPosition(LevelReader.ReadLine(), 1);
+			level.Finish = GetPosition(LevelReader.ReadLine(), 1);
+
+			Point gridObjectPos;
+			GridObjectType gridObjectType = GridObjectType.Tile;
+			string tileLine = LevelReader.ReadLine();
+			while (tileLine != null)
 			{
-				ILevel level;
-
-				// Create level with the width and height specified in the file.
-				int width = GetIntValue(LevelReader.ReadLine());
-				int height = GetIntValue(LevelReader.ReadLine());
-				level = new Level(width, height);
-				// Set start and finish point
-				level.Start = GetPosition(GetStringValue(LevelReader.ReadLine()));
-				level.Finish = GetPosition(GetStringValue(LevelReader.ReadLine()));
-
-				// Read all coordinates and add them as tiles to the level.
-				TileType tileType;
-				Point position;
-				string line = LevelReader.ReadLine();
-				while (line != null)
+				gridObjectPos = GetPosition(tileLine, 0);
+				switch (GetStringValue(tileLine))
 				{
-					tileType = (TileType)GetIntValue(line);
-					position = GetPosition(line);
-					level.SetTile(position, tileType);
-					line = LevelReader.ReadLine();
+					case "tile":
+						gridObjectType = GridObjectType.Tile;
+						break;
+					case "ghost":
+						gridObjectType = GridObjectType.Ghost;
+						break;
+					case "patrol":
+						gridObjectType = GridObjectType.Patrol;
+						break;
 				}
-				LevelReader.Close();
-				return level;
+				level.SetGridObject(gridObjectPos, new GridObject(gridObjectType));
+				tileLine = LevelReader.ReadLine();
 			}
-			catch (Exception)
-			{
-				LevelReader.Close();
-				throw new ArgumentException("Not a valid level file");
-			}
+			LevelReader.Close();
+			return level;
 		}
 
 		/// <summary>
@@ -99,10 +97,10 @@ namespace LevelEditor.Models.IO
 		/// Gets the Point with a position of a string tha tlooks like:
 		/// xcoordinate,ycoordinate=tiletype
 		/// </summary>
-		private Point GetPosition(string line)
+		private Point GetPosition(string line, int posIndex)
 		{
 			// line.Split() => ["point", "tiletype"]
-			string point = line.Split('=')[0];
+			string point = line.Split('=')[posIndex];
 			// point.Split() => ["x-coordinate", "y-coordinate"]
 			string[] coordinates = point.Split(',');
 
