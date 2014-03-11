@@ -30,7 +30,7 @@ namespace isgp {
 		}
 		CollidingTiles.clear();
 		collision = None;
-		Vector2D bottomRight = this->_position + *_size;
+		Vector2D bottomRight = this->_position + *_size + Vector2D(5);
 		vector<Tile*> includedTiles = _grid->GetTilesInRectangle(this->_position, bottomRight);
 		GridGraphicTranslator translator = GridGraphicTranslator();
 		Vector2D diff = Vector2D(TILE_WIDTH / 2, TILE_HEIGHT / 2);

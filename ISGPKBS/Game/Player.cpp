@@ -65,12 +65,6 @@ namespace isgp{
 		}
 		if((collision & Down && _velocity->Y() > 0) || (collision & Up && _velocity->Y() < 0)) { 
 			_velocity->Y(0);
-			// escape from the ground, otherwise ground is like slibsand
-			if(collision & Down){
-				// calculate the grid truncation and add that value to velocity
-				GridGraphicTranslator().FromTo(GridGraphicTranslator().ToFrom(_position));
-
-			}
 		}
 		if((collision & Right && _velocity->X() > 0) || (collision & Left && _velocity->X() < 0)) { 
 			_velocity->X(0);
