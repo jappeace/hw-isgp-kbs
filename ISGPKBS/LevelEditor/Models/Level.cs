@@ -11,6 +11,7 @@ namespace LevelEditor.Models
 		private int _width;
 		private int _height;
 		private Point _start;
+		private Point _finish;
 		private SpriteSet _spriteSet;
 		private IDictionary<Point, GridObject> _gridObjects;
 
@@ -37,6 +38,15 @@ namespace LevelEditor.Models
 		{
 			get { return _start; }
 			set { _start = value; }
+		}
+
+		/// <summary>
+		/// Finish of the player.
+		/// </summary>
+		public Point Finish
+		{
+			get { return _finish; }
+			set { _finish = value; }
 		}
 
 		/// <summary>

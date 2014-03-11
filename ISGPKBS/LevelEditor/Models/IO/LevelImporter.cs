@@ -45,6 +45,7 @@ namespace LevelEditor.Models.IO
 			int height = GetIntValue(LevelReader.ReadLine());
 			ILevel level = new Level(width, height);
 			level.Start = GetPosition(LevelReader.ReadLine(), 1);
+			level.Finish = GetPosition(LevelReader.ReadLine(), 1);
 
 			Point gridObjectPos;
 			GridObjectType gridObjectType = GridObjectType.Tile;

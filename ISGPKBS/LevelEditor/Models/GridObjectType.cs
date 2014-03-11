@@ -6,6 +6,7 @@
 	public enum GridObjectType
 	{
 		Tile,
-		Ghost
+		Ghost,
+		Patrol
 	}
 }

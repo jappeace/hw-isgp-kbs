@@ -12,6 +12,7 @@ namespace LevelEditor.Models
 		int Width { get; }
 		int Height { get; }
 		Point Start { get; set; }
+		Point Finish { get; set; }
 		IDictionary<Point, GridObject> GridObjects { get; set; }
 		SpriteSet SpriteSet { get; set; }
 		void SetGridObject(Point pos, GridObject obj);
