@@ -3,9 +3,9 @@
 #include "CollisionDetection.h"
 namespace isgp{
 	Player::Player(Vector2D position) {
-		_maxVel = 5;
-		_accel = 22;
-		_deAccel = 11;
+		_maxVel = 500;
+		_accel = 220;
+		_deAccel = 110;
 
 		_position = position;
 		_velocity = new Vector2D();
@@ -55,6 +55,7 @@ namespace isgp{
 			_velocity->X(_velocity->X() + _deAccel * elapsed);
 		}
 		
+		// no wandering
 		if (!_leftKey && !_rightKey && (collision & Down) && _velocity->X() < 20 && _velocity->X() > -20) {
 			_velocity->X(0);
 		}
@@ -62,11 +63,19 @@ namespace isgp{
 		for (unsigned int i = 0; i < _behaviours->size(); ++i) {
 			_behaviours->at(i)->Update(milisec);
 		}
-		if(collision & Down && _velocity->Y() > 0) {
+		if((collision & Down && _velocity->Y() > 0) || (collision & Up && _velocity->Y() < 0)) { 
 			_velocity->Y(0);
+			// escape from the ground, otherwise ground is like slibsand
+			if(collision & Down){
+				// calculate the grid truncation and add that value to velocity
+				GridGraphicTranslator().FromTo(GridGraphicTranslator().ToFrom(_position));
+
+			}
 		}
-		_position.X(_position.X() + (_velocity->X() * elapsed));
-		_position.Y(_position.Y() + (_velocity->Y() * elapsed));
+		if((collision & Right && _velocity->X() > 0) || (collision & Left && _velocity->X() < 0)) { 
+			_velocity->X(0);
+		}
+		_position += (*_velocity) * Vector2D(elapsed);
 
 	}
 

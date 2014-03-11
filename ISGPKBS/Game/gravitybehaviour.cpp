@@ -1,7 +1,7 @@
 #include "gravitybehaviour.h"
 #include "CollisionDetection.h"
 namespace isgp {
-	static const double GRAVITATIONAL_PULL = (double) 20;
+	static const double GRAVITATIONAL_PULL = (double) 200;
 
 	GravityBehaviour::GravityBehaviour(Player* player) {
 		this->_player = player;
