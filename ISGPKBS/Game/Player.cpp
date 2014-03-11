@@ -3,13 +3,12 @@
 #include "CollisionDetection.h"
 namespace isgp{
 	Player::Player(Vector2D position) {
-		_maxVel = 500;
-		_accel = 2200;
-		_deAccel = 1100;
+		_maxVel = 5;
+		_accel = 22;
+		_deAccel = 11;
 
 		_position = position;
-		_xVel = 0;
-		_yVel = 0;
+		_velocity = new Vector2D();
 		_leftKey = false;
 		_rightKey = false;
 		_upKey = false;
@@ -28,6 +27,7 @@ namespace isgp{
 		// Delete vector
 		delete _behaviours;
 		delete _size;
+		delete _velocity;
 	}
 
 	void Player::Update(const double milisec) {
@@ -35,35 +35,38 @@ namespace isgp{
 
 		collision = CheckCollision();
 
-		if (_leftKey && _xVel > -_maxVel) { 
-			if (collision & Down) {
-				_xVel -= _accel * elapsed;
-			} else { 
-				_xVel -= _deAccel * elapsed;
+		if(_leftKey && _velocity->X() > -_maxVel) {
+			if(collision & Down){
+				_velocity->X(_velocity->X() - (_accel * elapsed));
+			} else {
+				_velocity->X(_velocity->X() - (_deAccel * elapsed));
 			}
-		} else if (_xVel < 0 && (collision & Down)) {
-			_xVel += _deAccel * elapsed;
-		}
-		
-		if (_rightKey && _xVel < _maxVel) { 
-			if (collision & Down) {
-				_xVel += _accel * elapsed;
-			} else { 
-				_xVel += _deAccel * elapsed;
-			}
-		} else if (_xVel > 0 && (collision & Down)) {
-			_xVel -= _deAccel * elapsed;
+		} else if(_velocity->X() < 0 && (collision & Down)) {
+			_velocity->X(_velocity->X() + _deAccel * elapsed);
 		}
 
-		if (!_leftKey && !_rightKey && (collision & Down) && _xVel < 20 && _xVel > -20) {
-			_xVel = 0;
+		if(_rightKey && _velocity->X() < _maxVel) {
+			if(collision & Down) {
+				_velocity->X(_velocity->X() + _accel * elapsed);
+			} else {
+				_velocity->X(_velocity->X() + _deAccel * elapsed);
+			}
+		} else if(_velocity->X() > 0 && (collision & Down)) {
+			_velocity->X(_velocity->X() + _deAccel * elapsed);
 		}
-		_position.X(_position.X() + (_xVel * elapsed));
-		_position.Y(_position.Y() + (_yVel * elapsed));
+		
+		if (!_leftKey && !_rightKey && (collision & Down) && _velocity->X() < 20 && _velocity->X() > -20) {
+			_velocity->X(0);
+		}
 
 		for (unsigned int i = 0; i < _behaviours->size(); ++i) {
 			_behaviours->at(i)->Update(milisec);
 		}
+		if(collision & Down && _velocity->Y() > 0) {
+			_velocity->Y(0);
+		}
+		_position.X(_position.X() + (_velocity->X() * elapsed));
+		_position.Y(_position.Y() + (_velocity->Y() * elapsed));
 
 	}
 
@@ -71,7 +74,7 @@ namespace isgp{
 	}
 	
 	void Player::AddToVelocityY(double y) {
-		_yVel += y;
+		_velocity->Y(_velocity->Y() + y);
 	}
 
 	void Player::Paint(Graphics* g) {

@@ -14,7 +14,7 @@ namespace isgp{
 	void Camera::Update(double milisec) {
 		double elapsed = milisec / 1000;
 
-		double camFix2 = 200 * (_player->_xVel * 0.0015);
+		double camFix2 = 200 * (_player->GetVelocity()->X() * 0.0015);
 
 		_camFix = _camFix + (camFix2 - _camFix) * (3 * elapsed);
 

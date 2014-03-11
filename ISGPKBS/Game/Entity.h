@@ -17,11 +17,13 @@ public:
 	Vector2D* GetSize() const;
 	void SetSize(Vector2D* size);
 	int GetCollision() const;
+	Vector2D* GetVelocity() const;
 
 protected:
 	int collision;
 	Grid* _grid;
 	Vector2D* _size;
+	Vector2D* _velocity;
 };
 }
 

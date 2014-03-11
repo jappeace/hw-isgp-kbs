@@ -16,14 +16,16 @@ namespace isgp {
 		void Update(const double);
 		void AddToVelocityY(double y);
 		bool _leftKey, _rightKey, _upKey, _spaceKey;
-		double _xVel, _yVel, _maxVel;
+		
 		void MoveTo(int x, int y);
 
 		
 	private:
 		vector<IBehaviour*>* _behaviours;
+		double _maxVel;
 		Graphics* _graphics;
-		double _accel, _deAccel;
+		double _accel, 
+			_deAccel;
 	};
 }
 
