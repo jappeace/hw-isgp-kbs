@@ -48,6 +48,9 @@ namespace LevelEditor.Models
 			set { _spriteSet = value; }
 		}
 
+		/// <summary>
+		/// Collection of all gridobjects in the level.
+		/// </summary>
 		public IDictionary<Point, GridObject> GridObjects
 		{
 			get
