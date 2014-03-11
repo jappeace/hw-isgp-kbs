@@ -27,10 +27,11 @@ namespace LevelEditor.Forms
 			}
 		}
 
-		public GridObjectType SelectedType { get; set; }
+		public Point SelectedPoint { get; set; }
 
 		private ILevel _level;
 		private Pen _gridPen;
+		private Pen _selectedPen;
 
 		private const int GridLineWidth = 1;
 		private const int GridSize = 16 + GridLineWidth;
@@ -43,13 +44,15 @@ namespace LevelEditor.Forms
 			AutoScroll = true;
 			BackColor = Color.Red;
 			_gridPen = new Pen(Color.Black, GridLineWidth);
+			_selectedPen = new Pen(Color.Blue, GridLineWidth * 2);
 			Scroll += OnScroll;
 			MouseClick += levelPanel_MouseClick;
 		}
 
 		private void levelPanel_MouseClick(object sender, MouseEventArgs e)
 		{
-			throw new NotImplementedException();
+			SelectedPoint = PanelToGridLocation(e.Location);
+			Invalidate();
 		}
 
 		private Point PanelToGridLocation(Point panelLocation)
@@ -109,11 +112,14 @@ namespace LevelEditor.Forms
 			// Draw right line.
 			g.DrawLine(_gridPen, Level.Width * GridSize, 0,
 				Level.Width * GridSize, Level.Height * GridSize);
+
+			// Draw selection.
+			g.DrawRectangle(_selectedPen, SelectedPoint.X * GridSize,
+				SelectedPoint.Y * GridSize, GridSize, GridSize);
 		}
 
 		private void DrawTiles(Graphics g)
 		{
-			throw new NotImplementedException();
 		}
 	}
 }

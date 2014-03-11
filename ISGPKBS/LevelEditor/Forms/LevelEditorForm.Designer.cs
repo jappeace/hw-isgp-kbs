@@ -34,18 +34,18 @@
 			this.loadLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.settingsGroup = new System.Windows.Forms.GroupBox();
+			this.typeBox = new System.Windows.Forms.GroupBox();
+			this.ghostRadio = new System.Windows.Forms.RadioButton();
+			this.tileRadio = new System.Windows.Forms.RadioButton();
 			this.actionBox = new System.Windows.Forms.GroupBox();
 			this.rmBtn = new System.Windows.Forms.RadioButton();
 			this.addBtn = new System.Windows.Forms.RadioButton();
 			this.pointBtn = new System.Windows.Forms.RadioButton();
 			this.levelPanel = new LevelEditor.Forms.LevelPanel();
-			this.typeBox = new System.Windows.Forms.GroupBox();
-			this.tileRadio = new System.Windows.Forms.RadioButton();
-			this.ghostRadio = new System.Windows.Forms.RadioButton();
 			this.menuStrip.SuspendLayout();
 			this.settingsGroup.SuspendLayout();
-			this.actionBox.SuspendLayout();
 			this.typeBox.SuspendLayout();
+			this.actionBox.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// menuStrip
@@ -106,6 +106,42 @@
 			this.settingsGroup.TabStop = false;
 			this.settingsGroup.Text = "Settings";
 			// 
+			// typeBox
+			// 
+			this.typeBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.typeBox.Controls.Add(this.ghostRadio);
+			this.typeBox.Controls.Add(this.tileRadio);
+			this.typeBox.Location = new System.Drawing.Point(7, 126);
+			this.typeBox.Name = "typeBox";
+			this.typeBox.Size = new System.Drawing.Size(248, 72);
+			this.typeBox.TabIndex = 2;
+			this.typeBox.TabStop = false;
+			this.typeBox.Text = "Type";
+			// 
+			// ghostRadio
+			// 
+			this.ghostRadio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.ghostRadio.AutoSize = true;
+			this.ghostRadio.Location = new System.Drawing.Point(7, 44);
+			this.ghostRadio.Name = "ghostRadio";
+			this.ghostRadio.Size = new System.Drawing.Size(53, 17);
+			this.ghostRadio.TabIndex = 1;
+			this.ghostRadio.Text = "Ghost";
+			this.ghostRadio.UseVisualStyleBackColor = true;
+			// 
+			// tileRadio
+			// 
+			this.tileRadio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.tileRadio.AutoSize = true;
+			this.tileRadio.Checked = true;
+			this.tileRadio.Location = new System.Drawing.Point(7, 20);
+			this.tileRadio.Name = "tileRadio";
+			this.tileRadio.Size = new System.Drawing.Size(42, 17);
+			this.tileRadio.TabIndex = 0;
+			this.tileRadio.TabStop = true;
+			this.tileRadio.Text = "Tile";
+			this.tileRadio.UseVisualStyleBackColor = true;
+			// 
 			// actionBox
 			// 
 			this.actionBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -127,7 +163,6 @@
 			this.rmBtn.Name = "rmBtn";
 			this.rmBtn.Size = new System.Drawing.Size(65, 17);
 			this.rmBtn.TabIndex = 2;
-			this.rmBtn.TabStop = true;
 			this.rmBtn.Text = "Remove";
 			this.rmBtn.UseVisualStyleBackColor = true;
 			// 
@@ -139,7 +174,6 @@
 			this.addBtn.Name = "addBtn";
 			this.addBtn.Size = new System.Drawing.Size(44, 17);
 			this.addBtn.TabIndex = 1;
-			this.addBtn.TabStop = true;
 			this.addBtn.Text = "Add";
 			this.addBtn.UseVisualStyleBackColor = true;
 			// 
@@ -147,6 +181,7 @@
 			// 
 			this.pointBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.pointBtn.AutoSize = true;
+			this.pointBtn.Checked = true;
 			this.pointBtn.Location = new System.Drawing.Point(7, 20);
 			this.pointBtn.Name = "pointBtn";
 			this.pointBtn.Size = new System.Drawing.Size(55, 17);
@@ -166,45 +201,8 @@
 			this.levelPanel.Level = null;
 			this.levelPanel.Location = new System.Drawing.Point(12, 27);
 			this.levelPanel.Name = "levelPanel";
-			this.levelPanel.SelectedType = LevelEditor.Models.GridObjectType.Tile;
 			this.levelPanel.Size = new System.Drawing.Size(501, 530);
 			this.levelPanel.TabIndex = 3;
-			// 
-			// typeBox
-			// 
-			this.typeBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.typeBox.Controls.Add(this.ghostRadio);
-			this.typeBox.Controls.Add(this.tileRadio);
-			this.typeBox.Location = new System.Drawing.Point(7, 126);
-			this.typeBox.Name = "typeBox";
-			this.typeBox.Size = new System.Drawing.Size(248, 72);
-			this.typeBox.TabIndex = 2;
-			this.typeBox.TabStop = false;
-			this.typeBox.Text = "Type";
-			// 
-			// tileRadio
-			// 
-			this.tileRadio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.tileRadio.AutoSize = true;
-			this.tileRadio.Location = new System.Drawing.Point(7, 20);
-			this.tileRadio.Name = "tileRadio";
-			this.tileRadio.Size = new System.Drawing.Size(42, 17);
-			this.tileRadio.TabIndex = 0;
-			this.tileRadio.TabStop = true;
-			this.tileRadio.Text = "Tile";
-			this.tileRadio.UseVisualStyleBackColor = true;
-			// 
-			// ghostRadio
-			// 
-			this.ghostRadio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.ghostRadio.AutoSize = true;
-			this.ghostRadio.Location = new System.Drawing.Point(7, 44);
-			this.ghostRadio.Name = "ghostRadio";
-			this.ghostRadio.Size = new System.Drawing.Size(53, 17);
-			this.ghostRadio.TabIndex = 1;
-			this.ghostRadio.TabStop = true;
-			this.ghostRadio.Text = "Ghost";
-			this.ghostRadio.UseVisualStyleBackColor = true;
 			// 
 			// LevelEditorForm
 			// 
@@ -222,10 +220,10 @@
 			this.menuStrip.ResumeLayout(false);
 			this.menuStrip.PerformLayout();
 			this.settingsGroup.ResumeLayout(false);
-			this.actionBox.ResumeLayout(false);
-			this.actionBox.PerformLayout();
 			this.typeBox.ResumeLayout(false);
 			this.typeBox.PerformLayout();
+			this.actionBox.ResumeLayout(false);
+			this.actionBox.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

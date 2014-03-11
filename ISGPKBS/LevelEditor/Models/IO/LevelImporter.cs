@@ -47,7 +47,7 @@ namespace LevelEditor.Models.IO
 			level.Start = GetPosition(LevelReader.ReadLine());
 
 			Point gridObjectPos;
-			GridObjectType gridObjectType;
+			GridObjectType gridObjectType = GridObjectType.Tile;
 			string tileLine = LevelReader.ReadLine();
 			while (tileLine != null)
 			{
@@ -61,6 +61,7 @@ namespace LevelEditor.Models.IO
 						gridObjectType = GridObjectType.Ghost;
 						break;
 				}
+				level.SetGridObject(gridObjectPos, new GridObject(gridObjectType));
 			}
 			return level;
 		}
