@@ -61,6 +61,9 @@ namespace LevelEditor.Models.IO
 				case GridObjectType.Ghost:
 					typeName = "ghost";
 					break;
+				case GridObjectType.Patrol:
+					typeName = "patrol";
+					break;
 			}
 			return string.Format("{0},{1}={2}", position.X, position.Y, typeName);
 		}

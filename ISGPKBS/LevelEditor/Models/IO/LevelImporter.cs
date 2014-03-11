@@ -61,6 +61,9 @@ namespace LevelEditor.Models.IO
 					case "ghost":
 						gridObjectType = GridObjectType.Ghost;
 						break;
+					case "patrol":
+						gridObjectType = GridObjectType.Patrol;
+						break;
 				}
 				level.SetGridObject(gridObjectPos, new GridObject(gridObjectType));
 				tileLine = LevelReader.ReadLine();

@@ -12,8 +12,6 @@ namespace LevelEditor.Forms
 	/// </summary>
 	public partial class LevelEditorForm : Form
 	{
-		private ILevel _level;
-
 		public LevelEditorForm()
 		{
 			InitializeComponent();
