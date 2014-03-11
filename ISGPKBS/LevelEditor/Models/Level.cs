@@ -60,11 +60,10 @@ namespace LevelEditor.Models
 		/// <summary>
 		/// Creates a level with the given width, height and spriteset.
 		/// </summary>
-		public Level(int width, int height, SpriteSet spriteSet)
+		public Level(int width, int height)
 		{
 			_width = width;
 			_height = height;
-			_spriteSet = spriteSet;
 		}
 	}
 }
