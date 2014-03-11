@@ -20,6 +20,7 @@ namespace isgp {
 		void GameLoop(double) override;
 		void AfterCreate() override;
 		Camera* _cam;
+		int _gameState;
 	private:
 		Level* _level;
 	};

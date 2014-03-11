@@ -13,7 +13,7 @@ namespace isgp {
 	public:
 		Enemy(Vector2D position, Player*);
 		~Enemy(void);
-		void Paint(Graphics* g) override;
+		virtual void Paint(Graphics* g);
 		virtual void Update(double) = 0;
 	protected:
 		vector<IBehaviour*>* _behaviours;
