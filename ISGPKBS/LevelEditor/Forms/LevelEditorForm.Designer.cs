@@ -38,9 +38,9 @@
 			this.ghostRadio = new System.Windows.Forms.RadioButton();
 			this.tileRadio = new System.Windows.Forms.RadioButton();
 			this.actionBox = new System.Windows.Forms.GroupBox();
-			this.rmBtn = new System.Windows.Forms.RadioButton();
-			this.addBtn = new System.Windows.Forms.RadioButton();
-			this.pointBtn = new System.Windows.Forms.RadioButton();
+			this.rmRadio = new System.Windows.Forms.RadioButton();
+			this.addRadio = new System.Windows.Forms.RadioButton();
+			this.selectRadio = new System.Windows.Forms.RadioButton();
 			this.levelPanel = new LevelEditor.Forms.LevelPanel();
 			this.menuStrip.SuspendLayout();
 			this.settingsGroup.SuspendLayout();
@@ -128,6 +128,7 @@
 			this.ghostRadio.TabIndex = 1;
 			this.ghostRadio.Text = "Ghost";
 			this.ghostRadio.UseVisualStyleBackColor = true;
+			this.ghostRadio.CheckedChanged += new System.EventHandler(this.ghostRadio_CheckedChanged);
 			// 
 			// tileRadio
 			// 
@@ -141,13 +142,14 @@
 			this.tileRadio.TabStop = true;
 			this.tileRadio.Text = "Tile";
 			this.tileRadio.UseVisualStyleBackColor = true;
+			this.tileRadio.CheckedChanged += new System.EventHandler(this.tileRadio_CheckedChanged);
 			// 
 			// actionBox
 			// 
 			this.actionBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.actionBox.Controls.Add(this.rmBtn);
-			this.actionBox.Controls.Add(this.addBtn);
-			this.actionBox.Controls.Add(this.pointBtn);
+			this.actionBox.Controls.Add(this.rmRadio);
+			this.actionBox.Controls.Add(this.addRadio);
+			this.actionBox.Controls.Add(this.selectRadio);
 			this.actionBox.Location = new System.Drawing.Point(6, 19);
 			this.actionBox.Name = "actionBox";
 			this.actionBox.Size = new System.Drawing.Size(249, 100);
@@ -155,40 +157,43 @@
 			this.actionBox.TabStop = false;
 			this.actionBox.Text = "Click action";
 			// 
-			// rmBtn
+			// rmRadio
 			// 
-			this.rmBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.rmBtn.AutoSize = true;
-			this.rmBtn.Location = new System.Drawing.Point(7, 68);
-			this.rmBtn.Name = "rmBtn";
-			this.rmBtn.Size = new System.Drawing.Size(65, 17);
-			this.rmBtn.TabIndex = 2;
-			this.rmBtn.Text = "Remove";
-			this.rmBtn.UseVisualStyleBackColor = true;
+			this.rmRadio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.rmRadio.AutoSize = true;
+			this.rmRadio.Location = new System.Drawing.Point(7, 68);
+			this.rmRadio.Name = "rmRadio";
+			this.rmRadio.Size = new System.Drawing.Size(65, 17);
+			this.rmRadio.TabIndex = 2;
+			this.rmRadio.Text = "Remove";
+			this.rmRadio.UseVisualStyleBackColor = true;
+			this.rmRadio.CheckedChanged += new System.EventHandler(this.rmBtn_CheckedChanged);
 			// 
-			// addBtn
+			// addRadio
 			// 
-			this.addBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.addBtn.AutoSize = true;
-			this.addBtn.Location = new System.Drawing.Point(7, 44);
-			this.addBtn.Name = "addBtn";
-			this.addBtn.Size = new System.Drawing.Size(44, 17);
-			this.addBtn.TabIndex = 1;
-			this.addBtn.Text = "Add";
-			this.addBtn.UseVisualStyleBackColor = true;
+			this.addRadio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.addRadio.AutoSize = true;
+			this.addRadio.Location = new System.Drawing.Point(7, 44);
+			this.addRadio.Name = "addRadio";
+			this.addRadio.Size = new System.Drawing.Size(44, 17);
+			this.addRadio.TabIndex = 1;
+			this.addRadio.Text = "Add";
+			this.addRadio.UseVisualStyleBackColor = true;
+			this.addRadio.CheckedChanged += new System.EventHandler(this.addBtn_CheckedChanged);
 			// 
-			// pointBtn
+			// selectRadio
 			// 
-			this.pointBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.pointBtn.AutoSize = true;
-			this.pointBtn.Checked = true;
-			this.pointBtn.Location = new System.Drawing.Point(7, 20);
-			this.pointBtn.Name = "pointBtn";
-			this.pointBtn.Size = new System.Drawing.Size(55, 17);
-			this.pointBtn.TabIndex = 0;
-			this.pointBtn.TabStop = true;
-			this.pointBtn.Text = "Select";
-			this.pointBtn.UseVisualStyleBackColor = true;
+			this.selectRadio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.selectRadio.AutoSize = true;
+			this.selectRadio.Checked = true;
+			this.selectRadio.Location = new System.Drawing.Point(7, 20);
+			this.selectRadio.Name = "selectRadio";
+			this.selectRadio.Size = new System.Drawing.Size(55, 17);
+			this.selectRadio.TabIndex = 0;
+			this.selectRadio.TabStop = true;
+			this.selectRadio.Text = "Select";
+			this.selectRadio.UseVisualStyleBackColor = true;
+			this.selectRadio.CheckedChanged += new System.EventHandler(this.pointBtn_CheckedChanged);
 			// 
 			// levelPanel
 			// 
@@ -200,7 +205,9 @@
 			this.levelPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.levelPanel.Level = null;
 			this.levelPanel.Location = new System.Drawing.Point(12, 27);
+			this.levelPanel.MouseAction = LevelEditor.Models.MouseAction.Select;
 			this.levelPanel.Name = "levelPanel";
+			this.levelPanel.SelectedPoint = new System.Drawing.Point(0, 0);
 			this.levelPanel.Size = new System.Drawing.Size(501, 530);
 			this.levelPanel.TabIndex = 3;
 			// 
@@ -239,9 +246,9 @@
 		private System.Windows.Forms.GroupBox settingsGroup;
 		private LevelPanel levelPanel;
 		private System.Windows.Forms.GroupBox actionBox;
-		private System.Windows.Forms.RadioButton rmBtn;
-		private System.Windows.Forms.RadioButton addBtn;
-		private System.Windows.Forms.RadioButton pointBtn;
+		private System.Windows.Forms.RadioButton rmRadio;
+		private System.Windows.Forms.RadioButton addRadio;
+		private System.Windows.Forms.RadioButton selectRadio;
 		private System.Windows.Forms.GroupBox typeBox;
 		private System.Windows.Forms.RadioButton ghostRadio;
 		private System.Windows.Forms.RadioButton tileRadio;

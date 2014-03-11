@@ -74,6 +74,7 @@
     <Compile Include="Forms\NewLevelForm.Designer.cs">
       <DependentUpon>NewLevelForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\MouseAction.cs" />
     <Compile Include="Models\SpriteSet.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -78,11 +78,14 @@ namespace LevelEditor.Models
 		/// </summary>
 		public void SetGridObject(Point pos, GridObject obj)
 		{
-			if (_gridObjects.Keys.Contains(pos))
+			if (pos.X < Width && pos.Y < Height)
 			{
-				_gridObjects.Remove(pos);
+				if (_gridObjects.Keys.Contains(pos))
+				{
+					_gridObjects.Remove(pos);
+				}
+				_gridObjects.Add(pos, obj);
 			}
-			_gridObjects.Add(pos, obj);
 		}
 
 		/// <summary>

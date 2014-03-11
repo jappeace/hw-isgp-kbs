@@ -122,5 +122,63 @@ namespace LevelEditor.Forms
 				}
 			}
 		}
+
+		private void addBtn_CheckedChanged(object sender, EventArgs e)
+		{
+			ChangeMouseAction();
+		}
+
+		private void pointBtn_CheckedChanged(object sender, EventArgs e)
+		{
+			ChangeMouseAction();
+		}
+
+		private void rmBtn_CheckedChanged(object sender, EventArgs e)
+		{
+			ChangeMouseAction();
+		}
+
+		private void ChangeMouseAction()
+		{
+			if (!selectRadio.Checked)
+			{
+				levelPanel.SelectedPoint = new Point(-1, -1);
+			}
+
+			if (selectRadio.Checked)
+			{
+				levelPanel.MouseAction = MouseAction.Select;
+			}
+			else if (addRadio.Checked)
+			{
+				levelPanel.MouseAction = MouseAction.Add;
+			}
+			else
+			{
+				levelPanel.MouseAction = MouseAction.Remove;
+			}
+			levelPanel.Invalidate();
+		}
+
+		private void tileRadio_CheckedChanged(object sender, EventArgs e)
+		{
+			ChangeType();
+		}
+
+		private void ghostRadio_CheckedChanged(object sender, EventArgs e)
+		{
+			ChangeType();
+		}
+
+		private void ChangeType()
+		{
+			GridObjectType type = GridObjectType.Tile;
+			if (ghostRadio.Checked)
+			{
+				type = GridObjectType.Ghost;
+			}
+			levelPanel.Level.SetGridObject(levelPanel.SelectedPoint, new GridObject(type));
+			levelPanel.Invalidate();
+		}
 	}
 }

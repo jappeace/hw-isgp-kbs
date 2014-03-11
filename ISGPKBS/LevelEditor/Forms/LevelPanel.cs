@@ -27,6 +27,8 @@ namespace LevelEditor.Forms
 			}
 		}
 
+		public MouseAction MouseAction { get; set; }
+
 		public Point SelectedPoint { get; set; }
 
 		private ILevel _level;
@@ -38,6 +40,7 @@ namespace LevelEditor.Forms
 
 		public LevelPanel()
 		{
+			MouseAction = MouseAction.Select;
 			// Enable double buffering for a smoother user experience.
 			DoubleBuffered = true;
 			// Enable scrollbars.
@@ -51,7 +54,27 @@ namespace LevelEditor.Forms
 
 		private void levelPanel_MouseClick(object sender, MouseEventArgs e)
 		{
-			SelectedPoint = PanelToGridLocation(e.Location);
+			if (_level == null)
+			{
+				return;
+			}
+			if (MouseAction == MouseAction.Select)
+			{
+				Point pos = PanelToGridLocation(e.Location);
+				if (pos.X < Level.Width && pos.Y < Level.Height)
+				{
+					SelectedPoint = PanelToGridLocation(e.Location);
+				}
+			}
+			if (MouseAction == MouseAction.Remove)
+			{
+				_level.RemoveGridObject(PanelToGridLocation(e.Location));
+			}
+			if (MouseAction == MouseAction.Add)
+			{
+				_level.SetGridObject(PanelToGridLocation(e.Location),
+					new GridObject(GridObjectType.Tile));
+			}
 			Invalidate();
 		}
 
@@ -114,12 +137,30 @@ namespace LevelEditor.Forms
 				Level.Width * GridSize, Level.Height * GridSize);
 
 			// Draw selection.
-			g.DrawRectangle(_selectedPen, SelectedPoint.X * GridSize,
-				SelectedPoint.Y * GridSize, GridSize, GridSize);
+			if (SelectedPoint.X != -1)
+			{
+				g.DrawRectangle(_selectedPen, SelectedPoint.X * GridSize,
+					SelectedPoint.Y * GridSize, GridSize, GridSize);
+			}
 		}
 
 		private void DrawTiles(Graphics g)
 		{
+			Brush tileBrush;
+			foreach (KeyValuePair<Point, GridObject> pair in Level.GridObjects)
+			{
+				if (pair.Value.Type == GridObjectType.Tile)
+				{
+					tileBrush = new SolidBrush(Color.Black);
+				}
+				else
+				{
+					tileBrush = new SolidBrush(Color.Gray);
+				}
+				g.FillRectangle(tileBrush, pair.Key.X * GridSize + GridLineWidth,
+					pair.Key.Y * GridSize + GridLineWidth,
+					GridSize - GridLineWidth, GridSize - GridLineWidth);
+			}
 		}
 	}
 }

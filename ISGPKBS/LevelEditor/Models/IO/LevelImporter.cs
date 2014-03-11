@@ -44,14 +44,14 @@ namespace LevelEditor.Models.IO
 			int width = GetIntValue(LevelReader.ReadLine());
 			int height = GetIntValue(LevelReader.ReadLine());
 			ILevel level = new Level(width, height);
-			level.Start = GetPosition(LevelReader.ReadLine());
+			level.Start = GetPosition(LevelReader.ReadLine(), 1);
 
 			Point gridObjectPos;
 			GridObjectType gridObjectType = GridObjectType.Tile;
 			string tileLine = LevelReader.ReadLine();
 			while (tileLine != null)
 			{
-				gridObjectPos = GetPosition(tileLine);
+				gridObjectPos = GetPosition(tileLine, 0);
 				switch (GetStringValue(tileLine))
 				{
 					case "tile":
@@ -62,6 +62,7 @@ namespace LevelEditor.Models.IO
 						break;
 				}
 				level.SetGridObject(gridObjectPos, new GridObject(gridObjectType));
+				tileLine = LevelReader.ReadLine();
 			}
 			return level;
 		}
@@ -91,10 +92,10 @@ namespace LevelEditor.Models.IO
 		/// Gets the Point with a position of a string tha tlooks like:
 		/// xcoordinate,ycoordinate=tiletype
 		/// </summary>
-		private Point GetPosition(string line)
+		private Point GetPosition(string line, int posIndex)
 		{
 			// line.Split() => ["point", "tiletype"]
-			string point = line.Split('=')[0];
+			string point = line.Split('=')[posIndex];
 			// point.Split() => ["x-coordinate", "y-coordinate"]
 			string[] coordinates = point.Split(',');
 
