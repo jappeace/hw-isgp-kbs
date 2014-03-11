@@ -92,30 +92,30 @@ namespace isgp{
 #ifdef _DEBUG
 		_graphics->DrawStaticRect(Vector2D(395, 395), Vector2D(405, 405));
 		GridGraphicTranslator translator = GridGraphicTranslator();
-			vector<Tile*> includedTiles = _grid->GetTilesInRectangle(_position, _position + *_size);
+		vector<Tile*> includedTiles = _grid->GetTilesInRectangle(_position, _position + *_size);
 
-g->SetColor(RGB(255, 0, 0));
-for(unsigned int i = 0; i < includedTiles.size(); i++) {
-Tile* t = includedTiles.at(i);
-Vector2D* p = &translator.FromTo(*t->GetPosition());
-includedTiles.at(i)->Paint(g);
+		g->SetColor(RGB(255, 0, 0));
+		for(unsigned int i = 0; i < includedTiles.size(); i++) {
+			Tile* t = includedTiles.at(i);
+			Vector2D* p = &translator.FromTo(*t->GetPosition());
+			includedTiles.at(i)->Paint(g);
 
-g->DrawRect(Vector2D((int)p->X(), (int)p->Y()), Vector2D((int)p->X() + 16, (int)p->Y() + 16));
-}
+			g->DrawRect(Vector2D((int)p->X(), (int)p->Y()), Vector2D((int)p->X() + 16, (int)p->Y() + 16));
+		}
 
-g->SetColor(RGB(0, 255, 0));
-for(unsigned int i = 0; i < CollidingTiles.size(); i++) {
-Tile* t = CollidingTiles.at(i);
-Vector2D* p = &translator.FromTo(*t->GetPosition());
-CollidingTiles.at(i)->Paint(g);
-g->DrawRect(Vector2D((int)p->X(), (int)p->Y()), Vector2D((int)p->X() + 16, (int)p->Y() + 16));
-}
-g->SetColor(RGB(0, 0, 0));
+		g->SetColor(RGB(0, 255, 0));
+		for(unsigned int i = 0; i < CollidingTiles.size(); i++) {
+			Tile* t = CollidingTiles.at(i);
+			Vector2D* p = &translator.FromTo(*t->GetPosition());
+			CollidingTiles.at(i)->Paint(g);
+			g->DrawRect(Vector2D((int)p->X(), (int)p->Y()), Vector2D((int)p->X() + 16, (int)p->Y() + 16));
+		}
+		g->SetColor(RGB(0, 0, 0));
 
-			g->DrawStr(Vector2D(10, 40), collision & Up ? "Up: true" : "Up: false");
-g->DrawStr(Vector2D(10, 55), collision & Down ? "Down: true" : "Down: false");
-g->DrawStr(Vector2D(10, 70), collision & Left ? "Left: true" : "Left: false");
-g->DrawStr(Vector2D(10, 85), collision & Right ? "Right: true" : "Right: false");
+		g->DrawStr(Vector2D(10, 40), collision & Up ? "Up: true" : "Up: false");
+		g->DrawStr(Vector2D(10, 55), collision & Down ? "Down: true" : "Down: false");
+		g->DrawStr(Vector2D(10, 70), collision & Left ? "Left: true" : "Left: false");
+		g->DrawStr(Vector2D(10, 85), collision & Right ? "Right: true" : "Right: false");
 #endif
 
 		_graphics->DrawRect(_position, _position + *_size);
