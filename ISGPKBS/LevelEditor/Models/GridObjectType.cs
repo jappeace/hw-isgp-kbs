@@ -5,8 +5,7 @@
 	/// </summary>
 	public enum GridObjectType
 	{
-		NPC,
-		Obstacle,
-		Scenery
+		Tile,
+		Ghost
 	}
 }

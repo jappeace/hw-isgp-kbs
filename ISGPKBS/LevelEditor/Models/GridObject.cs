@@ -20,20 +20,14 @@ namespace LevelEditor.Models
 		public IEnumerable<Behaviour> Behaviour { get; set; }
 
 		/// <summary>
-		/// Position of the tile in the map.
-		/// </summary>
-		public Point Position { get; set; }
-
-		/// <summary>
 		/// Topleft coordinate in the spriteset in pixels where the sprite for
 		/// this gridobject starts.
 		/// </summary>
 		public Point SpriteSetLocation { get; set; }
 
-		public GridObject(GridObjectType type, Point position)
+		public GridObject(GridObjectType type)
 		{
 			Type = type;
-			Position = position;
 			Behaviour = new List<Behaviour>();
 			SpriteSetLocation = new Point();
 		}

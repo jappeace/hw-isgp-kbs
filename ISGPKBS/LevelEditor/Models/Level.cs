@@ -11,8 +11,8 @@ namespace LevelEditor.Models
 		private int _width;
 		private int _height;
 		private Point _start;
-		private IDictionary<Point, IDictionary<Layer, GridObject>> _gridObjects;
 		private SpriteSet _spriteSet;
+		private IDictionary<Point, GridObject> _gridObjects;
 
 		/// <summary>
 		/// Width of the map in tiles.
@@ -40,15 +40,6 @@ namespace LevelEditor.Models
 		}
 
 		/// <summary>
-		/// Collection of all gridobjects.
-		/// </summary>
-		public IDictionary<Point, IDictionary<Layer, GridObject>> GridObjects
-		{
-			get { return _gridObjects; }
-			set { _gridObjects = value; }
-		}
-
-		/// <summary>
 		/// Spriteset for the map.
 		/// </summary>
 		public SpriteSet SpriteSet
@@ -57,13 +48,46 @@ namespace LevelEditor.Models
 			set { _spriteSet = value; }
 		}
 
+		public IDictionary<Point, GridObject> GridObjects
+		{
+			get
+			{
+				return _gridObjects;
+			}
+			set
+			{
+				_gridObjects = value;
+			}
+		}
+
 		/// <summary>
 		/// Creates a level with the given width, height and spriteset.
 		/// </summary>
 		public Level(int width, int height)
 		{
+			_gridObjects = new Dictionary<Point, GridObject>();
 			_width = width;
 			_height = height;
+		}
+
+		/// <summary>
+		/// Set gridobject to the given value.
+		/// </summary>
+		public void SetGridObject(Point pos, GridObject obj)
+		{
+			if (_gridObjects.Keys.Contains(pos))
+			{
+				_gridObjects.Remove(pos);
+			}
+			_gridObjects.Add(pos, obj);
+		}
+
+		/// <summary>
+		/// Removes the gridobject at the given position if it exists.
+		/// </summary>
+		public void RemoveGridObject(Point pos)
+		{
+			_gridObjects.Remove(pos);
 		}
 	}
 }

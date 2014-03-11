@@ -41,7 +41,27 @@ namespace LevelEditor.Models.IO
 		/// </summary>
 		public ILevel ImportLevel()
 		{
-			throw new NotImplementedException();
+			int width = GetIntValue(LevelReader.ReadLine());
+			int height = GetIntValue(LevelReader.ReadLine());
+			ILevel level = new Level(width, height);
+			level.Start = GetPosition(LevelReader.ReadLine());
+
+			Point gridObjectPos;
+			GridObjectType gridObjectType;
+			string tileLine = LevelReader.ReadLine();
+			while (tileLine != null)
+			{
+				gridObjectPos = GetPosition(tileLine);
+				switch (GetStringValue(tileLine))
+				{
+					case "tile":
+						gridObjectType = GridObjectType.Tile;
+						break;
+					case "ghost":
+						gridObjectType = GridObjectType.Ghost;
+						break;
+				}
+			}
 		}
 
 		/// <summary>
