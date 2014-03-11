@@ -40,12 +40,13 @@ namespace isgp {
 
 		if (_xVel > 0.0) {
 			_facingRight = true;
-		_position.X(_position.X() + (_xVel * elapsed));
-		_position.Y(_position.Y() + (_yVel * elapsed));
 		}else{
 			_facingRight = false;
 		}
 
+		
+		_position.X(_position.X() + (_xVel * elapsed));
+		_position.Y(_position.Y() + (_yVel * elapsed));
 	}
 
 	void Ghost::Paint(Graphics* g) {
