@@ -105,7 +105,7 @@ namespace isgp{
 			// In the air
 			Point offset((2 * kSpriteSize) + facingOffset, 2 * kSpriteSize);
 			g->DrawBitmap(".\\tiles\\megaman.bmp", this->_position, offset, Size(kSpriteSize, kSpriteSize));
-		} else if (_xVel == 0) {
+		} else if (!_leftKey && !_rightKey) {
 			// Standing still on the ground
 			Point offset(facingOffset, 2 * kSpriteSize);
 			g->DrawBitmap(".\\tiles\\megaman.bmp", this->_position, offset, Size(kSpriteSize, kSpriteSize));
