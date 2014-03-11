@@ -2,19 +2,21 @@
 
 #include <Windows.h>
 
-class Sprite
-{
-public:
-	Sprite(void);
-	Sprite(HBITMAP bitmap);
-	~Sprite(void);
+namespace isgp {
 
-	HBITMAP GetBitmap();
-	HBITMAP GetMask();
+	class Sprite
+	{
+	public:
+		Sprite(void);
+		Sprite(HBITMAP bitmap);
+		~Sprite(void);
 
-private:
-	HBITMAP _image;
-	HBITMAP _mask;
+		HBITMAP GetBitmap();
+		HBITMAP GetMask();
+
+	private:
+		HBITMAP _image;
+		HBITMAP _mask;
 	
-};
-
+	};
+}
