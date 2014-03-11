@@ -19,6 +19,7 @@ namespace isgp{
 		
 		_facingRight = true;
 		_animation = new Animation(".\\tiles\\megaman.bmp", Size(32, 32), 4, 200);
+		_isAlive = true;
 	}
 
 	Player::~Player(void) {
@@ -156,5 +157,15 @@ namespace isgp{
 			Vector2D offset(0, facingOffset);
 			_animation->Render(g, this->_position, offset);
 		}
+	}
+
+	// Check if the player is alive.
+	bool Player::IsAlive() {
+		return _isAlive;
+	}
+
+	// Kill the player by setting it's Alive status to false.
+	void Player::Kill() {
+		_isAlive = false;
 	}
 }
