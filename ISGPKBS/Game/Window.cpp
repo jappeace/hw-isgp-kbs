@@ -8,7 +8,7 @@ Window::Window() {
 	ILevelFactory* factory = new SimpleLevelFactory();
 	_level = factory->CreateLevel();
 	delete factory;
-	_gameState = 1;
+	_gameState = Playing;
 }
 
 Window::~Window()
@@ -31,13 +31,13 @@ void Window::OnPaint(Graphics* g){
 	_level->Paint(g);
 }
 void Window::GameLoop(double elapsed) { //elapsed time, in MS
-	if (_gameState == 1) {
+	if (_gameState == Playing) {
 		//update all the game objects now
 		_level->_player->Update(elapsed);
 		_level->_enemy->Update(elapsed);
 		_level->_enemy2->Update(elapsed);
 		_cam->Update(elapsed);
-	} else if (_gameState == 2) {
+	} else if (_gameState == GameOver) {
 		
 	}
 

@@ -67,6 +67,7 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="GameState.h" />
     <ClInclude Include="Ghost.h" />
     <ClInclude Include="IBehaviour.h" />
     <ClInclude Include="Camera.h" />

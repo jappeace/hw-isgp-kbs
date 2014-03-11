@@ -6,6 +6,7 @@
 #include "ILevelFactory.h"
 #include "WorldBlock.h"
 #include "Camera.h"
+#include "GameState.h"
 
 namespace isgp {
 	class Window : public AbstractWindow {
@@ -20,7 +21,7 @@ namespace isgp {
 		void GameLoop(double) override;
 		void AfterCreate() override;
 		Camera* _cam;
-		int _gameState;
+		GameState _gameState;
 	private:
 		Level* _level;
 	};
