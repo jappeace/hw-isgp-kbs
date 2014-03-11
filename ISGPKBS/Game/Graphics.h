@@ -38,6 +38,7 @@ namespace isgp {
 #endif
 		map<string, Sprite*>* _bitmapCache;
 	public:
+		Graphics(Graphics* takeBuffer);
 		Graphics(HWND);
 		~Graphics(void);
 
@@ -73,5 +74,6 @@ namespace isgp {
 		// Draws a bitmap at the given location with the given size
 		// The source rectangle starts at the given offset
 		void DrawBitmap(string path, Vector2D& position, Vector2D& offset, Size& size);
+		void DrawSprite(Sprite* sprite, Vector2D& position, Vector2D& offset, Size& size);
 	};
 }

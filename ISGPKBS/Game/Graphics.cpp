@@ -128,13 +128,18 @@ namespace isgp {
 	}
 
 	void Graphics::DrawBitmap(string path, Vector2D& position, Vector2D& offset, Size& size) {
+		
+		Sprite* sprite = this->LoadBitmapFile(path);
+		DrawSprite(sprite, position, offset, size);
+	}
+	void Graphics::DrawSprite(Sprite* sprite, Vector2D& position, Vector2D& offset, Size& size){
+
 		Vector2D correctedVector2D = position;
 
 		if (_cam != NULL) {
 			correctedVector2D = _cam->FromTo(position);
 		}
-		
-		Sprite* sprite = this->LoadBitmapFile(path);
+
 		HDC bitmap_hdc = CreateCompatibleDC(NULL);
 
 		// link the bitmap to a device context
