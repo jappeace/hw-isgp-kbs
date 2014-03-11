@@ -115,23 +115,23 @@ namespace isgp {
 		return sprite;
 	}
 
-	void Graphics::DrawBitmap(string path, Point& position) {
+	void Graphics::DrawBitmap(string path, Vector2D& position) {
 		this->DrawBitmap(path, position, Size(TILE_WIDTH, TILE_HEIGHT));
 	}
 	
-	void Graphics::DrawBitmap(string path, Point& position, Point& offset) {
+	void Graphics::DrawBitmap(string path, Vector2D& position, Vector2D& offset) {
 		this->DrawBitmap(path, position, offset, Size(TILE_WIDTH, TILE_HEIGHT));
 	}
 
-	void Graphics::DrawBitmap(string path, Point& position, Size& size) {
-		this->DrawBitmap(path, position, Point(0, 0), size);
+	void Graphics::DrawBitmap(string path, Vector2D& position, Size& size) {
+		this->DrawBitmap(path, position, Vector2D(0, 0), size);
 	}
 
-	void Graphics::DrawBitmap(string path, Point& position, Point& offset, Size& size) {
-		Point correctedPoint = position;
+	void Graphics::DrawBitmap(string path, Vector2D& position, Vector2D& offset, Size& size) {
+		Vector2D correctedVector2D = position;
 
 		if (_cam != NULL) {
-			correctedPoint = _cam->FromTo(position);
+			correctedVector2D = _cam->FromTo(position);
 		}
 		
 		Sprite* sprite = this->LoadBitmapFile(path);
@@ -145,13 +145,13 @@ namespace isgp {
 			// Dest Context
 			_backBuffer, 
 			// Posotion
-			(int) correctedPoint.GetX(), (int) correctedPoint.GetY(),
+			(int) correctedVector2D.X(), (int) correctedVector2D.Y(),
 			// Size
 			size.GetWidth(), size.GetHeight(), 
 			// Source Context
 			bitmap_hdc, 
 			// Image offset
-			(int) offset.GetX(), (int) offset.GetY(),
+			(int) offset.X(), (int) offset.Y(),
 			// Operation
 			SRCAND);
 
@@ -163,13 +163,13 @@ namespace isgp {
 			// Dest Context
 			_backBuffer, 
 			// Posotion
-			(int) correctedPoint.GetX(), (int) correctedPoint.GetY(),
+			(int) correctedVector2D.X(), (int) correctedVector2D.Y(),
 			// Size
 			size.GetWidth(), size.GetHeight(), 
 			// Source Context
 			bitmap_hdc, 
 			// Image offset
-			(int) offset.GetX(), (int) offset.GetY(),
+			(int) offset.X(), (int) offset.Y(),
 			// Operation
 			SRCPAINT);
 

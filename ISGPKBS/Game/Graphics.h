@@ -64,14 +64,14 @@ namespace isgp {
 		void DrawStaticRect(Vector2D& one, Vector2D& two);
 
 		// Draws a bitmap at the given position with the default tile size
-		void DrawBitmap(string path, Point& position);
+		void DrawBitmap(string path, Vector2D& position);
 		// Draws a bitmap at the given position with the default tile size
 		// The source rectangle starts at the given offset
-		void DrawBitmap(string path, Point& position, Point& offset);
+		void DrawBitmap(string path, Vector2D& position, Vector2D& offset);
 		// Draws a bitmap at the given location with the given size
-		void DrawBitmap(string path, Point& position, Size& size);
+		void DrawBitmap(string path, Vector2D& position, Size& size);
 		// Draws a bitmap at the given location with the given size
 		// The source rectangle starts at the given offset
-		void DrawBitmap(string path, Point& position, Point& offset, Size& size);
+		void DrawBitmap(string path, Vector2D& position, Vector2D& offset, Size& size);
 	};
 }

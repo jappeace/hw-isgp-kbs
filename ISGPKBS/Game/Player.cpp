@@ -17,7 +17,7 @@ namespace isgp{
 		_behaviours = new vector<IBehaviour*>();
 		_behaviours->push_back(new GravityBehaviour(this));
 		
-		_animation = Animation(".\\tiles\\megaman.bmp", Size(32, 32), 4, 200);
+		_animation = new Animation(".\\tiles\\megaman.bmp", Size(32, 32), 4, 200);
 	}
 
 	Player::~Player(void) {
@@ -29,6 +29,7 @@ namespace isgp{
 		delete _behaviours;
 		delete _size;
 		delete _velocity;
+		delete _animation;
 	}
 
 	void Player::Update(const double milisec) {

@@ -1,7 +1,7 @@
 #include "Enemy.h"
 
 namespace isgp {
-	Enemy::Enemy(Point position, Player* player)
+	Enemy::Enemy(Vector2D position, Player* player)
 	{
 		_position = position;
 		_player = player;
@@ -21,6 +21,6 @@ namespace isgp {
 	void Enemy::Paint(Graphics* g) {
 		_graphics = g;
 
-		_graphics->DrawRect(_position, Point(_position.GetX() + 32, _position.GetY() + 32));
+		_graphics->DrawRect(_position, Vector2D(_position.X() + 32, _position.Y() + 32));
 	}
 }

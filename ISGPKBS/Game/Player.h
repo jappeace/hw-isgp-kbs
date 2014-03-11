@@ -27,6 +27,7 @@ namespace isgp {
 		Graphics* _graphics;
 		double _accel, 
 			_deAccel;
+		Animation* _animation;
 	};
 }
 
