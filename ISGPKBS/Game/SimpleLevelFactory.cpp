@@ -12,18 +12,17 @@ namespace isgp{
 	}
 
 	Level* SimpleLevelFactory::CreateLevel(){
-		Level* result = new Level();
-		Vector2D position = Vector2D(5,5);
+		Level* result = new Level(new Grid(50,50));
 		Grid * g = result->GetGrid();
-		result->_player = new Player(Vector2D(4,4));
-		result->_player->SetGrid(g);
+		
 		g->GetTileAt(Vector2D(10, 10))->SetData(new WorldBlock("C:\\tiles\\smile.bmp"));
 		g->GetTileAt(Vector2D(10, 11))->SetData(new WorldBlock("C:\\tiles\\smile.bmp"));
 		g->GetTileAt(Vector2D(10, 12))->SetData(new WorldBlock("C:\\tiles\\smile.bmp"));
-		g->TraverseRow(15, this);
-		g->TraverseRow(16, this);
-		g->TraverseRow(17, this);
+
 		g->TraverseRow(18, this);
+
+		result->_player = new Player(Vector2D(200,100));
+		result->_player->SetGrid(g);
 		//g->TraverseRow(1, this);
 		//g->TraverseRow(2, this);
 		return result;

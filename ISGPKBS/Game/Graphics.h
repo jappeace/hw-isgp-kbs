@@ -28,7 +28,8 @@ namespace isgp {
 		HDC _backBuffer;
 		// The bitmap on which we are actually rendering in the background
 		HBITMAP _bitmap;
-
+		
+		HPEN _pen;
 #ifdef _DEBUG
 		// FPScounter.
 		TimesPerSecondCounter _fpsCounter;
@@ -40,6 +41,8 @@ namespace isgp {
 
 		ITranslator* _cam;
 		void SetCam(ITranslator*);
+
+		void SetColor(COLORREF color);
 
 		// Prepares the device context to start rendering
 		void BeginRendering(HWND, PAINTSTRUCT *);

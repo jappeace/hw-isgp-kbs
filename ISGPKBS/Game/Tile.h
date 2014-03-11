@@ -30,7 +30,7 @@ namespace isgp {
 		Vector2D* GetPosition() const;
 		void Paint(Graphics* g);
 		void SetData(ITileData*);
-		bool HasData() const;
+		ITileData* GetData() const;
 		vector<Tile*> GetSurroundingTiles() const;
 	private:
 		void Init(Vector2D* p);
@@ -40,6 +40,7 @@ namespace isgp {
 		Tile* _left;
 		Tile* _right;
 		Tile* _bottom;
+		bool _hasData;
 	};
 	inline bool operator==(const Tile& l, const Tile& r){
 		if(l.GetPosition() != r.GetPosition()){

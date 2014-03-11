@@ -62,6 +62,13 @@ namespace isgp {
 		TextOut(_backBuffer, (int) position.X(), (int) position.Y(), str, length);
 	}
 
+	void Graphics::SetColor(COLORREF color) {
+		if(_pen)
+			DeleteObject(_pen);
+		_pen = CreatePen(PS_SOLID, 1, color);
+		SelectObject(this->_backBuffer, _pen);
+	}
+
 	void Graphics::SetTextColor(COLORREF color) {
 		::SetTextColor(_backBuffer, color);
 	}

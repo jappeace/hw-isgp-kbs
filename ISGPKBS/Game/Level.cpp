@@ -14,7 +14,6 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 	}
 	Level::Level(Grid* grid) {
 		_grid = grid;
-		_player = new Player(Vector2D(100,100));
 	}
 
 	Level::~Level(void)

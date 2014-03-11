@@ -33,14 +33,11 @@ namespace isgp {
 
 		for(unsigned i = 0; i < includedTiles.size(); i++) {
 			Tile* currentTile = includedTiles.at(i);
-
-			if(currentTile->HasData() ) {
+			if(currentTile->GetData()) {
 				Vector2D absoluteTilePositionTL = translator.FromTo(*currentTile->GetPosition());
 				Vector2D tileCenter = absoluteTilePositionTL + diff;
-
-				currentTile->GetPosition();
-				_position;
-				if(abs(currentTile->GetPosition()->Y() - _position.Y()) < _size->Y()){
+			
+				if(abs(absoluteTilePositionTL.Y() - _position.Y()) < _size->Y()){
 					double diffX = _position.X() - tileCenter.X();
 					if(abs(diffX) < diff.X()){
 						collision |= Left;
@@ -52,7 +49,7 @@ namespace isgp {
 					}
 					
 				}
-				if(abs(currentTile->GetPosition()->X() - _position.X()) < _size->X()){
+				if(abs(absoluteTilePositionTL.X() - _position.X()) < _size->X()){
 					double diffY = _position.Y() - tileCenter.Y();
 					if(abs(diffY) < diff.Y()){
 						collision |= Up;

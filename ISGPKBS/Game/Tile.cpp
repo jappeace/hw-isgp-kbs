@@ -12,6 +12,7 @@ namespace isgp{
 	void Tile::Init(Vector2D* p) {
 		_position = p;
 		_tiledata = NULL;
+		_hasData = false;
 		_bottom = NULL;
 		_top = NULL;
 		_left = NULL;
@@ -27,6 +28,7 @@ namespace isgp{
 	void Tile::SetData(ITileData* paintable){
 		paintable->ReceiveTile(this);
 		_tiledata = paintable;
+		_hasData = true;
 	}
 
 	void Tile::SetBottom(Tile* bottom) {
@@ -61,8 +63,8 @@ namespace isgp{
 		return _top;
 	}
 
-	bool Tile::HasData() const {
-		return _tiledata == NULL;
+	ITileData* Tile::GetData() const {
+		return _tiledata;
 	}
 
 	vector<Tile*> Tile::GetSurroundingTiles() const {
