@@ -13,7 +13,7 @@ namespace isgp {
 		if (range < 26) {
 			_xVel = -_xVel;
 			_yVel = -_yVel;
-		}else if (range < 700) {
+		}else if (range < 800) {
 			if (_aVel < 700) {
 				_aVel += (2000 * elapsed);
 			}

@@ -4,8 +4,8 @@
 namespace isgp{
 	Player::Player(Vector2D position) {
 		_maxVel = 500;
-		_accel = 220;
-		_deAccel = 110;
+		_accel = 2200;
+		_deAccel = 1100;
 
 		_position = position;
 		_velocity = new Vector2D();
@@ -54,7 +54,7 @@ namespace isgp{
 				_velocity->X(_velocity->X() + _deAccel * elapsed);
 			}
 		} else if(_velocity->X() > 0 && (collision & Down)) {
-			_velocity->X(_velocity->X() + _deAccel * elapsed);
+			_velocity->X(_velocity->X() - _deAccel * elapsed);
 		}
 		
 		// no wandering
