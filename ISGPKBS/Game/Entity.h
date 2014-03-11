@@ -3,29 +3,25 @@
 #include "Vector2D.h"
 #include "Graphics.h"
 #include "Grid.h"
+#include "Size.h"
 namespace isgp {
 class Entity : public IPaintable
 {
 public:
 	virtual void Paint(Graphics* g) override = 0;
 	virtual void Update(const double) = 0;
-	int CheckCollision(Vector2D topLeft, Vector2D bottomRight);
+	int CheckCollision();
 	Vector2D _position;
-	int collision;
 	void SetGrid(Grid* grid);
 	vector<Tile*> CollidingTiles;
+	Vector2D* GetSize() const;
+	void SetSize(Vector2D* size);
+	int GetCollision() const;
 
 protected:
+	int collision;
 	Grid* _grid;
-
-public:
-	enum Collision {
-		None = 0,
-		Left = 1,
-		Up = 2,
-		Right = 4,
-		Down = 8
-	};
+	Vector2D* _size;
 };
 }
 

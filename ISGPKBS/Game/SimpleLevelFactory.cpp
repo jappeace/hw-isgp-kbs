@@ -24,8 +24,8 @@ namespace isgp{
 		g->TraverseRow(16, this);
 		g->TraverseRow(17, this);
 		g->TraverseRow(18, this);
-		g->TraverseRow(1, this);
-		g->TraverseRow(2, this);
+		//g->TraverseRow(1, this);
+		//g->TraverseRow(2, this);
 		return result;
 	}
 	void SimpleLevelFactory::ReceiveTile(Tile* tile){

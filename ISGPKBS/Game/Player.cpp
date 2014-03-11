@@ -1,6 +1,6 @@
 #include "gravitybehaviour.h"
 #include "Player.h"
-
+#include "CollisionDetection.h"
 namespace isgp{
 	Player::Player(Vector2D position) {
 		_maxVel = 500;
@@ -14,7 +14,7 @@ namespace isgp{
 		_rightKey = false;
 		_upKey = false;
 		_spaceKey = false;
-		_collision = false;
+		_size = new Size(32, 32);
 		_behaviours = new vector<IBehaviour*>();
 		_behaviours->push_back(new GravityBehaviour(this));
 	}
@@ -27,69 +27,49 @@ namespace isgp{
 		}
 		// Delete vector
 		delete _behaviours;
+		delete _size;
 	}
 
 	void Player::Update(const double milisec) {
 		double elapsed = milisec / 1000;
 
 		if (_leftKey && _xVel > -_maxVel) { 
-			if (_collision) {
+			if (collision & Down) {
 				_xVel -= _accel * elapsed;
 			} else { 
 				_xVel -= _deAccel * elapsed;
 			}
-		} else if (_xVel < 0 && _collision) {
+		} else if (_xVel < 0 && (collision & Down)) {
 			_xVel += _deAccel * elapsed;
 		}
 		
 		if (_rightKey && _xVel < _maxVel) { 
-			if (_collision) {
+			if (collision & Down) {
 				_xVel += _accel * elapsed;
 			} else { 
 				_xVel += _deAccel * elapsed;
 			}
-		} else if (_xVel > 0 && _collision) {
+		} else if (_xVel > 0 && (collision & Down)) {
 			_xVel -= _deAccel * elapsed;
 		}
 
-		if (!_leftKey && !_rightKey && _collision && _xVel < 20 && _xVel > -20) {
+		if (!_leftKey && !_rightKey && (collision & Down) && _xVel < 20 && _xVel > -20) {
 			_xVel = 0;
 		}
-		if(_grid->CanDoMove(this->_position, Vector2D((_xVel * elapsed), 0.0))) {
-			_position.X(_position.X() + (_xVel * elapsed));
-		}
-		if(_grid->CanDoMove(this->_position, Vector2D(0.0, (_yVel * elapsed)))) {
-			_position.Y(_position.Y() + (_yVel * elapsed));
-		}
+		_position.X(_position.X() + (_xVel * elapsed));
+		_position.Y(_position.Y() + (_yVel * elapsed));
 
 		for (unsigned int i = 0; i < _behaviours->size(); ++i) {
 			_behaviours->at(i)->Update(milisec);
 		}
 
-		if (_position.Y() > 220.0) { 
-			_position.Y(221.0);
-			_collision = true;
-		} else {
-			_collision = false;
-		}
-		
-		if (_upKey && _position.Y() >= 221.0) {
-			_yVel = -650;
-		}
 	}
 
 	void Player::MoveTo(int x, int y) {
-		if(_grid->CanDoMove(this->_position, Vector2D(x, 0))) {
-
-		}
 	}
 	
 	void Player::AddToVelocityY(double y) {
-		if(_grid->CanDoMove(this->_position, Vector2D(0.0, y))) {
-			_yVel += y;
-		} else {
-			int a = 2;
-		}
+		_yVel += y;
 	}
 
 	void Player::Paint(Graphics* g) {

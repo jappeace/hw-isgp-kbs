@@ -156,20 +156,6 @@ namespace isgp {
 		return _size;
 	}
 
-	bool Grid::CanDoMove(Vector2D location, Vector2D velocity) const {//Vector2D velocity
-		GridGraphicTranslator translator = GridGraphicTranslator();
-		Vector2D locationTranslated = Vector2D(location.X(), location.Y());
-
-		locationTranslated += velocity;
-
-		Vector2D moveToTile = translator.ToFrom(locationTranslated);
-		int desiredIndex = GetTileIndex((int)moveToTile.X(), (int)moveToTile.Y());
-		if(desiredIndex < 0 || (unsigned)desiredIndex > _tilesLength)
-			return false;
-		Tile* tile = this->GetTileAt(moveToTile);
-		return tile->HasData();
-	}
-
 	vector<Tile*> Grid::GetSurroundingTiles(vector<Tile*> tiles) const {
 		vector<Tile*> allTiles;
 		allTiles.reserve(tiles.size() * 4);

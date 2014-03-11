@@ -16,9 +16,11 @@ namespace isgp {
 		void Update(const double);
 		void AddToVelocityY(double y);
 		Vector2D _position;
-		bool _leftKey, _rightKey, _upKey, _spaceKey, _collision;
+		bool _leftKey, _rightKey, _upKey, _spaceKey;
 		double _xVel, _yVel, _maxVel;
 		void MoveTo(int x, int y);
+
+		
 	private:
 		vector<IBehaviour*>* _behaviours;
 		Graphics* _graphics;

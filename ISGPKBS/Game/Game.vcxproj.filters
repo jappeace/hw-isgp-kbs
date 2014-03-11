@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Source Files">
@@ -50,14 +50,14 @@
     <ClCompile Include="Gravitybehaviour.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Point.cpp">
-      <Filter>Cartesian</Filter>
-    </ClCompile>
     <ClCompile Include="Vector2D.cpp">
       <Filter>Cartesian</Filter>
     </ClCompile>
     <ClCompile Include="Size.cpp">
       <Filter>Cartesian</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -133,14 +133,17 @@
     <ClInclude Include="Gravitybehaviour.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Point.h">
-      <Filter>Cartesian</Filter>
-    </ClInclude>
     <ClInclude Include="Vector2D.h">
       <Filter>Cartesian</Filter>
     </ClInclude>
     <ClInclude Include="Size.h">
       <Filter>Cartesian</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionDetection.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
