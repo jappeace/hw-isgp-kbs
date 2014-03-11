@@ -2,7 +2,7 @@
 #include "GridGraphicTranslator.h"
 namespace isgp{
 // default amount of tiles in level
-const Size Level::defaultTileAmount = Size(10,10);
+const Size Level::defaultTileAmount = Size(100,100);
 
 // tile size, should equal the width and height of spritesheet tiles
 const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
@@ -14,9 +14,6 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 	}
 	Level::Level(Grid* grid) {
 		_grid = grid;
-		_player = new Player(Point(100,100));
-		_enemy = new Ghost(Point(100,100), _player);
-		_enemy2 = new Patrol(Point(500,221), 100, _player);
 	}
 
 	Level::~Level(void)
@@ -34,15 +31,15 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 	}
 	void Level::ReceiveTile(Tile* tile) {
 #ifdef _DEBUG
-		Point position = *tile->GetPosition();
-		position.SetX(position.GetX() * Level::tileSize.GetWidth());
-		position.SetY(position.GetY() * Level::tileSize.GetHeight());
+		Vector2D position = *tile->GetPosition();
+		position.X(position.X() * Level::tileSize.GetWidth());
+		position.Y(position.Y() * Level::tileSize.GetHeight());
 
 		_graphics->DrawRect(
 			position, 
-			Point(
-				position.GetX() + Level::tileSize.GetWidth(),
-				position.GetY() + Level::tileSize.GetHeight()
+			Vector2D(
+				position.X() + Level::tileSize.GetWidth(),
+				position.Y() + Level::tileSize.GetHeight()
 			)
 		);
 #endif

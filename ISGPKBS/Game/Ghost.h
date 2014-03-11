@@ -6,7 +6,7 @@ namespace isgp {
 	class Ghost : public Enemy
 	{
 	public:
-		Ghost(Point, Player*);
+		Ghost(Vector2D, Player*);
 		void Update(double) override;
 		void Paint(Graphics* g) override;
 	private:

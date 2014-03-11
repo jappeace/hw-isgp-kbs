@@ -11,14 +11,14 @@ namespace isgp {
 	class Enemy : public IPaintable
 	{
 	public:
-		Enemy(Point, Player*);
+		Enemy(Vector2D position, Player*);
 		~Enemy(void);
 		virtual void Paint(Graphics* g);
 		virtual void Update(double) = 0;
 	protected:
 		vector<IBehaviour*>* _behaviours;
 		double _accel, _deAccel, _xVel, _yVel, _aVel, _radAngle;
-		Point _position;
+		Vector2D _position;
 		Player* _player;
 	private:
 		Graphics* _graphics;
