@@ -21,6 +21,7 @@ namespace isgp {
 	void GravityBehaviour::Update(const double ms) {
 		if (_player->GetCollision() & Down) {
 			// The character is on a platform so we don't apply gravity to that.
+			OutputDebugString("Down\n");
 			return;
 		}
 

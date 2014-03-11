@@ -42,32 +42,29 @@ namespace isgp {
 				_position;
 				if(abs(currentTile->GetPosition()->Y() - _position.Y()) < _size->Y()){
 					double diffX = _position.X() - tileCenter.X();
-					if(_position.X() > currentTile->GetPosition()->X()) { // block is to the left
+					if(abs(diffX) < diff.X()){
+						collision |= Left;
+					}
 					
-						
-						if(abs(diffX) < diff.X()){
-							collision |= Left;
-						}
+					diffX = bottomRight.X() - tileCenter.X();
+					if(abs(diffX) < diff.X()){
+						collision |= Right;
+					}
 					
-					} else {
-						diffX = bottomRight.X() - tileCenter.X();
-						if(abs(diffX) < diff.X()){
-							collision |= Right;
-						}
+				}
+				if(abs(currentTile->GetPosition()->X() - _position.X()) < _size->X()){
+					double diffY = _position.Y() - tileCenter.Y();
+					if(abs(diffY) < diff.Y()){
+						collision |= Up;
+					}
+					diffY = bottomRight.Y() - tileCenter.Y();
+					if(abs(diffY) < diff.Y()){
+						collision |= Down;
 					}
 				}
 
 
 
-
-				double diffY = _position.Y() - tileCenter.Y();
-				if(abs(diffY) < diff.Y()){
-					collision |= Up;
-				}
-				diffY = bottomRight.Y() - tileCenter.Y();
-				if(abs(diffY) < diff.Y()){
-					collision |= Down;
-				}
 
 				if(collision != None) {
 					CollidingTiles.push_back(currentTile);

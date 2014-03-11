@@ -33,6 +33,8 @@ namespace isgp{
 	void Player::Update(const double milisec) {
 		double elapsed = milisec / 1000;
 
+		collision = CheckCollision();
+
 		if (_leftKey && _xVel > -_maxVel) { 
 			if (collision & Down) {
 				_xVel -= _accel * elapsed;
