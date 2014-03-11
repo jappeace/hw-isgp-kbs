@@ -34,11 +34,18 @@
 			this.loadLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.settingsGroup = new System.Windows.Forms.GroupBox();
+			this.actionBox = new System.Windows.Forms.GroupBox();
+			this.rmBtn = new System.Windows.Forms.RadioButton();
+			this.addBtn = new System.Windows.Forms.RadioButton();
+			this.pointBtn = new System.Windows.Forms.RadioButton();
 			this.levelPanel = new LevelEditor.Forms.LevelPanel();
-			this.spritePickerPanel1 = new LevelEditor.Forms.SpritePickerPanel();
-			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.typeBox = new System.Windows.Forms.GroupBox();
+			this.tileRadio = new System.Windows.Forms.RadioButton();
+			this.ghostRadio = new System.Windows.Forms.RadioButton();
 			this.menuStrip.SuspendLayout();
 			this.settingsGroup.SuspendLayout();
+			this.actionBox.SuspendLayout();
+			this.typeBox.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// menuStrip
@@ -90,14 +97,59 @@
 			// 
 			this.settingsGroup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.settingsGroup.Controls.Add(this.groupBox1);
-			this.settingsGroup.Controls.Add(this.spritePickerPanel1);
+			this.settingsGroup.Controls.Add(this.typeBox);
+			this.settingsGroup.Controls.Add(this.actionBox);
 			this.settingsGroup.Location = new System.Drawing.Point(519, 27);
 			this.settingsGroup.Name = "settingsGroup";
 			this.settingsGroup.Size = new System.Drawing.Size(261, 530);
 			this.settingsGroup.TabIndex = 2;
 			this.settingsGroup.TabStop = false;
 			this.settingsGroup.Text = "Settings";
+			// 
+			// actionBox
+			// 
+			this.actionBox.Controls.Add(this.rmBtn);
+			this.actionBox.Controls.Add(this.addBtn);
+			this.actionBox.Controls.Add(this.pointBtn);
+			this.actionBox.Location = new System.Drawing.Point(6, 19);
+			this.actionBox.Name = "actionBox";
+			this.actionBox.Size = new System.Drawing.Size(249, 100);
+			this.actionBox.TabIndex = 1;
+			this.actionBox.TabStop = false;
+			this.actionBox.Text = "Click action";
+			// 
+			// rmBtn
+			// 
+			this.rmBtn.AutoSize = true;
+			this.rmBtn.Location = new System.Drawing.Point(7, 68);
+			this.rmBtn.Name = "rmBtn";
+			this.rmBtn.Size = new System.Drawing.Size(65, 17);
+			this.rmBtn.TabIndex = 2;
+			this.rmBtn.TabStop = true;
+			this.rmBtn.Text = "Remove";
+			this.rmBtn.UseVisualStyleBackColor = true;
+			// 
+			// addBtn
+			// 
+			this.addBtn.AutoSize = true;
+			this.addBtn.Location = new System.Drawing.Point(7, 44);
+			this.addBtn.Name = "addBtn";
+			this.addBtn.Size = new System.Drawing.Size(44, 17);
+			this.addBtn.TabIndex = 1;
+			this.addBtn.TabStop = true;
+			this.addBtn.Text = "Add";
+			this.addBtn.UseVisualStyleBackColor = true;
+			// 
+			// pointBtn
+			// 
+			this.pointBtn.AutoSize = true;
+			this.pointBtn.Location = new System.Drawing.Point(7, 20);
+			this.pointBtn.Name = "pointBtn";
+			this.pointBtn.Size = new System.Drawing.Size(55, 17);
+			this.pointBtn.TabIndex = 0;
+			this.pointBtn.TabStop = true;
+			this.pointBtn.Text = "Select";
+			this.pointBtn.UseVisualStyleBackColor = true;
 			// 
 			// levelPanel
 			// 
@@ -114,22 +166,38 @@
 			this.levelPanel.Size = new System.Drawing.Size(501, 530);
 			this.levelPanel.TabIndex = 3;
 			// 
-			// spritePickerPanel1
+			// typeBox
 			// 
-			this.spritePickerPanel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-			this.spritePickerPanel1.Location = new System.Drawing.Point(6, 19);
-			this.spritePickerPanel1.Name = "spritePickerPanel1";
-			this.spritePickerPanel1.Size = new System.Drawing.Size(249, 137);
-			this.spritePickerPanel1.TabIndex = 0;
+			this.typeBox.Controls.Add(this.ghostRadio);
+			this.typeBox.Controls.Add(this.tileRadio);
+			this.typeBox.Location = new System.Drawing.Point(7, 126);
+			this.typeBox.Name = "typeBox";
+			this.typeBox.Size = new System.Drawing.Size(248, 72);
+			this.typeBox.TabIndex = 2;
+			this.typeBox.TabStop = false;
+			this.typeBox.Text = "Type";
 			// 
-			// groupBox1
+			// tileRadio
 			// 
-			this.groupBox1.Location = new System.Drawing.Point(6, 187);
-			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(200, 100);
-			this.groupBox1.TabIndex = 1;
-			this.groupBox1.TabStop = false;
-			this.groupBox1.Text = "groupBox1";
+			this.tileRadio.AutoSize = true;
+			this.tileRadio.Location = new System.Drawing.Point(7, 20);
+			this.tileRadio.Name = "tileRadio";
+			this.tileRadio.Size = new System.Drawing.Size(42, 17);
+			this.tileRadio.TabIndex = 0;
+			this.tileRadio.TabStop = true;
+			this.tileRadio.Text = "Tile";
+			this.tileRadio.UseVisualStyleBackColor = true;
+			// 
+			// ghostRadio
+			// 
+			this.ghostRadio.AutoSize = true;
+			this.ghostRadio.Location = new System.Drawing.Point(7, 44);
+			this.ghostRadio.Name = "ghostRadio";
+			this.ghostRadio.Size = new System.Drawing.Size(53, 17);
+			this.ghostRadio.TabIndex = 1;
+			this.ghostRadio.TabStop = true;
+			this.ghostRadio.Text = "Ghost";
+			this.ghostRadio.UseVisualStyleBackColor = true;
 			// 
 			// LevelEditorForm
 			// 
@@ -147,6 +215,10 @@
 			this.menuStrip.ResumeLayout(false);
 			this.menuStrip.PerformLayout();
 			this.settingsGroup.ResumeLayout(false);
+			this.actionBox.ResumeLayout(false);
+			this.actionBox.PerformLayout();
+			this.typeBox.ResumeLayout(false);
+			this.typeBox.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -161,8 +233,13 @@
 		private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
 		private System.Windows.Forms.GroupBox settingsGroup;
 		private LevelPanel levelPanel;
-		private SpritePickerPanel spritePickerPanel1;
-		private System.Windows.Forms.GroupBox groupBox1;
+		private System.Windows.Forms.GroupBox actionBox;
+		private System.Windows.Forms.RadioButton rmBtn;
+		private System.Windows.Forms.RadioButton addBtn;
+		private System.Windows.Forms.RadioButton pointBtn;
+		private System.Windows.Forms.GroupBox typeBox;
+		private System.Windows.Forms.RadioButton ghostRadio;
+		private System.Windows.Forms.RadioButton tileRadio;
 
 	}
 }
