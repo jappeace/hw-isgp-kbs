@@ -5,6 +5,7 @@
 		Select,
 		Add,
 		Remove,
-		Start
+		Start,
+		Finish
 	}
 }

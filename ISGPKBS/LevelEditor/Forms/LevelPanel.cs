@@ -27,6 +27,7 @@ namespace LevelEditor.Forms
 			}
 		}
 
+		public GridObjectType SelectedType { get; set; }
 		public MouseAction MouseAction { get; set; }
 
 		public Point SelectedPoint { get; set; }
@@ -73,11 +74,15 @@ namespace LevelEditor.Forms
 			if (MouseAction == MouseAction.Add)
 			{
 				_level.SetGridObject(PanelToGridLocation(e.Location),
-					new GridObject(GridObjectType.Tile));
+					new GridObject(SelectedType));
 			}
 			if (MouseAction == MouseAction.Start)
 			{
 				Level.Start = PanelToGridLocation(e.Location);
+			}
+			if (MouseAction == MouseAction.Finish)
+			{
+				Level.Finish = PanelToGridLocation(e.Location);
 			}
 			Invalidate();
 		}
@@ -157,9 +162,13 @@ namespace LevelEditor.Forms
 				{
 					tileBrush = new SolidBrush(Color.Black);
 				}
-				else
+				else if (pair.Value.Type == GridObjectType.Ghost)
 				{
 					tileBrush = new SolidBrush(Color.Gray);
+				}
+				else
+				{
+					tileBrush = new SolidBrush(Color.Brown);
 				}
 				g.FillRectangle(tileBrush, pair.Key.X * GridSize + GridLineWidth,
 					pair.Key.Y * GridSize + GridLineWidth,
@@ -167,6 +176,9 @@ namespace LevelEditor.Forms
 			}
 			g.FillRectangle(new SolidBrush(Color.Green), Level.Start.X * GridSize + GridLineWidth,
 				Level.Start.Y * GridSize + GridLineWidth,
+				GridSize - GridLineWidth, GridSize - GridLineWidth);
+			g.FillRectangle(new SolidBrush(Color.Red), Level.Finish.X * GridSize + GridLineWidth,
+				Level.Finish.Y * GridSize + GridLineWidth,
 				GridSize - GridLineWidth, GridSize - GridLineWidth);
 		}
 	}

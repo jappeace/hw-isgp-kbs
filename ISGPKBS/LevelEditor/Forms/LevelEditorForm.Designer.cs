@@ -38,11 +38,13 @@
 			this.ghostRadio = new System.Windows.Forms.RadioButton();
 			this.tileRadio = new System.Windows.Forms.RadioButton();
 			this.actionBox = new System.Windows.Forms.GroupBox();
+			this.startRadio = new System.Windows.Forms.RadioButton();
 			this.rmRadio = new System.Windows.Forms.RadioButton();
 			this.addRadio = new System.Windows.Forms.RadioButton();
 			this.selectRadio = new System.Windows.Forms.RadioButton();
+			this.finishRadio = new System.Windows.Forms.RadioButton();
 			this.levelPanel = new LevelEditor.Forms.LevelPanel();
-			this.startRadio = new System.Windows.Forms.RadioButton();
+			this.patrolRadio = new System.Windows.Forms.RadioButton();
 			this.menuStrip.SuspendLayout();
 			this.settingsGroup.SuspendLayout();
 			this.typeBox.SuspendLayout();
@@ -110,11 +112,12 @@
 			// typeBox
 			// 
 			this.typeBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.typeBox.Controls.Add(this.patrolRadio);
 			this.typeBox.Controls.Add(this.ghostRadio);
 			this.typeBox.Controls.Add(this.tileRadio);
 			this.typeBox.Location = new System.Drawing.Point(7, 174);
 			this.typeBox.Name = "typeBox";
-			this.typeBox.Size = new System.Drawing.Size(248, 72);
+			this.typeBox.Size = new System.Drawing.Size(248, 107);
 			this.typeBox.TabIndex = 2;
 			this.typeBox.TabStop = false;
 			this.typeBox.Text = "Type";
@@ -148,16 +151,30 @@
 			// actionBox
 			// 
 			this.actionBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.actionBox.Controls.Add(this.finishRadio);
 			this.actionBox.Controls.Add(this.startRadio);
 			this.actionBox.Controls.Add(this.rmRadio);
 			this.actionBox.Controls.Add(this.addRadio);
 			this.actionBox.Controls.Add(this.selectRadio);
 			this.actionBox.Location = new System.Drawing.Point(6, 19);
 			this.actionBox.Name = "actionBox";
-			this.actionBox.Size = new System.Drawing.Size(249, 128);
+			this.actionBox.Size = new System.Drawing.Size(249, 149);
 			this.actionBox.TabIndex = 1;
 			this.actionBox.TabStop = false;
 			this.actionBox.Text = "Click action";
+			// 
+			// startRadio
+			// 
+			this.startRadio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.startRadio.AutoSize = true;
+			this.startRadio.Location = new System.Drawing.Point(7, 92);
+			this.startRadio.Name = "startRadio";
+			this.startRadio.Size = new System.Drawing.Size(47, 17);
+			this.startRadio.TabIndex = 3;
+			this.startRadio.TabStop = true;
+			this.startRadio.Text = "Start";
+			this.startRadio.UseVisualStyleBackColor = true;
+			this.startRadio.CheckedChanged += new System.EventHandler(this.startRadio_CheckedChanged);
 			// 
 			// rmRadio
 			// 
@@ -197,6 +214,18 @@
 			this.selectRadio.UseVisualStyleBackColor = true;
 			this.selectRadio.CheckedChanged += new System.EventHandler(this.pointBtn_CheckedChanged);
 			// 
+			// finishRadio
+			// 
+			this.finishRadio.AutoSize = true;
+			this.finishRadio.Location = new System.Drawing.Point(8, 116);
+			this.finishRadio.Name = "finishRadio";
+			this.finishRadio.Size = new System.Drawing.Size(52, 17);
+			this.finishRadio.TabIndex = 4;
+			this.finishRadio.TabStop = true;
+			this.finishRadio.Text = "Finish";
+			this.finishRadio.UseVisualStyleBackColor = true;
+			this.finishRadio.CheckedChanged += new System.EventHandler(this.finishRadio_CheckedChanged);
+			// 
 			// levelPanel
 			// 
 			this.levelPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -210,21 +239,20 @@
 			this.levelPanel.MouseAction = LevelEditor.Models.MouseAction.Select;
 			this.levelPanel.Name = "levelPanel";
 			this.levelPanel.SelectedPoint = new System.Drawing.Point(0, 0);
+			this.levelPanel.SelectedType = LevelEditor.Models.GridObjectType.Tile;
 			this.levelPanel.Size = new System.Drawing.Size(501, 530);
 			this.levelPanel.TabIndex = 3;
 			// 
-			// startRadio
+			// patrolRadio
 			// 
-			this.startRadio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.startRadio.AutoSize = true;
-			this.startRadio.Location = new System.Drawing.Point(7, 92);
-			this.startRadio.Name = "startRadio";
-			this.startRadio.Size = new System.Drawing.Size(47, 17);
-			this.startRadio.TabIndex = 3;
-			this.startRadio.TabStop = true;
-			this.startRadio.Text = "Start";
-			this.startRadio.UseVisualStyleBackColor = true;
-			this.startRadio.CheckedChanged += new System.EventHandler(this.startRadio_CheckedChanged);
+			this.patrolRadio.AutoSize = true;
+			this.patrolRadio.Location = new System.Drawing.Point(7, 68);
+			this.patrolRadio.Name = "patrolRadio";
+			this.patrolRadio.Size = new System.Drawing.Size(52, 17);
+			this.patrolRadio.TabIndex = 2;
+			this.patrolRadio.TabStop = true;
+			this.patrolRadio.Text = "Patrol";
+			this.patrolRadio.UseVisualStyleBackColor = true;
 			// 
 			// LevelEditorForm
 			// 
@@ -268,6 +296,8 @@
 		private System.Windows.Forms.RadioButton ghostRadio;
 		private System.Windows.Forms.RadioButton tileRadio;
 		private System.Windows.Forms.RadioButton startRadio;
+		private System.Windows.Forms.RadioButton finishRadio;
+		private System.Windows.Forms.RadioButton patrolRadio;
 
 	}
 }

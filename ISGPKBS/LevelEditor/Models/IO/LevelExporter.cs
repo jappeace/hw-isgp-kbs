@@ -40,6 +40,8 @@ namespace LevelEditor.Models.IO
 			LevelWriter.WriteLine(string.Format("height={0}", level.Height));
 			LevelWriter.WriteLine(string.Format("start={0},{1}",
 				level.Start.X, level.Start.Y));
+			LevelWriter.WriteLine(string.Format("finish={0},{1}",
+				level.Finish.X, level.Finish.Y));
 			foreach (KeyValuePair<Point, GridObject> pair in level.GridObjects)
 			{
 				LevelWriter.WriteLine(TileToString(pair.Key, pair.Value));

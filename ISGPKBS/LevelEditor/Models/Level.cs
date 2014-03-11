@@ -37,7 +37,13 @@ namespace LevelEditor.Models
 		public Point Start
 		{
 			get { return _start; }
-			set { _start = value; }
+			set
+			{
+				if (!GridObjects.Keys.Contains(value))
+				{
+					_start = value;
+				}
+			}
 		}
 
 		/// <summary>
@@ -46,7 +52,13 @@ namespace LevelEditor.Models
 		public Point Finish
 		{
 			get { return _finish; }
-			set { _finish = value; }
+			set
+			{
+				if (!GridObjects.Keys.Contains(value))
+				{
+					_finish = value;
+				}
+			}
 		}
 
 		/// <summary>
@@ -81,6 +93,8 @@ namespace LevelEditor.Models
 			_gridObjects = new Dictionary<Point, GridObject>();
 			_width = width;
 			_height = height;
+			Start = new Point(0, 0);
+			Finish = new Point(1, 0);
 		}
 
 		/// <summary>

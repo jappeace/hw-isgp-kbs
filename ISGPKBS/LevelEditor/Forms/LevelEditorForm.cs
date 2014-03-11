@@ -141,6 +141,11 @@ namespace LevelEditor.Forms
 			ChangeMouseAction();
 		}
 
+		private void finishRadio_CheckedChanged(object sender, EventArgs e)
+		{
+
+		}
+
 		private void ChangeMouseAction()
 		{
 			if (!selectRadio.Checked)
@@ -159,6 +164,10 @@ namespace LevelEditor.Forms
 			else if (startRadio.Checked)
 			{
 				levelPanel.MouseAction = MouseAction.Start;
+			}
+			else if (finishRadio.Checked)
+			{
+				levelPanel.MouseAction = MouseAction.Finish;
 			}
 			else
 			{
@@ -179,13 +188,25 @@ namespace LevelEditor.Forms
 
 		private void ChangeType()
 		{
-			GridObjectType type = GridObjectType.Tile;
 			if (ghostRadio.Checked)
 			{
-				type = GridObjectType.Ghost;
+				levelPanel.SelectedType = GridObjectType.Ghost;
 			}
-			levelPanel.Level.SetGridObject(levelPanel.SelectedPoint, new GridObject(type));
-			levelPanel.Invalidate();
+			else if (tileRadio.Checked)
+			{
+				levelPanel.SelectedType = GridObjectType.Tile;
+			}
+			else if (patrolRadio.Checked)
+			{
+				levelPanel.SelectedType = GridObjectType.Patrol;
+			}
+			if (levelPanel.SelectedPoint.X != -1)
+			{
+				levelPanel.Level.SetGridObject(levelPanel.SelectedPoint,
+					new GridObject(levelPanel.SelectedType));
+				levelPanel.Invalidate();
+			}
 		}
+
 	}
 }
