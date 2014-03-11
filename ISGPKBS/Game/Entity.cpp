@@ -30,8 +30,9 @@ namespace isgp {
 		}
 		CollidingTiles.clear();
 		collision = None;
-		Vector2D bottomRight = this->_position + *_size + Vector2D(3);
-		vector<Tile*> includedTiles = _grid->GetTilesInRectangle(this->_position - Vector2D(3), bottomRight);
+		Vector2D bottomRight = this->_position + *_size + Vector2D(2);
+		Vector2D topLeft = this->_position - Vector2D(2);
+		vector<Tile*> includedTiles = _grid->GetTilesInRectangle(this->_position, bottomRight);
 		GridGraphicTranslator translator = GridGraphicTranslator();
 		Vector2D diff = Vector2D(TILE_WIDTH / 2, TILE_HEIGHT / 2);
 
@@ -41,8 +42,8 @@ namespace isgp {
 				Vector2D absoluteTilePositionTL = translator.FromTo(*currentTile->GetPosition());
 				Vector2D tileCenter = absoluteTilePositionTL + diff;
 			
-				if(abs(absoluteTilePositionTL.Y() - _position.Y()) < _size->Y()){
-					double diffX = _position.X() - tileCenter.X();
+				if(abs(absoluteTilePositionTL.Y() - topLeft.Y()) < _size->Y()){
+					double diffX = topLeft.X() - tileCenter.X();
 					if(abs(diffX) < diff.X()){
 						collision |= Left;
 					}
@@ -53,8 +54,8 @@ namespace isgp {
 					}
 					
 				}
-				if(abs(absoluteTilePositionTL.X() - _position.X()) < _size->X()){
-					double diffY = _position.Y() - tileCenter.Y();
+				if(abs(absoluteTilePositionTL.X() - topLeft.X()) < _size->X()){
+					double diffY = topLeft.Y() - tileCenter.Y();
 					if(abs(diffY) < diff.Y()){
 						collision |= Up;
 					}
