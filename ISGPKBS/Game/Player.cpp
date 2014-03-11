@@ -18,6 +18,8 @@ namespace isgp{
 		_facingRight = true;
 		_behaviours = new vector<IBehaviour*>();
 		_behaviours->push_back(new GravityBehaviour(this));
+		
+		_animation = Animation(".\\tiles\\megaman.bmp", Size(32, 32), 4, 200);
 	}
 
 	Player::~Player(void) {
@@ -78,6 +80,13 @@ namespace isgp{
 		if (_xVel != 0) {
 			_facingRight = _xVel > 0;
 		}
+
+		// Update animation
+		_animation.OnUpdate(milisec);
+
+		if (_xVel == 0) {
+			_animation.Reset();
+		}
 	}
 	
 	void Player::AddToVelocityY(double y) {
@@ -85,20 +94,23 @@ namespace isgp{
 	}
 
 	void Player::Paint(Graphics* g) {
-		_graphics = g;
+		if (_xVel != 0) {
+			Point offset(32, (_facingRight) ? 0 : 32);
+			_animation.Render(g, this->_position, offset);
+		} else {
+			Point offset(0, (_facingRight) ? 0 : 32);
+			g->DrawBitmap(".\\tiles\\megaman.bmp", this->_position, offset, Size(32, 32));
+		}
 
-		Point offset(0, (_facingRight) ? 0 : 32);
-
-		_graphics->DrawBitmap(".\\tiles\\megaman.bmp", _position, offset, Size(32, 32));
 #ifdef _DEBUG
 		// Facing info
 		if (_facingRight) {
-			_graphics->DrawRect(Point(_position.GetX() + 32, _position.GetY() + 8), Point(_position.GetX() + 40, _position.GetY() + 16));
+			g->DrawRect(Point(_position.GetX() + 32, _position.GetY() + 8), Point(_position.GetX() + 40, _position.GetY() + 16));
 		} else {
-			_graphics->DrawRect(Point(_position.GetX(), _position.GetY() + 8), Point(_position.GetX() - 8, _position.GetY() + 16));
+			g->DrawRect(Point(_position.GetX(), _position.GetY() + 8), Point(_position.GetX() - 8, _position.GetY() + 16));
 		}
 
-		_graphics->DrawStaticRect(Point(395, 395), Point(405, 405));
+		g->DrawStaticRect(Point(395, 395), Point(405, 405));
 #endif
 	}
 }

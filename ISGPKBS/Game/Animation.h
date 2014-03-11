@@ -12,6 +12,7 @@ namespace isgp {
 		// frameCount: The amount of frames in the file (only horizontal frames)
 		// frameTime: The time in milliseconds which defines how long a frame will be visible
 		Animation(const string path, Size& frameSize, int frameCount, int frameTime);
+		Animation(void);
 		~Animation(void);
 
 		// Updates the animation based on the time which has passed.

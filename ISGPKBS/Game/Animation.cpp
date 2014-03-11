@@ -12,8 +12,10 @@ namespace isgp {
 		this->_current_frame_time = 0;
 	}
 
-	Animation::~Animation(void)
-	{
+	Animation::Animation() {
+	}
+
+	Animation::~Animation(void) {
 	}
 
 	void Animation::OnUpdate(const double tpf) {

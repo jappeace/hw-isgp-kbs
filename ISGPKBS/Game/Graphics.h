@@ -35,7 +35,7 @@ namespace isgp {
 		// FPScounter.
 		TimesPerSecondCounter _fpsCounter;
 #endif
-		map<string, Sprite>* _bitmapCache;
+		map<string, Sprite*>* _bitmapCache;
 	public:
 		Graphics(HWND);
 		~Graphics(void);
@@ -48,7 +48,7 @@ namespace isgp {
 		// Ends the rendering state and draws the backbuffer onto the screen
 		void EndRendering(HWND, PAINTSTRUCT *);
 		// get a bitmap from the cache or load it from a file and put it in the cache and return
-		Sprite LoadBitmapFile(string path);
+		Sprite* LoadBitmapFile(string path);
 
 		void SetTextColor(COLORREF color);
 		void SetTextBackgroundColor(COLORREF color);

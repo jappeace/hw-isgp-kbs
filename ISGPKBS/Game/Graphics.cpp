@@ -9,7 +9,7 @@ namespace isgp {
 	Graphics::Graphics(HWND hWnd) {
 		_cam = NULL;
 		
-		_bitmapCache = new map<string, Sprite>();
+		_bitmapCache = new map<string, Sprite*>();
 
 		this->_backBuffer = CreateCompatibleDC(NULL);
 
@@ -27,6 +27,10 @@ namespace isgp {
 
 	Graphics::~Graphics(void) {
 		if(_bitmapCache) {
+			for (map<string, Sprite*>::iterator it = _bitmapCache->begin(); it != _bitmapCache->end(); ++it) {
+				delete it->second;
+			}
+
 			delete _bitmapCache;
 		}
 	}
@@ -90,14 +94,14 @@ namespace isgp {
 		Rectangle(_backBuffer, xone, yone, xtwo, ytwo);
 	}
 
-	Sprite Graphics::LoadBitmapFile(string path) {
+	Sprite* Graphics::LoadBitmapFile(string path) {
 		if(_bitmapCache->count(path)) {
 			// Return cached item
 			return _bitmapCache->find(path)->second;
 		}
 
 		HBITMAP bitmap = (HBITMAP)LoadImage(NULL, path.c_str(), IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
-		Sprite sprite = Sprite(bitmap);
+		Sprite* sprite = new Sprite(bitmap);
 
 		(*_bitmapCache)[path] = sprite;
 
@@ -123,11 +127,11 @@ namespace isgp {
 			correctedPoint = _cam->FromTo(position);
 		}
 		
-		Sprite sprite = this->LoadBitmapFile(path);
+		Sprite* sprite = this->LoadBitmapFile(path);
 		HDC bitmap_hdc = CreateCompatibleDC(NULL);
 
 		// link the bitmap to a device context
-		SelectObject(bitmap_hdc, sprite.GetMask());
+		SelectObject(bitmap_hdc, sprite->GetMask());
 
 		// OR the image on the mask to apply transparancy
 		BitBlt(
@@ -145,7 +149,7 @@ namespace isgp {
 			SRCAND);
 
 		// link the bitmap to a device context
-		SelectObject(bitmap_hdc, sprite.GetBitmap());
+		SelectObject(bitmap_hdc, sprite->GetBitmap());
 
 		// OR the image on the mask to apply transparancy
 		BitBlt(
