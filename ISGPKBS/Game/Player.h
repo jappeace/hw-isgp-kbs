@@ -2,6 +2,7 @@
 
 #include <vector>
 
+#include "Animation.h"
 #include "IBehaviour.h"
 #include "IPaintable.h"
 #include "Grid.h"

@@ -16,8 +16,9 @@ namespace isgp{
 		_size = new Size(32, 32);
 		_behaviours = new vector<IBehaviour*>();
 		_behaviours->push_back(new GravityBehaviour(this));
+		
+		_animation = Animation(".\\tiles\\megaman.bmp", Size(32, 32), 4, 200);
 	}
-
 
 	Player::~Player(void) {
 		// Delete references in vector

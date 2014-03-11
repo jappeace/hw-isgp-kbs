@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Source Files">
@@ -50,13 +50,16 @@
     <ClCompile Include="Gravitybehaviour.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Vector2D.cpp">
-      <Filter>Cartesian</Filter>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Size.cpp">
-      <Filter>Cartesian</Filter>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Entity.cpp">
+    <ClCompile Include="Ghost.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -133,16 +136,16 @@
     <ClInclude Include="Gravitybehaviour.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Vector2D.h">
-      <Filter>Cartesian</Filter>
-    </ClInclude>
-    <ClInclude Include="Size.h">
-      <Filter>Cartesian</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity.h">
+    <ClInclude Include="Enemy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CollisionDetection.h">
+    <ClInclude Include="Sprite.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Ghost.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

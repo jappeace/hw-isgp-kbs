@@ -28,6 +28,6 @@ namespace isgp{
 		return result;
 	}
 	void SimpleLevelFactory::ReceiveTile(Tile* tile){
-		tile->SetData(new WorldBlock("C:\\tiles\\smile.bmp"));
+		tile->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
 	}
 }

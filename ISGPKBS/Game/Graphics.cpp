@@ -1,13 +1,15 @@
-#include "Graphics.h"
-#include "StrConverter.h"
 #include "AbstractWindow.h"
+#include "Graphics.h"
 #include "GridGraphicTranslator.h"
+#include "Sprite.h"
+#include "StrConverter.h"
 
 namespace isgp {
+
 	Graphics::Graphics(HWND hWnd) {
 		_cam = NULL;
 		
-		_bitmapCache = new map<string,  HBITMAP>();
+		_bitmapCache = new map<string, Sprite*>();
 
 		this->_backBuffer = CreateCompatibleDC(NULL);
 
@@ -25,6 +27,10 @@ namespace isgp {
 
 	Graphics::~Graphics(void) {
 		if(_bitmapCache) {
+			for (map<string, Sprite*>::iterator it = _bitmapCache->begin(); it != _bitmapCache->end(); ++it) {
+				delete it->second;
+			}
+
 			delete _bitmapCache;
 		}
 	}
@@ -94,56 +100,78 @@ namespace isgp {
 	void Graphics::DrawRect(int xone, int yone, int xtwo, int ytwo) {
 		Rectangle(_backBuffer, xone, yone, xtwo, ytwo);
 	}
-	HBITMAP Graphics::LoadBitmapFile(string path, int offsetX, int offsetY) {
-		string key = path + StrConverter::IntToString(offsetX) + StrConverter::IntToString(offsetY);
-		if(_bitmapCache->count(key)) {
-			return _bitmapCache->find(key)->second;
+
+	Sprite* Graphics::LoadBitmapFile(string path) {
+		if(_bitmapCache->count(path)) {
+			// Return cached item
+			return _bitmapCache->find(path)->second;
 		}
-		HBITMAP bitmap = (HBITMAP)LoadImage(NULL, path.c_str(), IMAGE_BITMAP, offsetX, offsetY, LR_LOADFROMFILE);
-		(*_bitmapCache)[key] = bitmap;
-		return bitmap;
-	}
-	HBITMAP Graphics::LoadBitmapFile(string path) {
-		return this->LoadBitmapFile(path, 0, 0);	
-	}
-	HBITMAP Graphics::LoadBitmapFile(string path, Vector2D& offset) {
-		return this->LoadBitmapFile(path, (int) offset.X(), (int) offset.Y());
+
+		HBITMAP bitmap = (HBITMAP)LoadImage(NULL, path.c_str(), IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+		Sprite* sprite = new Sprite(bitmap);
+
+		(*_bitmapCache)[path] = sprite;
+
+		return sprite;
 	}
 
-	void Graphics::DrawBitmap(string path, Vector2D& position) {
-		DrawBitmap(path,(int) position.X(),(int) position.Y(), 0, 0);
+	void Graphics::DrawBitmap(string path, Point& position) {
+		this->DrawBitmap(path, position, Size(TILE_WIDTH, TILE_HEIGHT));
 	}
-	void Graphics::DrawBitmap(string path, Vector2D& position, Vector2D& offset) {
-		DrawBitmap(path,(int) position.X(),(int) position.Y(),(int) offset.X(),(int) offset.Y());
+	
+	void Graphics::DrawBitmap(string path, Point& position, Point& offset) {
+		this->DrawBitmap(path, position, offset, Size(TILE_WIDTH, TILE_HEIGHT));
 	}
-	void Graphics::DrawBitmap(string path, int x, int y) {
-		DrawBitmap(path, x, y, 0, 0);
+
+	void Graphics::DrawBitmap(string path, Point& position, Size& size) {
+		this->DrawBitmap(path, position, Point(0, 0), size);
 	}
-	void Graphics::DrawBitmap(string path, int x, int y, int offsetx, int offsety) {
+
+	void Graphics::DrawBitmap(string path, Point& position, Point& offset, Size& size) {
+		Point correctedPoint = position;
+
 		if (_cam != NULL) {
-			Vector2D one1 = _cam->FromTo(Vector2D(x,y));
-			x = (int)one1.X();
-			y = (int)one1.Y();
+			correctedPoint = _cam->FromTo(position);
 		}
 		
-		HBITMAP bitmap = this->LoadBitmapFile(path, offsetx, offsety);
+		Sprite* sprite = this->LoadBitmapFile(path);
 		HDC bitmap_hdc = CreateCompatibleDC(NULL);
 
 		// link the bitmap to a device context
-		SelectObject(bitmap_hdc,bitmap);
+		SelectObject(bitmap_hdc, sprite->GetMask());
 
-		// copy the bitmap on the backbuffer
-		int bltResult =  BitBlt(
+		// OR the image on the mask to apply transparancy
+		BitBlt(
+			// Dest Context
 			_backBuffer, 
-			x, 
-			y,
-			TILE_WIDTH, 
-			TILE_HEIGHT, 
+			// Posotion
+			(int) correctedPoint.GetX(), (int) correctedPoint.GetY(),
+			// Size
+			size.GetWidth(), size.GetHeight(), 
+			// Source Context
 			bitmap_hdc, 
-			0, 
-			0, 
-			SRCCOPY
-		);
+			// Image offset
+			(int) offset.GetX(), (int) offset.GetY(),
+			// Operation
+			SRCAND);
+
+		// link the bitmap to a device context
+		SelectObject(bitmap_hdc, sprite->GetBitmap());
+
+		// OR the image on the mask to apply transparancy
+		BitBlt(
+			// Dest Context
+			_backBuffer, 
+			// Posotion
+			(int) correctedPoint.GetX(), (int) correctedPoint.GetY(),
+			// Size
+			size.GetWidth(), size.GetHeight(), 
+			// Source Context
+			bitmap_hdc, 
+			// Image offset
+			(int) offset.GetX(), (int) offset.GetY(),
+			// Operation
+			SRCPAINT);
 
 		// release the resource
 		DeleteDC(bitmap_hdc);
