@@ -78,7 +78,7 @@ namespace isgp{
 
 		// Update Facing
 		if (_xVel != 0) {
-			_facingRight = _xVel > 0;
+			_facingRight = _xVel > 0.0;
 		}
 
 		// Update animation
@@ -94,12 +94,25 @@ namespace isgp{
 	}
 
 	void Player::Paint(Graphics* g) {
-		if (_xVel != 0) {
-			Point offset(32, (_facingRight) ? 0 : 32);
-			_animation.Render(g, this->_position, offset);
+		static int const kSpriteSize = 32;
+
+		int facingOffset = 0;
+		if (!_facingRight) {
+			facingOffset = kSpriteSize;
+		}
+
+		if (!_collision) {
+			// In the air
+			Point offset((2 * kSpriteSize) + facingOffset, 2 * kSpriteSize);
+			g->DrawBitmap(".\\tiles\\megaman.bmp", this->_position, offset, Size(kSpriteSize, kSpriteSize));
+		} else if (_xVel == 0) {
+			// Standing still on the ground
+			Point offset(facingOffset, 2 * kSpriteSize);
+			g->DrawBitmap(".\\tiles\\megaman.bmp", this->_position, offset, Size(kSpriteSize, kSpriteSize));
 		} else {
-			Point offset(0, (_facingRight) ? 0 : 32);
-			g->DrawBitmap(".\\tiles\\megaman.bmp", this->_position, offset, Size(32, 32));
+			// Moving
+			Point offset(0, facingOffset);
+			_animation.Render(g, this->_position, offset);
 		}
 
 #ifdef _DEBUG
