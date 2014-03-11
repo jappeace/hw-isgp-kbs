@@ -18,7 +18,7 @@ public:
 	void SetSize(Vector2D* size);
 	int GetCollision() const;
 	Vector2D* GetVelocity() const;
-
+	virtual void AddToVelocityY(double) = 0;
 protected:
 	int collision;
 	Grid* _grid;

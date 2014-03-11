@@ -17,10 +17,7 @@ namespace isgp {
 		void Update(const double);
 		void AddToVelocityY(double y);
 		bool _leftKey, _rightKey, _upKey, _spaceKey;
-		
 		void MoveTo(int x, int y);
-
-		
 	private:
 		vector<IBehaviour*>* _behaviours;
 		double _maxVel;
