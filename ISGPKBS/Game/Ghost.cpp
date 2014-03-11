@@ -1,13 +1,13 @@
 #include "Ghost.h"
 
 namespace isgp {
-	Ghost::Ghost(Point point, Player* player) : Enemy(point, player) {
+	Ghost::Ghost(Vector2D point, Player* player) : Enemy(point, player) {
 		_aVel = 0;
 	}
 
 	void Ghost::Update(double milisec) {
 		double elapsed = milisec / 1000;
-		double range = sqrt(pow(_position.GetX() - _player->_position.GetX(), 2) + pow(_position.GetY() - _player->_position.GetY(), 2));
+		double range = sqrt(pow(_position.X() - _player->_position.X(), 2) + pow(_position.Y() - _player->_position.Y(), 2));
 
 		if (range < 26) {
 			_xVel = -_xVel;
@@ -17,7 +17,7 @@ namespace isgp {
 				_aVel += (2000 * elapsed);
 			}
 			
-			_radAngle = atan2(_player->_position.GetY() - _position.GetY(), _player->_position.GetX() - _position.GetX());
+			_radAngle = atan2(_player->_position.Y() - _position.Y(), _player->_position.X() - _position.X());
 
 			double targetXVel = _aVel * cos(_radAngle);
 			double targetYVel = _aVel * sin(_radAngle);
@@ -37,7 +37,7 @@ namespace isgp {
 			}
 		}
 
-		_position.SetX(_position.GetX() + (_xVel * elapsed));
-		_position.SetY(_position.GetY() + (_yVel * elapsed));
+		_position.X(_position.X() + (_xVel * elapsed));
+		_position.Y(_position.Y() + (_yVel * elapsed));
 	}
 }

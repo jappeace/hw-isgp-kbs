@@ -1,17 +1,18 @@
 #include "Tile.h"
 
 namespace isgp{
-	Tile::Tile(Point* p) {
+	Tile::Tile(Vector2D* p) {
 		Init(p);
 	}
 
 	Tile::Tile(int x, int y) {
-		Init(new Point(x, y));
+		Init(new Vector2D(x, y));
 	}
 
-	void Tile::Init(Point* p) {
+	void Tile::Init(Vector2D* p) {
 		_position = p;
 		_tiledata = NULL;
+		_hasData = false;
 		_bottom = NULL;
 		_top = NULL;
 		_left = NULL;
@@ -27,6 +28,7 @@ namespace isgp{
 	void Tile::SetData(ITileData* paintable){
 		paintable->ReceiveTile(this);
 		_tiledata = paintable;
+		_hasData = true;
 	}
 
 	void Tile::SetBottom(Tile* bottom) {
@@ -61,7 +63,20 @@ namespace isgp{
 		return _top;
 	}
 
-	Point* Tile::GetPosition() const {
+	ITileData* Tile::GetData() const {
+		return _tiledata;
+	}
+
+	vector<Tile*> Tile::GetSurroundingTiles() const {
+		vector<Tile*> tiles;
+		tiles.push_back(this->GetLeft());
+		tiles.push_back(this->GetTop());
+		tiles.push_back(this->GetRight());
+		tiles.push_back(this->GetBottom());
+		return tiles;
+	}
+
+	Vector2D* Tile::GetPosition() const {
 		return _position;
 	}
 

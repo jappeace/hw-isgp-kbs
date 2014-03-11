@@ -3,7 +3,7 @@
 #include <windows.h>
 #include <string>
 #include <map>
-#include "Point.h"
+#include "Vector2D.h"
 #include "TimesPerSecondCounter.h"
 #include "ITranslator.h"
 #include "Size.h"
@@ -30,7 +30,8 @@ namespace isgp {
 		HDC _backBuffer;
 		// The bitmap on which we are actually rendering in the background
 		HBITMAP _bitmap;
-
+		
+		HPEN _pen;
 #ifdef _DEBUG
 		// FPScounter.
 		TimesPerSecondCounter _fpsCounter;
@@ -43,6 +44,8 @@ namespace isgp {
 		ITranslator* _cam;
 		void SetCam(ITranslator*);
 
+		void SetColor(COLORREF color);
+
 		// Prepares the device context to start rendering
 		void BeginRendering(HWND, PAINTSTRUCT *);
 		// Ends the rendering state and draws the backbuffer onto the screen
@@ -53,22 +56,22 @@ namespace isgp {
 		void SetTextColor(COLORREF color);
 		void SetTextBackgroundColor(COLORREF color);
 
-		void DrawStr(Point& position, string str);
-		void DrawStr(Point& position, const char* str, int length);
+		void DrawStr(Vector2D& position, string str);
+		void DrawStr(Vector2D& position, const char* str, int length);
 		
-		void DrawRect(Point& one, Point& two);
+		void DrawRect(Vector2D& one, Vector2D& two);
 		void DrawRect(int xone, int yone, int xtwo, int ytwo);
-		void DrawStaticRect(Point& one, Point& two);
+		void DrawStaticRect(Vector2D& one, Vector2D& two);
 
 		// Draws a bitmap at the given position with the default tile size
-		void DrawBitmap(string path, Point& position);
+		void DrawBitmap(string path, Vector2D& position);
 		// Draws a bitmap at the given position with the default tile size
 		// The source rectangle starts at the given offset
-		void DrawBitmap(string path, Point& position, Point& offset);
+		void DrawBitmap(string path, Vector2D& position, Vector2D& offset);
 		// Draws a bitmap at the given location with the given size
-		void DrawBitmap(string path, Point& position, Size& size);
+		void DrawBitmap(string path, Vector2D& position, Size& size);
 		// Draws a bitmap at the given location with the given size
 		// The source rectangle starts at the given offset
-		void DrawBitmap(string path, Point& position, Point& offset, Size& size);
+		void DrawBitmap(string path, Vector2D& position, Vector2D& offset, Size& size);
 	};
 }

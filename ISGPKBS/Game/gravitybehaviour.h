@@ -10,6 +10,7 @@ namespace isgp {
 	class GravityBehaviour : public IBehaviour
 	{
 	public:
+		static double CalculateGravity(const double);
 		GravityBehaviour(Player* player);
 		~GravityBehaviour(void);
 
@@ -17,5 +18,7 @@ namespace isgp {
 
 	private:
 		Player* _player;
+
+		
 	};
 }

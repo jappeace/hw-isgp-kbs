@@ -9,11 +9,11 @@ namespace isgp{
 		Camera(Player*);
 		~Camera(void);
 		void Update(double);
-		Point FromTo(Point) override;
-		Point ToFrom(Point) override;
+		Vector2D FromTo(Vector2D) override;
+		Vector2D ToFrom(Vector2D) override;
 	private:
 		Player* _player;
-		Point _position;
+		Vector2D _position;
 		int _direction;
 		double _camFix;
 	};

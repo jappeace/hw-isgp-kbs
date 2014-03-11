@@ -46,7 +46,7 @@ namespace isgp {
 	void Graphics::EndRendering(HWND hWnd, PAINTSTRUCT *ps) {
 #ifdef _DEBUG
 		this->_fpsCounter.Update();
-		DrawStr(Point(10, 10), "FPS: " + StrConverter::IntToString(this->_fpsCounter.Get()));
+		DrawStr(Vector2D(10, 10), "FPS: " + StrConverter::IntToString(this->_fpsCounter.Get()));
 #endif
 
 		// Blit the new frame to the screen
@@ -60,12 +60,19 @@ namespace isgp {
 		_cam = cam;
 	}
 
-	void Graphics::DrawStr(Point& position, string str) {
+	void Graphics::DrawStr(Vector2D& position, string str) {
 		this->DrawStr(position,str.c_str(), str.length());
 	}
 
-	void Graphics::DrawStr(Point& position, const char* str, int length) {
-		TextOut(_backBuffer, (int) position.GetX(), (int) position.GetY(), str, length);
+	void Graphics::DrawStr(Vector2D& position, const char* str, int length) {
+		TextOut(_backBuffer, (int) position.X(), (int) position.Y(), str, length);
+	}
+
+	void Graphics::SetColor(COLORREF color) {
+		if(_pen)
+			DeleteObject(_pen);
+		_pen = CreatePen(PS_SOLID, 1, color);
+		SelectObject(this->_backBuffer, _pen);
 	}
 
 	void Graphics::SetTextColor(COLORREF color) {
@@ -76,18 +83,18 @@ namespace isgp {
 		SetBkColor(_backBuffer, color);
 	}
 
-	void Graphics::DrawRect(Point& one, Point& two) {
+	void Graphics::DrawRect(Vector2D& one, Vector2D& two) {
 		if (_cam != NULL) {
-			Point one1 = _cam->FromTo(one);
-			Point two1 = _cam->FromTo(two);
-			this->DrawRect((int)one1.GetX(),(int) one1.GetY(),(int) two1.GetX(),(int) two1.GetY());
+			Vector2D one1 = _cam->FromTo(one);
+			Vector2D two1 = _cam->FromTo(two);
+			this->DrawRect((int)one1.X(),(int) one1.Y(),(int) two1.X(),(int) two1.Y());
 		} else {
-			this->DrawRect((int)one.GetX(),(int) one.GetY(),(int) two.GetX(),(int) two.GetY());
+			this->DrawRect((int)one.X(),(int) one.Y(),(int) two.X(),(int) two.Y());
 		}
 	}
 
-	void Graphics::DrawStaticRect(Point& one, Point& two) {
-		this->DrawRect((int)one.GetX(),(int) one.GetY(),(int) two.GetX(),(int) two.GetY());
+	void Graphics::DrawStaticRect(Vector2D& one, Vector2D& two) {
+		this->DrawRect((int)one.X(),(int) one.Y(),(int) two.X(),(int) two.Y());
 	}
 
 	void Graphics::DrawRect(int xone, int yone, int xtwo, int ytwo) {
@@ -108,23 +115,23 @@ namespace isgp {
 		return sprite;
 	}
 
-	void Graphics::DrawBitmap(string path, Point& position) {
+	void Graphics::DrawBitmap(string path, Vector2D& position) {
 		this->DrawBitmap(path, position, Size(TILE_WIDTH, TILE_HEIGHT));
 	}
 	
-	void Graphics::DrawBitmap(string path, Point& position, Point& offset) {
+	void Graphics::DrawBitmap(string path, Vector2D& position, Vector2D& offset) {
 		this->DrawBitmap(path, position, offset, Size(TILE_WIDTH, TILE_HEIGHT));
 	}
 
-	void Graphics::DrawBitmap(string path, Point& position, Size& size) {
-		this->DrawBitmap(path, position, Point(0, 0), size);
+	void Graphics::DrawBitmap(string path, Vector2D& position, Size& size) {
+		this->DrawBitmap(path, position, Vector2D(0, 0), size);
 	}
 
-	void Graphics::DrawBitmap(string path, Point& position, Point& offset, Size& size) {
-		Point correctedPoint = position;
+	void Graphics::DrawBitmap(string path, Vector2D& position, Vector2D& offset, Size& size) {
+		Vector2D correctedVector2D = position;
 
 		if (_cam != NULL) {
-			correctedPoint = _cam->FromTo(position);
+			correctedVector2D = _cam->FromTo(position);
 		}
 		
 		Sprite* sprite = this->LoadBitmapFile(path);
@@ -138,13 +145,13 @@ namespace isgp {
 			// Dest Context
 			_backBuffer, 
 			// Posotion
-			(int) correctedPoint.GetX(), (int) correctedPoint.GetY(),
+			(int) correctedVector2D.X(), (int) correctedVector2D.Y(),
 			// Size
 			size.GetWidth(), size.GetHeight(), 
 			// Source Context
 			bitmap_hdc, 
 			// Image offset
-			(int) offset.GetX(), (int) offset.GetY(),
+			(int) offset.X(), (int) offset.Y(),
 			// Operation
 			SRCAND);
 
@@ -156,13 +163,13 @@ namespace isgp {
 			// Dest Context
 			_backBuffer, 
 			// Posotion
-			(int) correctedPoint.GetX(), (int) correctedPoint.GetY(),
+			(int) correctedVector2D.X(), (int) correctedVector2D.Y(),
 			// Size
 			size.GetWidth(), size.GetHeight(), 
 			// Source Context
 			bitmap_hdc, 
 			// Image offset
-			(int) offset.GetX(), (int) offset.GetY(),
+			(int) offset.X(), (int) offset.Y(),
 			// Operation
 			SRCPAINT);
 
@@ -170,4 +177,3 @@ namespace isgp {
 		DeleteDC(bitmap_hdc);
 	}
 }
-

@@ -1,8 +1,9 @@
 #pragma once
-
+#include "Vector2D.h"
 namespace isgp {
 	// a positive size of somthing
-	class Size {
+	// just an extension of vector
+	class Size : public Vector2D{
 	public:
 		// set size to 0,0
 		Size();
@@ -12,8 +13,5 @@ namespace isgp {
 		unsigned  GetHeight() const;
 		void SetWidth(unsigned);
 		unsigned  GetWidth() const;
-	private:
-		unsigned  _width;
-		unsigned  _height;
 	};
 }

@@ -7,7 +7,7 @@ namespace isgp {
 		traveller->ReceiveTile(GetTileAt(x, y));
 	}
 
-	unsigned Grid::GetTileIndex(unsigned x, unsigned y) const {
+	int Grid::GetTileIndex(unsigned x, unsigned y) const {
 		return x + y * _size->GetWidth();
 	}
 
@@ -124,14 +124,14 @@ namespace isgp {
 		if (desiredIndex < 0) {
 			sizeMessage(x, y);
 		}
-		if (desiredIndex >= _tilesLength) {
+		if (desiredIndex > _tilesLength) {
 			sizeMessage(x, y);
 		}
 		return _tiles->at(desiredIndex);
 	}
 
-	Tile* Grid::GetTileAt(Point& p) const {
-		return GetTileAt((unsigned) p.GetX(), (unsigned) p.GetY());
+	Tile* Grid::GetTileAt(Vector2D& p) const {
+		return GetTileAt((unsigned) p.X(), (unsigned) p.Y());
 	}
 
 	void Grid::TraverseRow(unsigned y, IGridTraveller* traveller) {
@@ -154,5 +154,36 @@ namespace isgp {
 
 	Size* Grid::GetSize() const {
 		return _size;
+	}
+
+	vector<Tile*> Grid::GetSurroundingTiles(vector<Tile*> tiles) const {
+		vector<Tile*> allTiles;
+		allTiles.reserve(tiles.size() * 4);
+		for(unsigned i = 0; i < tiles.size(); i++) {
+			Tile* t = tiles.at(i);
+			std::vector<Tile*> surrounding = t->GetSurroundingTiles();
+			allTiles.insert(allTiles.end(), surrounding.begin(), surrounding.end());
+		}
+		std::sort(allTiles.begin(), allTiles.end());
+		std::sort(tiles.begin(), tiles.end());
+		std::vector<Tile*> difference;
+		std::set_difference(allTiles.begin(), allTiles.end(), tiles.begin(), tiles.end(), std::back_inserter(difference));
+		return difference;
+	}
+
+	vector<Tile*> Grid::GetTilesInRectangle(Vector2D topLeft, Vector2D bottomRight) const {
+		GridGraphicTranslator translator = GridGraphicTranslator();
+		vector<Tile*> includedTiles;
+
+		Vector2D p = translator.ToFrom(topLeft);
+		Tile* topLeftTile = GetTileAt(p);
+		Tile* topRightTile = GetTileAt(translator.ToFrom(bottomRight));
+
+		for(double i = topLeftTile->GetPosition()->X(); i <= topRightTile->GetPosition()->X(); i++) {
+			for(double j = topLeftTile->GetPosition()->Y(); j <= topRightTile->GetPosition()->Y(); j++) {
+				includedTiles.push_back(GetTileAt((int)i, (int)j));
+			}
+		}
+		return includedTiles;
 	}
 }

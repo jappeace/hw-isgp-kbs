@@ -19,12 +19,12 @@ namespace isgp {
 		void OnUpdate(const double tpf);
 
 		// Renders the animation onto the screen at the given point
-		void Render(Graphics* g, Point& position);
+		void Render(Graphics* g, Vector2D& position);
 
 		// Renders the animation onto the screen at the given point
 		// The given offset will be added to the animation calculated offset to
 		// give better integration with tilesets.
-		void Render(Graphics* g, Point& position, Point& offset);
+		void Render(Graphics* g, Vector2D& position, Vector2D& offset);
 
 		// Resets the animation to the first frame
 		void Reset();
@@ -42,5 +42,6 @@ namespace isgp {
 		double _current_frame_time;
 		// The size of a single frame
 		Size _frame_size;
+
 	};
 }

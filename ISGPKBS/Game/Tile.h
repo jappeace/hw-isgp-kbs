@@ -1,7 +1,8 @@
 #pragma once
 
+#include <vector>
 #include <cstdlib>
-#include "Point.h"
+#include "Vector2D.h"
 #include "IPaintable.h"
 #include "ITileData.h"
 
@@ -12,7 +13,7 @@ namespace isgp {
 	class Tile : IPaintable{
 	public:
 		// set a tile to the point
-		Tile(Point* p);
+		Tile(Vector2D* p);
 		// set a tile to x,y
 		Tile(int x, int y);
 
@@ -26,17 +27,20 @@ namespace isgp {
 		Tile* GetLeft() const;
 		void SetTop(Tile* top);
 		Tile* GetTop() const;
-		Point* GetPosition() const;
+		Vector2D* GetPosition() const;
 		void Paint(Graphics* g);
 		void SetData(ITileData*);
+		ITileData* GetData() const;
+		vector<Tile*> GetSurroundingTiles() const;
 	private:
-		void Init(Point* p);
+		void Init(Vector2D* p);
 		ITileData* _tiledata;
-		Point* _position;
+		Vector2D* _position;
 		Tile* _top;
 		Tile* _left;
 		Tile* _right;
 		Tile* _bottom;
+		bool _hasData;
 	};
 	inline bool operator==(const Tile& l, const Tile& r){
 		if(l.GetPosition() != r.GetPosition()){

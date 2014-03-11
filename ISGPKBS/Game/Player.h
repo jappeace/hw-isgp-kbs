@@ -5,26 +5,29 @@
 #include "Animation.h"
 #include "IBehaviour.h"
 #include "IPaintable.h"
-
+#include "Grid.h"
+#include "Entity.h"
 namespace isgp {
-	class Player : public IPaintable
+	class Player : public Entity
 	{
 	public:
-		Player(Point position);
+		Player(Vector2D position);
 		~Player(void);
 		void Paint(Graphics* g) override;
 		void Update(const double);
 		void AddToVelocityY(double y);
-		Point _position;
-		bool _leftKey, _rightKey, _upKey, _spaceKey, _collision;
-		double _xVel, _yVel, _maxVel;
+		bool _leftKey, _rightKey, _upKey, _spaceKey;
+		
+		void MoveTo(int x, int y);
+
+		
 	private:
 		vector<IBehaviour*>* _behaviours;
-		double _accel, _deAccel;
-		// If the player is facing right
-		bool _facingRight;
-		// The animation of the player character
-		Animation _animation;
+		double _maxVel;
+		Graphics* _graphics;
+		double _accel, 
+			_deAccel;
+		Animation* _animation;
 	};
 }
 
