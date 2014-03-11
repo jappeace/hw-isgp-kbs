@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>LevelEditor</RootNamespace>
     <AssemblyName>LevelEditor</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -44,6 +45,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\SpritePickerPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Models\BitmapCollection.cs" />
     <Compile Include="Forms\LevelPanel.cs">
       <SubType>Component</SubType>
@@ -70,10 +74,12 @@
     <Compile Include="Forms\NewLevelForm.Designer.cs">
       <DependentUpon>NewLevelForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\MouseAction.cs" />
+    <Compile Include="Models\SpriteSet.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Models\Tile.cs" />
-    <Compile Include="Models\TileType.cs" />
+    <Compile Include="Models\GridObject.cs" />
+    <Compile Include="Models\GridObjectType.cs" />
     <EmbeddedResource Include="Forms\LevelEditorForm.resx">
       <DependentUpon>LevelEditorForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -88,6 +94,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
