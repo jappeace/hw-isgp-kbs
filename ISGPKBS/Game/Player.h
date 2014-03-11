@@ -2,6 +2,7 @@
 
 #include <vector>
 
+#include "Animation.h"
 #include "IBehaviour.h"
 #include "IPaintable.h"
 
@@ -19,8 +20,11 @@ namespace isgp {
 		double _xVel, _yVel, _maxVel;
 	private:
 		vector<IBehaviour*>* _behaviours;
-		Graphics* _graphics;
 		double _accel, _deAccel;
+		// If the player is facing right
+		bool _facingRight;
+		// The animation of the player character
+		Animation _animation;
 	};
 }
 

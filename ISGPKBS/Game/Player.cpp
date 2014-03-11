@@ -15,8 +15,11 @@ namespace isgp{
 		_upKey = false;
 		_spaceKey = false;
 		_collision = false;
+		_facingRight = true;
 		_behaviours = new vector<IBehaviour*>();
 		_behaviours->push_back(new GravityBehaviour(this));
+		
+		_animation = Animation(".\\tiles\\megaman.bmp", Size(32, 32), 4, 200);
 	}
 
 	Player::~Player(void) {
@@ -72,6 +75,18 @@ namespace isgp{
 		if (_upKey && _position.GetY() >= 221.0) {
 			_yVel = -650;
 		}
+
+		// Update Facing
+		if (_xVel != 0) {
+			_facingRight = _xVel > 0.0;
+		}
+
+		// Update animation
+		_animation.OnUpdate(milisec);
+
+		if (_xVel == 0) {
+			_animation.Reset();
+		}
 	}
 	
 	void Player::AddToVelocityY(double y) {
@@ -79,12 +94,36 @@ namespace isgp{
 	}
 
 	void Player::Paint(Graphics* g) {
-		_graphics = g;
-		
-		_graphics->DrawRect(_position, Point(_position.GetX() + 32, _position.GetY() + 32));
-		
+		static int const kSpriteSize = 32;
+
+		int facingOffset = 0;
+		if (!_facingRight) {
+			facingOffset = kSpriteSize;
+		}
+
+		if (!_collision) {
+			// In the air
+			Point offset((2 * kSpriteSize) + facingOffset, 2 * kSpriteSize);
+			g->DrawBitmap(".\\tiles\\megaman.bmp", this->_position, offset, Size(kSpriteSize, kSpriteSize));
+		} else if (!_leftKey && !_rightKey) {
+			// Standing still on the ground
+			Point offset(facingOffset, 2 * kSpriteSize);
+			g->DrawBitmap(".\\tiles\\megaman.bmp", this->_position, offset, Size(kSpriteSize, kSpriteSize));
+		} else {
+			// Moving
+			Point offset(0, facingOffset);
+			_animation.Render(g, this->_position, offset);
+		}
+
 #ifdef _DEBUG
-		_graphics->DrawStaticRect(Point(395, 395), Point(405, 405));
+		// Facing info
+		if (_facingRight) {
+			g->DrawRect(Point(_position.GetX() + 32, _position.GetY() + 8), Point(_position.GetX() + 40, _position.GetY() + 16));
+		} else {
+			g->DrawRect(Point(_position.GetX(), _position.GetY() + 8), Point(_position.GetX() - 8, _position.GetY() + 16));
+		}
+
+		g->DrawStaticRect(Point(395, 395), Point(405, 405));
 #endif
 	}
 }
