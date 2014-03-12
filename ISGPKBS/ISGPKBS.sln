@@ -26,6 +26,7 @@ Global
 		{270E6645-99A5-4AEE-9159-07D7C4776781}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
 		{270E6645-99A5-4AEE-9159-07D7C4776781}.Debug|Mixed Platforms.Build.0 = Debug|Win32
 		{270E6645-99A5-4AEE-9159-07D7C4776781}.Debug|Win32.ActiveCfg = Debug|Win32
+		{270E6645-99A5-4AEE-9159-07D7C4776781}.Debug|Win32.Build.0 = Debug|Win32
 		{270E6645-99A5-4AEE-9159-07D7C4776781}.Release|Any CPU.ActiveCfg = Release|Win32
 		{270E6645-99A5-4AEE-9159-07D7C4776781}.Release|Mixed Platforms.ActiveCfg = Release|Win32
 		{270E6645-99A5-4AEE-9159-07D7C4776781}.Release|Mixed Platforms.Build.0 = Release|Win32
