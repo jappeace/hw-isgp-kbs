@@ -24,6 +24,62 @@ namespace isgp {
 		return _size;
 	}
 
+	
+	int Entity::Collides(int x, int y) {
+		_position += Vector2D(x, y);
+		int doesCollide = CheckCollision();
+		_position -= Vector2D(x, y);
+		return doesCollide;
+	}
+
+	void Entity::Move(Vector2D velocity) {
+		if(velocity.X() != 0 || velocity.Y() != 0) {
+			double allowedX = 0;
+			double allowedY = 0;
+			bool hasCollided = false;
+
+			while(true) {
+				double stepSizeX = CalcStepSize(velocity.X() - allowedX);
+				double stepSizeY = CalcStepSize(velocity.Y() - allowedY);
+
+				bool canMoveX = stepSizeX != 0 && ((Collides((int)(allowedX + stepSizeX), 0) & (Left | Right)) == None);
+				bool canMoveY = stepSizeY != 0 && ((Collides(0, (int)(allowedY + stepSizeY)) & (Down | Up)) == None);
+				if(canMoveX) {
+					allowedX += stepSizeX;
+				} else if(stepSizeX != 0  && !hasCollided) {
+					hasCollided = true;
+				}
+
+				if(canMoveY) {
+					allowedY += stepSizeY;
+				} else if(stepSizeY != 0 && !hasCollided) {
+					hasCollided = true;
+				}
+
+				if(!canMoveX && !canMoveY) {
+					break;
+				}
+			}
+
+			if(allowedX != 0 || allowedY != 0) {
+				_position += Vector2D(allowedX, allowedY);
+				if(allowedY != 0) {
+					_position += Vector2D(0, 1);
+				}
+			}
+			
+		}
+		
+	}
+
+	double Entity::CalcStepSize(double vel) {
+		if(abs(vel) < 0.1) {
+			return 0.0;
+		} else {
+			return (vel > 0) ? min(vel, 1) : max(vel, -1);
+		}
+	}
+
 	int Entity::CheckCollision() {
 		if(!_grid) {
 			return None;
