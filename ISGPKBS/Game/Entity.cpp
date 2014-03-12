@@ -42,8 +42,25 @@ namespace isgp {
 				double stepSizeX = CalcStepSize(velocity.X() - allowedX);
 				double stepSizeY = CalcStepSize(velocity.Y() - allowedY);
 
-				bool canMoveX = stepSizeX != 0 && ((Collides((int)(allowedX + stepSizeX), 0) & (Left | Right)) == None);
-				bool canMoveY = stepSizeY != 0 && ((Collides(0, (int)(allowedY + stepSizeY)) & (Down | Up)) == None);
+				int xCollision = Collides((int)(allowedX + stepSizeX), 0);
+				int yCollision = Collides(0, (int)(allowedY + stepSizeY));
+
+				bool canMoveX = stepSizeX != 0;
+				bool canMoveY = stepSizeY != 0;
+
+				if((xCollision & Left) && velocity.X() < 0) {
+					canMoveX = false;
+				} else if((xCollision & Right) && velocity.X() > 0) {
+					canMoveX = false;
+				}
+
+				if((yCollision & Up) && velocity.Y() < 0) {
+					canMoveY = false;
+				} else if((yCollision & Down) && velocity.Y() > 0) {
+					canMoveY = false;
+				}
+
+				
 				if(canMoveX) {
 					allowedX += stepSizeX;
 				} else if(stepSizeX != 0  && !hasCollided) {

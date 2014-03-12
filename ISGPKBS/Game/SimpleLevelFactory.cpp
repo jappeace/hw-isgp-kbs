@@ -25,15 +25,15 @@ namespace isgp{
 		g->GetTileAt(Vector2D(41, 17))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
 		g->GetTileAt(Vector2D(42, 17))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
 		
-		g->GetTileAt(Vector2D(55, 13))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
-		g->GetTileAt(Vector2D(56, 13))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
-		g->GetTileAt(Vector2D(57, 13))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
-		g->GetTileAt(Vector2D(58, 13))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
-		g->GetTileAt(Vector2D(59, 13))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
-		g->GetTileAt(Vector2D(60, 13))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
-		g->GetTileAt(Vector2D(61, 13))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
-		g->GetTileAt(Vector2D(62, 13))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
-		g->GetTileAt(Vector2D(63, 13))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
+		g->GetTileAt(Vector2D(55, 14))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
+		g->GetTileAt(Vector2D(56, 14))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
+		g->GetTileAt(Vector2D(57, 14))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
+		g->GetTileAt(Vector2D(58, 14))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
+		g->GetTileAt(Vector2D(59, 14))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
+		g->GetTileAt(Vector2D(60, 14))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
+		g->GetTileAt(Vector2D(61, 14))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
+		g->GetTileAt(Vector2D(62, 14))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
+		g->GetTileAt(Vector2D(63, 14))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
 
 		g->TraverseRow(18, this);
 
