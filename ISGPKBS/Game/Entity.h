@@ -18,8 +18,13 @@ public:
 	void SetSize(Vector2D* size);
 	int GetCollision() const;
 	Vector2D* GetVelocity() const;
+	virtual void AddToVelocityY(double) = 0;
+	void Move(Vector2D);
 
 protected:
+	double CalcStepSize(double vel);
+	int Collides(int x, int y);
+
 	int collision;
 	Grid* _grid;
 	Vector2D* _size;

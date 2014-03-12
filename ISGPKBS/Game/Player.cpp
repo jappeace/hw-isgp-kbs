@@ -64,16 +64,18 @@ namespace isgp{
 			_velocity->X(0);
 		}
 
+		//behaviors
 		for (unsigned int i = 0; i < _behaviours->size(); ++i) {
 			_behaviours->at(i)->Update(milisec);
 		}
+
 		if((collision & Down && _velocity->Y() > 0) || (collision & Up && _velocity->Y() < 0)) { 
 			_velocity->Y(0);
 		}
 		if((collision & Right && _velocity->X() > 0) || (collision & Left && _velocity->X() < 0)) { 
 			_velocity->X(0);
 		}
-		_position += (*_velocity) * Vector2D(elapsed);
+		Move((*_velocity) * Vector2D(elapsed));
 
 		if(_upKey && (collision & Down)) {
 			_velocity->Y(-650);
@@ -90,9 +92,6 @@ namespace isgp{
 		if (_velocity->X() == 0) {
 			_animation->Reset();
 		}
-	}
-
-	void Player::MoveTo(int x, int y) {
 	}
 	
 	void Player::AddToVelocityY(double y) {
@@ -138,7 +137,7 @@ namespace isgp{
 		static int const kSpriteSize = 32;
 
 		int facingOffset = 0;
-		int collision = CheckCollision();
+		//int collision = CheckCollision();
 
 		if (!_facingRight) {
 			facingOffset = kSpriteSize;
