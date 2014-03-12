@@ -46,6 +46,7 @@ namespace isgp {
 	void Graphics::EndRendering(HWND hWnd, PAINTSTRUCT *ps) {
 #ifdef _DEBUG
 		this->_fpsCounter.Update();
+		SetTextColor(RGB(0, 0, 0));
 		DrawStr(Vector2D(10, 10), "FPS: " + StrConverter::IntToString(this->_fpsCounter.Get()));
 #endif
 
