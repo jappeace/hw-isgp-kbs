@@ -63,9 +63,11 @@ namespace isgp{
 			_velocity->X(0);
 		}
 
+		//behaviors
 		for (unsigned int i = 0; i < _behaviours->size(); ++i) {
 			_behaviours->at(i)->Update(milisec);
 		}
+
 		if((collision & Down && _velocity->Y() > 0) || (collision & Up && _velocity->Y() < 0)) { 
 			_velocity->Y(0);
 		}

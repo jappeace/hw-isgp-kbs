@@ -18,8 +18,8 @@ namespace isgp{
 		void Paint(Graphics* g) override;
 		static const Size tileSize;
 		Player* _player;
-		Enemy* _enemy;
-		Enemy* _enemy2;
+		Entity* _enemy;
+		Entity* _enemy2;
 		Grid* GetGrid() const;
 		static const Size defaultTileAmount;
 	private:
