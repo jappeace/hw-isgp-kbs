@@ -18,9 +18,11 @@ namespace isgp {
 		void AddToVelocityY(double y);
 		bool _leftKey, _rightKey, _upKey, _spaceKey;
 		
-		void MoveTo(int x, int y);
+		void Move(Vector2D);
 
-		
+	protected:
+		double CalcStepSize(double vel);
+		bool Collides(int x, int y);
 	private:
 		vector<IBehaviour*>* _behaviours;
 		double _maxVel;
