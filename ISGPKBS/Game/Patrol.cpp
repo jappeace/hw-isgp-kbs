@@ -35,9 +35,9 @@ namespace isgp {
 		if (range > _range) {
 			_velocity->X(-_velocity->X());
 		}
-
-		_position.X(_position.X() + (_velocity->X() * elapsed));
-		_position.Y(_position.Y() + (_velocity->Y() * elapsed));
+		Move(Vector2D((_velocity->X() * elapsed), (_velocity->Y() * elapsed)));
+		//_position.X(_position.X() + (_velocity->X() * elapsed));
+		//_position.Y(_position.Y() + (_velocity->Y() * elapsed));
 
 		// Update Facing
 		if (_velocity->X() != 0) {
