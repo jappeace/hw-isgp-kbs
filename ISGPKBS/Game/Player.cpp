@@ -101,8 +101,8 @@ namespace isgp{
 #ifdef _DEBUG
 		g->DrawStaticRect(Vector2D(395, 395), Vector2D(405, 405));
 		GridGraphicTranslator translator = GridGraphicTranslator();
-		vector<Tile*> includedTiles = _grid->GetTilesInRectangle(_position, _position + *_size);
-
+		vector<Tile*> includedTiles = _grid->GetTilesInRectangle(_position, _position + *_size + Vector2D(2));
+		collision = CheckCollision();
 		g->SetColor(RGB(255, 0, 0));
 		for(unsigned int i = 0; i < includedTiles.size(); i++) {
 			Tile* t = includedTiles.at(i);

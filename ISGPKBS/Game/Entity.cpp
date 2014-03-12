@@ -25,7 +25,7 @@ namespace isgp {
 	}
 
 	
-	int Entity::Collides(int x, int y) {
+	int Entity::Collides(double x, double y) {
 		_position += Vector2D(x, y);
 		int doesCollide = CheckCollision();
 		_position -= Vector2D(x, y);
@@ -42,21 +42,19 @@ namespace isgp {
 				double stepSizeX = CalcStepSize(velocity.X() - allowedX);
 				double stepSizeY = CalcStepSize(velocity.Y() - allowedY);
 
-				int xCollision = Collides((int)(allowedX + stepSizeX), 0);
-				int yCollision = Collides(0, (int)(allowedY + stepSizeY));
+				int xCollision = Collides(allowedX + stepSizeX, 0);
+				int yCollision = Collides(0, allowedY + stepSizeY);
 
 				bool canMoveX = stepSizeX != 0;
 				bool canMoveY = stepSizeY != 0;
 
-				if((xCollision & Left) && velocity.X() < 0) {
-					canMoveX = false;
-				} else if((xCollision & Right) && velocity.X() > 0) {
+				if(((xCollision & Left) && velocity.X() < 0) || ((xCollision & Right) && velocity.X() > 0)) {
 					canMoveX = false;
 				}
 
-				if((yCollision & Up) && velocity.Y() < 0) {
-					canMoveY = false;
-				} else if((yCollision & Down) && velocity.Y() > 0) {
+				if(((yCollision & Up) && velocity.Y() < 0) || ((yCollision & Down) && velocity.Y() > 0)) {
+					//if (canMoveY)
+					//	allowedY += stepSizeY;
 					canMoveY = false;
 				}
 
@@ -78,7 +76,7 @@ namespace isgp {
 				}
 			}
 
-			if(allowedX != 0 || allowedY != 0) {
+			if(allowedX != 0.0 || allowedY != 0.0) {
 				_position += Vector2D(allowedX, allowedY);
 				if(allowedY != 0) {
 					_position += Vector2D(0, velocity.Y() < 0 ? -1 : 1);
@@ -93,11 +91,11 @@ namespace isgp {
 	}
 
 	double Entity::CalcStepSize(double vel) {
-		if(abs(vel) < 0.1) {
+		/*if(abs(vel) < 0.1) {
 			return 0.0;
 		} else {
-			return (vel > 0) ? min(vel, 1) : max(vel, -1);
-		}
+			*/return (vel > 0) ? min(vel, 1) : max(vel, -1);
+		//}
 	}
 
 	int Entity::CheckCollision() {
@@ -141,14 +139,9 @@ namespace isgp {
 					}
 				}
 
-
-
-
 				if(collision != None) {
 					CollidingTiles.push_back(currentTile);
 				}
-				
-				
 			}
 		}
 
