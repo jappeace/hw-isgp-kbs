@@ -81,7 +81,10 @@ namespace isgp {
 			if(allowedX != 0 || allowedY != 0) {
 				_position += Vector2D(allowedX, allowedY);
 				if(allowedY != 0) {
-					_position += Vector2D(0, 1);
+					_position += Vector2D(0, velocity.Y() < 0 ? -1 : 1);
+				}
+				if(allowedX != 0) {
+					_position += Vector2D(velocity.X() < 0 ? -1 : 1, 0);
 				}
 			}
 			
