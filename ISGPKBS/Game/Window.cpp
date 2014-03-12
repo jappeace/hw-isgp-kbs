@@ -31,6 +31,9 @@ void Window::OnPaint(Graphics* g){
 	if (_gameState == Playing) {
 		_level->Paint(g);
 	}
+	else {
+		this->_gameOverMenu.Paint(g);
+	}
 }
 void Window::GameLoop(double elapsed) { //elapsed time, in MS
 	if (_gameState == Playing) {

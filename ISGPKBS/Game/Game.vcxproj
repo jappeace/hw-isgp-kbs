@@ -67,6 +67,7 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="GameOverMenu.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="Ghost.h" />
     <ClInclude Include="IBehaviour.h" />
@@ -103,6 +104,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="GameOverMenu.cpp" />
     <ClCompile Include="Ghost.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Gravitybehaviour.cpp" />

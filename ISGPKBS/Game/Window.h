@@ -7,6 +7,7 @@
 #include "WorldBlock.h"
 #include "Camera.h"
 #include "GameState.h"
+#include "GameOverMenu.h"
 
 namespace isgp {
 	class Window : public AbstractWindow {
@@ -22,6 +23,7 @@ namespace isgp {
 		void AfterCreate() override;
 		Camera* _cam;
 		GameState _gameState;
+		GameOverMenu _gameOverMenu;
 	private:
 		Level* _level;
 	};
