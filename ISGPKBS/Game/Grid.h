@@ -1,18 +1,20 @@
 #pragma once
 #ifndef MAX_TILES
 	// unit test started to fail when the number got to high on construction.
-	#define MAX_TILES 10000
+	#define MAX_TILES 100000
 #endif
 
 #include <vector>
 #include "Tile.h"
 #include "Size.h"
-#include "Point.h"
+#include "Vector2D.h"
 #include "IGridTraveller.h"
 #include <iostream>
 #include "StrConverter.h"
 #include <stdexcept>
 #include "Exceptions.h"
+#include <algorithm>
+#include "GridGraphicTranslator.h"
 
 using namespace std;
 
@@ -32,7 +34,7 @@ namespace isgp {
 		// retrieve tile at postiotion
 		Tile* GetTileAt(unsigned x, unsigned y) const;
 		// shorthand for getTileAt(int x, int y)
-		Tile* GetTileAt(Point& p) const;
+		Tile* GetTileAt(Vector2D& p) const;
 
 		// The given function pointer will receive all the tiles and coordinates in the specified row
 		void TraverseRow(unsigned y, IGridTraveller* travellar);
@@ -41,6 +43,9 @@ namespace isgp {
 		// The given function pointer will receive all the tiles in the grid and the cordiantes of them.
 		void TraverseTiles(IGridTraveller* travellar);
 		Size* GetSize() const;
+		vector<Tile*> GetSurroundingTiles(vector<Tile*>) const;
+		vector<Tile*> GetTilesInRectangle(Vector2D topLeft, Vector2D bottomRight) const;
+
 	private:
 		vector<Tile*>* _tiles;
 		unsigned _tilesLength;
@@ -58,6 +63,6 @@ namespace isgp {
 		// comman code for both contructors
 		void Init(unsigned width, unsigned height);
 		// this function prevents the same calculation showing up in several places
-		unsigned GetTileIndex(unsigned x, unsigned y) const;
+		int GetTileIndex(unsigned x, unsigned y) const;
 	};
 }

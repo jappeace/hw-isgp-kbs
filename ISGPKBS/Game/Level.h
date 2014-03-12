@@ -4,6 +4,7 @@
 #include "IPaintable.h"
 #include "Player.h"
 #include "Ghost.h"
+#include "Patrol.h"
 
 namespace isgp{
 	// represents a level in the game
@@ -17,7 +18,8 @@ namespace isgp{
 		void Paint(Graphics* g) override;
 		static const Size tileSize;
 		Player* _player;
-		Enemy* _enemy;
+		Entity* _enemy;
+		Entity* _enemy2;
 		Grid* GetGrid() const;
 		static const Size defaultTileAmount;
 	private:

@@ -3,16 +3,20 @@ using System.Drawing;
 
 namespace LevelEditor.Models
 {
+	/// <summary>
+	/// A level with information about its contents.
+	/// </summary>
 	public class Level : ILevel
 	{
 		private int _width;
 		private int _height;
 		private Point _start;
 		private Point _finish;
-		private IDictionary<Point, TileType> _tiles;
+		private SpriteSet _spriteSet;
+		private IDictionary<Point, GridObject> _gridObjects;
 
 		/// <summary>
-		/// Width of the level in tiles.
+		/// Width of the map in tiles.
 		/// </summary>
 		public int Width
 		{
@@ -20,7 +24,7 @@ namespace LevelEditor.Models
 		}
 
 		/// <summary>
-		/// Height of the level in tiles.
+		/// Height of the map in tiles.
 		/// </summary>
 		public int Height
 		{
@@ -28,81 +32,92 @@ namespace LevelEditor.Models
 		}
 
 		/// <summary>
-		/// Position of the starting point.
+		/// Startposition of the player.
 		/// </summary>
 		public Point Start
 		{
 			get { return _start; }
-			set { _start = value; }
-		}
-
-		/// <summary>
-		/// Position of the starting point.
-		/// </summary>
-		public Point Finish
-		{
-			get { return _finish; }
-			set { _finish = value; }
-		}
-
-		/// <summary>
-		/// Creates an empty level with the specified width and height in tiles.
-		/// </summary>
-		public Level(int width, int height)
-		{
-			_width = width;
-			_height = height;
-			Start = new Point(0, 0);
-			Start = new Point(1, 0);
-			_tiles = new Dictionary<Point, TileType>();
-		}
-
-		/// <summary>
-		/// Creates a tile on the specified position of the specified type.
-		/// If a tile exists on the specified position, the tile will be
-		/// replaced.
-		/// If position is outside the level, no tile will be set.
-		/// If TileType is a start/finish, the start/finish position will be
-		/// changed.
-		/// </summary>
-		public void SetTile(Point position, TileType tileType)
-		{
-			if (position.X < Width && position.Y < Height)
+			set
 			{
-				if (tileType == TileType.Start)
+				if (!GridObjects.Keys.Contains(value))
 				{
-					Start = position;
-				}
-				else if (tileType == TileType.Finish)
-				{
-					Finish = position;
-				}
-				else if (Start != position && Finish != position)
-				{
-					if (_tiles.ContainsKey(position))
-					{
-						_tiles.Remove(position);
-					}
-					_tiles.Add(position, tileType);
+					_start = value;
 				}
 			}
 		}
 
 		/// <summary>
-		/// Removes a tile on the specified position. Does nothing if no
-		/// tile exists on the specified position.
+		/// Finish of the player.
 		/// </summary>
-		public void RemoveTile(Point position)
+		public Point Finish
 		{
-			_tiles.Remove(position);
+			get { return _finish; }
+			set
+			{
+				if (!GridObjects.Keys.Contains(value))
+				{
+					_finish = value;
+				}
+			}
 		}
 
 		/// <summary>
-		/// Gets a dictionary that contains all non-empty tiles.
+		/// Spriteset for the map.
 		/// </summary>
-		public IDictionary<Point, TileType> GetTiles()
+		public SpriteSet SpriteSet
 		{
-			return _tiles;
+			get { return _spriteSet; }
+			set { _spriteSet = value; }
+		}
+
+		/// <summary>
+		/// Collection of all gridobjects in the level.
+		/// </summary>
+		public IDictionary<Point, GridObject> GridObjects
+		{
+			get
+			{
+				return _gridObjects;
+			}
+			set
+			{
+				_gridObjects = value;
+			}
+		}
+
+		/// <summary>
+		/// Creates a level with the given width, height and spriteset.
+		/// </summary>
+		public Level(int width, int height)
+		{
+			_gridObjects = new Dictionary<Point, GridObject>();
+			_width = width;
+			_height = height;
+			Start = new Point(0, 0);
+			Finish = new Point(1, 0);
+		}
+
+		/// <summary>
+		/// Set gridobject to the given value.
+		/// </summary>
+		public void SetGridObject(Point pos, GridObject obj)
+		{
+			if (pos.X < Width && pos.Y < Height)
+			{
+				if (_gridObjects.Keys.Contains(pos))
+				{
+					_gridObjects.Remove(pos);
+				}
+				_gridObjects.Add(pos, obj);
+			}
+		}
+
+		/// <summary>
+		/// Removes the gridobject at the given position if it exists.
+		/// </summary>
+		public void RemoveGridObject(Point pos)
+		{
+			_gridObjects.Remove(pos);
 		}
 	}
 }
