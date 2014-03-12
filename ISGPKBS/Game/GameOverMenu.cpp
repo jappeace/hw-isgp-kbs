@@ -2,9 +2,8 @@
 
 namespace isgp {
 	GameOverMenu::GameOverMenu() {
-		this->_hFont = CreateFont(50, 20, 0, 0, FW_NORMAL, FALSE, FALSE, FALSE,
-			ANSI_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY,
-			FF_DONTCARE, "Lucida Console");
+		this->_hFont = CreateFont(36,20,-300,0,FW_DONTCARE,FALSE,TRUE,FALSE,DEFAULT_CHARSET,OUT_OUTLINE_PRECIS,
+			CLIP_DEFAULT_PRECIS,CLEARTYPE_QUALITY, VARIABLE_PITCH,TEXT("Times New Roman"));
 	}
 
 	GameOverMenu::~GameOverMenu() {

@@ -73,7 +73,12 @@ namespace isgp {
 	}
 
 	void Graphics::DrawStr(Vector2D& position, const char* str, int length, HFONT font) {
-		TextOut(_backBuffer, (int) position.X(), (int) position.Y(), str, length);
+		HGDIOBJ oldFont = SelectObject(this->_hdc, font);
+		RECT rect;
+		SetRect(&rect, position.X, position.Y, 200, 200);
+		DrawText(this->_hdc, str, length, &rect, DT_NOCLIP);
+		//TextOut(_backBuffer, (int) position.X(), (int) position.Y(), str, length);
+		SelectObject(this->_hdc, oldFont);
 	}
 
 	void Graphics::SetColor(COLORREF color) {
