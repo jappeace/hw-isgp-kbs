@@ -136,7 +136,7 @@ namespace isgp{
 	}
 
 	double Player::CalcStepSize(double vel) {
-		if(abs(vel) < 0.01) {
+		if(abs(vel) < 1) {
 			return 0.0;
 		} else {
 			return (vel > 0) ? min(vel, 1) : max(vel, -1);
