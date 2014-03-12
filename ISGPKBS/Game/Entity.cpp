@@ -27,16 +27,15 @@ namespace isgp {
 	
 	int Entity::Collides(double x, double y) {
 		_position += Vector2D(x, y);
-		int doesCollide = CheckCollision();
+		collision = CheckCollision();
 		_position -= Vector2D(x, y);
-		return doesCollide;
+		return collision;
 	}
 
 	void Entity::Move(Vector2D velocity) {
 		if(velocity.X() != 0 || velocity.Y() != 0) {
 			double allowedX = 0;
 			double allowedY = 0;
-			bool hasCollided = false;
 
 			while(true) {
 				double stepSizeX = CalcStepSize(velocity.X() - allowedX);
@@ -61,14 +60,10 @@ namespace isgp {
 				
 				if(canMoveX) {
 					allowedX += stepSizeX;
-				} else if(stepSizeX != 0  && !hasCollided) {
-					hasCollided = true;
 				}
 
 				if(canMoveY) {
 					allowedY += stepSizeY;
-				} else if(stepSizeY != 0 && !hasCollided) {
-					hasCollided = true;
 				}
 
 				if(!canMoveX && !canMoveY) {

@@ -26,7 +26,7 @@ namespace isgp {
 		double range = sqrt(pow(_position.X() - _startingPoint.X(), 2) + pow(_position.Y() - _startingPoint.Y(), 2));
 		double collisionRange = sqrt(pow(_position.X() - _player->_position.X(), 2) + pow(_position.Y() - _player->_position.Y(), 2));
 
-		collision = CheckCollision();
+		//collision = CheckCollision();
 
 		if (collisionRange < 26) {
 			//collision!
@@ -35,7 +35,7 @@ namespace isgp {
 		if (range > _range) {
 			_velocity->X(-_velocity->X());
 		}
-		Move(Vector2D((_velocity->X() * elapsed), (_velocity->Y() * elapsed)));
+
 		//_position.X(_position.X() + (_velocity->X() * elapsed));
 		//_position.Y(_position.Y() + (_velocity->Y() * elapsed));
 
@@ -60,9 +60,13 @@ namespace isgp {
 		if((collision & Down && _velocity->Y() > 0) || (collision & Up && _velocity->Y() < 0)) { 
 			_velocity->Y(0);
 		}
+		if((collision & Right) && (collision & Left)) {
+			OutputDebugString("collide");
+		}
 		if((collision & Right && _velocity->X() > 0) || (collision & Left && _velocity->X() < 0)) { 
 			_velocity->X(-_velocity->X());
 		}
+				Move(Vector2D((_velocity->X() * elapsed), (_velocity->Y() * elapsed)));
 	}
 
 	void Patrol::AddToVelocityY(double y) {
