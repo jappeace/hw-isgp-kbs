@@ -64,7 +64,15 @@ namespace isgp {
 		this->DrawStr(position,str.c_str(), str.length());
 	}
 
+	void Graphics::DrawStr(Vector2D& position, string str, HFONT font) {
+		this->DrawStr(position,str.c_str(), str.length(), font);
+	}
+
 	void Graphics::DrawStr(Vector2D& position, const char* str, int length) {
+		TextOut(_backBuffer, (int) position.X(), (int) position.Y(), str, length);
+	}
+
+	void Graphics::DrawStr(Vector2D& position, const char* str, int length, HFONT font) {
 		TextOut(_backBuffer, (int) position.X(), (int) position.Y(), str, length);
 	}
 
