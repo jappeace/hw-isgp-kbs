@@ -1,7 +1,7 @@
 #pragma once
 #ifndef MAX_TILES
 	// unit test started to fail when the number got to high on construction.
-	#define MAX_TILES 10000
+	#define MAX_TILES 100000
 #endif
 
 #include <vector>
