@@ -124,7 +124,6 @@ HRESULT AbstractWindow::Create()
 LRESULT AbstractWindow::MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	HDC hdc = HDC();
-	PAINTSTRUCT paintStructure = PAINTSTRUCT();
 
 	if (!_hWnd){
 		_hWnd = hWnd;
@@ -144,9 +143,9 @@ LRESULT AbstractWindow::MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 			break;
 
 		case WM_PAINT:
-			_graphics->BeginRendering(_hWnd, &paintStructure);
+			_graphics->BeginRendering(_hWnd);
 			OnPaint(_graphics);
-			_graphics->EndRendering(_hWnd, &paintStructure);
+			_graphics->EndRendering(_hWnd);
 			break;
 
 		case WM_DESTROY:

@@ -33,12 +33,10 @@ namespace isgp{
 
 	// From static to dynamic
 	Vector2D Camera::ToFrom(Vector2D p) {
-		Vector2D tmp = Vector2D(0,0);
-		
-		tmp.X((p.X() - _position.X()) + 384);
-		tmp.Y((p.Y() - _position.Y()) + 384);
+		p -= _position;
+		p += Vector2D(384,384);
 
-		return tmp;
+		return p;
 	}
 
 	// From static to dynamic
