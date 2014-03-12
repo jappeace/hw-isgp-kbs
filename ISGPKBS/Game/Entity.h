@@ -23,7 +23,7 @@ public:
 
 protected:
 	double CalcStepSize(double vel);
-	bool Collides(int x, int y);
+	int Collides(int x, int y);
 
 	int collision;
 	Grid* _grid;
