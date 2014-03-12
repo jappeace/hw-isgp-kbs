@@ -8,7 +8,6 @@ Window::Window() {
 	ILevelFactory* factory = new SimpleLevelFactory();
 	_level = factory->CreateLevel();
 	delete factory;
-	_gameState = GameOver;
 }
 
 Window::~Window()
@@ -16,7 +15,7 @@ Window::~Window()
 }
 
 /////////////////////////////////////
-// Member functions                  //
+// Member functions                //
 /////////////////////////////////////
 
 void Window::AfterCreate() {
@@ -37,8 +36,11 @@ void Window::GameLoop(double elapsed) { //elapsed time, in MS
 		_level->_enemy->Update(elapsed);
 		_level->_enemy2->Update(elapsed);
 		_cam->Update(elapsed);
+		if (!_level->_player->IsAlive()) {
+			_gameState = GameOver;
+		}
 	} else if (_gameState == GameOver) {
-		
+		// TODO
 	}
 
 	AbstractWindow::GameLoop(elapsed);
@@ -63,6 +65,10 @@ void Window::OnKeyDown(int which) {
 	}
 	if (which == VK_RETURN) {
 		_gameState = Playing;
+	}
+	// 0x51 = q key.
+	if (which == 0x51) {
+		_level->_player->Kill();
 	}
 #endif
 }
