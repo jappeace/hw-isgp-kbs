@@ -8,6 +8,7 @@ Window::Window() {
 	ILevelFactory* factory = new SimpleLevelFactory();
 	_level = factory->CreateLevel();
 	delete factory;
+	this->_gameState = Playing;
 }
 
 Window::~Window()
@@ -27,7 +28,9 @@ INT_PTR CALLBACK dialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 	return NULL;
 }
 void Window::OnPaint(Graphics* g){
-	_level->Paint(g);
+	if (_gameState == Playing) {
+		_level->Paint(g);
+	}
 }
 void Window::GameLoop(double elapsed) { //elapsed time, in MS
 	if (_gameState == Playing) {
@@ -39,6 +42,7 @@ void Window::GameLoop(double elapsed) { //elapsed time, in MS
 		if (!_level->_player->IsAlive()) {
 			_gameState = GameOver;
 		}
+
 	} else if (_gameState == GameOver) {
 		// TODO
 	}
