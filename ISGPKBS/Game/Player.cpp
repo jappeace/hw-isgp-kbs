@@ -137,13 +137,12 @@ namespace isgp{
 		static int const kSpriteSize = 32;
 
 		int facingOffset = 0;
-		int collision = CheckCollision();
 
 		if (!_facingRight) {
 			facingOffset = kSpriteSize;
 		}
 
-		if ((collision & Down) == 0) {
+		if ((GetCollision() & Down) == 0) {
 			// In the air
 			Vector2D offset((2 * kSpriteSize) + facingOffset, 2 * kSpriteSize);
 			g->DrawBitmap(".\\tiles\\megaman.bmp", this->_position, offset, Size(kSpriteSize, kSpriteSize));

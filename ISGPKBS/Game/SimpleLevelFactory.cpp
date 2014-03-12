@@ -15,9 +15,9 @@ namespace isgp{
 		Level* result = new Level(new Grid(50,50));
 		Grid * g = result->GetGrid();
 		
-		g->GetTileAt(Vector2D(10, 10))->SetData(new WorldBlock("C:\\tiles\\smile.bmp"));
-		g->GetTileAt(Vector2D(10, 11))->SetData(new WorldBlock("C:\\tiles\\smile.bmp"));
-		g->GetTileAt(Vector2D(10, 12))->SetData(new WorldBlock("C:\\tiles\\smile.bmp"));
+		g->GetTileAt(Vector2D(10, 10))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
+		g->GetTileAt(Vector2D(10, 11))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
+		g->GetTileAt(Vector2D(10, 12))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
 
 		g->TraverseRow(18, this);
 
