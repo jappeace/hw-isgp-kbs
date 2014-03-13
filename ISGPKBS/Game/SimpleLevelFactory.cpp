@@ -12,7 +12,7 @@ namespace isgp{
 	}
 
 	Level* SimpleLevelFactory::CreateLevel(){
-		Level* result = new Level(new Grid(500,40));
+		Level* result = new Level(new Grid(250,40));
 		Grid * g = result->GetGrid();
 		
 		//g->GetTileAt(Vector2D(10, 10))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));

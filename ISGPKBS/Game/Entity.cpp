@@ -84,8 +84,6 @@ namespace isgp {
 					x = velocity.X() < 0 ? -1 : 1;
 				}
 
-				_position.X(floor(_position.X()));
-				_position.Y(floor(_position.Y()));
 				Collides(x, y);
 			}
 			
@@ -93,6 +91,9 @@ namespace isgp {
 	}
 
 	double Entity::CalcStepSize(double vel) {
+		if (abs(vel) < 1) {
+			return 0.0;
+		}
 		return (vel > 0) ? min(vel, 1) : max(vel, -1);
 	}
 
