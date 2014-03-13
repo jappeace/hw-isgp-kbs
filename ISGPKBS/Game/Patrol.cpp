@@ -26,8 +26,6 @@ namespace isgp {
 		double range = sqrt(pow(_position.X() - _startingPoint.X(), 2) + pow(_position.Y() - _startingPoint.Y(), 2));
 		double collisionRange = sqrt(pow(_position.X() - _player->_position.X(), 2) + pow(_position.Y() - _player->_position.Y(), 2));
 
-		collision = CheckCollision();
-
 		if (collisionRange < 26) {
 			//collision!
 		}
@@ -35,9 +33,6 @@ namespace isgp {
 		if (range > _range) {
 			_velocity->X(-_velocity->X());
 		}
-		Move(Vector2D((_velocity->X() * elapsed), (_velocity->Y() * elapsed)));
-		//_position.X(_position.X() + (_velocity->X() * elapsed));
-		//_position.Y(_position.Y() + (_velocity->Y() * elapsed));
 
 		// Update Facing
 		if (_velocity->X() != 0) {
@@ -56,6 +51,8 @@ namespace isgp {
 			_behaviours->at(i)->Update(milisec);
 		}
 
+		Move(Vector2D((_velocity->X() * elapsed), (_velocity->Y() * elapsed)));
+
 		//Collision
 		if((collision & Down && _velocity->Y() > 0) || (collision & Up && _velocity->Y() < 0)) { 
 			_velocity->Y(0);
@@ -70,6 +67,28 @@ namespace isgp {
 	}
 
 	void Patrol::Paint(Graphics* g) {
+#ifdef _DEBUG
+		GridGraphicTranslator translator = GridGraphicTranslator();
+		vector<Tile*> includedTiles = _grid->GetTilesInRectangle(_position, _position + *_size + Vector2D(2));
+		g->SetColor(RGB(255, 0, 0));
+		for(unsigned int i = 0; i < includedTiles.size(); i++) {
+			Tile* t = includedTiles.at(i);
+			Vector2D* p = &translator.FromTo(*t->GetPosition());
+			includedTiles.at(i)->Paint(g);
+
+			g->DrawRect(Vector2D((int)p->X(), (int)p->Y()), Vector2D((int)p->X() + 16, (int)p->Y() + 16));
+		}
+
+		g->SetColor(RGB(0, 255, 0));
+		for(unsigned int i = 0; i < CollidingTiles.size(); i++) {
+			Tile* t = CollidingTiles.at(i);
+			Vector2D* p = &translator.FromTo(*t->GetPosition());
+			CollidingTiles.at(i)->Paint(g);
+			g->DrawRect(Vector2D((int)p->X(), (int)p->Y()), Vector2D((int)p->X() + 16, (int)p->Y() + 16));
+		}
+		g->SetColor(RGB(0, 0, 0));
+#endif
+
 		static int const kSpriteSize = 32;
 		
 		int facingOffset = 0;

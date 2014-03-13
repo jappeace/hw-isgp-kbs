@@ -4,6 +4,10 @@
 
 namespace isgp {
 
+	Entity::Entity() {
+		this->collision = None;
+	}
+
 	void Entity::SetGrid(Grid* grid) {
 		this->_grid = grid;
 	}
@@ -25,52 +29,42 @@ namespace isgp {
 	}
 
 	
-	int Entity::Collides(int x, int y) {
+	int Entity::Collides(double x, double y) {
 		_position += Vector2D(x, y);
-		int doesCollide = CheckCollision();
+		collision = CheckCollision();
 		_position -= Vector2D(x, y);
-		return doesCollide;
+		return collision;
 	}
 
 	void Entity::Move(Vector2D velocity) {
 		if(velocity.X() != 0 || velocity.Y() != 0) {
 			double allowedX = 0;
 			double allowedY = 0;
-			bool hasCollided = false;
 
 			while(true) {
 				double stepSizeX = CalcStepSize(velocity.X() - allowedX);
 				double stepSizeY = CalcStepSize(velocity.Y() - allowedY);
 
-				int xCollision = Collides((int)(allowedX + stepSizeX), 0);
-				int yCollision = Collides(0, (int)(allowedY + stepSizeY));
+				int xCollision = Collides(allowedX + stepSizeX, 0);
+				int yCollision = Collides(0, allowedY + stepSizeY);
 
 				bool canMoveX = stepSizeX != 0;
 				bool canMoveY = stepSizeY != 0;
 
-				if((xCollision & Left) && velocity.X() < 0) {
-					canMoveX = false;
-				} else if((xCollision & Right) && velocity.X() > 0) {
+				if(((xCollision & Left) && velocity.X() < 0) || ((xCollision & Right) && velocity.X() > 0)) {
 					canMoveX = false;
 				}
 
-				if((yCollision & Up) && velocity.Y() < 0) {
-					canMoveY = false;
-				} else if((yCollision & Down) && velocity.Y() > 0) {
+				if(((yCollision & Up) && velocity.Y() < 0) || ((yCollision & Down) && velocity.Y() > 0)) {
 					canMoveY = false;
 				}
-
 				
 				if(canMoveX) {
 					allowedX += stepSizeX;
-				} else if(stepSizeX != 0  && !hasCollided) {
-					hasCollided = true;
 				}
 
 				if(canMoveY) {
 					allowedY += stepSizeY;
-				} else if(stepSizeY != 0 && !hasCollided) {
-					hasCollided = true;
 				}
 
 				if(!canMoveX && !canMoveY) {
@@ -78,26 +72,18 @@ namespace isgp {
 				}
 			}
 
-			if(allowedX != 0 || allowedY != 0) {
+			if(allowedX != 0.0 || allowedY != 0.0) {
 				_position += Vector2D(allowedX, allowedY);
 				if(allowedY != 0) {
 					_position += Vector2D(0, velocity.Y() < 0 ? -1 : 1);
 				}
-				if(allowedX != 0) {
-					_position += Vector2D(velocity.X() < 0 ? -1 : 1, 0);
-				}
 			}
 			
 		}
-		
 	}
 
 	double Entity::CalcStepSize(double vel) {
-		if(abs(vel) < 0.1) {
-			return 0.0;
-		} else {
-			return (vel > 0) ? min(vel, 1) : max(vel, -1);
-		}
+		return (vel > 0) ? min(vel, 1) : max(vel, -1);
 	}
 
 	int Entity::CheckCollision() {
@@ -141,14 +127,9 @@ namespace isgp {
 					}
 				}
 
-
-
-
 				if(collision != None) {
 					CollidingTiles.push_back(currentTile);
 				}
-				
-				
 			}
 		}
 

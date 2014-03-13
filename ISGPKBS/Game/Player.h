@@ -18,6 +18,7 @@ namespace isgp {
 		bool _leftKey, _rightKey, _upKey, _spaceKey;
 		bool IsAlive();
 		void Kill();
+		static const Size InitSize;
 	private:
 		vector<IBehaviour*>* _behaviours;
 		double _maxVel;

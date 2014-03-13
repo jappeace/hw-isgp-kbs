@@ -29,20 +29,24 @@ namespace isgp{
 				_player->_position.Y() - _position.Y()
 			) * (4 * elapsed)
 		);
+
+		if (_position.Y() < 384) { _position.Y(384); }
+		if (_position.X() < 384) { _position.X(384); }
 	}
 
 	// From static to dynamic
 	Vector2D Camera::ToFrom(Vector2D p) {
-		Vector2D tmp = Vector2D(0,0);
-		
-		tmp.X((p.X() - _position.X()) + 384);
-		tmp.Y((p.Y() - _position.Y()) + 384);
+		p -= _position;
+		p += ((AbstractWindow::WindowSize - Player::InitSize) * Vector2D(1.0,1.35)) / Vector2D(2);
 
-		return tmp;
+		return p;
 	}
 
 	// From static to dynamic
 	Vector2D Camera::FromTo(Vector2D p) {
 		return ToFrom(p);
+	}
+	Vector2D Camera::GetPosition(){
+		return _position;
 	}
 }
