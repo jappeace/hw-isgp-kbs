@@ -84,6 +84,8 @@ namespace isgp {
 					x = velocity.X() < 0 ? -1 : 1;
 				}
 
+				_position.X(floor(_position.X()));
+				_position.Y(floor(_position.Y()));
 				Collides(x, y);
 			}
 			
@@ -114,23 +116,23 @@ namespace isgp {
 			
 				if(abs(absoluteTilePositionTL.Y() - topLeft.Y()) < _size->Y()){
 					double diffX = topLeft.X() - tileCenter.X();
-					if(abs(diffX) < diff.X()){
+					if(abs(diffX) <= diff.X()){
 						collision |= Left;
 					}
 					
 					diffX = bottomRight.X() - tileCenter.X();
-					if(abs(diffX) < diff.X()){
+					if(abs(diffX) <= diff.X()){
 						collision |= Right;
 					}
 					
 				}
 				if(abs(absoluteTilePositionTL.X() - topLeft.X()) < _size->X()){
 					double diffY = topLeft.Y() - tileCenter.Y();
-					if(abs(diffY) < diff.Y()){
+					if(abs(diffY) <= diff.Y()){
 						collision |= Up;
 					}
 					diffY = bottomRight.Y() - tileCenter.Y();
-					if(abs(diffY) < diff.Y()){
+					if(abs(diffY) <= diff.Y()){
 						collision |= Down;
 					}
 				}

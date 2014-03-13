@@ -17,6 +17,7 @@ namespace isgp {
 	private:
 		Vector2D _startingPoint;
 		int _range;
+		const int _movement_speed;
 		Animation* _animation;
 		Player* _player;
 		bool _facingRight;

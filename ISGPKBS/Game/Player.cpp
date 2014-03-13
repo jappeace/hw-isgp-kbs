@@ -73,7 +73,6 @@ const Size Player::InitSize(32, 32);
 		if((collision & Right && _velocity->X() > 0) || (collision & Left && _velocity->X() < 0)) { 
 			_velocity->X(0);
 		}
-		
 
 		if(_upKey && (collision & Down)) {
 			_velocity->Y(-650);

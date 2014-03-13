@@ -3,12 +3,12 @@
 #include "CollisionDetection.h"
 
 namespace isgp {
-	Patrol::Patrol(Vector2D point, int range, Player* player) {
+	Patrol::Patrol(Vector2D point, int range, Player* player) : _movement_speed(200) {
 		_position = point;
 		_player = player;
 		
 		_velocity = new Vector2D(0,0);
-		_velocity->X(200);
+		_velocity->X(_movement_speed);
 		_startingPoint = point;
 		_range = range;
 		
@@ -23,7 +23,7 @@ namespace isgp {
 
 	void Patrol::Update(double milisec) {
 		double elapsed = milisec / 1000;
-		double range = abs(_position.X() - _startingPoint.X());
+		double range = _position.X() - _startingPoint.X();
 		double collisionRange = sqrt(pow(_position.X() - _player->_position.X(), 2) + pow(_position.Y() - _player->_position.Y(), 2));
 
 		if (collisionRange < 26) {
@@ -31,7 +31,9 @@ namespace isgp {
 		}
 
 		if (range > _range) {
-			_velocity->X(-_velocity->X());
+			_velocity->X(-this->_movement_speed);
+		} else if (range < -_range) {
+			_velocity->X(this->_movement_speed);
 		}
 
 		// Update Facing
