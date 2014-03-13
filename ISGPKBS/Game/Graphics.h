@@ -89,10 +89,8 @@ namespace isgp {
 		HBITMAP _bitmap;
 		PAINTSTRUCT* _paintStructure;
 		HPEN _pen;
-#ifdef _DEBUG
 		// FPScounter.
 		TimesPerSecondCounter _fpsCounter;
-#endif
 		map<string, Sprite*>* _bitmapCache;
 
 		bool _isClearBackbuffer;
