@@ -48,7 +48,7 @@ namespace isgp {
 		// allows graphics to be cached
 		if(_isClearBackbuffer){
 			// Clear the backbuffer.
-			BitBlockTransfer(this->_backBuffer, Vector2D(), AbstractWindow::WindowSize, NULL, NULL, SRCCOPY);
+			BitBlockTransfer(this->_backBuffer, Vector2D(), AbstractWindow::WindowSize, NULL, NULL, WHITENESS);
 		}
 	}
 
