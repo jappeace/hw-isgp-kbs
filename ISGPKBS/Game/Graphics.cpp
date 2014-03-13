@@ -3,7 +3,6 @@
 namespace isgp {
 
 	void Graphics::Init(void){
-		_isClearBackbuffer = true;
 		_cam = NULL;
 		_bitmapCache = new map<string, Sprite*>();
 	}
@@ -55,17 +54,12 @@ namespace isgp {
 #endif
 
 		// Blit the new frame to the screen
-		Update(Vector2D());
-
+		BitBlockTransfer(_paintStructure->hdc, Vector2D(), AbstractWindow::WindowSize, this->_backBuffer, Vector2D(), SRCCOPY);
 		// End the drawing state of WIN32
 		EndPaint(hWnd, _paintStructure);
 		delete _paintStructure;
 	}
 
-	void Graphics::Update(const Vector2D& position){
-		// Blit the backbuffer to the visiblehdc
-		BitBlockTransfer(_paintStructure->hdc, Vector2D(), AbstractWindow::WindowSize, this->_backBuffer, position, SRCCOPY);
-	}
 	void Graphics::SetCam(ITranslator* cam) {
 		_cam = cam;
 	}
@@ -142,12 +136,6 @@ namespace isgp {
 		Sprite* sprite = this->LoadBitmapFile(path);
 		DrawSprite(sprite, position, offset, size);
 	}
-	Graphics* Graphics::CreateLinkedGraphics(const Size& size){
-		Graphics* result = new Graphics();
-		SelectObject(result->_visibleHdc, this->_bitmap);
-		result->CreateBackbuffer(result->_visibleHdc, size);
-		return result;
-	}
 	BOOL Graphics::BitBlockTransfer(HDC destination, const Vector2D& destPosition, const Size& bothSize, HDC source, const Vector2D& positionSrc, DWORD actionFlag){
 		return BitBlt(
 			// Dest Context
@@ -207,8 +195,4 @@ namespace isgp {
 		// release the resource
 		DeleteDC(bitmap_hdc);
 	}
-	void Graphics::SetIsClearingBackbuffer(bool is){
-		_isClearBackbuffer = is;
-	}
-
 }

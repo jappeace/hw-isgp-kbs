@@ -64,16 +64,6 @@ namespace isgp {
 
 		// draw a sprite from memory instead of path
 		void DrawSprite(Sprite* sprite, Vector2D& position, Vector2D& offset, Size& size);
-
-		// link the backbuffer as the current graphics to the front buffer of the created graphics
-		Graphics* CreateLinkedGraphics(const Size&);
-
-		// bit block transfeur from the backbuffer onto the visible hdc from the backbuffer position just 0,0 on source
-		// allows caching on bigger backbuffer image then source (ie a world)
-		void Update(const Vector2D& position);
-
-		// set the backbuffur clearing to a value, it somtimes desirable to not do this (for cashes)
-		void SetIsClearingBackbuffer(bool);
 	private:
 		// create a graphics without initilizing the target hdc
 		Graphics(void);
@@ -98,7 +88,5 @@ namespace isgp {
 		TimesPerSecondCounter _fpsCounter;
 #endif
 		map<string, Sprite*>* _bitmapCache;
-
-		bool _isClearBackbuffer;
 	};
 }
