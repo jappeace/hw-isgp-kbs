@@ -68,6 +68,12 @@
     <ClCompile Include="Entity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MenuItem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IMenu.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
     <ClCompile Include="GameOverMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -169,10 +175,10 @@
     <ClInclude Include="GameState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GameOverMenu.h">
+    <ClInclude Include="MenuItem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IMenu.h">
+    <ClInclude Include="GameOverMenu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -82,7 +82,7 @@
     <ClInclude Include="ITileData.h" />
     <ClInclude Include="ITranslator.h" />
     <ClInclude Include="Level.h" />
-    <ClInclude Include="IMenu.h" />
+    <ClInclude Include="MenuItem.h" />
     <ClInclude Include="Patrol.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="resource.h" />
@@ -109,7 +109,9 @@
     <ClCompile Include="Gravitybehaviour.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="GridGraphicTranslator.cpp" />
+    <ClCompile Include="IMenu.h" />
     <ClCompile Include="Level.cpp" />
+    <ClCompile Include="MenuItem.cpp" />
     <ClCompile Include="Patrol.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SimpleLevelFactory.cpp" />

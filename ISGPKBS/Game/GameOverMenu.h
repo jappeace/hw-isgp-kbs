@@ -1,18 +1,20 @@
 #pragma once
 
 #include "IMenu.h"
-#include <Windows.h>
+#include <vector>
 
 namespace isgp {
-
-	// Menu to be shown when the player dies.
-	// Allows the player to choose to restart the game.
 	class GameOverMenu : public IMenu {
 	public:
 		GameOverMenu();
 		~GameOverMenu();
+		void AddMenuItem(MenuItem* menuItem) override;
+		void MoveCursorUp() override;
+		void MoveCursorDown() override;
+		void ExecuteSelection() override;
 		void Paint(Graphics* g) override;
 	private:
-		HFONT _hFont;
+		std::vector<MenuItem*> _menuItems;
+		int _selectedMenuItem;
 	};
 }

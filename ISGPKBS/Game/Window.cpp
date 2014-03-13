@@ -1,5 +1,7 @@
 #include "Window.h"
 #include "SimpleLevelFactory.h"
+#include "GameOverMenu.h"
+#include "MenuItem.h"
 
 namespace isgp {
 
@@ -9,6 +11,12 @@ Window::Window() {
 	_level = factory->CreateLevel();
 	delete factory;
 	this->_gameState = Playing;
+	this->_currentMenu = new GameOverMenu();
+	this->_currentMenu->AddMenuItem(new MenuItem("YOU SUCK", this, NULL));
+	this->_currentMenu->AddMenuItem(new MenuItem("Retry", this, NULL));
+	this->_currentMenu->AddMenuItem(new MenuItem("Exit", this, NULL));
+	this->_currentMenu->AddMenuItem(new MenuItem("Magiiiiiiiiiic", this, NULL));
+	this->_currentMenu->AddMenuItem(new MenuItem("Ecoooookasdfasfxit", this, NULL));
 }
 
 Window::~Window()
@@ -32,7 +40,7 @@ void Window::OnPaint(Graphics* g){
 		_level->Paint(g);
 	}
 	else {
-		this->_gameOverMenu.Paint(g);
+		this->_currentMenu->Paint(g);
 	}
 }
 void Window::GameLoop(double elapsed) { //elapsed time, in MS
