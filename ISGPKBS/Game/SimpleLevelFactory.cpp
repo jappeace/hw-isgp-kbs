@@ -37,7 +37,7 @@ namespace isgp{
 
 		g->TraverseRow(18, this);
 
-		result->_player = new Player(Vector2D(500,250));
+		result->_player = new Player(Vector2D(500,32));
 		result->_player->SetGrid(g);
 		result->_enemy = new Ghost(Vector2D(2000,256), result->_player);
 		result->_enemy2 = new Patrol(Vector2D(200,256), 200, result->_player);

@@ -52,11 +52,8 @@ namespace isgp {
 				}
 
 				if(((yCollision & Up) && velocity.Y() < 0) || ((yCollision & Down) && velocity.Y() > 0)) {
-					//if (canMoveY)
-					//	allowedY += stepSizeY;
 					canMoveY = false;
 				}
-
 				
 				if(canMoveX) {
 					allowedX += stepSizeX;
@@ -82,15 +79,13 @@ namespace isgp {
 			}
 			
 		}
+
+		CheckCollision();
 		
 	}
 
 	double Entity::CalcStepSize(double vel) {
-		/*if(abs(vel) < 0.1) {
-			return 0.0;
-		} else {
-			*/return (vel > 0) ? min(vel, 1) : max(vel, -1);
-		//}
+		return (vel > 0) ? min(vel, 1) : max(vel, -1);
 	}
 
 	int Entity::CheckCollision() {

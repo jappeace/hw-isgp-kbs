@@ -10,7 +10,6 @@ class Entity : public IPaintable
 public:
 	virtual void Paint(Graphics* g) override = 0;
 	virtual void Update(const double) = 0;
-	int CheckCollision();
 	Vector2D _position;
 	void SetGrid(Grid* grid);
 	vector<Tile*> CollidingTiles;
@@ -29,6 +28,9 @@ protected:
 	Grid* _grid;
 	Vector2D* _size;
 	Vector2D* _velocity;
+
+private:
+	int CheckCollision();
 };
 }
 

@@ -36,8 +36,6 @@ namespace isgp{
 	void Player::Update(const double milisec) {
 		double elapsed = milisec / 1000;
 
-		collision = CheckCollision();
-
 		if(_leftKey && _velocity->X() > -_maxVel) {
 			if(collision & Down){
 				_velocity->X(_velocity->X() - (_accel * elapsed));
@@ -74,6 +72,7 @@ namespace isgp{
 		if((collision & Right && _velocity->X() > 0) || (collision & Left && _velocity->X() < 0)) { 
 			_velocity->X(0);
 		}
+
 		Move((*_velocity) * Vector2D(elapsed));
 
 		if(_upKey && (collision & Down)) {
@@ -102,7 +101,6 @@ namespace isgp{
 		g->DrawStaticRect(Vector2D(395, 395), Vector2D(405, 405));
 		GridGraphicTranslator translator = GridGraphicTranslator();
 		vector<Tile*> includedTiles = _grid->GetTilesInRectangle(_position, _position + *_size + Vector2D(2));
-		collision = CheckCollision();
 		g->SetColor(RGB(255, 0, 0));
 		for(unsigned int i = 0; i < includedTiles.size(); i++) {
 			Tile* t = includedTiles.at(i);
@@ -136,7 +134,6 @@ namespace isgp{
 		static int const kSpriteSize = 32;
 
 		int facingOffset = 0;
-		//int collision = CheckCollision();
 
 		if (!_facingRight) {
 			facingOffset = kSpriteSize;
