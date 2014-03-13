@@ -12,30 +12,30 @@ namespace isgp{
 	}
 
 	Level* SimpleLevelFactory::CreateLevel(){
-		Level* result = new Level(new Grid(500,30));
+		Level* result = new Level(new Grid(500,40));
 		Grid * g = result->GetGrid();
 		
 		//g->GetTileAt(Vector2D(10, 10))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
 		//g->GetTileAt(Vector2D(10, 11))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
 		//g->GetTileAt(Vector2D(10, 12))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
 		
-		g->GetTileAt(Vector2D(1, 17))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
-		g->GetTileAt(Vector2D(2, 17))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
+		g->GetTileAt(Vector2D(1, 37))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
+		g->GetTileAt(Vector2D(2, 37))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
 		
-		g->GetTileAt(Vector2D(41, 17))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
-		g->GetTileAt(Vector2D(42, 17))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
+		g->GetTileAt(Vector2D(41, 37))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
+		g->GetTileAt(Vector2D(42, 37))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
 		
-		g->GetTileAt(Vector2D(55, 13))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
-		g->GetTileAt(Vector2D(56, 13))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
-		g->GetTileAt(Vector2D(57, 13))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
-		g->GetTileAt(Vector2D(58, 13))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
-		g->GetTileAt(Vector2D(59, 13))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
-		g->GetTileAt(Vector2D(60, 13))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
-		g->GetTileAt(Vector2D(61, 13))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
-		g->GetTileAt(Vector2D(62, 13))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
-		g->GetTileAt(Vector2D(63, 13))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
+		g->GetTileAt(Vector2D(55, 33))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
+		g->GetTileAt(Vector2D(56, 33))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
+		g->GetTileAt(Vector2D(57, 33))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
+		g->GetTileAt(Vector2D(58, 33))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
+		g->GetTileAt(Vector2D(59, 33))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
+		g->GetTileAt(Vector2D(60, 33))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
+		g->GetTileAt(Vector2D(61, 33))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
+		g->GetTileAt(Vector2D(62, 33))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
+		g->GetTileAt(Vector2D(63, 33))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
 
-		g->TraverseRow(18, this);
+		g->TraverseRow(38, this);
 
 		result->_player = new Player(Vector2D(500,32));
 		result->_player->SetGrid(g);
