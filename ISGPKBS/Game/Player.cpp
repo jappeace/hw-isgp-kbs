@@ -36,7 +36,7 @@ namespace isgp{
 	void Player::Update(const double milisec) {
 		double elapsed = milisec / 1000;
 
-		collision = CheckCollision();
+		//collision = CheckCollision();
 
 		if(_leftKey && _velocity->X() > -_maxVel) {
 			if(collision & Down){
@@ -67,14 +67,14 @@ namespace isgp{
 		for (unsigned int i = 0; i < _behaviours->size(); ++i) {
 			_behaviours->at(i)->Update(milisec);
 		}
-
+		Move((*_velocity) * Vector2D(elapsed));
 		if((collision & Down && _velocity->Y() > 0) || (collision & Up && _velocity->Y() < 0)) { 
 			_velocity->Y(0);
 		}
 		if((collision & Right && _velocity->X() > 0) || (collision & Left && _velocity->X() < 0)) { 
 			_velocity->X(0);
 		}
-		Move((*_velocity) * Vector2D(elapsed));
+		
 
 		if(_upKey && (collision & Down)) {
 			_velocity->Y(-650);
