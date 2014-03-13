@@ -141,12 +141,14 @@ namespace isgp {
 		Sprite* sprite = this->LoadBitmapFile(path);
 		DrawSprite(sprite, position, offset, size);
 	}
+
 	Graphics* Graphics::CreateLinkedGraphics(const Size& size){
 		Graphics* result = new Graphics();
 		result->_visibleHdc = this->_backBuffer;
 		result->CreateBackbuffer(this->_backBuffer, size);
 		return result;
 	}
+
 	BOOL Graphics::BitBlockTransfer(HDC destination, const Vector2D& destPosition, const Size& bothSize, HDC source, const Vector2D& positionSrc, DWORD actionFlag){
 		return BitBlt(
 			// Dest Context
