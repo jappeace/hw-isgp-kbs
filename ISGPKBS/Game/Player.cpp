@@ -98,7 +98,6 @@ const Size Player::InitSize(32, 32);
 
 	void Player::Paint(Graphics* g) {
 #ifdef _DEBUG
-		g->DrawStaticRect(Vector2D(395, 395), Vector2D(405, 405));
 		GridGraphicTranslator translator = GridGraphicTranslator();
 		vector<Tile*> includedTiles = _grid->GetTilesInRectangle(_position, _position + *_size + Vector2D(2));
 		g->SetColor(RGB(255, 0, 0));
@@ -152,5 +151,8 @@ const Size Player::InitSize(32, 32);
 			Vector2D offset(0, facingOffset);
 			_animation->Render(g, this->_position, offset);
 		}
+#ifdef _DEBUG
+		g->DrawStaticRect(Vector2D(395, 395), Vector2D(405, 405));
+#endif
 	}
 }
