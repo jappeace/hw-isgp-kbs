@@ -1,7 +1,7 @@
 #pragma once
 
 #include "IBehaviour.h"
-#include "Player.h"
+#include "Entity.h"
 
 namespace isgp {
 
@@ -11,14 +11,12 @@ namespace isgp {
 	{
 	public:
 		static double CalculateGravity(const double);
-		GravityBehaviour(Player* player);
+		GravityBehaviour(Entity* entity);
 		~GravityBehaviour(void);
 
 		void Update(const double ms);
 
 	private:
-		Player* _player;
-
-		
+		Entity* _entity;
 	};
 }

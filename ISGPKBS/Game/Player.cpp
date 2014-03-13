@@ -5,8 +5,8 @@ namespace isgp{
 const Size Player::InitSize(32, 32);
 	Player::Player(Vector2D position) {
 		_maxVel = 500;
-		_accel = 220;
-		_deAccel = 110;
+		_accel = 2200;
+		_deAccel = 1100;
 
 		_position = position;
 		_velocity = new Vector2D();
@@ -18,6 +18,7 @@ const Size Player::InitSize(32, 32);
 		_behaviours = new vector<IBehaviour*>();
 		_behaviours->push_back(new GravityBehaviour(this));
 		
+		_facingRight = true;
 		_animation = new Animation(".\\tiles\\megaman.bmp", (Size) *_size, 4, 200);
 	}
 
@@ -36,8 +37,6 @@ const Size Player::InitSize(32, 32);
 	void Player::Update(const double milisec) {
 		double elapsed = milisec / 1000;
 
-		collision = CheckCollision();
-
 		if(_leftKey && _velocity->X() > -_maxVel) {
 			if(collision & Down){
 				_velocity->X(_velocity->X() - (_accel * elapsed));
@@ -55,32 +54,42 @@ const Size Player::InitSize(32, 32);
 				_velocity->X(_velocity->X() + _deAccel * elapsed);
 			}
 		} else if(_velocity->X() > 0 && (collision & Down)) {
-			_velocity->X(_velocity->X() + _deAccel * elapsed);
+			_velocity->X(_velocity->X() - _deAccel * elapsed);
 		}
 		
 		// no wandering
-		if (!_leftKey && !_rightKey && (collision & Down) && _velocity->X() < 20 && _velocity->X() > -20) {
+		if (!_leftKey && !_rightKey && (collision & Down) && _velocity->X() < 100 && _velocity->X() > -100) {
 			_velocity->X(0);
 		}
 
+		//behaviors
 		for (unsigned int i = 0; i < _behaviours->size(); ++i) {
 			_behaviours->at(i)->Update(milisec);
 		}
+		Move((*_velocity) * Vector2D(elapsed));
 		if((collision & Down && _velocity->Y() > 0) || (collision & Up && _velocity->Y() < 0)) { 
 			_velocity->Y(0);
 		}
 		if((collision & Right && _velocity->X() > 0) || (collision & Left && _velocity->X() < 0)) { 
 			_velocity->X(0);
 		}
-		_position += (*_velocity) * Vector2D(elapsed);
+		
 
 		if(_upKey && (collision & Down)) {
-			_velocity->Y(-220);
+			_velocity->Y(-650);
 		}
 
-	}
+		// Update Facing
+		if (_velocity->X() != 0) {
+			_facingRight = _velocity->X() > 0.0;
+		}
 
-	void Player::MoveTo(int x, int y) {
+		// Update animation
+		_animation->OnUpdate(milisec);
+
+		if (_velocity->X() == 0) {
+			_animation->Reset();
+		}
 	}
 	
 	void Player::AddToVelocityY(double y) {
@@ -88,12 +97,10 @@ const Size Player::InitSize(32, 32);
 	}
 
 	void Player::Paint(Graphics* g) {
-		_graphics = g;
-		
 #ifdef _DEBUG
+		g->DrawStaticRect(Vector2D(395, 395), Vector2D(405, 405));
 		GridGraphicTranslator translator = GridGraphicTranslator();
-			vector<Tile*> includedTiles = _grid->GetTilesInRectangle(_position, _position + *_size);
-
+		vector<Tile*> includedTiles = _grid->GetTilesInRectangle(_position, _position + *_size + Vector2D(2));
 		g->SetColor(RGB(255, 0, 0));
 		for(unsigned int i = 0; i < includedTiles.size(); i++) {
 			Tile* t = includedTiles.at(i);
@@ -110,18 +117,40 @@ const Size Player::InitSize(32, 32);
 			CollidingTiles.at(i)->Paint(g);
 			g->DrawRect(Vector2D((int)p->X(), (int)p->Y()), Vector2D((int)p->X() + 16, (int)p->Y() + 16));
 		}
-g->SetColor(RGB(0, 0, 0));
+		g->SetColor(RGB(0, 0, 0));
 
-			g->DrawStr(Vector2D(10, 40), collision & Up ? "Up: true" : "Up: false");
-g->DrawStr(Vector2D(10, 55), collision & Down ? "Down: true" : "Down: false");
-g->DrawStr(Vector2D(10, 70), collision & Left ? "Left: true" : "Left: false");
-g->DrawStr(Vector2D(10, 85), collision & Right ? "Right: true" : "Right: false");
-#endif
-		_graphics->DrawRect(_position, _position + *_size);
-#ifdef _DEBUG
-		_graphics->DrawStaticRect(Vector2D(395, 395), Vector2D(405, 405));
-#endif
+		g->DrawStr(Vector2D(10, 40), collision & Up ? "Up: true" : "Up: false");
+		g->DrawStr(Vector2D(10, 55), collision & Down ? "Down: true" : "Down: false");
+		g->DrawStr(Vector2D(10, 70), collision & Left ? "Left: true" : "Left: false");
+		g->DrawStr(Vector2D(10, 85), collision & Right ? "Right: true" : "Right: false");
 
-		
+		// Facing info
+		if (_facingRight) {
+			g->DrawRect(Vector2D(_position.X() + 32, _position.Y() + 8), Vector2D(_position.X() + 40, _position.Y() + 16));
+		} else {
+			g->DrawRect(Vector2D(_position.X(), _position.Y() + 8), Vector2D(_position.X() - 8, _position.Y() + 16));
+		}
+#endif
+		static int const kSpriteSize = 32;
+
+		int facingOffset = 0;
+
+		if (!_facingRight) {
+			facingOffset = kSpriteSize;
+		}
+
+		if ((collision & Down) == 0) {
+			// In the air
+			Vector2D offset((2 * kSpriteSize) + facingOffset, 2 * kSpriteSize);
+			g->DrawBitmap(".\\tiles\\megaman.bmp", this->_position, offset, Size(kSpriteSize, kSpriteSize));
+		} else if (!_leftKey && !_rightKey) {
+			// Standing still on the ground
+			Vector2D offset(facingOffset, 2 * kSpriteSize);
+			g->DrawBitmap(".\\tiles\\megaman.bmp", this->_position, offset, Size(kSpriteSize, kSpriteSize));
+		} else {
+			// Moving
+			Vector2D offset(0, facingOffset);
+			_animation->Render(g, this->_position, offset);
+		}
 	}
 }

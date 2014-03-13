@@ -30,7 +30,7 @@ namespace LevelEditor.Models
 		/// <summary>
 		/// Dictionary of bitmap per tiletype.
 		/// </summary>
-		public IDictionary<TileType, Bitmap> BitmapDictionary { get; set; }
+		public IDictionary<GridObjectType, Bitmap> BitmapDictionary { get; set; }
 
 		private static BitmapCollection _instance;
 		private const string SpritesFolder = @"sprites\";
@@ -40,12 +40,12 @@ namespace LevelEditor.Models
 		/// </summary>
 		private BitmapCollection()
 		{
-			BitmapDictionary = new Dictionary<TileType, Bitmap>();
+			BitmapDictionary = new Dictionary<GridObjectType, Bitmap>();
 			string fileName;
-			foreach (TileType tileType in Enum.GetValues(typeof(TileType)))
+			foreach (GridObjectType tileType in Enum.GetValues(typeof(GridObjectType)))
 			{
 				fileName = string.Format("{0}{1}.bmp",
-					SpritesFolder, Enum.GetName(typeof(TileType), tileType));
+					SpritesFolder, Enum.GetName(typeof(GridObjectType), tileType));
 				BitmapDictionary.Add(tileType, (Bitmap)Bitmap.FromFile(fileName));
 			}
 		}
@@ -53,7 +53,7 @@ namespace LevelEditor.Models
 		/// <summary>
 		/// Gets the bitmap for the specified tiletype.
 		/// </summary>
-		public static Bitmap GetBitmapForType(TileType type)
+		public static Bitmap GetBitmapForType(GridObjectType type)
 		{
 			return Instance.BitmapDictionary[type];
 		}

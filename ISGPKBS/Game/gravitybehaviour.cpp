@@ -1,10 +1,10 @@
 #include "gravitybehaviour.h"
 #include "CollisionDetection.h"
 namespace isgp {
-	static const double GRAVITATIONAL_PULL = (double) 200;
+	static const double GRAVITATIONAL_PULL = (double) 2000;
 
-	GravityBehaviour::GravityBehaviour(Player* player) {
-		this->_player = player;
+	GravityBehaviour::GravityBehaviour(Entity* entity) {
+		this->_entity = entity;
 	}
 
 	GravityBehaviour::~GravityBehaviour(void) {
@@ -19,7 +19,7 @@ namespace isgp {
 	}
 
 	void GravityBehaviour::Update(const double ms) {
-		if (_player->GetCollision() & Down) {
+		if (_entity->GetCollision() & Down) {
 			// The character is on a platform so we don't apply gravity to that.
 			return;
 		}
@@ -28,6 +28,6 @@ namespace isgp {
 		
 
 		// Apply downward motion onto character
-		_player->AddToVelocityY(CalculateGravity(ms));
+		_entity->AddToVelocityY(CalculateGravity(ms));
 	}
 }

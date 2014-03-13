@@ -12,8 +12,6 @@ namespace LevelEditor.Forms
 	/// </summary>
 	public partial class LevelEditorForm : Form
 	{
-		private ILevel _level;
-
 		public LevelEditorForm()
 		{
 			InitializeComponent();
@@ -23,7 +21,6 @@ namespace LevelEditor.Forms
 		private void Init()
 		{
 			KeyPreview = true;
-			spritePicker.DataSource = Enum.GetNames(typeof(TileType));
 		}
 
 		/// <summary>
@@ -32,22 +29,6 @@ namespace LevelEditor.Forms
 		private void newLevelToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			NewLevelDialog();
-		}
-
-		private void spritePicker_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			TileType selectedType = (TileType)Enum.Parse(typeof(TileType), spritePicker.Text);
-			levelPanel.SelectedType = selectedType;
-			Bitmap bitmap;
-			try
-			{
-				bitmap = BitmapCollection.GetBitmapForType(selectedType);
-			}
-			catch (FileNotFoundException)
-			{
-				bitmap = new Bitmap(64, 64);
-			}
-			spriteBox.Image = bitmap;
 		}
 
 		private void saveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -110,12 +91,10 @@ namespace LevelEditor.Forms
 
 		private void NewLevelDialog()
 		{
-			var newLevelDialog = new NewLevelForm();
-			if (newLevelDialog.ShowDialog() == DialogResult.OK)
+			NewLevelForm dialog = new NewLevelForm();
+			if (dialog.ShowDialog() == DialogResult.OK)
 			{
-				levelPanel.Level = new Level(newLevelDialog.MapWidth,
-					newLevelDialog.MapHeight);
-				levelPanel.Invalidate();
+				levelPanel.Level = new Level(dialog.MapWidth, dialog.MapHeight);
 			}
 		}
 
@@ -141,5 +120,93 @@ namespace LevelEditor.Forms
 				}
 			}
 		}
+
+		private void addBtn_CheckedChanged(object sender, EventArgs e)
+		{
+			ChangeMouseAction();
+		}
+
+		private void pointBtn_CheckedChanged(object sender, EventArgs e)
+		{
+			ChangeMouseAction();
+		}
+
+		private void rmBtn_CheckedChanged(object sender, EventArgs e)
+		{
+			ChangeMouseAction();
+		}
+
+		private void startRadio_CheckedChanged(object sender, EventArgs e)
+		{
+			ChangeMouseAction();
+		}
+
+		private void finishRadio_CheckedChanged(object sender, EventArgs e)
+		{
+
+		}
+
+		private void ChangeMouseAction()
+		{
+			if (!selectRadio.Checked)
+			{
+				levelPanel.SelectedPoint = new Point(-1, -1);
+			}
+
+			if (selectRadio.Checked)
+			{
+				levelPanel.MouseAction = MouseAction.Select;
+			}
+			else if (addRadio.Checked)
+			{
+				levelPanel.MouseAction = MouseAction.Add;
+			}
+			else if (startRadio.Checked)
+			{
+				levelPanel.MouseAction = MouseAction.Start;
+			}
+			else if (finishRadio.Checked)
+			{
+				levelPanel.MouseAction = MouseAction.Finish;
+			}
+			else
+			{
+				levelPanel.MouseAction = MouseAction.Remove;
+			}
+			levelPanel.Invalidate();
+		}
+
+		private void tileRadio_CheckedChanged(object sender, EventArgs e)
+		{
+			ChangeType();
+		}
+
+		private void ghostRadio_CheckedChanged(object sender, EventArgs e)
+		{
+			ChangeType();
+		}
+
+		private void ChangeType()
+		{
+			if (ghostRadio.Checked)
+			{
+				levelPanel.SelectedType = GridObjectType.Ghost;
+			}
+			else if (tileRadio.Checked)
+			{
+				levelPanel.SelectedType = GridObjectType.Tile;
+			}
+			else if (patrolRadio.Checked)
+			{
+				levelPanel.SelectedType = GridObjectType.Patrol;
+			}
+			if (levelPanel.SelectedPoint.X != -1)
+			{
+				levelPanel.Level.SetGridObject(levelPanel.SelectedPoint,
+					new GridObject(levelPanel.SelectedType));
+				levelPanel.Invalidate();
+			}
+		}
+
 	}
 }

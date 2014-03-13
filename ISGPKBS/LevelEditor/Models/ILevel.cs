@@ -5,7 +5,7 @@ namespace LevelEditor.Models
 {
 	/// <summary>
 	/// Interface that defines methods for getting and setting information
-	/// about tiles in a level.
+	/// about gridobjects in a level.
 	/// </summary>
 	public interface ILevel
 	{
@@ -13,8 +13,9 @@ namespace LevelEditor.Models
 		int Height { get; }
 		Point Start { get; set; }
 		Point Finish { get; set; }
-		void SetTile(Point position, TileType tileType);
-		void RemoveTile(Point position);
-		IDictionary<Point, TileType> GetTiles();
+		IDictionary<Point, GridObject> GridObjects { get; set; }
+		SpriteSet SpriteSet { get; set; }
+		void SetGridObject(Point pos, GridObject obj);
+		void RemoveGridObject(Point pos);
 	}
 }

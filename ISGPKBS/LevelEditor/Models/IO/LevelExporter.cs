@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace LevelEditor.Models.IO
@@ -35,20 +36,15 @@ namespace LevelEditor.Models.IO
 		/// </summary>
 		public void ExportLevel(ILevel level)
 		{
-			IDictionary<Point, TileType> tiles = level.GetTiles();
-
-			// Write width and height to the file.
 			LevelWriter.WriteLine(string.Format("width={0}", level.Width));
 			LevelWriter.WriteLine(string.Format("height={0}", level.Height));
-			// Write the start/finish points.
 			LevelWriter.WriteLine(string.Format("start={0},{1}",
 				level.Start.X, level.Start.Y));
 			LevelWriter.WriteLine(string.Format("finish={0},{1}",
 				level.Finish.X, level.Finish.Y));
-			// Write the position and tiletypes of all nonempty tiles.
-			foreach (Point key in tiles.Keys)
+			foreach (KeyValuePair<Point, GridObject> pair in level.GridObjects)
 			{
-				LevelWriter.WriteLine(TileToString(key, tiles[key]));
+				LevelWriter.WriteLine(TileToString(pair.Key, pair.Value));
 			}
 			LevelWriter.Close();
 		}
@@ -56,9 +52,22 @@ namespace LevelEditor.Models.IO
 		/// <summary>
 		/// Creates a line for a tile.
 		/// </summary>
-		private string TileToString(Point position, TileType type)
+		private string TileToString(Point position, GridObject obj)
 		{
-			return string.Format("{0},{1}={2}", position.X, position.Y, (int)type);
+			string typeName = string.Empty;
+			switch (obj.Type)
+			{
+				case GridObjectType.Tile:
+					typeName = "tile";
+					break;
+				case GridObjectType.Ghost:
+					typeName = "ghost";
+					break;
+				case GridObjectType.Patrol:
+					typeName = "patrol";
+					break;
+			}
+			return string.Format("{0},{1}={2}", position.X, position.Y, typeName);
 		}
 	}
 }

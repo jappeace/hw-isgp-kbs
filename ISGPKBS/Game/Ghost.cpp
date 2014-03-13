@@ -1,8 +1,13 @@
 #include "Ghost.h"
 
 namespace isgp {
-	Ghost::Ghost(Vector2D point, Player* player) : Enemy(point, player) {
+	Ghost::Ghost(Vector2D point, Player* player) {
 		_aVel = 0;
+		_facingRight = true;
+		_position = point;
+		_player = player;
+		
+		_velocity = new Vector2D(0,0);
 	}
 
 	void Ghost::Update(double milisec) {
@@ -10,9 +15,9 @@ namespace isgp {
 		double range = sqrt(pow(_position.X() - _player->_position.X(), 2) + pow(_position.Y() - _player->_position.Y(), 2));
 
 		if (range < 26) {
-			_xVel = -_xVel;
-			_yVel = -_yVel;
-		}else if (range < 600) {
+			_velocity->X(-_velocity->X());
+			_velocity->Y(-_velocity->Y());
+		}else if (range < 800) {
 			if (_aVel < 700) {
 				_aVel += (2000 * elapsed);
 			}
@@ -22,22 +27,38 @@ namespace isgp {
 			double targetXVel = _aVel * cos(_radAngle);
 			double targetYVel = _aVel * sin(_radAngle);
 			
-			_xVel = _xVel + (targetXVel - _xVel) * elapsed;
-			_yVel = _yVel + (targetYVel - _yVel) * elapsed;
+			_velocity->X(_velocity->X() + (targetXVel - _velocity->X()) * elapsed);
+			_velocity->Y(_velocity->Y() + (targetYVel - _velocity->Y()) * elapsed);
 		}else{
 			if (_aVel > 0) {
-				_radAngle = atan2(_yVel, _xVel);
-				_aVel = sqrt((_xVel * _xVel) + (_yVel * _yVel));
+				_radAngle = atan2(_velocity->Y(), _velocity->X());
+				_aVel = sqrt((_velocity->X() * _velocity->X()) + (_velocity->Y() * _velocity->Y()));
 
 				_aVel -= (2000 * elapsed);
 				if (_aVel < 0){ _aVel = 0; }
 
-				_xVel = _aVel * cos(_radAngle);
-				_yVel = _aVel * sin(_radAngle);
+				_velocity->X(_aVel * cos(_radAngle));
+				_velocity->Y(_aVel * sin(_radAngle));
 			}
 		}
 
-		_position.X(_position.X() + (_xVel * elapsed));
-		_position.Y(_position.Y() + (_yVel * elapsed));
+		if (_velocity->X() > 0.0) {
+			_facingRight = true;
+		}else{
+			_facingRight = false;
+		}
+
+		_position.X(_position.X() + (_velocity->X() * elapsed));
+		_position.Y(_position.Y() + (_velocity->Y() * elapsed));
+	}
+
+	void Ghost::AddToVelocityY(double) {}
+
+	void Ghost::Paint(Graphics* g) {
+		if (_facingRight) {
+			g->DrawBitmap(".\\tiles\\boo.bmp", this->_position, Size(32, 32));
+		}else{
+			g->DrawBitmap(".\\tiles\\boo.bmp", this->_position, Vector2D(32, 0), Size(32, 32));
+		}
 	}
 }
