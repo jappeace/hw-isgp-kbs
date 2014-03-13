@@ -19,8 +19,21 @@ Window::~Window()
 // Member functions                  //
 /////////////////////////////////////
 
-void Window::AfterCreate() {
-	_cam = new Camera(_level->_player);
+void Window::ClientResize(HWND hWnd, int nWidth, int nHeight)
+{
+  RECT rcClient, rcWind;
+  POINT ptDiff;
+  GetClientRect(hWnd, &rcClient);
+  GetWindowRect(hWnd, &rcWind);
+  ptDiff.x = (rcWind.right - rcWind.left) - rcClient.right;
+  ptDiff.y = (rcWind.bottom - rcWind.top) - rcClient.bottom;
+  MoveWindow(hWnd,rcWind.left, rcWind.top, nWidth + ptDiff.x, nHeight + ptDiff.y, TRUE);
+}
+
+void Window::AfterCreate(HWND hWnd) {
+	ClientResize(hWnd, WindowSize.GetWidth(), WindowSize.GetHeight());
+	
+	_cam = new Camera(_level->_player, _level->GetGrid());
 	_graphics->SetCam(_cam);
 }
 
