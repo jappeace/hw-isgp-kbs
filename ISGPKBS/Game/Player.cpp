@@ -4,7 +4,7 @@
 namespace isgp{
 const Size Player::InitSize(32, 32);
 	Player::Player(Vector2D position) {
-		_maxVel = 500;
+		_maxVel = 350;
 		_accel = 2200;
 		_deAccel = 1100;
 
