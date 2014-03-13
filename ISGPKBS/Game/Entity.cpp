@@ -74,9 +74,17 @@ namespace isgp {
 
 			if(allowedX != 0.0 || allowedY != 0.0) {
 				_position += Vector2D(allowedX, allowedY);
+				double x = 0;
+				double y = 0;
 				if(allowedY != 0) {
-					_position += Vector2D(0, velocity.Y() < 0 ? -1 : 1);
+					y = velocity.Y() < 0 ? -1 : 1;
+					_position += Vector2D(0.0, y);
 				}
+				if (allowedX != 0) {
+					x = velocity.X() < 0 ? -1 : 1;
+				}
+
+				Collides(x, y);
 			}
 			
 		}

@@ -23,7 +23,7 @@ namespace isgp {
 
 	void Patrol::Update(double milisec) {
 		double elapsed = milisec / 1000;
-		double range = sqrt(pow(_position.X() - _startingPoint.X(), 2) + pow(_position.Y() - _startingPoint.Y(), 2));
+		double range = abs(_position.X() - _startingPoint.X());
 		double collisionRange = sqrt(pow(_position.X() - _player->_position.X(), 2) + pow(_position.Y() - _player->_position.Y(), 2));
 
 		if (collisionRange < 26) {
