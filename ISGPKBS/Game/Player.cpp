@@ -138,7 +138,7 @@ const Size Player::InitSize(32, 32);
 			facingOffset = kSpriteSize;
 		}
 
-		if ((collision & Down) == 0) {
+		if (_velocity->Y() != 0.0) {
 			// In the air
 			Vector2D offset((2 * kSpriteSize) + facingOffset, 2 * kSpriteSize);
 			g->DrawBitmap(".\\tiles\\megaman.bmp", this->_position, offset, Size(kSpriteSize, kSpriteSize));
