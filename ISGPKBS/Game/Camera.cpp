@@ -43,4 +43,7 @@ namespace isgp{
 	Vector2D Camera::FromTo(Vector2D p) {
 		return ToFrom(p);
 	}
+	Vector2D Camera::GetPosition(){
+		return _position;
+	}
 }
