@@ -21,7 +21,12 @@ namespace isgp {
 
 	// Moves cursor up. Cursor goes to bottom if it can't go up.
 	void GameOverMenu::MoveCursorUp() {
-		_selectedMenuItem = (_selectedMenuItem - 1) % _menuItems.size();
+		if (_selectedMenuItem == 0) {
+			_selectedMenuItem = _menuItems.size() - 1;
+		}
+		else {
+			_selectedMenuItem = (_selectedMenuItem - 1) % _menuItems.size();
+		}
 	}
 
 	// Moves cursor down. Cursor goes to top if it can't go down.
@@ -39,6 +44,12 @@ namespace isgp {
 	void GameOverMenu::Paint(Graphics* g) {
 		Vector2D location(300, 100);
 		for (auto item = _menuItems.begin(); item != _menuItems.end(); ++item) {
+			if (std::distance(_menuItems.begin(), item) == this->_selectedMenuItem) {
+				g->SetTextColor(RGB(0, 200, 150));
+			}
+			else {
+				g->SetTextColor(RGB(0, 0, 0));
+			}
 			g->DrawStr(location, (*item)->GetText());
 			location.Y(location.Y() + 20);
 		}

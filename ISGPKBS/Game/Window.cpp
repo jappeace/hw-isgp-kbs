@@ -7,16 +7,22 @@ namespace isgp {
 
 // Constructors / Destructors      //
 Window::Window() {
-	ILevelFactory* factory = new SimpleLevelFactory();
-	_level = factory->CreateLevel();
-	delete factory;
+	SimpleLevelFactory factory;
+	_level = factory.CreateLevel();
 	this->_gameState = Playing;
 	this->_currentMenu = new GameOverMenu();
 	this->_currentMenu->AddMenuItem(new MenuItem("YOU SUCK", this, NULL));
 	this->_currentMenu->AddMenuItem(new MenuItem("Retry", this, NULL));
-	this->_currentMenu->AddMenuItem(new MenuItem("Exit", this, NULL));
+	this->_currentMenu->AddMenuItem(new MenuItem("Exit", this, &Window::RestartGame));
 	this->_currentMenu->AddMenuItem(new MenuItem("Magiiiiiiiiiic", this, NULL));
 	this->_currentMenu->AddMenuItem(new MenuItem("Ecoooookasdfasfxit", this, NULL));
+	this->_restart = false;
+
+	Level* lv;
+	for (int i = 0; i < 100; i++) {
+		lv = factory.CreateLevel();
+		delete lv;
+	}
 }
 
 Window::~Window()
@@ -44,6 +50,16 @@ void Window::OnPaint(Graphics* g){
 	}
 }
 void Window::GameLoop(double elapsed) { //elapsed time, in MS
+	if (_restart) {
+		_restart = false;
+		_gameState = Playing;
+		SimpleLevelFactory factory;
+		delete _level;
+		_level = factory.CreateLevel();
+
+		delete _cam;
+		AfterCreate();
+	}
 	if (_gameState == Playing) {
 		//update all the game objects now
 		_level->_player->Update(elapsed);
@@ -62,17 +78,25 @@ void Window::GameLoop(double elapsed) { //elapsed time, in MS
 }
 
 void Window::OnKeyDown(int which) {
-	if (which == VK_LEFT) {
+	switch (which) {
+	case VK_LEFT:
 		_level->_player->_leftKey = true;
-	}
-	if (which == VK_RIGHT) {
+		break;
+	case VK_RIGHT:
 		_level->_player->_rightKey = true;
-	}
-	if (which == VK_UP) {
+		break;
+	case VK_UP:
 		_level->_player->_upKey = true;
-	}
-	if (which == VK_SPACE) {
+		_currentMenu->MoveCursorUp();
+		break;
+	case VK_DOWN:
+		_currentMenu->MoveCursorDown();
+		break;
+	case VK_SPACE:
 		_level->_player->_spaceKey = true;
+		break;
+	case VK_RETURN:
+		_currentMenu->ExecuteSelection();
 	}
 #ifdef _DEBUG
 	if (which == VK_ESCAPE) {
@@ -126,6 +150,10 @@ void Window::OnCommand(int from, int command) {
 
 LRESULT Window::MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 	return AbstractWindow::MsgProc(hWnd, uMsg, wParam, lParam);
+}
+
+void Window::RestartGame() {
+	this->_restart = true;
 }
 
 }

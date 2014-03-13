@@ -27,5 +27,6 @@ namespace isgp {
 		IMenu* _currentMenu;
 	private:
 		Level* _level;
+		bool _restart;
 	};
 }
