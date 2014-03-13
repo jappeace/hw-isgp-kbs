@@ -8,6 +8,7 @@ namespace isgp {
 class Entity : public IPaintable
 {
 public:
+	Entity();
 	virtual void Paint(Graphics* g) override = 0;
 	virtual void Update(const double) = 0;
 	int CheckCollision();

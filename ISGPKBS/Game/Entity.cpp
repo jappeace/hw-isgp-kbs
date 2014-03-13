@@ -4,6 +4,10 @@
 
 namespace isgp {
 
+	Entity::Entity() {
+		this->collision = None;
+	}
+
 	void Entity::SetGrid(Grid* grid) {
 		this->_grid = grid;
 	}
