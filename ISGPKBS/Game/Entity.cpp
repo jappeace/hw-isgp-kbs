@@ -83,9 +83,6 @@ namespace isgp {
 			}
 			
 		}
-
-		CheckCollision();
-		
 	}
 
 	double Entity::CalcStepSize(double vel) {
