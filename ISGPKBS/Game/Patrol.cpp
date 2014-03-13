@@ -5,6 +5,7 @@
 namespace isgp {
 	Patrol::Patrol(Vector2D point, int range, Player* player) {
 		_position = point;
+		_oldPosition = Vector2D(1337, 1337);
 		_player = player;
 		
 		_velocity = new Vector2D(0,0);
@@ -60,6 +61,13 @@ namespace isgp {
 		if((collision & Right && _velocity->X() > 0) || (collision & Left && _velocity->X() < 0)) { 
 			_velocity->X(-_velocity->X());
 		}
+
+		//this is a tmp fix
+		if (_oldPosition == _position) {
+			_velocity->X(-_velocity->X());
+		}
+
+		_oldPosition = _position;
 	}
 
 	void Patrol::AddToVelocityY(double y) {
