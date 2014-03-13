@@ -52,8 +52,6 @@ namespace isgp {
 				}
 
 				if(((yCollision & Up) && velocity.Y() < 0) || ((yCollision & Down) && velocity.Y() > 0)) {
-					//if (canMoveY)
-					//	allowedY += stepSizeY;
 					canMoveY = false;
 				}
 
