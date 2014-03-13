@@ -82,6 +82,7 @@
     <ClInclude Include="ITileData.h" />
     <ClInclude Include="ITranslator.h" />
     <ClInclude Include="Level.h" />
+    <ClInclude Include="IMenu.h" />
     <ClInclude Include="Patrol.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="resource.h" />

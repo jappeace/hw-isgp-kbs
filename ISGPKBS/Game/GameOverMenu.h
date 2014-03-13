@@ -1,13 +1,13 @@
 #pragma once
 
-#include "IPaintable.h"
+#include "IMenu.h"
 #include <Windows.h>
 
 namespace isgp {
 
 	// Menu to be shown when the player dies.
 	// Allows the player to choose to restart the game.
-	class GameOverMenu : public IPaintable {
+	class GameOverMenu : public IMenu {
 	public:
 		GameOverMenu();
 		~GameOverMenu();
