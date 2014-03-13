@@ -23,27 +23,9 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 		}
 	}
 	void Level::Paint(Graphics* g) {
-		_graphics = g;
-		_grid->TraverseTiles(this);
 		_player->Paint(g);
 		_enemy->Paint(g);
 		_enemy2->Paint(g);
-	}
-	void Level::ReceiveTile(Tile* tile) {
-#ifdef _DEBUG
-		Vector2D position = *tile->GetPosition();
-		position.X(position.X() * Level::tileSize.GetWidth());
-		position.Y(position.Y() * Level::tileSize.GetHeight());
-
-		_graphics->DrawRect(
-			position, 
-			Vector2D(
-				position.X() + Level::tileSize.GetWidth(),
-				position.Y() + Level::tileSize.GetHeight()
-			)
-		);
-#endif
-		tile->Paint(_graphics);
 	}
 	Grid* Level::GetGrid() const{
 		return _grid;
