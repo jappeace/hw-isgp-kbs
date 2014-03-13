@@ -59,7 +59,7 @@ namespace isgp{
 		}
 		
 		// no wandering
-		if (!_leftKey && !_rightKey && (collision & Down) && _velocity->X() < 20 && _velocity->X() > -20) {
+		if (!_leftKey && !_rightKey && (collision & Down) && _velocity->X() < 100 && _velocity->X() > -100) {
 			_velocity->X(0);
 		}
 
