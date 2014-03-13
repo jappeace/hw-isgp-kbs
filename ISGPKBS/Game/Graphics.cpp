@@ -144,10 +144,8 @@ namespace isgp {
 		DrawSprite(sprite, position, offset, size);
 	}
 	Graphics* Graphics::CreateLinkedGraphics(const Size& size){
-
 		Graphics* result = new Graphics();
-
-
+		result->_visibleHdc = this->_backBuffer;
 		result->CreateBackbuffer(this->_backBuffer, size);
 		return result;
 	}

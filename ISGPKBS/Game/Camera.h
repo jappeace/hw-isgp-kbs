@@ -12,6 +12,7 @@ namespace isgp{
 		void Update(double);
 		Vector2D FromTo(Vector2D) override;
 		Vector2D ToFrom(Vector2D) override;
+		Vector2D GetPosition();
 	private:
 		Player* _player;
 		Vector2D _position;
