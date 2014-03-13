@@ -29,6 +29,9 @@ namespace isgp{
 				_player->_position.Y() - _position.Y()
 			) * (4 * elapsed)
 		);
+
+		if (_position.Y() < 384) { _position.Y(384); }
+		if (_position.X() < 384) { _position.X(384); }
 	}
 
 	// From static to dynamic
@@ -42,5 +45,8 @@ namespace isgp{
 	// From static to dynamic
 	Vector2D Camera::FromTo(Vector2D p) {
 		return ToFrom(p);
+	}
+	Vector2D Camera::GetPosition(){
+		return _position;
 	}
 }

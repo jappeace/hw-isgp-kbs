@@ -112,7 +112,7 @@ HRESULT AbstractWindow::Create()
 	_graphics = new Graphics(_hWnd);
 	ShowWindow(_hWnd, _dwCreationFlags);
 	UpdateWindow(_hWnd);
-	_engineThrottle = 5;
+	_engineThrottle = 1;
 	::QueryPerformanceFrequency((LARGE_INTEGER*)&_freq);
 	::QueryPerformanceCounter((LARGE_INTEGER*)&_lastUpdate);
 

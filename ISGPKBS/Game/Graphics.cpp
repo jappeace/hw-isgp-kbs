@@ -53,10 +53,8 @@ namespace isgp {
 	}
 
 	void Graphics::EndRendering(HWND hWnd) {
-#ifdef _DEBUG
 		this->_fpsCounter.Update();
 		DrawStr(Vector2D(10, 10), "FPS: " + StrConverter::IntToString(this->_fpsCounter.Get()));
-#endif
 
 		// Blit the new frame to the screen
 		BitBlockTransfer(_paintStructure->hdc, Vector2D(), AbstractWindow::WindowSize, this->_backBuffer, Vector2D(), SRCCOPY);
