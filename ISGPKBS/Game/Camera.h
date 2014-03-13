@@ -2,6 +2,7 @@
 
 #include "Player.h"
 #include "GridGraphicTranslator.h"
+#include "AbstractWindow.h"
 
 namespace isgp{
 	class Camera : public ITranslator {

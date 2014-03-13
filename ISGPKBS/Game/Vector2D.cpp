@@ -14,6 +14,9 @@ namespace isgp{
 	Vector2D::Vector2D(int x, int y){
 		init(x, y);
 	}
+	Vector2D::Vector2D(const Vector2D& cpy){
+		init(cpy._x, cpy._y);
+	}
 	Vector2D::~Vector2D(void)
 	{
 	}

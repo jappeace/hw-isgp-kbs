@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "CollisionDetection.h"
 namespace isgp{
+const Size Player::InitSize(32, 32);
 	Player::Player(Vector2D position) {
 		_maxVel = 500;
 		_accel = 2200;
@@ -13,12 +14,12 @@ namespace isgp{
 		_rightKey = false;
 		_upKey = false;
 		_spaceKey = false;
-		_size = new Size(32, 32);
+		_size = new Size(Player::InitSize);
 		_behaviours = new vector<IBehaviour*>();
 		_behaviours->push_back(new GravityBehaviour(this));
 		
 		_facingRight = true;
-		_animation = new Animation(".\\tiles\\megaman.bmp", Size(32, 32), 4, 200);
+		_animation = new Animation(".\\tiles\\megaman.bmp", (Size) *_size, 4, 200);
 	}
 
 	Player::~Player(void) {
@@ -35,8 +36,6 @@ namespace isgp{
 
 	void Player::Update(const double milisec) {
 		double elapsed = milisec / 1000;
-
-		//collision = CheckCollision();
 
 		if(_leftKey && _velocity->X() > -_maxVel) {
 			if(collision & Down){
@@ -99,10 +98,8 @@ namespace isgp{
 
 	void Player::Paint(Graphics* g) {
 #ifdef _DEBUG
-		g->DrawStaticRect(Vector2D(395, 395), Vector2D(405, 405));
 		GridGraphicTranslator translator = GridGraphicTranslator();
 		vector<Tile*> includedTiles = _grid->GetTilesInRectangle(_position, _position + *_size + Vector2D(2));
-		collision = CheckCollision();
 		g->SetColor(RGB(255, 0, 0));
 		for(unsigned int i = 0; i < includedTiles.size(); i++) {
 			Tile* t = includedTiles.at(i);
@@ -136,13 +133,12 @@ namespace isgp{
 		static int const kSpriteSize = 32;
 
 		int facingOffset = 0;
-		//int collision = CheckCollision();
 
 		if (!_facingRight) {
 			facingOffset = kSpriteSize;
 		}
 
-		if ((collision & Down) == 0) {
+		if (_velocity->Y() != 0.0) {
 			// In the air
 			Vector2D offset((2 * kSpriteSize) + facingOffset, 2 * kSpriteSize);
 			g->DrawBitmap(".\\tiles\\megaman.bmp", this->_position, offset, Size(kSpriteSize, kSpriteSize));
@@ -155,5 +151,8 @@ namespace isgp{
 			Vector2D offset(0, facingOffset);
 			_animation->Render(g, this->_position, offset);
 		}
+#ifdef _DEBUG
+		g->DrawStaticRect(Vector2D(395, 395), Vector2D(405, 405));
+#endif
 	}
 }

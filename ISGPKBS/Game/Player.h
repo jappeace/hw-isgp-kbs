@@ -19,7 +19,8 @@ namespace isgp {
 		bool _leftKey, _rightKey, _upKey, _spaceKey;
 		
 
-
+		static const Size InitSize;
+		
 	private:
 		vector<IBehaviour*>* _behaviours;
 		double _maxVel;
