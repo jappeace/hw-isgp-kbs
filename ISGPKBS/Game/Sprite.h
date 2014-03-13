@@ -1,13 +1,13 @@
 #pragma once
 
 #include <Windows.h>
-
+#include "Size.h"
 namespace isgp {
 
 	class Sprite
 	{
 	public:
-		Sprite(void);
+		Sprite(const Size&);
 		Sprite(HBITMAP bitmap);
 		~Sprite(void);
 
@@ -17,6 +17,10 @@ namespace isgp {
 	private:
 		HBITMAP _image;
 		HBITMAP _mask;
+
+		void RenderMask(BITMAP& from);
+		BITMAP dereferenceBitmap(HBITMAP);
+		void init(HBITMAP);
 	
 	};
 }

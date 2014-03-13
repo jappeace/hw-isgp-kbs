@@ -2,25 +2,51 @@
 
 namespace isgp {
 
-	Sprite::Sprite(void) {
-		this->_image = NULL;
-		this->_mask = NULL;
+	Sprite::Sprite(const Size& s) {
+		init(
+			CreateCompatibleBitmap(
+				CreateCompatibleDC(NULL),
+				s.GetWidth(),
+				s.GetHeight()
+			)
+		);
 	}
 
 	Sprite::Sprite(HBITMAP bitmap)
 	{
-		this->_image = bitmap;
+		init(bitmap);
+	}
+	void Sprite::init(HBITMAP bitmapPointer){
+		this->_image = bitmapPointer;
+		RenderMask(dereferenceBitmap(bitmapPointer));
+	}
 
-		// Create variables to work with the given image.
+	BITMAP Sprite::dereferenceBitmap(HBITMAP pointer){
+		BITMAP result;
+		GetObject(pointer, sizeof(BITMAP), &result);
+		return result;
+	}
+
+	Sprite::~Sprite(void) {
+		DeleteObject(this->_image);
+		DeleteObject(this->_mask);
+	}
+
+	HBITMAP Sprite::GetBitmap() {
+		return _image;
+	}
+
+	HBITMAP Sprite::GetMask() {
+		return _mask;
+	}
+	void Sprite::RenderMask(BITMAP& from){
 		HDC imgHDC = CreateCompatibleDC(NULL);
-		BITMAP image;
-		GetObject(this->_image, sizeof(BITMAP), &image);
 		SelectObject(imgHDC, this->_image);
 
 		// Create variables to create the mask
 		BITMAP mask;
 		HDC tmpHDC = CreateCompatibleDC(NULL);
-		this->_mask = CreateCompatibleBitmap(tmpHDC, image.bmWidth, image.bmHeight);
+		this->_mask = CreateCompatibleBitmap(tmpHDC, from.bmWidth, from.bmHeight);
 		GetObject(this->_mask, sizeof(BITMAP), &mask);
 		SelectObject(tmpHDC, this->_mask);
 
@@ -31,8 +57,8 @@ namespace isgp {
 		static const int kBlack          = 0x000000; // The hex value of the color black
 
 		// Generate alpha-mask and overwrite image pixels if needed.
-		for (int y = 0; y < image.bmHeight; ++y) {
-			for (int x = 0; x < image.bmWidth; ++x) {
+		for (int y = 0; y < from.bmHeight; ++y) {
+			for (int x = 0; x < from.bmWidth; ++x) {
 				int color = GetPixel(imgHDC, x, y);
 				if (color == kKeyColor) {
 					SetPixel(imgHDC, x, y, kBlack); // Set to BLACK to prevent any color merging to happen
@@ -46,19 +72,5 @@ namespace isgp {
 		// Clean up no longer needed resources
 		DeleteDC(imgHDC);
 		DeleteDC(tmpHDC);
-	}
-
-
-	Sprite::~Sprite(void) {
-		DeleteObject(this->_image);
-		DeleteObject(this->_mask);
-	}
-
-	HBITMAP Sprite::GetBitmap() {
-		return _image;
-	}
-
-	HBITMAP Sprite::GetMask() {
-		return _mask;
 	}
 }

@@ -43,13 +43,9 @@ namespace isgp {
 		_paintStructure = new PAINTSTRUCT();
 		// Begin the drawing state of WIN32
 		_visibleHdc = BeginPaint(hWnd, _paintStructure);
-
 		
-		// allows graphics to be cached
-		if(_isClearBackbuffer){
-			// Clear the backbuffer.
-			BitBlockTransfer(this->_backBuffer, Vector2D(), AbstractWindow::WindowSize, NULL, NULL, WHITENESS);
-		}
+		// Clear the backbuffer.
+		BitBlockTransfer(this->_backBuffer, Vector2D(), AbstractWindow::WindowSize, NULL, NULL, WHITENESS);
 	}
 
 	void Graphics::EndRendering(HWND hWnd) {
