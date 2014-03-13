@@ -44,10 +44,10 @@ namespace isgp {
 	}
 
 	void Graphics::EndRendering(HWND hWnd, PAINTSTRUCT *ps) {
-#ifdef _DEBUG
+//#ifdef _DEBUG
 		this->_fpsCounter.Update();
 		DrawStr(Vector2D(10, 10), "FPS: " + StrConverter::IntToString(this->_fpsCounter.Get()));
-#endif
+//#endif
 
 		// Blit the new frame to the screen
 		BitBlt(ps->hdc, 0, 0, AbstractWindow::WindowSize.GetWidth(), AbstractWindow::WindowSize.GetHeight(), this->_backBuffer, 0, 0, SRCCOPY);

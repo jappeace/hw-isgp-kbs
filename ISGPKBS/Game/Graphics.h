@@ -32,10 +32,10 @@ namespace isgp {
 		HBITMAP _bitmap;
 		
 		HPEN _pen;
-#ifdef _DEBUG
+//#ifdef _DEBUG
 		// FPScounter.
 		TimesPerSecondCounter _fpsCounter;
-#endif
+//#endif
 		map<string, Sprite*>* _bitmapCache;
 	public:
 		Graphics(HWND);

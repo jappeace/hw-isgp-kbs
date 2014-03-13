@@ -57,7 +57,7 @@ namespace isgp{
 		}
 		
 		// no wandering
-		if (!_leftKey && !_rightKey && (collision & Down) && _velocity->X() < 20 && _velocity->X() > -20) {
+		if (!_leftKey && !_rightKey && (collision & Down) && _velocity->X() < 100 && _velocity->X() > -100) {
 			_velocity->X(0);
 		}
 
@@ -65,15 +65,14 @@ namespace isgp{
 		for (unsigned int i = 0; i < _behaviours->size(); ++i) {
 			_behaviours->at(i)->Update(milisec);
 		}
-
+		Move((*_velocity) * Vector2D(elapsed));
 		if((collision & Down && _velocity->Y() > 0) || (collision & Up && _velocity->Y() < 0)) { 
 			_velocity->Y(0);
 		}
 		if((collision & Right && _velocity->X() > 0) || (collision & Left && _velocity->X() < 0)) { 
 			_velocity->X(0);
 		}
-
-		Move((*_velocity) * Vector2D(elapsed));
+		
 
 		if(_upKey && (collision & Down)) {
 			_velocity->Y(-650);
