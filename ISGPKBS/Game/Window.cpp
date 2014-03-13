@@ -22,6 +22,8 @@ Window::~Window()
 void Window::AfterCreate() {
 	_cam = new Camera(_level->_player);
 	_graphics->SetCam(_cam);
+	_artist = new BackgroundArtist(_graphics, _cam, _level);
+	_artist->RenderBackground();
 }
 
 INT_PTR CALLBACK dialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
@@ -29,6 +31,7 @@ INT_PTR CALLBACK dialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 }
 void Window::OnPaint(Graphics* g){
 	_level->Paint(g);
+	_artist->Paint(g);
 }
 void Window::GameLoop(double elapsed) { //elapsed time, in MS
 	if (_gameState == 1) {

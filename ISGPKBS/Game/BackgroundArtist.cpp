@@ -10,6 +10,7 @@ namespace isgp{
 		);
 		_background->SetIsClearingBackbuffer(false);
 		_cam = cam;
+		_level = level;
 
 	}
 	BackgroundArtist::~BackgroundArtist(void)
@@ -21,7 +22,7 @@ namespace isgp{
 		_level->GetGrid()->TraverseTiles(this);
 	}
 	void BackgroundArtist::Paint(Graphics* g) {
-		
+		_background->Update(_cam->GetPosition());
 	}
 	void BackgroundArtist::ReceiveTile(Tile* tile) {
 #ifdef _DEBUG

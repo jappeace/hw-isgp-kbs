@@ -68,6 +68,10 @@ namespace isgp {
 		// link the backbuffer as the current graphics to the front buffer of the created graphics
 		Graphics* CreateLinkedGraphics(const Size&);
 
+		// bit block transfeur from the backbuffer onto the visible hdc from the backbuffer position just 0,0 on source
+		// allows caching on bigger backbuffer image then source (ie a world)
+		void Update(const Vector2D& position);
+
 		// set the backbuffur clearing to a value, it somtimes desirable to not do this (for cashes)
 		void SetIsClearingBackbuffer(bool);
 	private:

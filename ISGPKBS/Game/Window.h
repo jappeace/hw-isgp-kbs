@@ -6,6 +6,7 @@
 #include "ILevelFactory.h"
 #include "WorldBlock.h"
 #include "Camera.h"
+#include "BackgroundArtist.h"
 
 namespace isgp {
 	class Window : public AbstractWindow {
@@ -23,5 +24,6 @@ namespace isgp {
 		int _gameState;
 	private:
 		Level* _level;
+		BackgroundArtist* _artist;
 	};
 }

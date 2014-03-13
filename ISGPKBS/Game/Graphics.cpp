@@ -59,14 +59,17 @@ namespace isgp {
 #endif
 
 		// Blit the new frame to the screen
-		BitBlockTransfer(_paintStructure->hdc, Vector2D(), AbstractWindow::WindowSize, this->_backBuffer, Vector2D(), SRCCOPY);
-		
+		Update(Vector2D());
 
 		// End the drawing state of WIN32
 		EndPaint(hWnd, _paintStructure);
 		delete _paintStructure;
 	}
 
+	void Graphics::Update(const Vector2D& position){
+		// Blit the backbuffer to the visiblehdc
+		BitBlockTransfer(_paintStructure->hdc, Vector2D(), AbstractWindow::WindowSize, this->_backBuffer, position, SRCCOPY);
+	}
 	void Graphics::SetCam(ITranslator* cam) {
 		_cam = cam;
 	}
