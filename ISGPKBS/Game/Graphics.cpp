@@ -148,8 +148,8 @@ namespace isgp {
 	}
 	Graphics* Graphics::CreateLinkedGraphics(const Size& size){
 		Graphics* result = new Graphics();
-		result->_visibleHdc = this->_backBuffer;
-		result->CreateBackbuffer(this->_backBuffer, size);
+		SelectObject(result->_visibleHdc, this->_bitmap);
+		result->CreateBackbuffer(result->_visibleHdc, size);
 		return result;
 	}
 	BOOL Graphics::BitBlockTransfer(HDC destination, const Vector2D& destPosition, const Size& bothSize, HDC source, const Vector2D& positionSrc, DWORD actionFlag){
