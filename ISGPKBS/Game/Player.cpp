@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "CollisionDetection.h"
 namespace isgp{
+const Size Player::InitSize(32, 32);
 	Player::Player(Vector2D position) {
 		_maxVel = 500;
 		_accel = 220;
@@ -13,11 +14,11 @@ namespace isgp{
 		_rightKey = false;
 		_upKey = false;
 		_spaceKey = false;
-		_size = new Size(32, 32);
+		_size = new Size(Player::InitSize);
 		_behaviours = new vector<IBehaviour*>();
 		_behaviours->push_back(new GravityBehaviour(this));
 		
-		_animation = new Animation(".\\tiles\\megaman.bmp", Size(32, 32), 4, 200);
+		_animation = new Animation(".\\tiles\\megaman.bmp", (Size) *_size, 4, 200);
 	}
 
 	Player::~Player(void) {

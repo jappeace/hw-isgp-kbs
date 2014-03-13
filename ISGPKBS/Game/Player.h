@@ -20,6 +20,7 @@ namespace isgp {
 		
 		void MoveTo(int x, int y);
 
+		static const Size InitSize;
 		
 	private:
 		vector<IBehaviour*>* _behaviours;
