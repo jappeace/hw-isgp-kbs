@@ -28,6 +28,9 @@ INT_PTR CALLBACK dialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 	return NULL;
 }
 void Window::OnPaint(Graphics* g){
+	//g->DrawBitmap("C:/Users/pobdoq/Dropbox/ISGP/mountain.bmp", Vector2D((_cam->GetPosition().X() - 384) * 0.5, (_cam->GetPosition().Y() - 384) * 0.5), Size(1920, 791));
+	//g->DrawBitmap("C:/Users/pobdoq/Dropbox/ISGP/ground.bmp", Vector2D((_cam->GetPosition().X() - 384) * 0.25, (_cam->GetPosition().Y() + 2000) * 0.25), Size(1920, 321));
+
 	_level->Paint(g);
 }
 void Window::GameLoop(double elapsed) { //elapsed time, in MS

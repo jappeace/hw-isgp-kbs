@@ -1,30 +1,34 @@
-#include "AbstractWindow.h"
 #include "Graphics.h"
-#include "GridGraphicTranslator.h"
-#include "Sprite.h"
-#include "StrConverter.h"
-
+#include "AbstractWindow.h" // loopfix
 namespace isgp {
 
-	Graphics::Graphics(HWND hWnd) {
+	void Graphics::Init(void){
+		_isClearBackbuffer = true;
 		_cam = NULL;
-		
 		_bitmapCache = new map<string, Sprite*>();
+	}
+
+	Graphics::Graphics(HWND hWnd) {
+		Init();
 
 		this->_backBuffer = CreateCompatibleDC(NULL);
 
 		//get the DC for the front buffer
 		HDC hdc = GetDC(hWnd);
 
-		this->_bitmap = CreateCompatibleBitmap(hdc, AbstractWindow::WindowSize.GetWidth(), AbstractWindow::WindowSize.GetHeight());
-
-		//select the bitmap into the memory device context
-		SelectObject(this->_backBuffer, this->_bitmap);
+		CreateBackbuffer(hdc, AbstractWindow::WindowSize);
 
 		//Don't forget to release the DC
 		ReleaseDC(hWnd, hdc); 
 	}
-
+	Graphics::Graphics(void){
+		Init();
+	}
+	void Graphics::CreateBackbuffer(HDC& hdc, const Size& size){
+		this->_bitmap = CreateCompatibleBitmap(hdc, size.GetWidth(), size.GetHeight());
+		//select the bitmap into the memory device context
+		SelectObject(this->_backBuffer, this->_bitmap);
+	}
 	Graphics::~Graphics(void) {
 		if(_bitmapCache) {
 			for (map<string, Sprite*>::iterator it = _bitmapCache->begin(); it != _bitmapCache->end(); ++it) {
@@ -35,25 +39,30 @@ namespace isgp {
 		}
 	}
 
-	void Graphics::BeginRendering(HWND hWnd, PAINTSTRUCT *ps) {
+	void Graphics::BeginRendering(HWND hWnd) {
+		_paintStructure = new PAINTSTRUCT();
 		// Begin the drawing state of WIN32
-		this->_hdc = BeginPaint(hWnd, ps);
+		_visibleHdc = BeginPaint(hWnd, _paintStructure);
 
-		// Clear the backbuffer.
-		BitBlt(this->_backBuffer,0, 0, AbstractWindow::WindowSize.GetWidth(), AbstractWindow::WindowSize.GetHeight(), NULL, NULL, NULL, WHITENESS);
+		
+		// allows graphics to be cached
+		if(_isClearBackbuffer){
+			// Clear the backbuffer.
+			BitBlockTransfer(this->_backBuffer, Vector2D(), AbstractWindow::WindowSize, NULL, NULL, WHITENESS);
+		}
 	}
 
-	void Graphics::EndRendering(HWND hWnd, PAINTSTRUCT *ps) {
-#ifdef _DEBUG
+	void Graphics::EndRendering(HWND hWnd) {
 		this->_fpsCounter.Update();
 		DrawStr(Vector2D(10, 10), "FPS: " + StrConverter::IntToString(this->_fpsCounter.Get()));
-#endif
 
 		// Blit the new frame to the screen
-		BitBlt(ps->hdc, 0, 0, AbstractWindow::WindowSize.GetWidth(), AbstractWindow::WindowSize.GetHeight(), this->_backBuffer, 0, 0, SRCCOPY);
+		BitBlockTransfer(_paintStructure->hdc, Vector2D(), AbstractWindow::WindowSize, this->_backBuffer, Vector2D(), SRCCOPY);
+		
 
 		// End the drawing state of WIN32
-		EndPaint(hWnd, ps);
+		EndPaint(hWnd, _paintStructure);
+		delete _paintStructure;
 	}
 
 	void Graphics::SetCam(ITranslator* cam) {
@@ -128,52 +137,79 @@ namespace isgp {
 	}
 
 	void Graphics::DrawBitmap(string path, Vector2D& position, Vector2D& offset, Size& size) {
+		
+		Sprite* sprite = this->LoadBitmapFile(path);
+		DrawSprite(sprite, position, offset, size);
+	}
+
+	Graphics* Graphics::CreateLinkedGraphics(const Size& size){
+		Graphics* result = new Graphics();
+		result->_visibleHdc = this->_backBuffer;
+		result->CreateBackbuffer(this->_backBuffer, size);
+		return result;
+	}
+
+	BOOL Graphics::BitBlockTransfer(HDC destination, const Vector2D& destPosition, const Size& bothSize, HDC source, const Vector2D& positionSrc, DWORD actionFlag){
+		return BitBlt(
+			// Dest Context
+			destination, 
+			// Position
+			(int) destPosition.X(), (int) destPosition.Y(),
+			// Size
+			bothSize.GetWidth(), bothSize.GetHeight(), 
+			// Source Context
+			source, 
+			// Image offset
+			(int) positionSrc.X(), (int) positionSrc.Y(),
+			// Operation
+			actionFlag);
+	}
+	void Graphics::DrawSprite(Sprite* sprite, Vector2D& position, Vector2D& offset, Size& size){
+
 		Vector2D correctedVector2D = position;
 
 		if (_cam != NULL) {
 			correctedVector2D = _cam->FromTo(position);
 		}
-		
-		Sprite* sprite = this->LoadBitmapFile(path);
+
 		HDC bitmap_hdc = CreateCompatibleDC(NULL);
 
 		// link the bitmap to a device context
 		SelectObject(bitmap_hdc, sprite->GetMask());
 
 		// OR the image on the mask to apply transparancy
-		BitBlt(
+		BitBlockTransfer(
 			// Dest Context
 			_backBuffer, 
-			// Posotion
-			(int) correctedVector2D.X(), (int) correctedVector2D.Y(),
-			// Size
-			size.GetWidth(), size.GetHeight(), 
+			// Position
+			correctedVector2D,
+			size, 
 			// Source Context
 			bitmap_hdc, 
-			// Image offset
-			(int) offset.X(), (int) offset.Y(),
-			// Operation
+			offset,
 			SRCAND);
 
 		// link the bitmap to a device context
 		SelectObject(bitmap_hdc, sprite->GetBitmap());
 
 		// OR the image on the mask to apply transparancy
-		BitBlt(
+		BitBlockTransfer(
 			// Dest Context
 			_backBuffer, 
-			// Posotion
-			(int) correctedVector2D.X(), (int) correctedVector2D.Y(),
-			// Size
-			size.GetWidth(), size.GetHeight(), 
+			// Position
+			correctedVector2D,
+			size,
 			// Source Context
 			bitmap_hdc, 
-			// Image offset
-			(int) offset.X(), (int) offset.Y(),
+			offset,
 			// Operation
 			SRCPAINT);
 
 		// release the resource
 		DeleteDC(bitmap_hdc);
 	}
+	void Graphics::SetIsClearingBackbuffer(bool is){
+		_isClearBackbuffer = is;
+	}
+
 }
