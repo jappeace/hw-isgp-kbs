@@ -20,7 +20,7 @@ namespace isgp {
 	void GadgetGravityBoots::OnCollide() {
 		if(_pickedUp)
 			return;
-		_player->isFabulous = true;
+		_player->Set_has_gravity_boots(true);
 		_pickedUp = true;
 		_player->AddBehaviour(_gravityBootsBehaviour);
 	}
@@ -32,7 +32,7 @@ namespace isgp {
 			_pickedUpTime += tpf;
 			if(_pickedUpTime > _activationTime) {
 				_finished = true;
-				_player->isFabulous = false;
+				_player->Set_has_gravity_boots(false);
 				_player->RemoveBehaviour(_gravityBootsBehaviour);
 			}
 		}

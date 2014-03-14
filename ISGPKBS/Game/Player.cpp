@@ -17,7 +17,7 @@ const Size Player::InitSize(32, 32);
 		_size = new Size(Player::InitSize);
 		_behaviours = new vector<IBehaviour*>();
 		_behaviours->push_back(new GravityBehaviour(this));
-		isFabulous = false;
+		_has_gravity_boots = false;
 		_facingRight = true;
 		_animation = new Animation(".\\tiles\\megaman.bmp", (Size) *_size, 4, 200);
 	}
@@ -44,6 +44,14 @@ const Size Player::InitSize(32, 32);
 				_behaviours->erase(_behaviours->begin() + i);
 			}
 		}
+	}
+
+	void Player::Set_has_gravity_boots(bool hasBoots) {
+		this->_has_gravity_boots = hasBoots;
+	}
+
+	bool Player::Get_has_gravity_boots() {
+		return this->_has_gravity_boots;
 	}
 
 	void Player::Update(const double milisec) {
@@ -147,26 +155,30 @@ const Size Player::InitSize(32, 32);
 #endif
 		static int const kSpriteSize = 32;
 
+		// Check the facing of the player
 		int facingOffset = 0;
-		int fabulousOffset = 0;
 		if (!_facingRight) {
 			facingOffset = kSpriteSize;
 		}
-		if(isFabulous) {
-			fabulousOffset = 96;
+
+		// Check the upgrades of the palyer
+		int armorUpgradeOffset = 0; // Offset which maps to the correct texture for the given upgrades
+		if(this->_has_gravity_boots) {
+			armorUpgradeOffset = 96;
 		}
 
+		// Draw
 		if (_velocity->Y() != 0.0) {
 			// In the air
-			Vector2D offset((2 * kSpriteSize) + facingOffset, 2 * kSpriteSize + fabulousOffset);
+			Vector2D offset((2 * kSpriteSize) + facingOffset, 2 * kSpriteSize + armorUpgradeOffset);
 			g->DrawBitmap(".\\tiles\\megaman.bmp", this->_position, offset, Size(kSpriteSize, kSpriteSize));
 		} else if (!_leftKey && !_rightKey) {
 			// Standing still on the ground
-			Vector2D offset(facingOffset, 2 * kSpriteSize + fabulousOffset);
+			Vector2D offset(facingOffset, 2 * kSpriteSize + armorUpgradeOffset);
 			g->DrawBitmap(".\\tiles\\megaman.bmp", this->_position, offset, Size(kSpriteSize, kSpriteSize));
 		} else {
 			// Moving
-			Vector2D offset(0, facingOffset + fabulousOffset);
+			Vector2D offset(0, facingOffset + armorUpgradeOffset);
 			_animation->Render(g, this->_position, offset);
 		}
 #ifdef _DEBUG
