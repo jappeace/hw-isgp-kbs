@@ -36,6 +36,7 @@ namespace isgp {
 	void Graphics::BeginRendering(Sprite* sprite){
 		this->_backBuffer = CreateCompatibleDC(NULL);
 		HGDIOBJ h = ::SelectObject(this->_backBuffer, sprite->GetBitmap());
+		BitBlockTransfer(this->_backBuffer, Vector2D(), sprite->GetSize(), NULL, NULL, WHITENESS);
 	}
 	void Graphics::BeginRendering(HWND hWnd) {
 		_paintStructure = new PAINTSTRUCT();
@@ -110,11 +111,11 @@ namespace isgp {
 			position = _cam->FromTo(position);
 		}
 		RECT r;
-		r.top = (LONG)position.X();
-		r.left = (LONG)position.Y();
+		r.left = (LONG)position.X();
+		r.top = (LONG)position.Y();
 		position += size;
-		r.bottom = (LONG)position.X();
-		r.right = (LONG)position.Y();
+		r.right = (LONG)position.X();
+		r.bottom = (LONG)position.Y();
 		::FillRect(_backBuffer, &r, CreateSolidBrush(color));
 	}
 
@@ -169,8 +170,12 @@ namespace isgp {
 			one = _cam->FromTo(one);
 			two = _cam->FromTo(two);
 		}
-		::MoveToEx(_backBuffer, (int) one.X(), (int) one.Y(), NULL);
-		::LineTo(_backBuffer, (int) two.Y(), (int) two.Y());
+		POINT points[2];
+		points[0].x = (long) one.X();
+		points[0].y = (long) one.Y();
+		points[1].x = (long) two.X();
+		points[1].y = (long) two.Y();
+		::Polyline(_backBuffer, points, 2);
 	}
 	void Graphics::DrawSprite(Sprite* sprite, Vector2D& position, Vector2D& offset, Size& size){
 
