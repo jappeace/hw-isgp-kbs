@@ -1,6 +1,7 @@
 #include "SimpleLevelFactory.h"
 #include "WorldBlock.h"
 #include "GadgetGravityBoots.h"
+#include "GadgetJumpPlatform.h"
 namespace isgp{
 
 	SimpleLevelFactory::SimpleLevelFactory(void)
@@ -63,7 +64,7 @@ namespace isgp{
 		result->_enemy = new Ghost(Vector2D(2000,256), result->_player);
 		result->_enemy2 = new Patrol(Vector2D(200,256), 200, result->_player);
 		result->_enemy2->SetGrid(g);
-		result->_gadget = new GadgetGravityBoots(Vector2D(200,576), result->_player);
+		result->_gadget = new GadgetJumpPlatform(Vector2D(200,592), result->_player);
 		result->_gadget->SetGrid(g);
 		result->_gadget2 = new GadgetGravityBoots(Vector2D(222,576), result->_player);
 		result->_gadget2->SetGrid(g);

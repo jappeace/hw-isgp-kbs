@@ -77,6 +77,9 @@
     <ClCompile Include="GravityBootsBehaviour.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GadgetJumpPlatform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="GameOverMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -193,13 +196,19 @@
     <ClInclude Include="GravityBootsBehaviour.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="GadgetJumpPlatform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="GameOverMenu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IMenu.h">
+    <ClInclude Include="GameState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MenuItem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IMenu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
