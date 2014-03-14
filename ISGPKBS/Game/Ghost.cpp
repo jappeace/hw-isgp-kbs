@@ -15,6 +15,7 @@ namespace isgp {
 		double range = sqrt(pow(_position.X() - _player->_position.X(), 2) + pow(_position.Y() - _player->_position.Y(), 2));
 
 		if (range < 26) {
+			_player->Kill();
 			_velocity->X(-_velocity->X());
 			_velocity->Y(-_velocity->Y());
 		}else if (range < 800) {

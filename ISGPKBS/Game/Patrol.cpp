@@ -28,7 +28,8 @@ namespace isgp {
 		double collisionRange = sqrt(pow(_position.X() - _player->_position.X(), 2) + pow(_position.Y() - _player->_position.Y(), 2));
 
 		if (collisionRange < 26) {
-			//collision!
+			// Collision with player, kill it!
+			_player->Kill();
 		}
 
 		if (range > _range) {
