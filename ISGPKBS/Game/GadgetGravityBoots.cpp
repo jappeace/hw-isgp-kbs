@@ -7,6 +7,10 @@ namespace isgp {
 		this->_position = position;
 		this->_player = player;
 		this->_pickedUp = false;
+		this->_finished = false;
+		this->_pickedUpTime = 0.0;
+		this->_activationTime = 5000;
+		this->_gravityBootsBehaviour = new GravityBootsBehaviour(_player);
 	}
 
 	GadgetGravityBoots::~GadgetGravityBoots(void) {
@@ -17,12 +21,19 @@ namespace isgp {
 		if(_pickedUp)
 			return;
 		_pickedUp = true;
-		_player->AddBehaviour(new GravityBootsBehaviour(_player));
+		_player->AddBehaviour(_gravityBootsBehaviour);
 	}
 
 
 	void GadgetGravityBoots::Update(const double tpf) {
 		Gadget::Update(tpf);
+		if(!_finished && _pickedUp) {
+			_pickedUpTime += tpf;
+			if(_pickedUpTime > _activationTime) {
+				_finished = true;
+				_player->RemoveBehaviour(_gravityBootsBehaviour);
+			}
+		}
 	}
 
 	void GadgetGravityBoots::Paint(Graphics* g) {
