@@ -17,12 +17,6 @@ Window::Window() {
 	this->_currentMenu->AddMenuItem(new MenuItem("Magiiiiiiiiiic", this, NULL));
 	this->_currentMenu->AddMenuItem(new MenuItem("Ecoooookasdfasfxit", this, NULL));
 	this->_restart = false;
-
-	Level* lv;
-	for (int i = 0; i < 100; i++) {
-		lv = factory.CreateLevel();
-		delete lv;
-	}
 }
 
 Window::~Window()
