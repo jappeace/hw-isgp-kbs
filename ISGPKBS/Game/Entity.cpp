@@ -91,7 +91,7 @@ namespace isgp {
 	}
 
 	bool Entity::IsColliding(Collision collisionSide) {
-		return collision & collisionSide != 0;
+		return (collision & collisionSide) != 0;
 	}
 
 	double Entity::CalcStepSize(double vel) {

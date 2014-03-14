@@ -7,10 +7,11 @@ namespace isgp {
 		this->_player = player;
 		this->_animation = new Animation("../tiles/jumpPad.bmp", Size(16, 16), 5, 100);
 		this->_ms_till_next_launch = 0;
+		this->SetSize(new Vector2D(16, 16));
 	}
 
-
 	GadgetJumpPlatform::~GadgetJumpPlatform(void) {
+		delete this->GetSize();
 		delete this->_animation;
 	}
 
