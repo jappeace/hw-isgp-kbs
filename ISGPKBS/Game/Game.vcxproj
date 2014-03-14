@@ -68,8 +68,10 @@
     <ClInclude Include="BackgroundArtist.h" />
     <ClInclude Include="CollisionDetection.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="Gadget.h" />
     <ClInclude Include="GadgetGravityBoots.h" />
     <ClInclude Include="Ghost.h" />
+    <ClInclude Include="GravityBootsBehaviour.h" />
     <ClInclude Include="IBehaviour.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Exceptions.h" />
@@ -104,10 +106,12 @@
     <ClCompile Include="BackgroundArtist.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="Gadget.cpp" />
     <ClCompile Include="GadgetGravityBoots.cpp" />
     <ClCompile Include="Ghost.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Gravitybehaviour.cpp" />
+    <ClCompile Include="GravityBootsBehaviour.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="GridGraphicTranslator.cpp" />
     <ClCompile Include="Level.cpp" />

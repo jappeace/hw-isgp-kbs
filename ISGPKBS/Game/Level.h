@@ -5,7 +5,7 @@
 #include "Player.h"
 #include "Ghost.h"
 #include "Patrol.h"
-
+#include "Gadget.h"
 namespace isgp{
 	// represents a level in the game
 	class Level : public IPaintable, public IGridTraveller {
@@ -20,6 +20,7 @@ namespace isgp{
 		Player* _player;
 		Entity* _enemy;
 		Entity* _enemy2;
+		Gadget* _gadget;
 		Grid* GetGrid() const;
 		static const Size defaultTileAmount;
 	private:

@@ -34,6 +34,10 @@ const Size Player::InitSize(32, 32);
 		delete _animation;
 	}
 
+	void Player::AddBehaviour(IBehaviour* behaviour) {
+		_behaviours->push_back(behaviour);
+	}
+
 	void Player::Update(const double milisec) {
 		double elapsed = milisec / 1000;
 
