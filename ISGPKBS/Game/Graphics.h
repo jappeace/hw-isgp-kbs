@@ -26,7 +26,10 @@ namespace isgp {
 	*/
 	class Graphics {
 	public:
+		// creates graphics to draw on a window
 		Graphics(HWND);
+		// creates graphics to draw on a sprite
+		Graphics(void);
 		~Graphics(void);
 
 		ITranslator* _cam;
@@ -38,6 +41,10 @@ namespace isgp {
 		void BeginRendering(HWND);
 		// Ends the rendering state and draws the backbuffer onto the screen
 		void EndRendering(HWND);
+		// Prepares a sprite for rendering
+		void BeginRendering(Sprite*);
+		// Ends the sprite rendering
+		void EndRendering();
 		// get a bitmap from the cache or load it from a file and put it in the cache and return
 		Sprite* LoadBitmapFile(string path);
 
@@ -47,10 +54,11 @@ namespace isgp {
 		void DrawStr(Vector2D& position, string str);
 		void DrawStr(Vector2D& position, const char* str, int length);
 		
-		void DrawRect(Vector2D& one, Vector2D& two);
+		void DrawRect(Vector2D one, Vector2D two);
 		void DrawRect(int xone, int yone, int xtwo, int ytwo);
 		void DrawStaticRect(Vector2D& one, Vector2D& two);
 
+		void FillRect(Vector2D position, const Size& size, COLORREF color);
 		// Draws a bitmap at the given position with the default tile size
 		void DrawBitmap(string path, Vector2D& position);
 		// Draws a bitmap at the given position with the default tile size
@@ -65,9 +73,6 @@ namespace isgp {
 		// draw a sprite from memory instead of path
 		void DrawSprite(Sprite* sprite, Vector2D& position, Vector2D& offset, Size& size);
 	private:
-		// create a graphics without initilizing the target hdc
-		Graphics(void);
-
 		// commen logic for both constructors
 		void Init(void);
 		//does the final api call for BitBLT
@@ -87,6 +92,6 @@ namespace isgp {
 		// FPScounter.
 		TimesPerSecondCounter _fpsCounter;
 #endif
-		map<string, Sprite*>* _bitmapCache;
+		static map<string, Sprite*>* _bitmapCache;
 	};
 }

@@ -2,11 +2,13 @@
 #include "AbstractWindow.h" // loopfix
 namespace isgp {
 
+	map<string, Sprite*>* Graphics::_bitmapCache = NULL;
 	void Graphics::Init(void){
 		_cam = NULL;
-		_bitmapCache = new map<string, Sprite*>();
+		if(_bitmapCache == NULL){
+			_bitmapCache = new map<string, Sprite*>();
+		}
 	}
-
 	Graphics::Graphics(HWND hWnd) {
 		Init();
 
@@ -29,15 +31,12 @@ namespace isgp {
 		SelectObject(this->_backBuffer, this->_bitmap);
 	}
 	Graphics::~Graphics(void) {
-		if(_bitmapCache) {
-			for (map<string, Sprite*>::iterator it = _bitmapCache->begin(); it != _bitmapCache->end(); ++it) {
-				delete it->second;
-			}
-
-			delete _bitmapCache;
-		}
+		// don't delete the cache, there might be other graphics arround
 	}
-
+	void Graphics::BeginRendering(Sprite* sprite){
+		this->_backBuffer = CreateCompatibleDC(NULL);
+		HGDIOBJ h = ::SelectObject(this->_backBuffer, sprite->GetBitmap());
+	}
 	void Graphics::BeginRendering(HWND hWnd) {
 		_paintStructure = new PAINTSTRUCT();
 		// Begin the drawing state of WIN32
@@ -47,6 +46,9 @@ namespace isgp {
 		BitBlockTransfer(this->_backBuffer, Vector2D(), AbstractWindow::WindowSize, NULL, NULL, WHITENESS);
 	}
 
+	void Graphics::EndRendering(){
+		DeleteDC(this->_backBuffer);
+	}
 	void Graphics::EndRendering(HWND hWnd) {
 #ifdef _DEBUG
 		this->_fpsCounter.Update();
@@ -84,17 +86,16 @@ namespace isgp {
 	}
 
 	void Graphics::SetTextBackgroundColor(COLORREF color) {
-		SetBkColor(_backBuffer, color);
+		::SetBkColor(_backBuffer, color);
 	}
 
-	void Graphics::DrawRect(Vector2D& one, Vector2D& two) {
+	void Graphics::DrawRect(Vector2D one, Vector2D two) {
 		if (_cam != NULL) {
-			Vector2D one1 = _cam->FromTo(one);
-			Vector2D two1 = _cam->FromTo(two);
-			this->DrawRect((int)one1.X(),(int) one1.Y(),(int) two1.X(),(int) two1.Y());
-		} else {
-			this->DrawRect((int)one.X(),(int) one.Y(),(int) two.X(),(int) two.Y());
-		}
+			one = _cam->FromTo(one);
+			two = _cam->FromTo(two);
+		} 
+		this->DrawRect((int)one.X(),(int) one.Y(),(int) two.X(),(int) two.Y());
+		
 	}
 
 	void Graphics::DrawStaticRect(Vector2D& one, Vector2D& two) {
@@ -102,7 +103,19 @@ namespace isgp {
 	}
 
 	void Graphics::DrawRect(int xone, int yone, int xtwo, int ytwo) {
-		Rectangle(_backBuffer, xone, yone, xtwo, ytwo);
+		::Rectangle(_backBuffer, xone, yone, xtwo, ytwo);
+	}
+	void Graphics::FillRect(Vector2D position, const Size& size, COLORREF color){
+		if (_cam != NULL) {
+			position = _cam->FromTo(position);
+		}
+		RECT r;
+		r.top = (LONG)position.X();
+		r.left = (LONG)position.Y();
+		position += size;
+		r.bottom = (LONG)position.X();
+		r.right = (LONG)position.Y();
+		::FillRect(_backBuffer, &r, CreateSolidBrush(color));
 	}
 
 	Sprite* Graphics::LoadBitmapFile(string path) {
@@ -162,7 +175,7 @@ namespace isgp {
 		HDC bitmap_hdc = CreateCompatibleDC(NULL);
 
 		// link the bitmap to a device context
-		SelectObject(bitmap_hdc, sprite->GetMask());
+		::SelectObject(bitmap_hdc, sprite->GetMask());
 
 		// OR the image on the mask to apply transparancy
 		BitBlockTransfer(
@@ -177,7 +190,7 @@ namespace isgp {
 			SRCAND);
 
 		// link the bitmap to a device context
-		SelectObject(bitmap_hdc, sprite->GetBitmap());
+		::SelectObject(bitmap_hdc, sprite->GetBitmap());
 
 		// OR the image on the mask to apply transparancy
 		BitBlockTransfer(

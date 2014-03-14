@@ -13,14 +13,17 @@ namespace isgp {
 
 		HBITMAP GetBitmap();
 		HBITMAP GetMask();
-
+		// calls the size of bitmap
+		Size GetSize();
+		// render an alpha mask, this is a O(bitmap.width * bitmap.height) operation, beware
+		void GenerateMask();
+		COLORREF GetTransparant();
 	private:
 		HBITMAP _image;
 		HBITMAP _mask;
-
-		void RenderMask(BITMAP& from);
-		BITMAP dereferenceBitmap(HBITMAP);
-		void init(HBITMAP);
+		static const int Sprite::kKeyColor;
+		BITMAP DereferenceBitmap(HBITMAP);
+		void Init(HBITMAP);
 	
 	};
 }

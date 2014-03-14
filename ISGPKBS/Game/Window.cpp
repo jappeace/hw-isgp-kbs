@@ -22,7 +22,7 @@ Window::~Window()
 void Window::AfterCreate() {
 	_cam = new Camera(_level->_player);
 	_graphics->SetCam(_cam);
-	_artist = new BackgroundArtist(_graphics, _cam, _level);
+	_artist = new BackgroundArtist(_cam, _level);
 	_artist->RenderBackground();
 }
 

@@ -2,26 +2,29 @@
 
 namespace isgp {
 
+	const int Sprite::kKeyColor = 0xff00ff; // Transparancy key color
 	Sprite::Sprite(const Size& s) {
-		init(
+		HDC forCreation = CreateCompatibleDC(NULL);
+		Init(
 			CreateCompatibleBitmap(
-				CreateCompatibleDC(NULL),
+				forCreation,
 				s.GetWidth(),
 				s.GetHeight()
 			)
 		);
+		DeleteDC(forCreation);
 	}
 
 	Sprite::Sprite(HBITMAP bitmap)
 	{
-		init(bitmap);
+		Init(bitmap);
 	}
-	void Sprite::init(HBITMAP bitmapPointer){
-		this->_image = bitmapPointer;
-		RenderMask(dereferenceBitmap(bitmapPointer));
+	void Sprite::Init(HBITMAP bitmapPointer){
+		_image = bitmapPointer;
+		GenerateMask();
 	}
 
-	BITMAP Sprite::dereferenceBitmap(HBITMAP pointer){
+	BITMAP Sprite::DereferenceBitmap(HBITMAP pointer){
 		BITMAP result;
 		GetObject(pointer, sizeof(BITMAP), &result);
 		return result;
@@ -39,7 +42,8 @@ namespace isgp {
 	HBITMAP Sprite::GetMask() {
 		return _mask;
 	}
-	void Sprite::RenderMask(BITMAP& from){
+	void Sprite::GenerateMask(){
+		BITMAP from = DereferenceBitmap(_image);
 		HDC imgHDC = CreateCompatibleDC(NULL);
 		SelectObject(imgHDC, this->_image);
 
@@ -51,7 +55,6 @@ namespace isgp {
 		SelectObject(tmpHDC, this->_mask);
 
 		// Define some constants which contain the values for transparancy correction.
-		static const int kKeyColor       = 0xff00ff; // Transparancy key color
 		static const int kPreserveColor  = 0xffffff; // A color which honors the backbuffer data instead of the image
 		static const int kOverwriteColor = 0x000000; // A color which honors the image data instead of the backbuffer
 		static const int kBlack          = 0x000000; // The hex value of the color black
@@ -72,5 +75,13 @@ namespace isgp {
 		// Clean up no longer needed resources
 		DeleteDC(imgHDC);
 		DeleteDC(tmpHDC);
+	}
+	Size Sprite::GetSize(){
+		BITMAP b = DereferenceBitmap(this->_image);
+		return Size(b.bmWidth, b.bmHeight);
+	}
+
+	COLORREF Sprite::GetTransparant(){
+		return Sprite::kKeyColor;
 	}
 }
