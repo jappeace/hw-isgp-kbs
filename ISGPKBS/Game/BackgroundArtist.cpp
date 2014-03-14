@@ -26,25 +26,17 @@ namespace isgp{
 		_quil->BeginRendering(_background);
 		_quil->FillRect(Vector2D(), _background->GetSize(), _background->GetTransparant());
 		_level->GetGrid()->TraverseTiles(this);
-		_background->GenerateMask();
 		_quil->EndRendering();
+		_background->GenerateMask();
 	}
 	void BackgroundArtist::Paint(Graphics* g) {
 		g->DrawSprite(_background,_cam->ToFrom(Vector2D()), _cam->GetPosition() - Vector2D(384,384), Size(AbstractWindow::WindowSize));
 	}
 	void BackgroundArtist::ReceiveTile(Tile* tile) {
 #ifdef _DEBUG
-		Vector2D position = *tile->GetPosition();
-		position.X(position.X() * Level::tileSize.GetWidth());
-		position.Y(position.Y() * Level::tileSize.GetHeight());
-
-		_quil->DrawRect(
-			position, 
-			Vector2D(
-				position.X() + Level::tileSize.GetWidth(),
-				position.Y() + Level::tileSize.GetHeight()
-			)
-		);
+		Vector2D position = *tile->GetPosition() * Level::tileSize;
+		_quil->DrawLine(position, position + Vector2D(Level::tileSize.GetWidth(), 0));
+		_quil->DrawLine(position, position + Vector2D(0, Level::tileSize.GetHeight()));
 #endif
 		tile->Paint(_quil);
 	}

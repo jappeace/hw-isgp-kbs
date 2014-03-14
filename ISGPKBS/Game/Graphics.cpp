@@ -47,7 +47,7 @@ namespace isgp {
 	}
 
 	void Graphics::EndRendering(){
-		DeleteDC(this->_backBuffer);
+		::DeleteDC(this->_backBuffer);
 	}
 	void Graphics::EndRendering(HWND hWnd) {
 #ifdef _DEBUG
@@ -163,6 +163,14 @@ namespace isgp {
 			(int) positionSrc.X(), (int) positionSrc.Y(),
 			// Operation
 			actionFlag);
+	}
+	void Graphics::DrawLine(Vector2D one, Vector2D two){
+		if(_cam != NULL){
+			one = _cam->FromTo(one);
+			two = _cam->FromTo(two);
+		}
+		::MoveToEx(_backBuffer, (int) one.X(), (int) one.Y(), NULL);
+		::LineTo(_backBuffer, (int) two.Y(), (int) two.Y());
 	}
 	void Graphics::DrawSprite(Sprite* sprite, Vector2D& position, Vector2D& offset, Size& size){
 
