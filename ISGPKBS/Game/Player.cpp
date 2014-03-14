@@ -85,7 +85,6 @@ const Size Player::InitSize(32, 32);
 		if((collision & Right && _velocity->X() > 0) || (collision & Left && _velocity->X() < 0)) { 
 			_velocity->X(0);
 		}
-		
 
 		if(_upKey && (collision & Down)) {
 			_velocity->Y(-650);
@@ -134,7 +133,6 @@ const Size Player::InitSize(32, 32);
 			g->DrawRect(Vector2D((int)p->X(), (int)p->Y()), Vector2D((int)p->X() + 16, (int)p->Y() + 16));
 		}
 		g->SetColor(RGB(0, 0, 0));
-
 		g->DrawStr(Vector2D(10, 40), collision & Up ? "Up: true" : "Up: false");
 		g->DrawStr(Vector2D(10, 55), collision & Down ? "Down: true" : "Down: false");
 		g->DrawStr(Vector2D(10, 70), collision & Left ? "Left: true" : "Left: false");

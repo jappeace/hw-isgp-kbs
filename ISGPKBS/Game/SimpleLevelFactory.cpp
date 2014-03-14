@@ -13,7 +13,7 @@ namespace isgp{
 	}
 
 	Level* SimpleLevelFactory::CreateLevel(){
-		Level* result = new Level(new Grid(140,50));
+		Level* result = new Level(new Grid(250,40));
 		Grid * g = result->GetGrid();
 		
 		//g->GetTileAt(Vector2D(10, 10))->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
@@ -61,7 +61,7 @@ namespace isgp{
 		result->_player = new Player(Vector2D(500,32));
 		result->_player->SetGrid(g);
 		result->_enemy = new Ghost(Vector2D(2000,256), result->_player);
-		result->_enemy2 = new Patrol(Vector2D(200,576), 200, result->_player);
+		result->_enemy2 = new Patrol(Vector2D(200,256), 200, result->_player);
 		result->_enemy2->SetGrid(g);
 		result->_gadget = new GadgetGravityBoots(Vector2D(200,576), result->_player);
 		result->_gadget->SetGrid(g);
