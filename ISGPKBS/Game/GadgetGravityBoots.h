@@ -14,6 +14,10 @@ namespace isgp {
 		void Update(const double);
 		virtual void OnCollide() override;
 	private:
+		IBehaviour* _gravityBootsBehaviour;
+		int _activationTime;
+		double _pickedUpTime;
 		bool _pickedUp;
+		bool _finished;
 	};
 }

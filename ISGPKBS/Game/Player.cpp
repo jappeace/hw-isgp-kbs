@@ -38,6 +38,14 @@ const Size Player::InitSize(32, 32);
 		_behaviours->push_back(behaviour);
 	}
 
+	void Player::RemoveBehaviour(IBehaviour* behaviour) {
+		for (unsigned int i = 0; i < _behaviours->size(); ++i) {
+			if(_behaviours->at(i) == behaviour) {
+				_behaviours->erase(_behaviours->begin() + i);
+			}
+		}
+	}
+
 	void Player::Update(const double milisec) {
 		double elapsed = milisec / 1000;
 

@@ -18,7 +18,7 @@ namespace isgp {
 		void AddToVelocityY(double y);
 		bool _leftKey, _rightKey, _upKey, _spaceKey;
 		void AddBehaviour(IBehaviour*);
-
+		void RemoveBehaviour(IBehaviour*);
 		static const Size InitSize;
 		
 	private:
