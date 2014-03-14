@@ -21,13 +21,13 @@ Window::~Window()
 
 void Window::ClientResize(HWND hWnd, int nWidth, int nHeight)
 {
-  RECT rcClient, rcWind;
-  POINT ptDiff;
-  GetClientRect(hWnd, &rcClient);
-  GetWindowRect(hWnd, &rcWind);
-  ptDiff.x = (rcWind.right - rcWind.left) - rcClient.right;
-  ptDiff.y = (rcWind.bottom - rcWind.top) - rcClient.bottom;
-  MoveWindow(hWnd,rcWind.left, rcWind.top, nWidth + ptDiff.x, nHeight + ptDiff.y, TRUE);
+	RECT rcClient, rcWind;
+	POINT ptDiff;
+	GetClientRect(hWnd, &rcClient);
+	GetWindowRect(hWnd, &rcWind);
+	ptDiff.x = (rcWind.right - rcWind.left) - rcClient.right;
+	ptDiff.y = (rcWind.bottom - rcWind.top) - rcClient.bottom;
+	MoveWindow(hWnd,rcWind.left, rcWind.top, nWidth + ptDiff.x, nHeight + ptDiff.y, TRUE);
 }
 
 void Window::AfterCreate(HWND hWnd) {
