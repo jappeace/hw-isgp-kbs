@@ -1,5 +1,7 @@
 #include "Window.h"
 #include "SimpleLevelFactory.h"
+#include "GameOverMenu.h"
+#include "MenuItem.h"
 
 namespace isgp {
 
@@ -8,7 +10,7 @@ Window::Window() {
 	ILevelFactory* factory = new SimpleLevelFactory();
 	_level = factory->CreateLevel();
 	delete factory;
-	_gameState = 1;
+	_gameState = Playing;
 }
 
 Window::~Window()
@@ -41,23 +43,29 @@ INT_PTR CALLBACK dialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 	return NULL;
 }
 void Window::OnPaint(Graphics* g){
-	//g->DrawBitmap("./tiles/mountain.bmp", Vector2D((_cam->GetPosition().X() - 384) * 0.5, (_cam->GetPosition().Y() - 384) * 0.5), Size(1920, 791));
-	//g->DrawBitmap("./tiles/ground.bmp", Vector2D((_cam->GetPosition().X() - 384) * 0.25, (_cam->GetPosition().Y() + 2000) * 0.25), Size(1920, 321));
-
-	_level->Paint(g);
+	if (_gameState == Playing) {
+		//g->DrawBitmap("./tiles/mountain.bmp", Vector2D((_cam->GetPosition().X() - 384) * 0.5, (_cam->GetPosition().Y() - 384) * 0.5), Size(1920, 791));
+		//g->DrawBitmap("./tiles/ground.bmp", Vector2D((_cam->GetPosition().X() - 384) * 0.25, (_cam->GetPosition().Y() + 2000) * 0.25), Size(1920, 321));
+		_level->Paint(g);
+	}
+	else if (_gameState == GameOver) {
+	}
 }
 void Window::GameLoop(double elapsed) { //elapsed time, in MS
-	if (_gameState == 1) {
+	if (!_level->_player->IsAlive()) {
+		_gameState = GameOver;
+		_currentMenu = new GameOverMenu();
+		_currentMenu->AddMenuItem(new MenuItem("Retry", this, &Window::RestartGame));
+		_currentMenu->AddMenuItem(new MenuItem("Exit", NULL, NULL));
+	}
+	if (_gameState == Playing) {
 		//update all the game objects now
 		_level->_player->Update(elapsed);
 		_level->_enemy->Update(elapsed);
 		_level->_enemy2->Update(elapsed);
 		_cam->Update(elapsed);
-	} else if (_gameState == 2) {
-		
-	}
+	}AbstractWindow::GameLoop(elapsed);
 
-	AbstractWindow::GameLoop(elapsed);
 }
 
 void Window::OnKeyDown(int which) {
@@ -113,6 +121,10 @@ void Window::OnCommand(int from, int command) {
 
 LRESULT Window::MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 	return AbstractWindow::MsgProc(hWnd, uMsg, wParam, lParam);
+}
+
+void Window::RestartGame() {
+
 }
 
 }
