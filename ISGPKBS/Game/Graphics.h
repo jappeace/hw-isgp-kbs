@@ -52,7 +52,9 @@ namespace isgp {
 		void SetTextBackgroundColor(COLORREF color);
 
 		void DrawStr(Vector2D& position, string str);
+		void DrawStr(Vector2D& position, string str, HFONT font);
 		void DrawStr(Vector2D& position, const char* str, int length);
+		void DrawStr(Vector2D& position, const char* str, int length, HFONT font);
 		
 		void DrawRect(Vector2D one, Vector2D two);
 		void DrawRect(int xone, int yone, int xtwo, int ytwo);
@@ -89,7 +91,6 @@ namespace isgp {
 		HBITMAP _bitmap;
 		PAINTSTRUCT* _paintStructure;
 		HPEN _pen;
-#ifdef _DEBUG
 		// FPScounter.
 		TimesPerSecondCounter _fpsCounter;
 #endif

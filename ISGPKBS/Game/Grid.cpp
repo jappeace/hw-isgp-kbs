@@ -101,6 +101,9 @@ namespace isgp {
 	}
 
 	Grid::~Grid() {
+		for (auto it = _tiles->begin(); it != _tiles->end(); ++it) {
+			delete (*it);
+		}
 		if(_tiles){
 			delete _tiles;
 		}

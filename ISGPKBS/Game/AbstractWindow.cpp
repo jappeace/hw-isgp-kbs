@@ -109,14 +109,14 @@ HRESULT AbstractWindow::Create()
 	{
 	  return FALSE;
 	}
+
 	_graphics = new Graphics(_hWnd);
+	AfterCreate(_hWnd);
 	ShowWindow(_hWnd, _dwCreationFlags);
 	UpdateWindow(_hWnd);
-	_engineThrottle = 5;
+	_engineThrottle = -1;
 	::QueryPerformanceFrequency((LARGE_INTEGER*)&_freq);
 	::QueryPerformanceCounter((LARGE_INTEGER*)&_lastUpdate);
-
-	AfterCreate();
 
 	return TRUE;
 }

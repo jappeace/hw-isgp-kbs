@@ -6,7 +6,8 @@
 #include "ILevelFactory.h"
 #include "WorldBlock.h"
 #include "Camera.h"
-#include "BackgroundArtist.h"
+#include "IMenu.h"
+#include "GameState.h"
 
 namespace isgp {
 	class Window : public AbstractWindow {
@@ -19,11 +20,13 @@ namespace isgp {
 		void OnKeyDown(int which) override;
 		void OnKeyUp(int which) override;
 		void GameLoop(double) override;
-		void AfterCreate() override;
+		void AfterCreate(HWND) override;
 		Camera* _cam;
-		int _gameState;
 	private:
 		Level* _level;
-		BackgroundArtist* _artist;
+		void ClientResize(HWND hWnd, int nWidth, int nHeight);
+		IMenu* _currentMenu;
+		GameState _gameState;
+		void RestartGame();
 	};
 }

@@ -4,7 +4,7 @@
 namespace isgp{
 const Size Player::InitSize(32, 32);
 	Player::Player(Vector2D position) {
-		_maxVel = 500;
+		_maxVel = 350;
 		_accel = 2200;
 		_deAccel = 1100;
 
@@ -17,9 +17,9 @@ const Size Player::InitSize(32, 32);
 		_size = new Size(Player::InitSize);
 		_behaviours = new vector<IBehaviour*>();
 		_behaviours->push_back(new GravityBehaviour(this));
-		
+		_has_gravity_boots = false;
 		_facingRight = true;
-		_animation = new Animation(".\\tiles\\megaman.bmp", (Size) *_size, 4, 200);
+		_animation = new Animation("../tiles/megaman.bmp", (Size) *_size, 4, 200);
 	}
 
 	Player::~Player(void) {
@@ -32,6 +32,26 @@ const Size Player::InitSize(32, 32);
 		delete _size;
 		delete _velocity;
 		delete _animation;
+	}
+
+	void Player::AddBehaviour(IBehaviour* behaviour) {
+		_behaviours->push_back(behaviour);
+	}
+
+	void Player::RemoveBehaviour(IBehaviour* behaviour) {
+		for (unsigned int i = 0; i < _behaviours->size(); ++i) {
+			if(_behaviours->at(i) == behaviour) {
+				_behaviours->erase(_behaviours->begin() + i);
+			}
+		}
+	}
+
+	void Player::Set_has_gravity_boots(bool hasBoots) {
+		this->_has_gravity_boots = hasBoots;
+	}
+
+	bool Player::Get_has_gravity_boots() {
+		return this->_has_gravity_boots;
 	}
 
 	void Player::Update(const double milisec) {
@@ -73,7 +93,6 @@ const Size Player::InitSize(32, 32);
 		if((collision & Right && _velocity->X() > 0) || (collision & Left && _velocity->X() < 0)) { 
 			_velocity->X(0);
 		}
-		
 
 		if(_upKey && (collision & Down)) {
 			_velocity->Y(-650);
@@ -89,6 +108,11 @@ const Size Player::InitSize(32, 32);
 
 		if (_velocity->X() == 0) {
 			_animation->Reset();
+		}
+
+		if (GridGraphicTranslator().FromTo(*_grid->GetSize()).Y() - 100 < _position.Y()){
+			//_velocity->Y(0);
+			//_position.Y(GridGraphicTranslator().FromTo(*_grid->GetSize()).Y() - 101);
 		}
 	}
 	
@@ -117,7 +141,6 @@ const Size Player::InitSize(32, 32);
 			g->DrawRect(Vector2D((int)p->X(), (int)p->Y()), Vector2D((int)p->X() + 16, (int)p->Y() + 16));
 		}
 		g->SetColor(RGB(0, 0, 0));
-
 		g->DrawStr(Vector2D(10, 40), collision & Up ? "Up: true" : "Up: false");
 		g->DrawStr(Vector2D(10, 55), collision & Down ? "Down: true" : "Down: false");
 		g->DrawStr(Vector2D(10, 70), collision & Left ? "Left: true" : "Left: false");
@@ -132,27 +155,47 @@ const Size Player::InitSize(32, 32);
 #endif
 		static int const kSpriteSize = 32;
 
+		// Check the facing of the player
 		int facingOffset = 0;
-
 		if (!_facingRight) {
 			facingOffset = kSpriteSize;
 		}
 
+		// Check the upgrades of the palyer
+		int armorUpgradeOffset = 0; // Offset which maps to the correct texture for the given upgrades
+		if(this->_has_gravity_boots) {
+			armorUpgradeOffset = 96;
+		}
+
+		Vector2D posFix = _position;
+		posFix.Y(posFix.Y() + 3);
+		
+		// Draw
 		if (_velocity->Y() != 0.0) {
 			// In the air
-			Vector2D offset((2 * kSpriteSize) + facingOffset, 2 * kSpriteSize);
-			g->DrawBitmap(".\\tiles\\megaman.bmp", this->_position, offset, Size(kSpriteSize, kSpriteSize));
+			Vector2D offset((2 * kSpriteSize) + facingOffset, 2 * kSpriteSize + armorUpgradeOffset);
+			g->DrawBitmap("../tiles/megaman.bmp", posFix, offset, Size(kSpriteSize, kSpriteSize));
 		} else if (!_leftKey && !_rightKey) {
 			// Standing still on the ground
-			Vector2D offset(facingOffset, 2 * kSpriteSize);
-			g->DrawBitmap(".\\tiles\\megaman.bmp", this->_position, offset, Size(kSpriteSize, kSpriteSize));
+			Vector2D offset(facingOffset, 2 * kSpriteSize + armorUpgradeOffset);
+			g->DrawBitmap("../tiles/megaman.bmp", posFix, offset, Size(kSpriteSize, kSpriteSize));
 		} else {
 			// Moving
-			Vector2D offset(0, facingOffset);
-			_animation->Render(g, this->_position, offset);
+			Vector2D offset(0, facingOffset + armorUpgradeOffset);
+			_animation->Render(g, posFix, offset);
 		}
 #ifdef _DEBUG
 		g->DrawStaticRect(Vector2D(395, 395), Vector2D(405, 405));
 #endif
+	}
+
+	// Check if the player is alive.
+	bool Player::IsAlive() {
+		return _isAlive;
+	}
+
+	// Kill the player by setting it's Alive status to false.
+	void Player::Kill() {
+		_isAlive = false;
 	}
 }
