@@ -12,7 +12,7 @@ namespace isgp {
 		this->_activationTime = 5000;
 		this->_gravityBootsBehaviour = new GravityBootsBehaviour(_player);
 		this->_bounceHeight = 0.75;
-		this->_spawnPos = _position.Y();
+		this->_spawnPos = (int) _position.Y();
 		this->_vel = 0;
 		this->_up = true;
 	}
