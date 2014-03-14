@@ -69,32 +69,36 @@ void Window::GameLoop(double elapsed) { //elapsed time, in MS
 }
 
 void Window::OnKeyDown(int which) {
-	if (which == VK_LEFT) {
+	switch (which) {
+	case VK_LEFT:
 		_level->_player->_leftKey = true;
-	}
-	if (which == VK_RIGHT) {
+		break;
+	case VK_RIGHT:
 		_level->_player->_rightKey = true;
-	}
-	if (which == VK_UP) {
+		break;
+	case VK_UP:
 		_level->_player->_upKey = true;
-	}
-	if (which == VK_SPACE) {
+		break;
+	case VK_SPACE:
 		_level->_player->_spaceKey = true;
+		break;
 	}
 }
 
 void Window::OnKeyUp(int which) {
-	if (which == VK_LEFT) {
+	switch (which) {
+	case VK_LEFT:
 		_level->_player->_leftKey = false;
-	}
-	if (which == VK_RIGHT) {
+		break;
+	case VK_RIGHT:
 		_level->_player->_rightKey = false;
-	}
-	if (which == VK_UP) {
+		break;
+	case VK_UP:
 		_level->_player->_upKey = false;
-	}
-	if (which == VK_SPACE) {
+		break;
+	case VK_SPACE:
 		_level->_player->_spaceKey = false;
+		break;
 	}
 }
 
