@@ -4,7 +4,7 @@
 namespace isgp{
 const Size Player::InitSize(32, 32);
 	Player::Player(Vector2D position) {
-		_maxVel = 500;
+		_maxVel = 350;
 		_accel = 2200;
 		_deAccel = 1100;
 
@@ -89,6 +89,11 @@ const Size Player::InitSize(32, 32);
 
 		if (_velocity->X() == 0) {
 			_animation->Reset();
+		}
+
+		if (GridGraphicTranslator().FromTo(*_grid->GetSize()).Y() - 100 < _position.Y()){
+			//_velocity->Y(0);
+			//_position.Y(GridGraphicTranslator().FromTo(*_grid->GetSize()).Y() - 101);
 		}
 	}
 	

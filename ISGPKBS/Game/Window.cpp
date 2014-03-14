@@ -1,22 +1,14 @@
 #include "Window.h"
 #include "SimpleLevelFactory.h"
-#include "GameOverMenu.h"
-#include "MenuItem.h"
 
 namespace isgp {
 
 // Constructors / Destructors      //
 Window::Window() {
-	SimpleLevelFactory factory;
-	_level = factory.CreateLevel();
-	this->_gameState = Playing;
-	this->_currentMenu = new GameOverMenu();
-	this->_currentMenu->AddMenuItem(new MenuItem("YOU SUCK", this, NULL));
-	this->_currentMenu->AddMenuItem(new MenuItem("Retry", this, NULL));
-	this->_currentMenu->AddMenuItem(new MenuItem("Exit", this, &Window::RestartGame));
-	this->_currentMenu->AddMenuItem(new MenuItem("Magiiiiiiiiiic", this, NULL));
-	this->_currentMenu->AddMenuItem(new MenuItem("Ecoooookasdfasfxit", this, NULL));
-	this->_restart = false;
+	ILevelFactory* factory = new SimpleLevelFactory();
+	_level = factory->CreateLevel();
+	delete factory;
+	_gameState = 1;
 }
 
 Window::~Window()
@@ -24,11 +16,24 @@ Window::~Window()
 }
 
 /////////////////////////////////////
-// Member functions                //
+// Member functions                  //
 /////////////////////////////////////
 
-void Window::AfterCreate() {
-	_cam = new Camera(_level->_player);
+void Window::ClientResize(HWND hWnd, int nWidth, int nHeight)
+{
+  RECT rcClient, rcWind;
+  POINT ptDiff;
+  GetClientRect(hWnd, &rcClient);
+  GetWindowRect(hWnd, &rcWind);
+  ptDiff.x = (rcWind.right - rcWind.left) - rcClient.right;
+  ptDiff.y = (rcWind.bottom - rcWind.top) - rcClient.bottom;
+  MoveWindow(hWnd,rcWind.left, rcWind.top, nWidth + ptDiff.x, nHeight + ptDiff.y, TRUE);
+}
+
+void Window::AfterCreate(HWND hWnd) {
+	ClientResize(hWnd, WindowSize.GetWidth(), WindowSize.GetHeight());
+	
+	_cam = new Camera(_level->_player, _level->GetGrid());
 	_graphics->SetCam(_cam);
 }
 
@@ -36,74 +41,38 @@ INT_PTR CALLBACK dialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 	return NULL;
 }
 void Window::OnPaint(Graphics* g){
-	if (_gameState == Playing) {
-		_level->Paint(g);
-	}
-	else {
-		this->_currentMenu->Paint(g);
-	}
+	g->DrawBitmap("./tiles/mountain.bmp", Vector2D((_cam->GetPosition().X() - 384) * 0.5, (_cam->GetPosition().Y() - 384) * 0.5), Size(1920, 791));
+	g->DrawBitmap("./tiles/ground.bmp", Vector2D((_cam->GetPosition().X() - 384) * 0.25, (_cam->GetPosition().Y() + 2000) * 0.25), Size(1920, 321));
+
+	_level->Paint(g);
 }
 void Window::GameLoop(double elapsed) { //elapsed time, in MS
-	if (_restart) {
-		_restart = false;
-		_gameState = Playing;
-		SimpleLevelFactory factory;
-		delete _level;
-		_level = factory.CreateLevel();
-
-		delete _cam;
-		AfterCreate();
-	}
-	if (_gameState == Playing) {
+	if (_gameState == 1) {
 		//update all the game objects now
 		_level->_player->Update(elapsed);
 		_level->_enemy->Update(elapsed);
 		_level->_enemy2->Update(elapsed);
 		_cam->Update(elapsed);
-		if (!_level->_player->IsAlive()) {
-			_gameState = GameOver;
-		}
-
-	} else if (_gameState == GameOver) {
-		// TODO
+	} else if (_gameState == 2) {
+		
 	}
 
 	AbstractWindow::GameLoop(elapsed);
 }
 
 void Window::OnKeyDown(int which) {
-	switch (which) {
-	case VK_LEFT:
+	if (which == VK_LEFT) {
 		_level->_player->_leftKey = true;
-		break;
-	case VK_RIGHT:
+	}
+	if (which == VK_RIGHT) {
 		_level->_player->_rightKey = true;
-		break;
-	case VK_UP:
+	}
+	if (which == VK_UP) {
 		_level->_player->_upKey = true;
-		_currentMenu->MoveCursorUp();
-		break;
-	case VK_DOWN:
-		_currentMenu->MoveCursorDown();
-		break;
-	case VK_SPACE:
+	}
+	if (which == VK_SPACE) {
 		_level->_player->_spaceKey = true;
-		break;
-	case VK_RETURN:
-		_currentMenu->ExecuteSelection();
 	}
-#ifdef _DEBUG
-	if (which == VK_ESCAPE) {
-		_gameState = GameOver;
-	}
-	if (which == VK_RETURN) {
-		_gameState = Playing;
-	}
-	// 0x51 = q key.
-	if (which == 0x51) {
-		_level->_player->Kill();
-	}
-#endif
 }
 
 void Window::OnKeyUp(int which) {
@@ -144,10 +113,6 @@ void Window::OnCommand(int from, int command) {
 
 LRESULT Window::MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 	return AbstractWindow::MsgProc(hWnd, uMsg, wParam, lParam);
-}
-
-void Window::RestartGame() {
-	this->_restart = true;
 }
 
 }
