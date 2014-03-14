@@ -26,8 +26,12 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 		_graphics = g;
 		_grid->TraverseTiles(this);
 		_player->Paint(g);
-		_enemy->Paint(g);
-		_enemy2->Paint(g);
+		//_enemy->Paint(g);
+		//_enemy2->Paint(g);
+			for(unsigned int i=0 ; i< enemies.size(); i++)
+		{
+			enemies[i]->Paint(g);
+		}
 	}
 	void Level::ReceiveTile(Tile* tile) {
 #ifdef _DEBUG

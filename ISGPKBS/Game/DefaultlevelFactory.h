@@ -4,32 +4,28 @@
 #include<cstdlib>
 #include <iostream>
 #include <fstream>
-
-
+#include <vector>
+#include "WorldBlock.h"
 using namespace std;
 namespace isgp{
 	class DefaultlevelFactory:
 		public ILevelFactory
 	{
 	public:
-		//CFile file;
-
-		
-	
-		void OutputLevel(ifstream &infile );
+		void OutputLevel();
 		void Error();
 		void inputString();
-
-		Level *CreateLevel();
+		Level *CreateLevel() override;
 		void get_size();
-		
-		
-	private :
-		int width;//인풋스트링에하나하나읽어 인풋[0]을 그면 split()함수를받아들여 
+		int width;
 		int height;
-		int start_X,start_Y;
-		string inputString[100];
-	
+		int start_X,start_Y,finish_X,finish_Y;
+		vector<string> v,ghost,patrol,tile;
+		int tile_X,tile_Y,ghost_X,ghost_Y,patrol_X,patrol_Y;
+
+
+	private :
+		Level *level;
 		
 
 	};
