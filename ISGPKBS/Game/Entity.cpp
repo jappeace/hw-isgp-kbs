@@ -1,6 +1,5 @@
 #include "Entity.h"
 #include "GridGraphicTranslator.h"
-#include "CollisionDetection.h"
 
 namespace isgp {
 
@@ -89,6 +88,10 @@ namespace isgp {
 #ifdef _DEBUG
 		Collides(x, y);
 #endif
+	}
+
+	bool Entity::IsColliding(Collision collisionSide) {
+		return collision & collisionSide != 0;
 	}
 
 	double Entity::CalcStepSize(double vel) {

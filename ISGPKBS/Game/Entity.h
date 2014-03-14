@@ -1,9 +1,10 @@
 #pragma once
-#include "IPaintable.h"
-#include "Vector2D.h"
+#include "CollisionDetection.h"
 #include "Graphics.h"
 #include "Grid.h"
+#include "IPaintable.h"
 #include "Size.h"
+#include "Vector2D.h"
 namespace isgp {
 class Entity : public IPaintable
 {
@@ -20,6 +21,8 @@ public:
 	Vector2D* GetVelocity() const;
 	virtual void AddToVelocityY(double);
 	void Move(Vector2D);
+	// Check if the entity is colliding on the given side
+	bool IsColliding(Collision collisionSide);
 
 protected:
 	double CalcStepSize(double vel);

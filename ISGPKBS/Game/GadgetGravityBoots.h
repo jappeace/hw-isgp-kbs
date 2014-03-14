@@ -10,7 +10,7 @@ namespace isgp {
 		GadgetGravityBoots(Vector2D position, Player* player);
 		~GadgetGravityBoots(void);
 
-		void Paint(Graphics* g);
+		void Paint(Graphics* g) override;
 		void Update(const double);
 		virtual void OnCollide() override;
 	private:
