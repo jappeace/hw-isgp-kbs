@@ -39,6 +39,15 @@ void Window::AfterCreate(HWND hWnd) {
 	
 	_cam = new Camera(_level->_player, _level->GetGrid());
 	_graphics->SetCam(_cam);
+	
+	_graphics->LoadBitmapFile("../tiles/mountain.bmp");
+	_graphics->LoadBitmapFile("../tiles/ground.bmp");
+
+	_graphics->LoadBitmapFile("../tiles/megaman.bmp");
+	_graphics->LoadBitmapFile("../tiles/boo.bmp");
+	_graphics->LoadBitmapFile("../tiles/link.bmp");
+	_graphics->LoadBitmapFile("../tiles/boots.bmp");
+	_graphics->LoadBitmapFile("../tiles/smile.bmp");
 }
 
 INT_PTR CALLBACK dialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam){

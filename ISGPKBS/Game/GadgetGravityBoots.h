@@ -19,5 +19,9 @@ namespace isgp {
 		double _pickedUpTime;
 		bool _pickedUp;
 		bool _finished;
+		int _spawnPos;
+		double _bounceHeight;
+		double _vel;
+		bool _up;
 	};
 }
