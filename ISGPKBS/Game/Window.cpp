@@ -1,5 +1,7 @@
 #include "Window.h"
 #include "SimpleLevelFactory.h"
+#include "GameOverMenu.h"
+#include "MenuItem.h"
 
 namespace isgp {
 
@@ -8,8 +10,9 @@ Window::Window() {
 	ILevelFactory* factory = new SimpleLevelFactory();
 	_level = factory->CreateLevel();
 	delete factory;
-	_gameState = 1;
+	_gameState = Playing;
 	_cam = NULL;
+	_currentMenu = NULL;
 }
 
 Window::~Window()
@@ -22,13 +25,13 @@ Window::~Window()
 
 void Window::ClientResize(HWND hWnd, int nWidth, int nHeight)
 {
-  RECT rcClient, rcWind;
-  POINT ptDiff;
-  GetClientRect(hWnd, &rcClient);
-  GetWindowRect(hWnd, &rcWind);
-  ptDiff.x = (rcWind.right - rcWind.left) - rcClient.right;
-  ptDiff.y = (rcWind.bottom - rcWind.top) - rcClient.bottom;
-  MoveWindow(hWnd,rcWind.left, rcWind.top, nWidth + ptDiff.x, nHeight + ptDiff.y, TRUE);
+	RECT rcClient, rcWind;
+	POINT ptDiff;
+	GetClientRect(hWnd, &rcClient);
+	GetWindowRect(hWnd, &rcWind);
+	ptDiff.x = (rcWind.right - rcWind.left) - rcClient.right;
+	ptDiff.y = (rcWind.bottom - rcWind.top) - rcClient.bottom;
+	MoveWindow(hWnd,rcWind.left, rcWind.top, nWidth + ptDiff.x, nHeight + ptDiff.y, TRUE);
 }
 
 void Window::AfterCreate(HWND hWnd) {
@@ -61,48 +64,76 @@ void Window::OnPaint(Graphics* g){
 		//Draw everything else
 		_level->Paint(g);
 	}
+	}
+	else if (_gameState == GameOver) {
+		_currentMenu->Paint(g);
+	}
 }
 void Window::GameLoop(double elapsed) { //elapsed time, in MS
-	if (_gameState == 1) {
+	if (_gameState == Playing && !_level->_player->IsAlive()) {
+		_gameState = GameOver;
+		delete _currentMenu;
+		_currentMenu = new GameOverMenu();
+		_currentMenu->AddMenuItem(new MenuItem("Retry", this, &Window::RestartGame));
+		_currentMenu->AddMenuItem(new MenuItem("Exit", NULL, NULL));
+	}
+	if (_gameState == Playing) {
 		//update all the game objects now
 		_level->_player->Update(elapsed);
 		_level->_enemy->Update(elapsed);
 		_level->_enemy2->Update(elapsed);
 		_cam->Update(elapsed);
-	} else if (_gameState == 2) {
-		
 	}
-
 	AbstractWindow::GameLoop(elapsed);
 }
 
 void Window::OnKeyDown(int which) {
-	if (which == VK_LEFT) {
+	switch (which) {
+	case VK_LEFT:
 		_level->_player->_leftKey = true;
-	}
-	if (which == VK_RIGHT) {
+		break;
+	case VK_RIGHT:
 		_level->_player->_rightKey = true;
-	}
-	if (which == VK_UP) {
+		break;
+	case VK_UP:
+		if (_currentMenu) {
+			_currentMenu->MoveCursorUp();
+		}
 		_level->_player->_upKey = true;
-	}
-	if (which == VK_SPACE) {
+		break;
+	case VK_DOWN:
+		if (_currentMenu) {
+			_currentMenu->MoveCursorDown();
+		}
+		break;
+	case VK_SPACE:
 		_level->_player->_spaceKey = true;
+		break;
+	case VK_RETURN:
+		if (_currentMenu) {
+			_currentMenu->ExecuteSelection();
+		}
+		break;
+	case VK_BACK:
+		_level->_player->Kill();
+		break;
 	}
 }
 
 void Window::OnKeyUp(int which) {
-	if (which == VK_LEFT) {
+	switch (which) {
+	case VK_LEFT:
 		_level->_player->_leftKey = false;
-	}
-	if (which == VK_RIGHT) {
+		break;
+	case VK_RIGHT:
 		_level->_player->_rightKey = false;
-	}
-	if (which == VK_UP) {
+		break;
+	case VK_UP:
 		_level->_player->_upKey = false;
-	}
-	if (which == VK_SPACE) {
+		break;
+	case VK_SPACE:
 		_level->_player->_spaceKey = false;
+		break;
 	}
 }
 
@@ -129,6 +160,15 @@ void Window::OnCommand(int from, int command) {
 
 LRESULT Window::MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 	return AbstractWindow::MsgProc(hWnd, uMsg, wParam, lParam);
+}
+
+void Window::RestartGame() {
+	SimpleLevelFactory factory;
+	_level = factory.CreateLevel();
+	_gameState = Playing;
+	AfterCreate(_hWnd);
+	delete _currentMenu;
+	_currentMenu = NULL;
 }
 
 }

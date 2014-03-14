@@ -54,6 +54,7 @@ namespace isgp {
 
 	void Graphics::EndRendering(HWND hWnd) {
 		this->_fpsCounter.Update();
+		SetTextColor(RGB(0, 0, 0));
 		DrawStr(Vector2D(10, 10), "FPS: " + StrConverter::IntToString(this->_fpsCounter.Get()));
 
 		// Blit the new frame to the screen
@@ -73,8 +74,21 @@ namespace isgp {
 		this->DrawStr(position,str.c_str(), str.length());
 	}
 
+	void Graphics::DrawStr(Vector2D& position, string str, HFONT font) {
+		this->DrawStr(position,str.c_str(), str.length(), font);
+	}
+
 	void Graphics::DrawStr(Vector2D& position, const char* str, int length) {
 		TextOut(_backBuffer, (int) position.X(), (int) position.Y(), str, length);
+	}
+
+	void Graphics::DrawStr(Vector2D& position, const char* str, int length, HFONT font) {
+		HGDIOBJ oldFont = SelectObject(this->_backBuffer, font);
+		RECT rect;
+		SetRect(&rect, (int)position.X(), (int)position.Y(), 200, 200);
+		DrawText(this->_backBuffer, str, length, &rect, DT_NOCLIP);
+		//TextOut(_backBuffer, (int) position.X(), (int) position.Y(), str, length);
+		SelectObject(this->_backBuffer, oldFont);
 	}
 
 	void Graphics::SetColor(COLORREF color) {
