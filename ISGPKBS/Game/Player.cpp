@@ -141,18 +141,21 @@ const Size Player::InitSize(32, 32);
 			facingOffset = kSpriteSize;
 		}
 
+
+		Vector2D posFix = _position;
+		posFix.Y(posFix.Y() + 3);
 		if (_velocity->Y() != 0.0) {
 			// In the air
 			Vector2D offset((2 * kSpriteSize) + facingOffset, 2 * kSpriteSize);
-			g->DrawBitmap("../tiles/megaman.bmp", this->_position, offset, Size(kSpriteSize, kSpriteSize));
+			g->DrawBitmap("../tiles/megaman.bmp", posFix, offset, Size(kSpriteSize, kSpriteSize));
 		} else if (!_leftKey && !_rightKey) {
 			// Standing still on the ground
 			Vector2D offset(facingOffset, 2 * kSpriteSize);
-			g->DrawBitmap("../tiles/megaman.bmp", this->_position, offset, Size(kSpriteSize, kSpriteSize));
+			g->DrawBitmap("../tiles/megaman.bmp", posFix, offset, Size(kSpriteSize, kSpriteSize));
 		} else {
 			// Moving
 			Vector2D offset(0, facingOffset);
-			_animation->Render(g, this->_position, offset);
+			_animation->Render(g, posFix, offset);
 		}
 #ifdef _DEBUG
 		g->DrawStaticRect(Vector2D(395, 395), Vector2D(405, 405));
