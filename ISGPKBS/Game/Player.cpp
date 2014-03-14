@@ -19,7 +19,7 @@ const Size Player::InitSize(32, 32);
 		_behaviours->push_back(new GravityBehaviour(this));
 		
 		_facingRight = true;
-		_animation = new Animation(".\\tiles\\megaman.bmp", (Size) *_size, 4, 200);
+		_animation = new Animation("../tiles/megaman.bmp", (Size) *_size, 4, 200);
 	}
 
 	Player::~Player(void) {
@@ -144,11 +144,11 @@ const Size Player::InitSize(32, 32);
 		if (_velocity->Y() != 0.0) {
 			// In the air
 			Vector2D offset((2 * kSpriteSize) + facingOffset, 2 * kSpriteSize);
-			g->DrawBitmap(".\\tiles\\megaman.bmp", this->_position, offset, Size(kSpriteSize, kSpriteSize));
+			g->DrawBitmap("../tiles/megaman.bmp", this->_position, offset, Size(kSpriteSize, kSpriteSize));
 		} else if (!_leftKey && !_rightKey) {
 			// Standing still on the ground
 			Vector2D offset(facingOffset, 2 * kSpriteSize);
-			g->DrawBitmap(".\\tiles\\megaman.bmp", this->_position, offset, Size(kSpriteSize, kSpriteSize));
+			g->DrawBitmap("../tiles/megaman.bmp", this->_position, offset, Size(kSpriteSize, kSpriteSize));
 		} else {
 			// Moving
 			Vector2D offset(0, facingOffset);

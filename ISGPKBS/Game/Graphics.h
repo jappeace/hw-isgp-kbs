@@ -49,6 +49,7 @@ namespace isgp {
 		void DrawStr(Vector2D& position, const char* str, int length);
 		void DrawStr(Vector2D& position, const char* str, int length, HFONT font);
 		
+		void FillStaticRect(int x1, int y1, int x2, int y2, HBRUSH brush);
 		void DrawRect(Vector2D& one, Vector2D& two);
 		void DrawRect(int xone, int yone, int xtwo, int ytwo);
 		void DrawStaticRect(Vector2D& one, Vector2D& two);

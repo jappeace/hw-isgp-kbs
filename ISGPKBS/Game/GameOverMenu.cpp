@@ -4,6 +4,9 @@
 namespace isgp {
 	GameOverMenu::GameOverMenu() {
 		this->_selectedMenuItem = 0;
+		this->_font = CreateFont(48,0,0,0,FW_DONTCARE,FALSE,TRUE,FALSE,DEFAULT_CHARSET,OUT_OUTLINE_PRECIS,
+			CLIP_DEFAULT_PRECIS,CLEARTYPE_QUALITY, VARIABLE_PITCH,TEXT("Arial"));
+		this->_brush = CreateSolidBrush(RGB(0, 0, 0));
 	}
 
 	GameOverMenu::~GameOverMenu() {
@@ -11,6 +14,8 @@ namespace isgp {
 		for (auto it = _menuItems.begin(); it != _menuItems.end(); ++it) {
 			delete (*it);
 		}
+		DeleteObject(this->_font);
+		DeleteObject(this->_brush);
 	}
 
 	// Add menu item to the menu.
@@ -42,7 +47,11 @@ namespace isgp {
 
 	// Paints the menu on the screen.
 	void GameOverMenu::Paint(Graphics* g) {
-		Vector2D location(300, 100);
+		g->FillStaticRect(100, 100, 300, 300, this->_brush);
+		g->SetTextColor(RGB(255, 0, 0));
+		g->DrawStr(Vector2D(200, 100), "You are dead!", _font);
+
+		Vector2D location(300, 200);
 		for (auto item = _menuItems.begin(); item != _menuItems.end(); ++item) {
 			if (std::distance(_menuItems.begin(), item) == this->_selectedMenuItem) {
 				g->SetTextColor(RGB(0, 200, 150));
@@ -50,8 +59,8 @@ namespace isgp {
 			else {
 				g->SetTextColor(RGB(0, 0, 0));
 			}
-			g->DrawStr(location, (*item)->GetText());
-			location.Y(location.Y() + 20);
+			g->DrawStr(location, (*item)->GetText(), _font);
+			location.Y(location.Y() + 50);
 		}
 	}
 }

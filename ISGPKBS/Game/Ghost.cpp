@@ -57,9 +57,9 @@ namespace isgp {
 
 	void Ghost::Paint(Graphics* g) {
 		if (_facingRight) {
-			g->DrawBitmap(".\\tiles\\boo.bmp", this->_position, Size(32, 32));
+			g->DrawBitmap("../tiles/boo.bmp", this->_position, Size(32, 32));
 		}else{
-			g->DrawBitmap(".\\tiles\\boo.bmp", this->_position, Vector2D(32, 0), Size(32, 32));
+			g->DrawBitmap("../tiles/boo.bmp", this->_position, Vector2D(32, 0), Size(32, 32));
 		}
 	}
 }
