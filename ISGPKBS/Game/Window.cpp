@@ -10,7 +10,7 @@ Window::Window() {
 	ILevelFactory* factory = new SimpleLevelFactory();
 	_level = factory->CreateLevel();
 	delete factory;
-	_gameState = Playing;
+	_gameState = NULL;
 	_cam = NULL;
 	_currentMenu = NULL;
 }

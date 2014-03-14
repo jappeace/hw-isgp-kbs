@@ -69,7 +69,8 @@
     <ClInclude Include="CollisionDetection.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="GameOverMenu.h" />
-    <ClInclude Include="GameState.h" />
+    <ClInclude Include="GameOverState.h" />
+    <ClInclude Include="IGameState.h" />
     <ClInclude Include="Ghost.h" />
     <ClInclude Include="IBehaviour.h" />
     <ClInclude Include="Camera.h" />
