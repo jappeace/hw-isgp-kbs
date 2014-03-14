@@ -24,9 +24,12 @@ namespace isgp {
 	void GadgetGravityBoots::OnCollide() {
 		if(_pickedUp)
 			return;
-		_player->Set_has_gravity_boots(true);
-		_pickedUp = true;
-		_player->AddBehaviour(_gravityBootsBehaviour);
+		
+		if (!_player->Get_has_gravity_boots()) {
+			_player->Set_has_gravity_boots(true);
+			_pickedUp = true;
+			_player->AddBehaviour(_gravityBootsBehaviour);
+		}
 	}
 
 

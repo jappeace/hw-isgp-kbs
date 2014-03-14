@@ -93,6 +93,7 @@ void Window::GameLoop(double elapsed) { //elapsed time, in MS
 		_level->_enemy->Update(elapsed);
 		_level->_enemy2->Update(elapsed);
 		_level->_gadget->Update(elapsed);
+		_level->_gadget2->Update(elapsed);
 		_cam->Update(elapsed);
 	}
 	AbstractWindow::GameLoop(elapsed);

@@ -65,6 +65,8 @@ namespace isgp{
 		result->_enemy2->SetGrid(g);
 		result->_gadget = new GadgetGravityBoots(Vector2D(200,576), result->_player);
 		result->_gadget->SetGrid(g);
+		result->_gadget2 = new GadgetGravityBoots(Vector2D(222,576), result->_player);
+		result->_gadget2->SetGrid(g);
 		//g->TraverseRow(1, this);
 		//g->TraverseRow(2, this);
 		return result;

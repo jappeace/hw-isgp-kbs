@@ -21,6 +21,7 @@ namespace isgp{
 		Entity* _enemy;
 		Entity* _enemy2;
 		Gadget* _gadget;
+		Gadget* _gadget2;
 		Grid* GetGrid() const;
 		static const Size defaultTileAmount;
 	private:

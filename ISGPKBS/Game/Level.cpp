@@ -29,6 +29,7 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 		_enemy->Paint(g);
 		_enemy2->Paint(g);
 		_gadget->Paint(g);
+		_gadget2->Paint(g);
 	}
 	void Level::ReceiveTile(Tile* tile) {
 #ifdef _DEBUG
