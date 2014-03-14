@@ -11,6 +11,7 @@ Window::Window() {
 	_level = factory->CreateLevel();
 	delete factory;
 	_gameState = Playing;
+	_currentMenu = NULL;
 }
 
 Window::~Window()
@@ -49,11 +50,13 @@ void Window::OnPaint(Graphics* g){
 		_level->Paint(g);
 	}
 	else if (_gameState == GameOver) {
+		_currentMenu->Paint(g);
 	}
 }
 void Window::GameLoop(double elapsed) { //elapsed time, in MS
-	if (!_level->_player->IsAlive()) {
+	if (_gameState == Playing && !_level->_player->IsAlive()) {
 		_gameState = GameOver;
+		delete _currentMenu;
 		_currentMenu = new GameOverMenu();
 		_currentMenu->AddMenuItem(new MenuItem("Retry", this, &Window::RestartGame));
 		_currentMenu->AddMenuItem(new MenuItem("Exit", NULL, NULL));
@@ -64,8 +67,8 @@ void Window::GameLoop(double elapsed) { //elapsed time, in MS
 		_level->_enemy->Update(elapsed);
 		_level->_enemy2->Update(elapsed);
 		_cam->Update(elapsed);
-	}AbstractWindow::GameLoop(elapsed);
-
+	}
+	AbstractWindow::GameLoop(elapsed);
 }
 
 void Window::OnKeyDown(int which) {
@@ -77,10 +80,26 @@ void Window::OnKeyDown(int which) {
 		_level->_player->_rightKey = true;
 		break;
 	case VK_UP:
+		if (_currentMenu) {
+			_currentMenu->MoveCursorUp();
+		}
 		_level->_player->_upKey = true;
+		break;
+	case VK_DOWN:
+		if (_currentMenu) {
+			_currentMenu->MoveCursorDown();
+		}
 		break;
 	case VK_SPACE:
 		_level->_player->_spaceKey = true;
+		break;
+	case VK_RETURN:
+		if (_currentMenu) {
+			_currentMenu->ExecuteSelection();
+		}
+		break;
+	case VK_BACK:
+		_level->_player->Kill();
 		break;
 	}
 }
@@ -128,7 +147,12 @@ LRESULT Window::MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 }
 
 void Window::RestartGame() {
-
+	SimpleLevelFactory factory;
+	_level = factory.CreateLevel();
+	_gameState = Playing;
+	AfterCreate(_hWnd);
+	delete _currentMenu;
+	_currentMenu = NULL;
 }
 
 }
