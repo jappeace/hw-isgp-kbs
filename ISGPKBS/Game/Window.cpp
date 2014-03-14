@@ -46,10 +46,6 @@ void Window::OnPaint(Graphics* g){
 		double width1 = (GridGraphicTranslator().FromTo(*_level->GetGrid()->GetSize()).X() * 0.5) + AbstractWindow::WindowSize.GetWidth();
 		double width2 = (GridGraphicTranslator().FromTo(*_level->GetGrid()->GetSize()).X() * 0.75) + AbstractWindow::WindowSize.GetWidth();
 
-		char buffer[100];
-		_snprintf_s(buffer, sizeof(buffer), "width = %f\n", width2);
-		OutputDebugString(buffer);
-
 		Vector2D fix = ((AbstractWindow::WindowSize - Player::InitSize) * Vector2D(1.0,1.35)) / Vector2D(2);
 
 		//Draw sky
