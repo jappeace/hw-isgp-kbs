@@ -20,7 +20,7 @@ namespace isgp {
 		void AddBehaviour(IBehaviour*);
 		void RemoveBehaviour(IBehaviour*);
 		static const Size InitSize;
-		
+		bool isFabulous;
 	private:
 		vector<IBehaviour*>* _behaviours;
 		double _maxVel;

@@ -17,7 +17,7 @@ const Size Player::InitSize(32, 32);
 		_size = new Size(Player::InitSize);
 		_behaviours = new vector<IBehaviour*>();
 		_behaviours->push_back(new GravityBehaviour(this));
-		
+		isFabulous = false;
 		_facingRight = true;
 		_animation = new Animation(".\\tiles\\megaman.bmp", (Size) *_size, 4, 200);
 	}
@@ -148,22 +148,25 @@ const Size Player::InitSize(32, 32);
 		static int const kSpriteSize = 32;
 
 		int facingOffset = 0;
-
+		int fabulousOffset = 0;
 		if (!_facingRight) {
 			facingOffset = kSpriteSize;
+		}
+		if(isFabulous) {
+			fabulousOffset = 96;
 		}
 
 		if (_velocity->Y() != 0.0) {
 			// In the air
-			Vector2D offset((2 * kSpriteSize) + facingOffset, 2 * kSpriteSize);
+			Vector2D offset((2 * kSpriteSize) + facingOffset, 2 * kSpriteSize + fabulousOffset);
 			g->DrawBitmap(".\\tiles\\megaman.bmp", this->_position, offset, Size(kSpriteSize, kSpriteSize));
 		} else if (!_leftKey && !_rightKey) {
 			// Standing still on the ground
-			Vector2D offset(facingOffset, 2 * kSpriteSize);
+			Vector2D offset(facingOffset, 2 * kSpriteSize + fabulousOffset);
 			g->DrawBitmap(".\\tiles\\megaman.bmp", this->_position, offset, Size(kSpriteSize, kSpriteSize));
 		} else {
 			// Moving
-			Vector2D offset(0, facingOffset);
+			Vector2D offset(0, facingOffset + fabulousOffset);
 			_animation->Render(g, this->_position, offset);
 		}
 #ifdef _DEBUG
