@@ -36,9 +36,9 @@ void Window::ClientResize(HWND hWnd, int nWidth, int nHeight)
 
 void Window::AfterCreate(HWND hWnd) {
 	ClientResize(hWnd, WindowSize.GetWidth(), WindowSize.GetHeight());
-	
+
 	_cam = new Camera(_level->_player, _level->GetGrid());
-	_graphics->SetCam(_cam);
+	//_graphics->SetCam(_cam);
 }
 
 INT_PTR CALLBACK dialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
