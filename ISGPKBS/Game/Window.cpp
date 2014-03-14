@@ -9,6 +9,7 @@ Window::Window() {
 	_level = factory->CreateLevel();
 	delete factory;
 	_gameState = 1;
+	_cam = NULL;
 }
 
 Window::~Window()
@@ -41,10 +42,27 @@ INT_PTR CALLBACK dialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 	return NULL;
 }
 void Window::OnPaint(Graphics* g){
-	g->DrawBitmap("./tiles/mountain.bmp", Vector2D((_cam->GetPosition().X() - 384) * 0.5, (_cam->GetPosition().Y() - 384) * 0.5), Size(1920, 791));
-	g->DrawBitmap("./tiles/ground.bmp", Vector2D((_cam->GetPosition().X() - 384) * 0.25, (_cam->GetPosition().Y() + 2000) * 0.25), Size(1920, 321));
+	if (_cam != NULL) {
+		double width1 = (GridGraphicTranslator().FromTo(*_level->GetGrid()->GetSize()).X() * 0.5) + AbstractWindow::WindowSize.GetWidth();
+		double width2 = (GridGraphicTranslator().FromTo(*_level->GetGrid()->GetSize()).X() * 0.75) + AbstractWindow::WindowSize.GetWidth();
 
-	_level->Paint(g);
+		char buffer[100];
+		_snprintf_s(buffer, sizeof(buffer), "width = %f\n", width2);
+		OutputDebugString(buffer);
+
+		//Draw sky
+		for (int i = 0; i < width1; i += 1920) {
+			g->DrawBitmap("../tiles/mountain.bmp", Vector2D(((_cam->GetPosition().X() - 384) * 0.5) + i, (_cam->GetPosition().Y() - 384) * 0.5), Size(1920, 791));
+		}
+	
+		//Draw ground
+		for (int i = 0; i < width2; i += 1920) {
+			g->DrawBitmap("../tiles/ground.bmp", Vector2D(((_cam->GetPosition().X() - 384) * 0.25) + i, (_cam->GetPosition().Y() + 2000) * 0.25), Size(1920, 321));
+		}
+
+		//Draw everything else
+		_level->Paint(g);
+	}
 }
 void Window::GameLoop(double elapsed) { //elapsed time, in MS
 	if (_gameState == 1) {
