@@ -48,10 +48,8 @@ namespace isgp {
 		SelectObject(imgHDC, this->_image);
 
 		// Create variables to create the mask
-		BITMAP mask;
 		HDC tmpHDC = CreateCompatibleDC(NULL);
 		this->_mask = CreateCompatibleBitmap(tmpHDC, from.bmWidth, from.bmHeight);
-		GetObject(this->_mask, sizeof(BITMAP), &mask);
 		SelectObject(tmpHDC, this->_mask);
 
 		// Define some constants which contain the values for transparancy correction.
