@@ -20,7 +20,6 @@ const Size Player::InitSize(32, 32);
 		
 		_facingRight = true;
 		_animation = new Animation(".\\tiles\\megaman.bmp", (Size) *_size, 4, 200);
-		bool _isAlive;
 	}
 
 	Player::~Player(void) {
