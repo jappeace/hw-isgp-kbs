@@ -45,8 +45,8 @@ INT_PTR CALLBACK dialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 }
 void Window::OnPaint(Graphics* g){
 	if (_gameState == Playing) {
-		//g->DrawBitmap("./tiles/mountain.bmp", Vector2D((_cam->GetPosition().X() - 384) * 0.5, (_cam->GetPosition().Y() - 384) * 0.5), Size(1920, 791));
-		//g->DrawBitmap("./tiles/ground.bmp", Vector2D((_cam->GetPosition().X() - 384) * 0.25, (_cam->GetPosition().Y() + 2000) * 0.25), Size(1920, 321));
+		g->DrawBitmap("./tiles/mountain.bmp", Vector2D((_cam->GetPosition().X() - 384) * 0.5, (_cam->GetPosition().Y() - 384) * 0.5), Size(1920, 791));
+		g->DrawBitmap("./tiles/ground.bmp", Vector2D((_cam->GetPosition().X() - 384) * 0.25, (_cam->GetPosition().Y() + 2000) * 0.25), Size(1920, 321));
 		_level->Paint(g);
 	}
 	else if (_gameState == GameOver) {
@@ -59,7 +59,7 @@ void Window::GameLoop(double elapsed) { //elapsed time, in MS
 		delete _currentMenu;
 		_currentMenu = new GameOverMenu();
 		_currentMenu->AddMenuItem(new MenuItem("Retry", this, &Window::RestartGame));
-		_currentMenu->AddMenuItem(new MenuItem("Exit", NULL, NULL));
+		_currentMenu->AddMenuItem(new MenuItem("Exit", this, &Window::QuitGame));
 	}
 	if (_gameState == Playing) {
 		//update all the game objects now
@@ -153,6 +153,10 @@ void Window::RestartGame() {
 	AfterCreate(_hWnd);
 	delete _currentMenu;
 	_currentMenu = NULL;
+}
+
+void Window::QuitGame() {
+	PostQuitMessage(0);
 }
 
 }

@@ -28,5 +28,6 @@ namespace isgp {
 		IMenu* _currentMenu;
 		GameState _gameState;
 		void RestartGame();
+		void QuitGame();
 	};
 }
