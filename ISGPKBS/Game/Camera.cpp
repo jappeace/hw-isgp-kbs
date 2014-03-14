@@ -35,15 +35,11 @@ namespace isgp{
 		Vector2D fix2 = GridGraphicTranslator().FromTo(*_grid->GetSize()) - AbstractWindow::WindowSize;
 		fix2 += fix;
 		
-		
-
 		if (_position.Y() > fix2.Y()) { _position.Y(fix2.Y()); }
 		if (_position.X() > fix2.X()) { _position.X(fix2.X()); }
 		
 		if (_position.Y() < fix.Y()) { _position.Y(fix.Y()); }
 		if (_position.X() < fix.X()) { _position.X(fix.X()); }
-
-		//fix -= Vector2D(100, 100);
 	}
 
 	// From static to dynamic
