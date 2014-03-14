@@ -30,9 +30,7 @@ namespace isgp{
 		_quil->EndRendering();
 	}
 	void BackgroundArtist::Paint(Graphics* g) {
-		g->SetCam(NULL);
-		g->DrawSprite(_background, Vector2D(), _cam->GetPosition(), Size(AbstractWindow::WindowSize));
-		g->SetCam(_cam);
+		g->DrawSprite(_background,Vector2D(), Vector2D(), Size(AbstractWindow::WindowSize));
 	}
 	void BackgroundArtist::ReceiveTile(Tile* tile) {
 #ifdef _DEBUG

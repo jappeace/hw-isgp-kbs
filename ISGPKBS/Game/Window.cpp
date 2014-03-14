@@ -30,8 +30,8 @@ INT_PTR CALLBACK dialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 	return NULL;
 }
 void Window::OnPaint(Graphics* g){
-	_level->Paint(g);
 	_artist->Paint(g);
+	_level->Paint(g);
 }
 void Window::GameLoop(double elapsed) { //elapsed time, in MS
 	if (_gameState == 1) {

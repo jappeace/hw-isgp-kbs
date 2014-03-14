@@ -33,15 +33,15 @@ namespace isgp{
 
 	// From static to dynamic
 	Vector2D Camera::ToFrom(Vector2D p) {
-		p -= _position;
-		p += ((AbstractWindow::WindowSize - Player::InitSize) * Vector2D(1.0,1.35)) / Vector2D(2);
-
-		return p;
+		return ToFrom(p);
 	}
 
 	// From static to dynamic
 	Vector2D Camera::FromTo(Vector2D p) {
-		return ToFrom(p);
+		p -= _position;
+		p += ((AbstractWindow::WindowSize - Player::InitSize) * Vector2D(1.0,1.35)) / Vector2D(2);
+
+		return p;
 	}
 	Vector2D Camera::GetPosition(){
 		return _position;
