@@ -39,6 +39,13 @@ namespace isgp {
 				_player->Set_has_gravity_boots(false);
 				_player->RemoveBehaviour(_gravityBootsBehaviour);
 			}
+		} else if (_finished && _pickedUp) {
+			_pickedUpTime += tpf;
+			if(_pickedUpTime > _activationTime * 2) {
+				_finished = false;
+				_pickedUp = false;
+				_pickedUpTime = 0;
+			}
 		} else if (!_pickedUp) {
 			if (_position.Y() > _spawnPos + _bounceHeight) {
 				_up = true;
