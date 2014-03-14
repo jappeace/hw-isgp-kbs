@@ -1,10 +1,11 @@
 #include "Camera.h"
 
 namespace isgp{
-	Camera::Camera(Player* player) {
+	Camera::Camera(Player* player, Grid* grid) {
 		_player = player;
 		_position = player->_position;
 		_camFix = 0;
+		_grid = grid;
 	}
 
 
@@ -30,8 +31,19 @@ namespace isgp{
 			) * (4 * elapsed)
 		);
 
-		if (_position.Y() < 384) { _position.Y(384); }
-		if (_position.X() < 384) { _position.X(384); }
+		Vector2D fix = ((AbstractWindow::WindowSize - Player::InitSize) * Vector2D(1.0,1.35)) / Vector2D(2);
+		Vector2D fix2 = GridGraphicTranslator().FromTo(*_grid->GetSize()) - AbstractWindow::WindowSize;
+		fix2 += fix;
+		
+		
+
+		if (_position.Y() > fix2.Y()) { _position.Y(fix2.Y()); }
+		if (_position.X() > fix2.X()) { _position.X(fix2.X()); }
+		
+		if (_position.Y() < fix.Y()) { _position.Y(fix.Y()); }
+		if (_position.X() < fix.X()) { _position.X(fix.X()); }
+
+		//fix -= Vector2D(100, 100);
 	}
 
 	// From static to dynamic

@@ -90,6 +90,11 @@ const Size Player::InitSize(32, 32);
 		if (_velocity->X() == 0) {
 			_animation->Reset();
 		}
+
+		if (GridGraphicTranslator().FromTo(*_grid->GetSize()).Y() - 100 < _position.Y()){
+			//_velocity->Y(0);
+			//_position.Y(GridGraphicTranslator().FromTo(*_grid->GetSize()).Y() - 101);
+		}
 	}
 	
 	void Player::AddToVelocityY(double y) {

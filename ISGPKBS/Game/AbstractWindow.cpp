@@ -116,7 +116,7 @@ HRESULT AbstractWindow::Create()
 	::QueryPerformanceFrequency((LARGE_INTEGER*)&_freq);
 	::QueryPerformanceCounter((LARGE_INTEGER*)&_lastUpdate);
 
-	AfterCreate();
+	AfterCreate(_hWnd);
 
 	return TRUE;
 }

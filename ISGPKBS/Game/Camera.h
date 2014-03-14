@@ -7,7 +7,7 @@
 namespace isgp{
 	class Camera : public ITranslator {
 	public:
-		Camera(Player*);
+		Camera(Player*, Grid*);
 		~Camera(void);
 		void Update(double);
 		Vector2D FromTo(Vector2D) override;
@@ -18,5 +18,6 @@ namespace isgp{
 		Vector2D _position;
 		int _direction;
 		double _camFix;
+		Grid* _grid;
 	};
 }

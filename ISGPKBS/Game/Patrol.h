@@ -22,5 +22,6 @@ namespace isgp {
 		bool _facingRight;
 		vector<IBehaviour*>* _behaviours;
 		void AddToVelocityY(double) override;
+		Vector2D _oldPosition;
 	};
 }
