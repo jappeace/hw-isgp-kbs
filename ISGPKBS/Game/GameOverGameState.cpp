@@ -3,7 +3,6 @@
 #include "IMenu.h"
 #include "IGameState.h"
 #include "Window.h"
-#include <functional>
 
 namespace isgp {
 
