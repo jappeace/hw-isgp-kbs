@@ -122,13 +122,17 @@ namespace isgp {
 		if (_cam != NULL) {
 			position = _cam->FromTo(position);
 		}
+		// pass into the static method
+		Graphics::FillRect(_backBuffer, position, size, color);
+	}
+	void Graphics::FillRect(HDC hdc, Vector2D position, const Size& size, COLORREF color){
 		RECT r;
 		r.left = (LONG)position.X();
 		r.top = (LONG)position.Y();
 		position += size;
 		r.right = (LONG)position.X();
 		r.bottom = (LONG)position.Y();
-		::FillRect(_backBuffer, &r, CreateSolidBrush(color));
+		::FillRect(hdc, &r, CreateSolidBrush(color));
 	}
 
 	Sprite* Graphics::LoadBitmapFile(string path) {

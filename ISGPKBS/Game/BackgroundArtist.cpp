@@ -24,7 +24,6 @@ namespace isgp{
 	}
 	void BackgroundArtist::RenderBackground(void){
 		_quil->BeginRendering(_background);
-		_quil->FillRect(Vector2D(), _background->GetSize(), 0xffffff);
 		_level->GetGrid()->TraverseTiles(this);
 		_quil->EndRendering();
 		_background->GenerateMask();
