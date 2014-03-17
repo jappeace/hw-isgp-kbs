@@ -8,12 +8,21 @@ const Size Level::defaultTileAmount = Size(500,30);
 // tile size, should equal the width and height of spritesheet tiles
 const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 	Level::Level(){
+		start = NULL;
+		finish = NULL;
+		_player = NULL;
 		_grid = new Grid(defaultTileAmount.GetWidth(), defaultTileAmount.GetHeight());
 	}
 	Level::Level(int width, int height) {
+		start = NULL;
+		finish = NULL;
+		_player = NULL;
 		_grid = new Grid(width, height);
 	}
 	Level::Level(Grid* grid) {
+		start = NULL;
+		finish = NULL;
+		_player = NULL;
 		_grid = grid;
 	}
 

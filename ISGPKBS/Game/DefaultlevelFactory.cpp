@@ -160,8 +160,6 @@ namespace isgp{
 		}
 	//tile, ghost, patrol 있음. 캄 vector 에 ghost가 몇번째에나오는지 확인하고. 그전까지 나온 거를 다 좌표로저장하기 위에처럼
 		//마찬가지로 patrol 나오기전까지 ghost 나온거를 다 좌표로 저장해서 무슨 2d 거기로넘겨야됨.
-	
-
 
 }
 
