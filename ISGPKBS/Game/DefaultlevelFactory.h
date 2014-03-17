@@ -6,6 +6,8 @@
 #include <fstream>
 #include <vector>
 #include "WorldBlock.h"
+#include "GadgetGravityBoots.h"
+#include "GadgetJumpPlatform.h"
 using namespace std;
 namespace isgp{
 	class DefaultlevelFactory:
