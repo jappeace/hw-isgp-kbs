@@ -165,12 +165,20 @@ namespace LevelEditor.Forms
 				else if (pair.Value.Type == GridObjectType.Ghost)
 				{
 					tileBrush = new SolidBrush(Color.Gray);
+				} 
+                else if (pair.Value.Type == GridObjectType.GravityBoots)
+				{
+                    tileBrush = new SolidBrush(Color.Gold);
 				}
+                else if (pair.Value.Type == GridObjectType.JumpPlatform)
+                {
+                    tileBrush = new SolidBrush(Color.HotPink);
+                }
 				else
 				{
-					tileBrush = new SolidBrush(Color.Brown);
+				    tileBrush = new SolidBrush(Color.Brown);
 				}
-				g.FillRectangle(tileBrush, pair.Key.X * GridSize + GridLineWidth,
+			    g.FillRectangle(tileBrush, pair.Key.X * GridSize + GridLineWidth,
 					pair.Key.Y * GridSize + GridLineWidth,
 					GridSize - GridLineWidth, GridSize - GridLineWidth);
 			}

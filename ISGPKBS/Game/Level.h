@@ -14,10 +14,14 @@ namespace isgp{
 		Level(Grid* grid);
 		Level(int width, int height);
 		~Level(void);
+		Vector2D *start;
+		Vector2D *finish;
 		void ReceiveTile(Tile* tile) override;
 		void Paint(Graphics* g) override;
 		static const Size tileSize;
 		Player* _player;
+		vector<Entity*> enemies;
+		vector<Gadget*> gadgets;
 		Entity* _enemy;
 		Entity* _enemy2;
 		Gadget* _gadget;
