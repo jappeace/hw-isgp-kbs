@@ -7,13 +7,11 @@
 
 namespace isgp {
 
-
 	// Gamestate for when the player is dead.
 	// Includes a menu that allows the player to restart the game.
 	class GameOverGameState : public IGameState {
 	public:
-		GameOverGameState(function<void(const Window&)> restart,
-			function<void(const Window&)> exit);
+		GameOverGameState(void (Window::*restart)(), void (Window::*exit)());
 		~GameOverGameState();
 	private:
 		void Paint(Graphics* g) override;
