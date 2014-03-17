@@ -1,5 +1,4 @@
 #include "Window.h"
-#include "SimpleLevelFactory.h"
 #include "GameOverMenu.h"
 #include "DefaultlevelFactory.h"
 #include "MenuItem.h"
@@ -100,8 +99,6 @@ LRESULT Window::MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 }
 
 void Window::RestartGame() {
-	SimpleLevelFactory factory;
-	_level = factory.CreateLevel();
 	_gameState = NULL;
 	AfterCreate(_hWnd);
 	delete _currentMenu;

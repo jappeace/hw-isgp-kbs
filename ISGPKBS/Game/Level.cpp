@@ -28,12 +28,8 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 		// Update player
 		_player->Update(elapsed);
 
-		// Update gadgets
-		for (auto it = gadgets.begin(); it != gadgets.end(); ++it) {
-			(*it)->Update(elapsed);
-		}
 		// Update enemies.
-		for (auto it = enemies.begin(); it != enemies.end(); ++it) {
+		for (auto it = entities.begin(); it != entities.end(); ++it) {
 			(*it)->Update(elapsed);
 		}
 	}
@@ -65,12 +61,8 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 		_graphics = g;
 		_grid->TraverseTiles(this);
 		_player->Paint(g);
-		// Update gadgets
-		for (auto it = gadgets.begin(); it != gadgets.end(); ++it) {
-			(*it)->Paint(g);
-		}
-		// Update enemies.
-		for (auto it = enemies.begin(); it != enemies.end(); ++it) {
+		// Update entities.
+		for (auto it = entities.begin(); it != entities.end(); ++it) {
 			(*it)->Paint(g);
 		}
 	}
