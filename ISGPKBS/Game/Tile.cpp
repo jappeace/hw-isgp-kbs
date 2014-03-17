@@ -81,19 +81,6 @@ namespace isgp{
 	}
 
 	Tile::~Tile(){
-
-		if(_top){
-			delete _top;
-		}
-		if(_left){
-			delete _left;
-		}
-		if(_right){
-			delete _right;
-		}
-		if(_bottom){
-			delete _bottom;
-		}
 		if(_position){
 			delete _position;
 		}

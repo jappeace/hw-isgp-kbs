@@ -2,7 +2,7 @@
 #include "GridGraphicTranslator.h"
 namespace isgp{
 // default amount of tiles in level
-const Size Level::defaultTileAmount = Size(100,100);
+const Size Level::defaultTileAmount = Size(500,30);
 
 // tile size, should equal the width and height of spritesheet tiles
 const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
@@ -28,6 +28,8 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 		_player->Paint(g);
 		_enemy->Paint(g);
 		_enemy2->Paint(g);
+		_gadget->Paint(g);
+		_gadget2->Paint(g);
 	}
 	void Level::ReceiveTile(Tile* tile) {
 #ifdef _DEBUG

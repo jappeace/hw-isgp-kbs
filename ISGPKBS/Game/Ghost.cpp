@@ -12,9 +12,10 @@ namespace isgp {
 
 	void Ghost::Update(double milisec) {
 		double elapsed = milisec / 1000;
-		double range = sqrt(pow(_position.X() - _player->_position.X(), 2) + pow(_position.Y() - _player->_position.Y(), 2));
+		double range = sqrt(pow(_position.X() - _player->GetPosition().X(), 2) + pow(_position.Y() - _player->GetPosition().Y(), 2));
 
 		if (range < 26) {
+			_player->Kill();
 			_velocity->X(-_velocity->X());
 			_velocity->Y(-_velocity->Y());
 		}else if (range < 800) {
@@ -22,7 +23,7 @@ namespace isgp {
 				_aVel += (2000 * elapsed);
 			}
 			
-			_radAngle = atan2(_player->_position.Y() - _position.Y(), _player->_position.X() - _position.X());
+			_radAngle = atan2(_player->GetPosition().Y() - _position.Y(), _player->GetPosition().X() - _position.X());
 
 			double targetXVel = _aVel * cos(_radAngle);
 			double targetYVel = _aVel * sin(_radAngle);
@@ -56,9 +57,9 @@ namespace isgp {
 
 	void Ghost::Paint(Graphics* g) {
 		if (_facingRight) {
-			g->DrawBitmap(".\\tiles\\boo.bmp", this->_position, Size(32, 32));
+			g->DrawBitmap("../tiles/boo.bmp", this->_position, Size(32, 32));
 		}else{
-			g->DrawBitmap(".\\tiles\\boo.bmp", this->_position, Vector2D(32, 0), Size(32, 32));
+			g->DrawBitmap("../tiles/boo.bmp", this->_position, Vector2D(32, 0), Size(32, 32));
 		}
 	}
 }

@@ -7,6 +7,7 @@ class Vector2D
 {
 public:
 	Vector2D(int x, int y);
+	Vector2D(const Vector2D&);
 	Vector2D(double x, double y);
 	Vector2D(double both);
 	Vector2D(void);
@@ -29,10 +30,11 @@ public:
 	Vector2D& operator-=(const Vector2D& rhs);
 	Vector2D& operator*=(const Vector2D& rhs);
 	Vector2D& operator/=(const Vector2D& rhs);
-private:
-	double _x, _y;
+protected:
 	// constructors call this
 	void init(double x, double y);
+private:
+	double _x, _y;
 };
 inline bool operator==(const Vector2D& lhs,const Vector2D& rhs){
 	/* do actual comparison */ 
