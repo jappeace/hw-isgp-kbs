@@ -1,6 +1,4 @@
 #include "DefaultlevelFactory.h"
-#include "GadgetGravityBoots.h"
-
 
 namespace isgp{
 
@@ -129,9 +127,8 @@ namespace isgp{
 			level->enemies.push_back(patrol2); 
 			
 		}
-
-		int gadget_size = gravityboots.size();
 		Gadget * gadget;
+		int gadget_size = gravityboots.size();
 		for(int n=0;n< gadget_size;n++)
 		{
 			patrol_X= atoi(gravityboots[n].c_str());
@@ -141,6 +138,22 @@ namespace isgp{
 			//
 
 			gadget = new GadgetGravityBoots(fromto.FromTo(Vector2D(patrol_X,patrol_Y)),level->_player);
+			gadget->SetGrid(level->GetGrid());
+			level->enemies.push_back(gadget); 
+			
+		}
+
+		gadget_size = jumpplatform.size();
+		
+		for(int n=0;n< gadget_size;n++)
+		{
+			patrol_X= atoi(jumpplatform[n].c_str());
+			strcpy_s(v_for,30,jumpplatform[n].c_str());
+			result=strtok_s(v_for,",",&m);
+			patrol_Y=atoi(m);
+			//
+
+			gadget = new GadgetJumpPlatform(fromto.FromTo(Vector2D(patrol_X,patrol_Y)),level->_player);
 			gadget->SetGrid(level->GetGrid());
 			level->enemies.push_back(gadget); 
 			
