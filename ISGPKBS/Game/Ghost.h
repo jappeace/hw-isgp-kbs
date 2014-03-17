@@ -8,6 +8,7 @@ namespace isgp {
 	{
 	public:
 		Ghost(Vector2D, Player*);
+		~Ghost();
 		void Update(const double) override;
 		void Paint(Graphics*) override;
 		void AddToVelocityY(double) override;

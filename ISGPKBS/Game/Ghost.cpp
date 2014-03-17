@@ -10,6 +10,10 @@ namespace isgp {
 		_velocity = new Vector2D(0,0);
 	}
 
+	Ghost::~Ghost() {
+		delete _velocity;
+	}
+
 	void Ghost::Update(double milisec) {
 		double elapsed = milisec / 1000;
 		double range = sqrt(pow(_position.X() - _player->GetPosition().X(), 2) + pow(_position.Y() - _player->GetPosition().Y(), 2));

@@ -12,6 +12,7 @@ namespace isgp {
 	{
 	public:
 		Patrol(Vector2D, int, Player*);
+		~Patrol();
 		void Update(const double) override;
 		void Paint(Graphics* g) override;
 	private:

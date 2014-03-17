@@ -22,6 +22,13 @@ namespace isgp {
 		_size = new Vector2D(32, 32);
 	}
 
+	Patrol::~Patrol() {
+		delete _velocity;
+		delete _behaviours;
+		delete _animation;
+		delete _size;
+	}
+
 	void Patrol::Update(double milisec) {
 		double elapsed = milisec / 1000;
 		double range = _position.X() - _startingPoint.X();

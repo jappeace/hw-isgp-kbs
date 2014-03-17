@@ -23,6 +23,9 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 		delete start;
 		delete finish;
 		delete _player;
+		for (auto it = entities.begin(); it != entities.end(); ++it) {
+			delete (*it);
+		}
 	}
 
 	void Level::Update(double elapsed) {
