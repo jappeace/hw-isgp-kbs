@@ -1,5 +1,4 @@
 #include "Window.h"
-#include "SimpleLevelFactory.h"
 #include "GameOverMenu.h"
 #include "DefaultlevelFactory.h"
 #include "MenuItem.h"

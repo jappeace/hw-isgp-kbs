@@ -108,7 +108,7 @@ namespace isgp{
 
 			ghost2 = new Ghost(fromto.FromTo(Vector2D(ghost_X,ghost_Y)),level->_player);
 			ghost2->SetGrid(level->GetGrid());
-			level->enemies.push_back(ghost2); 
+			level->entities.push_back(ghost2); 
 			
 		}
 
@@ -124,7 +124,7 @@ namespace isgp{
 
 			patrol2 = new Patrol(fromto.FromTo(Vector2D(patrol_X,patrol_Y)),100,level->_player);
 			patrol2->SetGrid(level->GetGrid());
-			level->enemies.push_back(patrol2); 
+			level->entities.push_back(patrol2); 
 			
 		}
 		Gadget * gadget;
@@ -139,7 +139,7 @@ namespace isgp{
 
 			gadget = new GadgetGravityBoots(fromto.FromTo(Vector2D(patrol_X,patrol_Y)),level->_player);
 			gadget->SetGrid(level->GetGrid());
-			level->enemies.push_back(gadget); 
+			level->entities.push_back(gadget); 
 			
 		}
 
@@ -155,7 +155,7 @@ namespace isgp{
 
 			gadget = new GadgetJumpPlatform(fromto.FromTo(Vector2D(patrol_X,patrol_Y)),level->_player);
 			gadget->SetGrid(level->GetGrid());
-			level->enemies.push_back(gadget); 
+			level->entities.push_back(gadget); 
 			
 		}
 	//tile, ghost, patrol 있음. 캄 vector 에 ghost가 몇번째에나오는지 확인하고. 그전까지 나온 거를 다 좌표로저장하기 위에처럼

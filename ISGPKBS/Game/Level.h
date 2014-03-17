@@ -21,8 +21,7 @@ namespace isgp{
 		void Update(double elapsed);
 		static const Size tileSize;
 		Player* _player;
-		vector<Entity*> enemies;
-		vector<Gadget*> gadgets;
+		vector<Entity*> entities;
 		Grid* GetGrid() const;
 		static const Size defaultTileAmount;
 	private:
