@@ -70,6 +70,7 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="GameOverMenu.h" />
     <ClInclude Include="GameOverState.h" />
+    <ClInclude Include="IKeyHandler.h" />
     <ClInclude Include="PlayingGameState.h" />
     <ClInclude Include="IGameState.h" />
     <ClInclude Include="Ghost.h" />

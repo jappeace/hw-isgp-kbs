@@ -1,14 +1,20 @@
 #include "PlayingGameState.h"
+#include "GameOverGameState.h"
 #include "SimpleLevelFactory.h"
 #include "Camera.h"
+#include <Windows.h>
 
 namespace isgp {
-	PlayingGameState::PlayingGameState(Graphics* graphics) {
+	PlayingGameState::PlayingGameState(Graphics* graphics, Window* window,
+		void(Window::*gameOver)()) {
+		_window = window;
+		_gameOver = gameOver;
 		_graphics = graphics;
+		_graphics->SetTextBackgroundColor(RGB(255, 255, 255));
 		SimpleLevelFactory factory;
 		_level = factory.CreateLevel();
-		Camera* cam = new Camera(_level->_player, _level->GetGrid());
-		_graphics->SetCam(cam);
+		_camera = new Camera(_level->_player, _level->GetGrid());
+		_graphics->SetCam(_camera);
 	}
 
 	PlayingGameState::~PlayingGameState() {
@@ -20,7 +26,44 @@ namespace isgp {
 	}
 
 	void PlayingGameState::Update(double elapsed) {
-		// TODO:
-		//_level->Update(elapsed);
+		_level->Update(elapsed);
+		_camera->Update(elapsed);
+		if (!_level->_player->IsAlive()) {
+			(_window->*_gameOver)();
+		}
+	}
+
+	void PlayingGameState::KeyDown(int keyCode) {
+		switch (keyCode) {
+		case VK_LEFT:
+			_level->_player->_leftKey = true;
+			break;
+		case VK_UP:
+			_level->_player->_upKey = true;
+			break;
+		case VK_RIGHT:
+			_level->_player->_rightKey = true;
+			break;
+		case VK_SPACE:
+			_level->_player->_spaceKey = true;
+			break;
+		}
+	}
+
+	void PlayingGameState::KeyUp(int keyCode) {
+		switch (keyCode) {
+		case VK_LEFT:
+			_level->_player->_leftKey = false;
+			break;
+		case VK_UP:
+			_level->_player->_upKey = false;
+			break;
+		case VK_RIGHT:
+			_level->_player->_rightKey = false;
+			break;
+		case VK_SPACE:
+			_level->_player->_spaceKey = false;
+			break;
+		}
 	}
 }

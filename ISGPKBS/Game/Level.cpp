@@ -22,6 +22,13 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 			delete _grid;
 		}
 	}
+
+	void Level::Update(double elapsed) {
+		_player->Update(elapsed);
+		_enemy->Update(elapsed);
+		_enemy2->Update(elapsed);
+	}
+
 	void Level::Paint(Graphics* g) {
 		_graphics = g;
 		_grid->TraverseTiles(this);

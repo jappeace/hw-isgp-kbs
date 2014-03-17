@@ -3,6 +3,7 @@
 #include "GameOverMenu.h"
 #include "MenuItem.h"
 #include "PlayingGameState.h"
+#include "GameOverGameState.h"
 
 namespace isgp {
 
@@ -32,7 +33,7 @@ void Window::ClientResize(HWND hWnd, int nWidth, int nHeight)
 }
 
 void Window::AfterCreate(HWND hWnd) {
-	_gameState = new PlayingGameState(_graphics);
+	_gameState = new PlayingGameState(_graphics, this, &Window::GameOver);
 	ClientResize(hWnd, WindowSize.GetWidth(), WindowSize.GetHeight());
 }
 
@@ -73,71 +74,17 @@ void Window::GameLoop(double elapsed) { //elapsed time, in MS
 	if (_gameState != NULL) {
 		_gameState->Update(elapsed);
 	}
-
-	if (_gameState == NULL && !_level->_player->IsAlive()) {
-		_gameState = NULL;
-		delete _currentMenu;
-		_currentMenu = new GameOverMenu();
-		_currentMenu->AddMenuItem(new MenuItem("Retry", this, &Window::RestartGame));
-		_currentMenu->AddMenuItem(new MenuItem("Exit", this, &Window::QuitGame));
-	}
-	if (_gameState == NULL) {
-		//update all the game objects now
-		_level->_player->Update(elapsed);
-		_level->_enemy->Update(elapsed);
-		_level->_enemy2->Update(elapsed);
-		_cam->Update(elapsed);
-	}
-	AbstractWindow::GameLoop(elapsed);
 }
 
 void Window::OnKeyDown(int which) {
-	switch (which) {
-	case VK_LEFT:
-		_level->_player->_leftKey = true;
-		break;
-	case VK_RIGHT:
-		_level->_player->_rightKey = true;
-		break;
-	case VK_UP:
-		if (_currentMenu) {
-			_currentMenu->MoveCursorUp();
-		}
-		_level->_player->_upKey = true;
-		break;
-	case VK_DOWN:
-		if (_currentMenu) {
-			_currentMenu->MoveCursorDown();
-		}
-		break;
-	case VK_SPACE:
-		_level->_player->_spaceKey = true;
-		break;
-	case VK_RETURN:
-		if (_currentMenu) {
-			_currentMenu->ExecuteSelection();
-		}
-		break;
-	case VK_BACK:
-		_level->_player->Kill();
-		break;
+	if (_gameState != NULL) {
+		_gameState->KeyDown(which);
 	}
 }
 
 void Window::OnKeyUp(int which) {
-	switch (which) {
-	case VK_LEFT:
-		_level->_player->_leftKey = false;
-		break;
-	case VK_RIGHT:
-		_level->_player->_rightKey = false;
-		break;
-	case VK_UP:
-		_level->_player->_upKey = false;
-		break;
-	case VK_SPACE:
-		_level->_player->_spaceKey = false;
-		break;
+	if (_gameState != NULL) {
+		_gameState->KeyUp(which);
 	}
 }
 
@@ -173,6 +120,13 @@ void Window::RestartGame() {
 	AfterCreate(_hWnd);
 	delete _currentMenu;
 	_currentMenu = NULL;
+}
+
+void Window::GameOver() {
+	delete _gameState;
+	_graphics->SetCam(NULL);
+	_gameState = new GameOverGameState(_graphics, this,
+		&Window::RestartGame, &Window::QuitGame);
 }
 
 void Window::QuitGame() {

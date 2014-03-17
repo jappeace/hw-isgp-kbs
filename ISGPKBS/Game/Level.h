@@ -14,6 +14,7 @@ namespace isgp{
 		Level(Grid* grid);
 		Level(int width, int height);
 		~Level(void);
+		void Update(double elapsed);
 		void ReceiveTile(Tile* tile) override;
 		void Paint(Graphics* g) override;
 		static const Size tileSize;

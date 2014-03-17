@@ -29,5 +29,6 @@ namespace isgp {
 		IGameState* _gameState;
 		void RestartGame();
 		void QuitGame();
+		void GameOver();
 	};
 }

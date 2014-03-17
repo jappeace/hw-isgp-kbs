@@ -15,6 +15,9 @@ namespace isgp {
 		~GameOverGameState();
 		void Paint(Graphics* g) override;
 		void Update(double elapsed) override;
+
+		void KeyDown(int keyCode) override;
+		void KeyUp(int keyCode) override;
 	private:
 		IMenu* _menu;
 	};
