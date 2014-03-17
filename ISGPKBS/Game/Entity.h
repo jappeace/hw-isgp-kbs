@@ -2,6 +2,7 @@
 #include "CollisionDetection.h"
 #include "Graphics.h"
 #include "Grid.h"
+#include "IBehaviour.h"
 #include "IPaintable.h"
 #include "Size.h"
 #include "Vector2D.h"
@@ -20,6 +21,10 @@ public:
 	// Moves the entity with the given velocity.
 	// Collision detection will apply to this movement.
 	void Move(Vector2D);
+	// Adds a behaviour to the entity
+	void AddBehaviour(IBehaviour*);
+	// Removes a behaviour from the entity
+	void RemoveBehaviour(IBehaviour*);
 	// Check if the entity is colliding on the given side
 	bool IsColliding(Collision collisionSide);
 	// Sets the grid for collision detection
@@ -48,6 +53,8 @@ protected:
 	Vector2D _position;
 	// The tiles with which the entity is colliding
 	vector<Tile*> CollidingTiles;
+	// The behaviours of this entity
+	vector<IBehaviour*>* _behaviours;
 
 private:
 	// Checks the collisions for the the current entity state

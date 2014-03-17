@@ -2,7 +2,6 @@
 
 #include <vector>
 #include "Animation.h"
-#include "IBehaviour.h"
 #include "IPaintable.h"
 #include "Grid.h"
 #include "Entity.h"
@@ -18,13 +17,10 @@ namespace isgp {
 		bool _leftKey, _rightKey, _upKey, _spaceKey;
 		bool IsAlive();
 		void Kill();
-		void AddBehaviour(IBehaviour*);
-		void RemoveBehaviour(IBehaviour*);
 		void Set_has_gravity_boots(bool hasBoots);
 		bool Get_has_gravity_boots();
 		static const Size InitSize;
 	private:
-		vector<IBehaviour*>* _behaviours;
 		double _maxVel;
 		double _accel;
 		double _deAccel;
