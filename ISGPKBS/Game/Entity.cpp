@@ -19,6 +19,10 @@ namespace isgp {
 		return collision;
 	}
 
+	Vector2D Entity::GetPosition() const {
+		return _position;
+	}
+
 	Vector2D* Entity::GetVelocity() const {
 		return _velocity;
 	}
