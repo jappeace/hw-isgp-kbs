@@ -15,7 +15,6 @@ namespace isgp {
 		// If the player is facing right
 		bool _facingRight;
 		Graphics* _graphics;
-		vector<IBehaviour*>* _behaviours;
 		double _aVel;
 		Player* _player;
 		double _radAngle;

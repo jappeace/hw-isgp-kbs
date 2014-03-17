@@ -6,7 +6,7 @@ namespace isgp {
 	}
 
 	void Gadget::Update(const double ms) {
-		double collisionRange = sqrt(pow(_position.X() - _player->_position.X(), 2) + pow(_position.Y() - _player->_position.Y(), 2));
+		double collisionRange = sqrt(pow(_position.X() - _player->GetPosition().X(), 2) + pow(_position.Y() - _player->GetPosition().Y(), 2));
 
 		if (collisionRange < 26) {
 			OnCollide();

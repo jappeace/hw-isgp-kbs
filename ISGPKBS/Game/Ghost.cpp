@@ -12,7 +12,7 @@ namespace isgp {
 
 	void Ghost::Update(double milisec) {
 		double elapsed = milisec / 1000;
-		double range = sqrt(pow(_position.X() - _player->_position.X(), 2) + pow(_position.Y() - _player->_position.Y(), 2));
+		double range = sqrt(pow(_position.X() - _player->GetPosition().X(), 2) + pow(_position.Y() - _player->GetPosition().Y(), 2));
 
 		if (range < 26) {
 			_player->Kill();
@@ -23,7 +23,7 @@ namespace isgp {
 				_aVel += (2000 * elapsed);
 			}
 			
-			_radAngle = atan2(_player->_position.Y() - _position.Y(), _player->_position.X() - _position.X());
+			_radAngle = atan2(_player->GetPosition().Y() - _position.Y(), _player->GetPosition().X() - _position.X());
 
 			double targetXVel = _aVel * cos(_radAngle);
 			double targetYVel = _aVel * sin(_radAngle);

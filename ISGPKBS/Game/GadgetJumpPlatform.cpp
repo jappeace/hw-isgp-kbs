@@ -32,7 +32,7 @@ namespace isgp {
 			return;
 
 		this->_ms_till_next_launch = 500;
-		this->_player->AddToVelocityY(-800);
+		this->_player->GetVelocity()->Y(-800);
 	}
 
 	void GadgetJumpPlatform::Paint(Graphics* g) {
