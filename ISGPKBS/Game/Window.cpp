@@ -48,6 +48,8 @@ void Window::AfterCreate(HWND hWnd) {
 	_graphics->LoadBitmapFile("../tiles/link.bmp");
 	_graphics->LoadBitmapFile("../tiles/boots.bmp");
 	_graphics->LoadBitmapFile("../tiles/smile.bmp");
+	_artist = new BackgroundArtist(_cam, _level);
+	_artist->RenderBackground();
 }
 
 INT_PTR CALLBACK dialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
@@ -70,6 +72,8 @@ void Window::OnPaint(Graphics* g){
 			for (int i = 0; i < width2; i += 1920) {
 				g->DrawBitmap("../tiles/ground.bmp", Vector2D(((_cam->GetPosition().X() - fix.X()) * 0.25) + i, (_cam->GetPosition().Y() + 2000) * 0.25), Size(1920, 321));
 			}
+			//Draw level
+			_artist->Paint(g);
 
 			//Draw everything else
 			_level->Paint(g);

@@ -8,6 +8,7 @@
 #include "Camera.h"
 #include "IMenu.h"
 #include "GameState.h"
+#include "BackgroundArtist.h"
 
 namespace isgp {
 	class Window : public AbstractWindow {
@@ -28,5 +29,6 @@ namespace isgp {
 		IMenu* _currentMenu;
 		GameState _gameState;
 		void RestartGame();
+		BackgroundArtist* _artist;
 	};
 }
