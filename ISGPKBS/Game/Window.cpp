@@ -1,15 +1,15 @@
 #include "Window.h"
 #include "SimpleLevelFactory.h"
 #include "GameOverMenu.h"
+#include "DefaultlevelFactory.h"
 #include "MenuItem.h"
 
 namespace isgp {
 
 // Constructors / Destructors      //
 Window::Window() {
-	ILevelFactory* factory = new SimpleLevelFactory();
-	_level = factory->CreateLevel();
-	delete factory;
+	DefaultlevelFactory factory;
+	_level = factory.CreateLevel();
 	_gameState = Playing;
 	_cam = NULL;
 	_currentMenu = NULL;
@@ -94,10 +94,12 @@ void Window::GameLoop(double elapsed) { //elapsed time, in MS
 	if (_gameState == Playing) {
 		//update all the game objects now
 		_level->_player->Update(elapsed);
-		_level->_enemy->Update(elapsed);
-		_level->_enemy2->Update(elapsed);
-		_level->_gadget->Update(elapsed);
-		_level->_gadget2->Update(elapsed);
+		
+		//Æ÷¹®
+		for(unsigned int i=0 ; i< _level->enemies.size(); i++)
+		{
+			_level->enemies[i]->Update(elapsed);
+		}
 		_cam->Update(elapsed);
 	}
 	AbstractWindow::GameLoop(elapsed);
