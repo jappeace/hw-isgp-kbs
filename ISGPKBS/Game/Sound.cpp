@@ -15,24 +15,30 @@ void Sound::Play(int ID)
 	{
 	case JUMP:
 		{
-		PlaySound(TEXT("1.wav"),GetModuleHandle(NULL),SND_FILENAME|SND_ASYNC);
+		PlaySound(TEXT("JUMP.wav"),GetModuleHandle(NULL),SND_FILENAME|SND_ASYNC);
 		return ;
 		}
-	case COLLISION:
+	case KILL_ENEMY:
 		{
-		PlaySound(TEXT("5.wav"),GetModuleHandle(NULL),SND_FILENAME|SND_ASYNC);
+		PlaySound(TEXT("KILL_ENEMY.wav"),GetModuleHandle(NULL),SND_FILENAME|SND_ASYNC);
 		return ;
 		}
 
 	case END_LOSE:
 		{
-		PlaySound(TEXT("2.wav"),GetModuleHandle(NULL),SND_FILENAME|SND_ASYNC);
+		PlaySound(TEXT("END_LOSE.wav"),GetModuleHandle(NULL),SND_FILENAME|SND_ASYNC);
 		return ;
 		}
 
 	case END_WIN:
 		{
-		PlaySound(TEXT("4.wav"),GetModuleHandle(NULL),SND_FILENAME|SND_ASYNC);
+		PlaySound(TEXT("END_WIN.wav"),GetModuleHandle(NULL),SND_FILENAME|SND_ASYNC);
+		return ;
+		}
+		
+	case CHANGE_DIREC:
+		{
+		PlaySound(TEXT("CHANGE_DIREC.wav"),GetModuleHandle(NULL),SND_FILENAME|SND_ASYNC);
 		return ;
 		}
 	}

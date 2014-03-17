@@ -55,10 +55,12 @@ protected:
 	vector<Tile*> CollidingTiles;
 	// The behaviours of this entity
 	vector<IBehaviour*>* _behaviours;
-
-private:
+	
 	// Checks the collisions for the the current entity state
 	int CheckCollision();
+private:
+	
+
 	// Creates a movement step size which returns 0 or 0.5
 	double CalcStepSize(double vel);
 	// Checks the collision state if the given values would be added to the entity.
