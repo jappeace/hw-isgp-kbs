@@ -2,15 +2,13 @@
 #include "SimpleLevelFactory.h"
 #include "GameOverMenu.h"
 #include "MenuItem.h"
+#include "PlayingGameState.h"
 
 namespace isgp {
 
 // Constructors / Destructors      //
 Window::Window() {
-	ILevelFactory* factory = new SimpleLevelFactory();
-	_level = factory->CreateLevel();
-	delete factory;
-	_gameState = NULL;
+	_gameState = new PlayingGameState();
 	_cam = NULL;
 	_currentMenu = NULL;
 }
@@ -38,7 +36,7 @@ void Window::AfterCreate(HWND hWnd) {
 	ClientResize(hWnd, WindowSize.GetWidth(), WindowSize.GetHeight());
 
 	_cam = new Camera(_level->_player, _level->GetGrid());
-	//_graphics->SetCam(_cam);
+	_graphics->SetCam(_cam);
 }
 
 INT_PTR CALLBACK dialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam){

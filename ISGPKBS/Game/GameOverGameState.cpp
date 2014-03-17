@@ -1,20 +1,24 @@
-#pragma once
-
-#include "IMenu.h"
-#include "IGameState.h"
-#include "Window.h"
+#include "GameOverGameState.h"
+#include "GameOverMenu.h"
+#include "MenuItem.h"
 
 namespace isgp {
+	GameOverGameState::GameOverGameState(Graphics* graphics, Window* window,
+		void (Window::*restart)(),
+		void (Window::*exit)()) {
+		_menu = new GameOverMenu();
+		_menu->AddMenuItem(new MenuItem("Retry", window, restart));
+		_menu->AddMenuItem(new MenuItem("Exit", window, exit));
+	}
 
-	// Gamestate for when the player is dead.
-	// Includes a menu that allows the player to restart the game.
-	class GameOverGameState : public IGameState {
-	public:
-		GameOverGameState(void (Window::*restart)(), void (Window::*exit)());
-		~GameOverGameState();
-	private:
-		void Paint(Graphics* g) override;
-		void Update(double elapsed) override;
-		IMenu* _menu;
-	};
+	GameOverGameState::~GameOverGameState() {
+		delete _menu;
+	}
+
+	void GameOverGameState::Paint(Graphics* g) {
+		_menu->Paint(g);
+	}
+
+	void GameOverGameState::Update(double elapsed) {
+	}
 }
