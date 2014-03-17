@@ -45,7 +45,7 @@ INT_PTR CALLBACK dialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 	return NULL;
 }
 void Window::OnPaint(Graphics* g){
-	if (_gameState == Playing) {
+	if (_gameState == NULL) {
 		if (_cam != NULL) {
 			double width1 = (GridGraphicTranslator().FromTo(*_level->GetGrid()->GetSize()).X() * 0.5) + AbstractWindow::WindowSize.GetWidth();
 			double width2 = (GridGraphicTranslator().FromTo(*_level->GetGrid()->GetSize()).X() * 0.75) + AbstractWindow::WindowSize.GetWidth();
@@ -66,19 +66,19 @@ void Window::OnPaint(Graphics* g){
 			_level->Paint(g);
 		}
 	}
-	else if (_gameState == GameOver) {
+	else if (_gameState == NULL) {
 		_currentMenu->Paint(g);
 	}
 }
 void Window::GameLoop(double elapsed) { //elapsed time, in MS
-	if (_gameState == Playing && !_level->_player->IsAlive()) {
-		_gameState = GameOver;
+	if (_gameState == NULL && !_level->_player->IsAlive()) {
+		_gameState = NULL;
 		delete _currentMenu;
 		_currentMenu = new GameOverMenu();
 		_currentMenu->AddMenuItem(new MenuItem("Retry", this, &Window::RestartGame));
 		_currentMenu->AddMenuItem(new MenuItem("Exit", this, &Window::QuitGame));
 	}
-	if (_gameState == Playing) {
+	if (_gameState == NULL) {
 		//update all the game objects now
 		_level->_player->Update(elapsed);
 		_level->_enemy->Update(elapsed);
@@ -166,7 +166,7 @@ LRESULT Window::MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 void Window::RestartGame() {
 	SimpleLevelFactory factory;
 	_level = factory.CreateLevel();
-	_gameState = Playing;
+	_gameState = NULL;
 	AfterCreate(_hWnd);
 	delete _currentMenu;
 	_currentMenu = NULL;
