@@ -10,7 +10,6 @@ namespace isgp {
 				s.GetWidth(),
 				s.GetHeight()
 			);
-
 		Graphics::FillRect(forCreation, Vector2D(0,0),s,kKeyColor);
 		DeleteDC(forCreation);
 		Init(b);

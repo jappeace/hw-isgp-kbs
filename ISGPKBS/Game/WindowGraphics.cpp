@@ -92,4 +92,48 @@ namespace isgp {
 		// release the resource
 		DeleteDC(bitmap_hdc);
 	}
+	void WindowGraphics::DrawBackground(Sprite* sprite, Vector2D& position, Vector2D& offset, Size& size) {
+
+		Vector2D correctedVector2D = position;
+
+		if (_translator != NULL) {
+			correctedVector2D = _translator->FromTo(position);
+		}
+
+		HDC bitmap_hdc = CreateCompatibleDC(NULL);
+
+		// link the bitmap to a device context
+		::SelectObject(bitmap_hdc, sprite->GetMask());
+
+		// OR the image on the mask to apply transparancy
+		BitBlockTransfer(
+			// Dest Context
+			getHDC(), 
+			// Position
+			correctedVector2D,
+			size, 
+			// Source Context
+			bitmap_hdc, 
+			offset,
+			SRCPAINT);
+
+		// link the bitmap to a device context
+		::SelectObject(bitmap_hdc, sprite->GetBitmap());
+
+		// OR the image on the mask to apply transparancy
+		BitBlockTransfer(
+			// Dest Context
+			getHDC(), 
+			// Position
+			correctedVector2D,
+			size,
+			// Source Context
+			bitmap_hdc, 
+			offset,
+			// Operation
+			SRCAND);
+
+		// release the resource
+		DeleteDC(bitmap_hdc);
+	}
 }

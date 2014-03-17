@@ -18,11 +18,11 @@ namespace isgp {
 		// render an alpha mask, this is a O(bitmap.width * bitmap.height) operation, beware
 		void GenerateMask();
 		COLORREF GetTransparant();
+		static BITMAP DereferenceBitmap(HBITMAP);
 	private:
 		HBITMAP _image;
 		HBITMAP _mask;
 		static const int Sprite::kKeyColor;
-		BITMAP DereferenceBitmap(HBITMAP);
 		void Init(HBITMAP);
 	
 	};

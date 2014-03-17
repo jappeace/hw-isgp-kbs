@@ -63,51 +63,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="AbstractWindow.h" />
-    <ClInclude Include="Animation.h" />
-    <ClInclude Include="BackgroundArtist.h" />
-    <ClInclude Include="CollisionDetection.h" />
-    <ClInclude Include="Entity.h" />
-    <ClInclude Include="Gadget.h" />
-    <ClInclude Include="GadgetGravityBoots.h" />
-    <ClInclude Include="GadgetJumpPlatform.h" />
-    <ClInclude Include="GameOverMenu.h" />
-    <ClInclude Include="GameState.h" />
-    <ClInclude Include="Ghost.h" />
-    <ClInclude Include="GravityBootsBehaviour.h" />
-    <ClInclude Include="IBehaviour.h" />
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="Exceptions.h" />
-    <ClInclude Include="Graphics.h" />
-    <ClInclude Include="Gravitybehaviour.h" />
-    <ClInclude Include="Grid.h" />
-    <ClInclude Include="GridGraphicTranslator.h" />
-    <ClInclude Include="IGridTraveller.h" />
-    <ClInclude Include="ILevelFactory.h" />
-    <ClInclude Include="IMenu.h" />
-    <ClInclude Include="IPaintable.h" />
-    <ClInclude Include="ITileData.h" />
-    <ClInclude Include="ITranslator.h" />
-    <ClInclude Include="Level.h" />
-    <ClInclude Include="MenuItem.h" />
-    <ClInclude Include="Patrol.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="resource.h" />
-    <ClInclude Include="resource1.h" />
-    <ClInclude Include="resource2.h" />
-    <ClInclude Include="SimpleLevelFactory.h" />
-    <ClInclude Include="Size.h" />
-    <ClInclude Include="Sprite.h" />
-    <ClInclude Include="SpriteGraphics.h" />
-    <ClInclude Include="StrConverter.h" />
-    <ClInclude Include="Tile.h" />
-    <ClInclude Include="TimesPerSecondCounter.h" />
-    <ClInclude Include="Vector2D.h" />
-    <ClInclude Include="Window.h" />
-    <ClInclude Include="WindowGraphics.h" />
-    <ClInclude Include="WorldBlock.h" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="AbstractWindow.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="BackgroundArtist.cpp" />
@@ -138,6 +93,51 @@
     <ClCompile Include="WindowGraphics.cpp" />
     <ClCompile Include="WinMain.cpp" />
     <ClCompile Include="WorldBlock.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AbstractWindow.h" />
+    <ClInclude Include="Animation.h" />
+    <ClInclude Include="BackgroundArtist.h" />
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="CollisionDetection.h" />
+    <ClInclude Include="Entity.h" />
+    <ClInclude Include="Exceptions.h" />
+    <ClInclude Include="Gadget.h" />
+    <ClInclude Include="GadgetGravityBoots.h" />
+    <ClInclude Include="GadgetJumpPlatform.h" />
+    <ClInclude Include="GameOverMenu.h" />
+    <ClInclude Include="GameState.h" />
+    <ClInclude Include="Ghost.h" />
+    <ClInclude Include="Graphics.h" />
+    <ClInclude Include="Gravitybehaviour.h" />
+    <ClInclude Include="GravityBootsBehaviour.h" />
+    <ClInclude Include="Grid.h" />
+    <ClInclude Include="GridGraphicTranslator.h" />
+    <ClInclude Include="IBehaviour.h" />
+    <ClInclude Include="IGridTraveller.h" />
+    <ClInclude Include="ILevelFactory.h" />
+    <ClInclude Include="IMenu.h" />
+    <ClInclude Include="IPaintable.h" />
+    <ClInclude Include="ITileData.h" />
+    <ClInclude Include="ITranslator.h" />
+    <ClInclude Include="Level.h" />
+    <ClInclude Include="MenuItem.h" />
+    <ClInclude Include="Patrol.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="resource1.h" />
+    <ClInclude Include="resource2.h" />
+    <ClInclude Include="SimpleLevelFactory.h" />
+    <ClInclude Include="Size.h" />
+    <ClInclude Include="Sprite.h" />
+    <ClInclude Include="SpriteGraphics.h" />
+    <ClInclude Include="StrConverter.h" />
+    <ClInclude Include="Tile.h" />
+    <ClInclude Include="TimesPerSecondCounter.h" />
+    <ClInclude Include="Vector2D.h" />
+    <ClInclude Include="Window.h" />
+    <ClInclude Include="WindowGraphics.h" />
+    <ClInclude Include="WorldBlock.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

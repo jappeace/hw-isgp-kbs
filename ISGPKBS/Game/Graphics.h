@@ -63,6 +63,10 @@ namespace isgp {
 
 		// draw a sprite from memory instead of path
 		virtual void DrawSprite(Sprite* sprite, Vector2D& position, Vector2D& offset, Size& size) = 0;
+
+		// a background sprite needs slightly different render logic, if drawsprite fails, use this one
+		virtual void DrawBackground(Sprite* sprite, Vector2D& position, Vector2D& offset, Size& size) {}
+
 		void DrawLine(Vector2D one,Vector2D two);
 
 		// translates a position and size into a C Rectangle structure
@@ -84,6 +88,6 @@ namespace isgp {
 
 	private:
 		// a bitmap cache based with string as a key
-		static map<string, Sprite*>* _bitmapCache;
+		map<string, Sprite*>* _bitmapCache;
 	};
 }

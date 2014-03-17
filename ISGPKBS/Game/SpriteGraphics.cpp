@@ -8,7 +8,7 @@ namespace isgp {
 	}
 	void SpriteGraphics::BeginRendering(){
 		this->_visibleHdc = CreateCompatibleDC(NULL);
-		HGDIOBJ h = ::SelectObject(this->_visibleHdc, _target->GetBitmap());
+		::SelectObject(this->_visibleHdc, _target->GetBitmap());
 		BitBlockTransfer(this->_visibleHdc, Vector2D(), _target->GetSize(), NULL, NULL, WHITENESS);
 	}
 
@@ -29,26 +29,10 @@ namespace isgp {
 			correctedVector2D = _translator->FromTo(position);
 		}
 
-		HDC bitmap_hdc = CreateCompatibleDC(NULL);
+		HDC input_hdc = CreateCompatibleDC(NULL);
 
 		// link the bitmap to a device context
-		::SelectObject(bitmap_hdc, sprite->GetMask());
-
-		// OR the image on the mask to apply transparancy
-		BitBlockTransfer(
-			// Dest Context
-			getHDC(), 
-			// Position
-			correctedVector2D,
-			size, 
-			// Source Context
-			bitmap_hdc, 
-			offset,
-			SRCAND);
-
-		// link the bitmap to a device context
-		::SelectObject(bitmap_hdc, sprite->GetBitmap());
-
+		::SelectObject(input_hdc, sprite->GetBitmap());
 		// OR the image on the mask to apply transparancy
 		BitBlockTransfer(
 			// Dest Context
@@ -57,12 +41,24 @@ namespace isgp {
 			correctedVector2D,
 			size,
 			// Source Context
-			bitmap_hdc, 
+			input_hdc, 
 			offset,
 			// Operation
-			SRCPAINT);
+			SRCCOPY);
 
+		::SelectObject(input_hdc, sprite->GetMask());
+		BitBlockTransfer(
+			// Dest Context
+			getHDC(), 
+			// Position
+			correctedVector2D,
+			size,
+			// Source Context
+			input_hdc, 
+			offset,
+			// Operation
+			SRCCOPY);
 		// release the resource
-		DeleteDC(bitmap_hdc);
+		DeleteDC(input_hdc);
 	}
 }

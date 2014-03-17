@@ -2,14 +2,11 @@
 #include "AbstractWindow.h" // loopfix
 namespace isgp {
 
-	map<string, Sprite*>* Graphics::_bitmapCache = NULL;
 	void Graphics::Init(void){
 		_translator = NULL;
 		_visibleHdc = NULL;
 		_pen = NULL;
-		if(_bitmapCache == NULL){
-			_bitmapCache = new map<string, Sprite*>();
-		}
+		_bitmapCache = new map<string, Sprite*>();
 	}
 
 	void Graphics::SetTranslator(ITranslator* cam) {
@@ -86,7 +83,7 @@ namespace isgp {
 	}
 
 	Sprite* Graphics::LoadBitmapFile(string path) {
-		if(_bitmapCache->count(path)) {
+		if(Graphics::_bitmapCache->count(path)) {
 			// Return cached item
 			return _bitmapCache->find(path)->second;
 		}
@@ -142,49 +139,5 @@ namespace isgp {
 		points[1].x = (long) two.X();
 		points[1].y = (long) two.Y();
 		::Polyline(getHDC(), points, 2);
-	}
-	void Graphics::DrawSprite(Sprite* sprite, Vector2D& position, Vector2D& offset, Size& size){
-
-		Vector2D correctedVector2D = position;
-
-		if (_translator != NULL) {
-			correctedVector2D = _translator->FromTo(position);
-		}
-
-		HDC bitmap_hdc = CreateCompatibleDC(NULL);
-
-		// link the bitmap to a device context
-		::SelectObject(bitmap_hdc, sprite->GetMask());
-
-		// OR the image on the mask to apply transparancy
-		BitBlockTransfer(
-			// Dest Context
-			getHDC(), 
-			// Position
-			correctedVector2D,
-			size, 
-			// Source Context
-			bitmap_hdc, 
-			offset,
-			SRCAND);
-
-		// link the bitmap to a device context
-		::SelectObject(bitmap_hdc, sprite->GetBitmap());
-
-		// OR the image on the mask to apply transparancy
-		BitBlockTransfer(
-			// Dest Context
-			getHDC(), 
-			// Position
-			correctedVector2D,
-			size,
-			// Source Context
-			bitmap_hdc, 
-			offset,
-			// Operation
-			SRCPAINT);
-
-		// release the resource
-		DeleteDC(bitmap_hdc);
 	}
 }
