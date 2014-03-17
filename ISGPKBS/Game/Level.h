@@ -21,6 +21,7 @@ namespace isgp{
 		static const Size tileSize;
 		Player* _player;
 		vector<Entity*> enemies;
+		vector<Gadget*> gadgets;
 		Entity* _enemy;
 		Entity* _enemy2;
 		Gadget* _gadget;

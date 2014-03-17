@@ -20,7 +20,7 @@ namespace isgp{
 		int width;
 		int height;
 		int start_X,start_Y,finish_X,finish_Y;
-		vector<string> v,ghost,patrol,tile;
+		vector<string> v,ghost,patrol,tile, jumpplatform, gravityboots;
 		int tile_X,tile_Y,ghost_X,ghost_Y,patrol_X,patrol_Y;
 
 

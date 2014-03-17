@@ -1,5 +1,5 @@
 #include "DefaultlevelFactory.h"
-
+#include "GadgetGravityBoots.h"
 
 
 namespace isgp{
@@ -80,6 +80,10 @@ namespace isgp{
 				tile.push_back(string(v[k]));
 			else if(0==strcmp(m,"patrol"))
 				patrol.push_back(string(v[k]));
+			else if(0==strcmp(m, "jumpplatform"))
+				jumpplatform.push_back(string(v[k]));
+			else if(0==strcmp(m, "gravityboots")) 
+				gravityboots.push_back(string(v[k]));
 		}
 
 		int tile_size = tile.size();
@@ -123,6 +127,22 @@ namespace isgp{
 			patrol2 = new Patrol(fromto.FromTo(Vector2D(patrol_X,patrol_Y)),100,level->_player);
 			patrol2->SetGrid(level->GetGrid());
 			level->enemies.push_back(patrol2); 
+			
+		}
+
+		int gadget_size = gravityboots.size();
+		Gadget * gadget;
+		for(int n=0;n< gadget_size;n++)
+		{
+			patrol_X= atoi(gravityboots[n].c_str());
+			strcpy_s(v_for,30,gravityboots[n].c_str());
+			result=strtok_s(v_for,",",&m);
+			patrol_Y=atoi(m);
+			//
+
+			gadget = new GadgetGravityBoots(fromto.FromTo(Vector2D(patrol_X,patrol_Y)),level->_player);
+			gadget->SetGrid(level->GetGrid());
+			level->enemies.push_back(gadget); 
 			
 		}
 	//tile, ghost, patrol 있음. 캄 vector 에 ghost가 몇번째에나오는지 확인하고. 그전까지 나온 거를 다 좌표로저장하기 위에처럼
