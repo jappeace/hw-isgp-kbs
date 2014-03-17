@@ -25,6 +25,8 @@ namespace isgp{
 	void BackgroundArtist::RenderBackground(void){
 		_quil->BeginRendering();
 		_level->GetGrid()->TraverseTiles(this);
+		_quil->SetColor(RGB(255,23,00));
+		_quil->DrawStaticRect(Vector2D(3,5), Vector2D(100, 300));
 		_quil->EndRendering();
 		_background->GenerateMask();
 	}
