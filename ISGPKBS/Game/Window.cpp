@@ -100,12 +100,8 @@ LRESULT Window::MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 }
 
 void Window::RestartGame() {
-	SimpleLevelFactory factory;
-	_level = factory.CreateLevel();
-	_gameState = NULL;
+	delete _gameState;
 	AfterCreate(_hWnd);
-	delete _currentMenu;
-	_currentMenu = NULL;
 }
 
 void Window::GameOver() {

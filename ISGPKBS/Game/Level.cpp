@@ -19,9 +19,10 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 
 	Level::~Level(void)
 	{
-		if(_grid){
-			delete _grid;
-		}
+		delete _grid;
+		delete start;
+		delete finish;
+		delete _player;
 	}
 
 	void Level::Update(double elapsed) {
