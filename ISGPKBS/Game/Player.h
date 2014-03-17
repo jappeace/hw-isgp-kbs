@@ -7,6 +7,7 @@
 #include "IPaintable.h"
 #include "Grid.h"
 #include "Entity.h"
+
 namespace isgp {
 	class Player : public Entity
 	{
@@ -18,7 +19,7 @@ namespace isgp {
 		void AddToVelocityY(double y);
 		bool _leftKey, _rightKey, _upKey, _spaceKey;
 		
-
+	
 
 	private:
 		vector<IBehaviour*>* _behaviours;

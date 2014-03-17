@@ -53,6 +53,7 @@ void Window::OnKeyDown(int which) {
 	}
 	if (which == VK_UP) {
 		_level->_player->_upKey = true;
+		
 	}
 	if (which == VK_SPACE) {
 		_level->_player->_spaceKey = true;
@@ -67,6 +68,7 @@ void Window::OnKeyUp(int which) {
 		_level->_player->_rightKey = false;
 	}
 	if (which == VK_UP) {
+	
 		_level->_player->_upKey = false;
 	}
 	if (which == VK_SPACE) {

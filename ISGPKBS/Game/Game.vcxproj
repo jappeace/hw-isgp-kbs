@@ -87,6 +87,7 @@
     <ClInclude Include="resource2.h" />
     <ClInclude Include="SimpleLevelFactory.h" />
     <ClInclude Include="Size.h" />
+    <ClInclude Include="Sound.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="StrConverter.h" />
     <ClInclude Include="Tile.h" />
@@ -110,6 +111,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SimpleLevelFactory.cpp" />
     <ClCompile Include="Size.cpp" />
+    <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TimesPerSecondCounter.cpp" />

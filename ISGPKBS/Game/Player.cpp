@@ -1,6 +1,9 @@
 #include "gravitybehaviour.h"
 #include "Player.h"
 #include "CollisionDetection.h"
+#include "Sound.h"
+
+
 namespace isgp{
 	Player::Player(Vector2D position) {
 		_maxVel = 500;
@@ -17,6 +20,7 @@ namespace isgp{
 		_behaviours = new vector<IBehaviour*>();
 		_behaviours->push_back(new GravityBehaviour(this));
 		
+	
 		_facingRight = true;
 		_animation = new Animation(".\\tiles\\megaman.bmp", Size(32, 32), 4, 200);
 	}
@@ -31,6 +35,8 @@ namespace isgp{
 		delete _size;
 		delete _velocity;
 		delete _animation;
+
+		
 	}
 
 	void Player::Update(const double milisec) {
@@ -40,6 +46,7 @@ namespace isgp{
 
 		if(_leftKey && _velocity->X() > -_maxVel) {
 			if(collision & Down){
+				
 				_velocity->X(_velocity->X() - (_accel * elapsed));
 			} else {
 				_velocity->X(_velocity->X() - (_deAccel * elapsed));
@@ -77,6 +84,7 @@ namespace isgp{
 		Move((*_velocity) * Vector2D(elapsed));
 
 		if(_upKey && (collision & Down)) {
+			Sound().Play(JUMP);
 			_velocity->Y(-650);
 		}
 
