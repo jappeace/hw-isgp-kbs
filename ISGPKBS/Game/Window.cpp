@@ -38,7 +38,7 @@ void Window::AfterCreate(HWND hWnd) {
 	ClientResize(hWnd, WindowSize.GetWidth(), WindowSize.GetHeight());
 	
 	_cam = new Camera(_level->_player, _level->GetGrid());
-	_graphics->SetCam(_cam);
+	_graphics->SetTranslator(_cam);
 	
 	_graphics->LoadBitmapFile("../tiles/mountain.bmp");
 	_graphics->LoadBitmapFile("../tiles/ground.bmp");

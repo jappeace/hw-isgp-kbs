@@ -1,5 +1,5 @@
 #pragma once
-#include "Graphics.h"
+#include "SpriteGraphics.h"
 #include "Level.h"
 #include "GridGraphicTranslator.h"
 #include "Camera.h"

@@ -98,11 +98,13 @@
     <ClInclude Include="SimpleLevelFactory.h" />
     <ClInclude Include="Size.h" />
     <ClInclude Include="Sprite.h" />
+    <ClInclude Include="SpriteGraphics.h" />
     <ClInclude Include="StrConverter.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TimesPerSecondCounter.h" />
     <ClInclude Include="Vector2D.h" />
     <ClInclude Include="Window.h" />
+    <ClInclude Include="WindowGraphics.h" />
     <ClInclude Include="WorldBlock.h" />
   </ItemGroup>
   <ItemGroup>
@@ -128,10 +130,12 @@
     <ClCompile Include="SimpleLevelFactory.cpp" />
     <ClCompile Include="Size.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="SpriteGraphics.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TimesPerSecondCounter.cpp" />
     <ClCompile Include="Vector2D.cpp" />
     <ClCompile Include="Window.cpp" />
+    <ClCompile Include="WindowGraphics.cpp" />
     <ClCompile Include="WinMain.cpp" />
     <ClCompile Include="WorldBlock.cpp" />
   </ItemGroup>

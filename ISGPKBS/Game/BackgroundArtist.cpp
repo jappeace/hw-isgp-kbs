@@ -10,7 +10,7 @@ namespace isgp{
 		);
 		_cam = cam;
 		_level = level;
-		_quil = new Graphics();
+		_quil = new SpriteGraphics(_background);
 	}
 	BackgroundArtist::~BackgroundArtist(void)
 	{
@@ -23,7 +23,7 @@ namespace isgp{
 		}
 	}
 	void BackgroundArtist::RenderBackground(void){
-		_quil->BeginRendering(_background);
+		_quil->BeginRendering();
 		_level->GetGrid()->TraverseTiles(this);
 		_quil->EndRendering();
 		_background->GenerateMask();

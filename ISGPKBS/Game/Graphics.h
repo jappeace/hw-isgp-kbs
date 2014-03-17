@@ -26,25 +26,14 @@ namespace isgp {
 	*/
 	class Graphics {
 	public:
-		// creates graphics to draw on a window
-		Graphics(HWND);
-		// creates graphics to draw on a sprite
-		Graphics(void);
-		~Graphics(void);
-
-		ITranslator* _cam;
-		void SetCam(ITranslator*);
+		void SetTranslator(ITranslator*);
 
 		void SetColor(COLORREF color);
 
-		// Prepares the device context to start rendering
-		void BeginRendering(HWND);
-		// Ends the rendering state and draws the backbuffer onto the screen
-		void EndRendering(HWND);
-		// Prepares a sprite for rendering
-		void BeginRendering(Sprite*);
-		// Ends the sprite rendering
-		void EndRendering();
+		// Prepares the win32 api rendering proces
+		virtual void BeginRendering(){}
+		// Ends the rendering
+		virtual void EndRendering(){}
 		// get a bitmap from the cache or load it from a file and put it in the cache and return
 		Sprite* LoadBitmapFile(string path);
 
@@ -73,29 +62,28 @@ namespace isgp {
 		void DrawBitmap(string path, Vector2D& position, Vector2D& offset, Size& size);
 
 		// draw a sprite from memory instead of path
-		void DrawSprite(Sprite* sprite, Vector2D& position, Vector2D& offset, Size& size);
+		virtual void DrawSprite(Sprite* sprite, Vector2D& position, Vector2D& offset, Size& size) = 0;
 		void DrawLine(Vector2D one,Vector2D two);
 
 		// translates a position and size into a C Rectangle structure
 		static void FillRect(HDC hdc, Vector2D position, const Size& size, COLORREF color);
-	private:
-		// commen logic for both constructors
-		void Init(void);
+	protected:
 		//does the final api call for BitBLT
 		BOOL BitBlockTransfer(HDC destination, const Vector2D& destPosition, const Size& bothSize, HDC source, const Vector2D& /** offset */positionSrc , DWORD actionFlag);
-		// creates a backbuffer based on
-		void CreateBackbuffer(HDC& hdc, const Size& size);
+
+		// should call this on construction, allows the cache to be created and put all members on NULL
+		virtual void Init();
+		// gets the hdc all preimplemnted methods should draw on
+		virtual HDC getHDC() = 0;
 
 		// The device context which is visible on the screen
 		HDC _visibleHdc;
-		// The hidden device context on which we render to prevent flickering
-		HDC _backBuffer;
-		// The bitmap on which we are actually rendering in the background
-		HBITMAP _bitmap;
-		PAINTSTRUCT* _paintStructure;
+
+		ITranslator* _translator;
 		HPEN _pen;
-		// FPScounter.
-		TimesPerSecondCounter _fpsCounter;
+
+	private:
+		// a bitmap cache based with string as a key
 		static map<string, Sprite*>* _bitmapCache;
 	};
 }
