@@ -25,11 +25,17 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 	}
 
 	void Level::Update(double elapsed) {
-		_gadget->Update(elapsed);
-		_gadget2->Update(elapsed);
+		// Update player
 		_player->Update(elapsed);
-		_enemy->Update(elapsed);
-		_enemy2->Update(elapsed);
+
+		// Update gadgets
+		for (auto it = gadgets.begin(); it != gadgets.end(); ++it) {
+			(*it)->Update(elapsed);
+		}
+		// Update enemies.
+		for (auto it = enemies.begin(); it != enemies.end(); ++it) {
+			(*it)->Update(elapsed);
+		}
 	}
 
 	void Level::Paint(Graphics* g) {
@@ -59,10 +65,14 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 		_graphics = g;
 		_grid->TraverseTiles(this);
 		_player->Paint(g);
-		_enemy->Paint(g);
-		_enemy2->Paint(g);
-		_gadget->Paint(g);
-		_gadget2->Paint(g);
+		// Update gadgets
+		for (auto it = gadgets.begin(); it != gadgets.end(); ++it) {
+			(*it)->Paint(g);
+		}
+		// Update enemies.
+		for (auto it = enemies.begin(); it != enemies.end(); ++it) {
+			(*it)->Paint(g);
+		}
 	}
 	void Level::ReceiveTile(Tile* tile) {
 #ifdef _DEBUG

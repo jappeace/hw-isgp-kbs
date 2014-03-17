@@ -1,6 +1,6 @@
 #include "PlayingGameState.h"
 #include "GameOverGameState.h"
-#include "SimpleLevelFactory.h"
+#include "DefaultlevelFactory.h"
 #include "Camera.h"
 #include <Windows.h>
 
@@ -11,7 +11,7 @@ namespace isgp {
 		_gameOver = gameOver;
 		_graphics = graphics;
 		_graphics->SetTextBackgroundColor(RGB(255, 255, 255));
-		SimpleLevelFactory factory;
+		DefaultlevelFactory factory;
 		_level = factory.CreateLevel();
 		_camera = new Camera(_level->_player, _level->GetGrid());
 		_graphics->SetCam(_camera);

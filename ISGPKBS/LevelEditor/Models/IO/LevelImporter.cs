@@ -64,6 +64,12 @@ namespace LevelEditor.Models.IO
 					case "patrol":
 						gridObjectType = GridObjectType.Patrol;
 						break;
+                    case "gravityboots":
+                        gridObjectType = GridObjectType.GravityBoots;
+				        break;
+                    case "jumpplatform":
+                        gridObjectType = GridObjectType.JumpPlatform;
+                        break;
 				}
 				level.SetGridObject(gridObjectPos, new GridObject(gridObjectType));
 				tileLine = LevelReader.ReadLine();
@@ -94,7 +100,7 @@ namespace LevelEditor.Models.IO
 		}
 
 		/// <summary>
-		/// Gets the Point with a position of a string tha tlooks like:
+		/// Gets the Point with a position of a string that looks like:
 		/// xcoordinate,ycoordinate=tiletype
 		/// </summary>
 		private Point GetPosition(string line, int posIndex)

@@ -7,6 +7,8 @@
 	{
 		Tile,
 		Ghost,
-		Patrol
+		Patrol,
+        GravityBoots,
+        JumpPlatform
 	}
 }

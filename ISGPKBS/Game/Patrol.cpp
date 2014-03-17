@@ -66,9 +66,9 @@ namespace isgp {
 		}
 
 		//this is a tmp fix
-		if (_oldPosition == _position) {
+		/*if (_oldPosition == _position) {
 			_velocity->X(-_velocity->X());
-		}
+		}*/
 
 		_oldPosition = _position;
 	}
