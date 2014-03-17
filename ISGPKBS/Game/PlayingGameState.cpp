@@ -20,5 +20,7 @@ namespace isgp {
 	}
 
 	void PlayingGameState::Update(double elapsed) {
+		// TODO:
+		//_level->Update(elapsed);
 	}
 }

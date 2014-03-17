@@ -70,6 +70,7 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="GameOverMenu.h" />
     <ClInclude Include="GameOverState.h" />
+    <ClInclude Include="PlayingGameState.h" />
     <ClInclude Include="IGameState.h" />
     <ClInclude Include="Ghost.h" />
     <ClInclude Include="IBehaviour.h" />
@@ -120,6 +121,7 @@
     <ClCompile Include="MenuItem.cpp" />
     <ClCompile Include="Patrol.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayingGameState.cpp" />
     <ClCompile Include="SimpleLevelFactory.cpp" />
     <ClCompile Include="Size.cpp" />
     <ClCompile Include="Sprite.cpp" />

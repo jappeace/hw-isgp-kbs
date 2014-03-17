@@ -2,6 +2,7 @@
 
 #include "IGameState.h"
 #include "Level.h"
+#include "Camera.h"
 
 namespace isgp {
 	class PlayingGameState : public IGameState {
