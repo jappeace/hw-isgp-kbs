@@ -2,7 +2,6 @@
 
 #include <vector>
 #include "Animation.h"
-#include "IBehaviour.h"
 #include "IPaintable.h"
 #include "Grid.h"
 #include "Entity.h"
@@ -18,14 +17,17 @@ namespace isgp {
 		bool _leftKey, _rightKey, _upKey, _spaceKey;
 		bool IsAlive();
 		void Kill();
+		void Set_has_gravity_boots(bool hasBoots);
+		bool Get_has_gravity_boots();
 		static const Size InitSize;
 	private:
-		vector<IBehaviour*>* _behaviours;
 		double _maxVel;
 		double _accel;
 		double _deAccel;
 		Animation* _animation;
 		bool _facingRight;
 		bool _isAlive;
+		// Tracks if the player has equiped the gravity boots
+		bool _has_gravity_boots;
 	};
 }

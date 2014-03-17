@@ -1,6 +1,5 @@
 #include "Entity.h"
 #include "GridGraphicTranslator.h"
-#include "CollisionDetection.h"
 
 namespace isgp {
 
@@ -20,6 +19,10 @@ namespace isgp {
 		return collision;
 	}
 
+	Vector2D Entity::GetPosition() const {
+		return _position;
+	}
+
 	Vector2D* Entity::GetVelocity() const {
 		return _velocity;
 	}
@@ -28,6 +31,17 @@ namespace isgp {
 		return _size;
 	}
 
+	void Entity::AddBehaviour(IBehaviour* behaviour) {
+		_behaviours->push_back(behaviour);
+	}
+
+	void Entity::RemoveBehaviour(IBehaviour* behaviour) {
+		for (unsigned int i = 0; i < _behaviours->size(); ++i) {
+			if(_behaviours->at(i) == behaviour) {
+				_behaviours->erase(_behaviours->begin() + i);
+			}
+		}
+	}
 	
 	int Entity::Collides(double x, double y) {
 		_position += Vector2D(x, y);
@@ -89,6 +103,10 @@ namespace isgp {
 #ifdef _DEBUG
 		Collides(x, y);
 #endif
+	}
+
+	bool Entity::IsColliding(Collision collisionSide) {
+		return (collision & collisionSide) != 0;
 	}
 
 	double Entity::CalcStepSize(double vel) {
