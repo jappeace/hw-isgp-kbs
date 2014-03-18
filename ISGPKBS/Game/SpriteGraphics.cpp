@@ -44,7 +44,7 @@ namespace isgp {
 			input_hdc, 
 			offset,
 			// Operation
-			SRCPAINT);
+			SRCAND);
 
 		::SelectObject(input_hdc, sprite->GetMask());
 		BitBlockTransfer(
@@ -57,7 +57,7 @@ namespace isgp {
 			input_hdc, 
 			offset,
 			// Operation
-			SRCAND);
+			SRCPAINT);
 		// release the resource
 		DeleteDC(input_hdc);
 	}

@@ -28,9 +28,10 @@ namespace isgp{
 		_quil->SetColor(RGB(255,23,00));
 		_quil->DrawStaticRect(Vector2D(3,5), Vector2D(100, 300));
 		_quil->EndRendering();
+		_background->GenerateMask();
 	}
 	void BackgroundArtist::Paint(Graphics* g) {
-		g->DrawBackground(_background,_cam->ToFrom(Vector2D()), _cam->GetPosition() - Vector2D(384,384), Size(AbstractWindow::WindowSize));
+		g->DrawSprite(_background,_cam->ToFrom(Vector2D()), _cam->GetPosition() - Vector2D(384,384), Size(AbstractWindow::WindowSize));
 	}
 	void BackgroundArtist::ReceiveTile(Tile* tile) {
 #ifdef _DEBUG
