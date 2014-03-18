@@ -14,10 +14,10 @@ namespace isgp{
 		public ILevelFactory
 	{
 	public:
-		void OutputLevel();
+		void OutputLevel(int currentLevel);
 		void Error();
 		void inputString();
-		Level *CreateLevel() override;
+		Level *CreateLevel(int level) override;
 		void get_size();
 		int width;
 		int height;

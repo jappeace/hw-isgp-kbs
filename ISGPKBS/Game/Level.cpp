@@ -40,11 +40,6 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 		// Update player
 		_player->Update(elapsed);
 
-		double collisionRange = sqrt(pow(finish.X() - _player->GetPosition().X(), 2) + pow(finish.Y() - _player->GetPosition().Y(), 2));
-		if (collisionRange < 26) {
-			//player finished
-		}
-
 		// Update enemies.
 		for (auto it = entities.begin(); it != entities.end(); ++it) {
 			(*it)->Update(elapsed);
@@ -83,6 +78,12 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 			(*it)->Paint(g);
 		}
 	}
+
+	bool Level::IsFinished() {
+		double collisionRange = sqrt(pow(finish.X() - _player->GetPosition().X(), 2) + pow(finish.Y() - _player->GetPosition().Y(), 2));
+		return (collisionRange < 26);
+	}
+
 	void Level::ReceiveTile(Tile* tile) {
 #ifdef _DEBUG
 		Vector2D position = *tile->GetPosition();

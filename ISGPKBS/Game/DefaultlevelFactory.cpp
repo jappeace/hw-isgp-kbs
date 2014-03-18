@@ -2,9 +2,9 @@
 
 namespace isgp{
 
-	void DefaultlevelFactory::OutputLevel()
+	void DefaultlevelFactory::OutputLevel(int currentLevel)
 	{
-		ifstream infile("level.txt");
+		ifstream infile("./levels/level" + StrConverter::IntToString(currentLevel) + ".level");
 
 		//infile.open("level.txt");
 		
@@ -162,9 +162,9 @@ namespace isgp{
 
 }
 
-	Level *DefaultlevelFactory::CreateLevel()
+	Level *DefaultlevelFactory::CreateLevel(int currentLevel)
 	{
-		OutputLevel();
+		OutputLevel(currentLevel);
 		get_size();
 		return level;
 	}

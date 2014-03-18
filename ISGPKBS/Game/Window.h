@@ -21,9 +21,11 @@ namespace isgp {
 		void OnKeyUp(int which) override;
 		void GameLoop(double) override;
 		void AfterCreate(HWND) override;
+		void NextLevel();
 		Camera* _cam;
 	private:
 		Level* _level;
+		int _currentLevel;
 		void ClientResize(HWND hWnd, int nWidth, int nHeight);
 		IMenu* _currentMenu;
 		IGameState* _gameState;
