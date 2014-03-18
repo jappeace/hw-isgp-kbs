@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Animation.h"
 #include "Entity.h"
 #include "Player.h"
 
@@ -8,6 +9,7 @@ namespace isgp {
 	{
 	public:
 		Ghost(Vector2D, Player*);
+		~Ghost();
 		void Update(const double) override;
 		void Paint(Graphics*) override;
 		void AddToVelocityY(double) override;
@@ -18,6 +20,7 @@ namespace isgp {
 		double _aVel;
 		Player* _player;
 		double _radAngle;
+		Animation* _animation;
 	};
 }
 

@@ -4,7 +4,8 @@ namespace isgp{
 
 	class ILevelFactory{
 	public:
-		virtual Level* CreateLevel() = 0;
+		virtual Level* CreateLevel(int level) = 0;
+		virtual bool LevelExists(int level) = 0;
 	};
 
 }

@@ -4,6 +4,8 @@
 namespace isgp {
 	GameOverMenu::GameOverMenu() {
 		this->_selectedMenuItem = 0;
+		this->_font = CreateFont(48,0,0,0,FW_DONTCARE,FALSE,FALSE,FALSE,DEFAULT_CHARSET,OUT_OUTLINE_PRECIS,
+			CLIP_DEFAULT_PRECIS,DEFAULT_QUALITY, VARIABLE_PITCH,TEXT("Lucida Console"));
 	}
 
 	GameOverMenu::~GameOverMenu() {
@@ -11,6 +13,7 @@ namespace isgp {
 		for (auto it = _menuItems.begin(); it != _menuItems.end(); ++it) {
 			delete (*it);
 		}
+		DeleteObject(this->_font);
 	}
 
 	// Add menu item to the menu.
@@ -42,16 +45,21 @@ namespace isgp {
 
 	// Paints the menu on the screen.
 	void GameOverMenu::Paint(Graphics* g) {
-		Vector2D location(300, 100);
+		g->SetTextBackgroundColor(RGB(0, 0, 0));
+		g->FillRect(Vector2D(0, 0), Size(800, 600),RGB(0, 0, 0));
+
+		Vector2D location(285, 200);
 		for (auto item = _menuItems.begin(); item != _menuItems.end(); ++item) {
 			if (std::distance(_menuItems.begin(), item) == this->_selectedMenuItem) {
-				g->SetTextColor(RGB(0, 200, 150));
+				g->SetTextColor(RGB(255, 255, 255));
+				g->DrawStr(location, ">" + (*item)->GetText(), _font);
 			}
 			else {
-				g->SetTextColor(RGB(0, 0, 0));
+				g->SetTextColor(RGB(155, 155, 155));
+				g->DrawStr(location, " " + (*item)->GetText(), _font);
 			}
-			g->DrawStr(location, (*item)->GetText());
-			location.Y(location.Y() + 20);
+			location.Y(location.Y() + 50);
 		}
+		g->DrawBitmap("../tiles/gameover.bmp", Vector2D(180, 120), Size(778, 88));
 	}
 }

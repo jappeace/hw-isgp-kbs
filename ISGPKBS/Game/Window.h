@@ -7,8 +7,9 @@
 #include "WorldBlock.h"
 #include "Camera.h"
 #include "IMenu.h"
-#include "GameState.h"
-
+#include "IGameState.h"
+#include "DefaultLevelFactory.h"
+#include "GameCompletedGameState.h"
 namespace isgp {
 	class Window : public AbstractWindow {
 	public:
@@ -21,12 +22,17 @@ namespace isgp {
 		void OnKeyUp(int which) override;
 		void GameLoop(double) override;
 		void AfterCreate(HWND) override;
+		void NextLevel();
+		void FullRestart();
 		Camera* _cam;
 	private:
 		Level* _level;
+		int _currentLevel;
 		void ClientResize(HWND hWnd, int nWidth, int nHeight);
 		IMenu* _currentMenu;
-		GameState _gameState;
+		IGameState* _gameState;
 		void RestartGame();
+		void QuitGame();
+		void GameOver();
 	};
 }

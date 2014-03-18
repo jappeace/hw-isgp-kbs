@@ -45,7 +45,25 @@ namespace isgp {
 	
 	int Entity::Collides(double x, double y) {
 		_position += Vector2D(x, y);
-		int collision = CheckCollision();
+
+		int collision = None;
+		GridGraphicTranslator ggt;
+		Vector2D maxPos = ggt.FromTo(Vector2D((int) _grid->GetSize()->GetWidth(), (int) _grid->GetSize()->GetHeight()));
+		if (_position.X() <= 0) {
+			collision = Left;
+		} else if (_position.X() + (GetSize()->X() * 1.25) >= maxPos.X()) {
+			collision = Right;
+		}
+		if (_position.Y() <= 0) {
+			collision = Up;
+		} else if (_position.Y() + (GetSize()->Y() * 1.25) >= maxPos.Y()) {
+			collision = Down;
+		} 
+
+		if (collision == None) {
+			collision = CheckCollision();
+		}
+
 		_position -= Vector2D(x, y);
 		return collision;
 	}
@@ -98,11 +116,12 @@ namespace isgp {
 
 		int xCol = Collides(x, 0);
 		int yCol = Collides(0, y);
-		collision = (xCol & (Left | Right)) | (yCol & (Up | Down));
 
 #ifdef _DEBUG
 		Collides(x, y);
 #endif
+
+		collision = (xCol & (Left | Right)) | (yCol & (Up | Down));
 	}
 
 	bool Entity::IsColliding(Collision collisionSide) {
