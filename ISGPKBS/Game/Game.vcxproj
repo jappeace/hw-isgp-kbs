@@ -72,6 +72,7 @@
     <ClInclude Include="Gadget.h" />
     <ClInclude Include="GadgetGravityBoots.h" />
     <ClInclude Include="GadgetJumpPlatform.h" />
+    <ClInclude Include="GameCompletedGameState.h" />
     <ClInclude Include="GameOverGameState.h" />
     <ClInclude Include="GameOverMenu.h" />
     <ClInclude Include="GameOverState.h" />
@@ -119,6 +120,7 @@
     <ClCompile Include="Gadget.cpp" />
     <ClCompile Include="GadgetGravityBoots.cpp" />
     <ClCompile Include="GadgetJumpPlatform.cpp" />
+    <ClCompile Include="GameCompletedGameState.cpp" />
     <ClCompile Include="GameOverGameState.cpp" />
     <ClCompile Include="GameOverMenu.cpp" />
     <ClCompile Include="Ghost.cpp" />

@@ -18,6 +18,7 @@ namespace isgp{
 		void Error();
 		void inputString();
 		Level *CreateLevel(int level) override;
+		bool LevelExists(int level) override;
 		void get_size();
 		int width;
 		int height;

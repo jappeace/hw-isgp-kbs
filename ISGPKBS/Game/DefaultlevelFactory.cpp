@@ -2,6 +2,11 @@
 
 namespace isgp{
 
+	bool DefaultlevelFactory::LevelExists(int currentLevel) {
+		ifstream ifile("./levels/level" + StrConverter::IntToString(currentLevel) + ".level");
+		return ifile;
+	}
+
 	void DefaultlevelFactory::OutputLevel(int currentLevel)
 	{
 		ifstream infile("./levels/level" + StrConverter::IntToString(currentLevel) + ".level");
