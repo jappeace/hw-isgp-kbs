@@ -119,7 +119,7 @@
     <ClCompile Include="CollisionHelper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Finish.cpp">
+    <ClCompile Include="Theme2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -277,7 +277,7 @@
     <ClInclude Include="CollisionHelper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Finish.h">
+    <ClInclude Include="Theme2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
