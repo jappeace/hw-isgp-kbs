@@ -58,15 +58,6 @@ namespace isgp {
 		
 	}
 
-	void Graphics::FillStaticRect(int x1, int y1, int x2, int y2, HBRUSH brush) {
-		RECT r;
-		r.left = x1;
-		r.top = y1;
-		r.right = x2;
-		r.bottom = y2;
-		FillRect(this->_backBuffer, &r, brush);
-	}
-
 	void Graphics::DrawStaticRect(Vector2D& one, Vector2D& two) {
 		this->DrawRect((int)one.X(),(int) one.Y(),(int) two.X(),(int) two.Y());
 	}
