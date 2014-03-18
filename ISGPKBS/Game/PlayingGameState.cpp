@@ -15,7 +15,7 @@ namespace isgp {
 		_level = factory.CreateLevel(level);
 		_camera = new Camera(_level->_player, _level->GetGrid());
 		_graphics->SetTranslator(_camera);
-		_artist = new BackgroundArtist(_camera, _level);
+		_artist = new BackgroundArtist(_camera, _level, level);
 		_artist->RenderBackground();
 	}
 

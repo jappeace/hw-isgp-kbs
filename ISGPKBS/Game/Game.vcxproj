@@ -138,6 +138,7 @@
     <ClInclude Include="resource2.h" />
     <ClInclude Include="Size.h" />
     <ClInclude Include="Sprite.h" />
+    <ClInclude Include="SpriteCache.h" />
     <ClInclude Include="SpriteGraphics.h" />
     <ClInclude Include="StrConverter.h" />
     <ClInclude Include="Tile.h" />
@@ -147,7 +148,6 @@
     <ClInclude Include="WindowGraphics.h" />
     <ClInclude Include="WorldBlock.h" />
   </ItemGroup>
-    
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

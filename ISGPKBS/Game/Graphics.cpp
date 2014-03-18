@@ -6,7 +6,7 @@ namespace isgp {
 		_translator = NULL;
 		_visibleHdc = NULL;
 		_pen = NULL;
-		_bitmapCache = new map<string, Sprite*>();
+		_sprites = new SpriteCache<string>();
 	}
 
 	void Graphics::SetTranslator(ITranslator* cam) {
@@ -83,15 +83,15 @@ namespace isgp {
 	}
 
 	Sprite* Graphics::LoadBitmapFile(string path) {
-		if(Graphics::_bitmapCache->count(path)) {
+		if(_sprites->IsAt(path)) {
 			// Return cached item
-			return _bitmapCache->find(path)->second;
+			return &_sprites->GetAt(path);
 		}
 
 		HBITMAP bitmap = (HBITMAP)LoadImage(NULL, path.c_str(), IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		Sprite* sprite = new Sprite(bitmap);
 
-		(*_bitmapCache)[path] = sprite;
+		(*_sprites)[path] = *sprite;
 
 		return sprite;
 	}

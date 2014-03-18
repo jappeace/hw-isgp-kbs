@@ -1,7 +1,7 @@
 #include "BackgroundArtist.h"
 
 namespace isgp{
-	BackgroundArtist::BackgroundArtist(Camera* cam, Level* level)
+	BackgroundArtist::BackgroundArtist(Camera* cam, Level* level, int levelnr)
 	{
 		_background = new Sprite(
 			GridGraphicTranslator().FromTo(

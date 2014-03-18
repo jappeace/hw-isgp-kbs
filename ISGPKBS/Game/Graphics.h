@@ -11,6 +11,7 @@
 #include "Sprite.h"
 #include "GridGraphicTranslator.h"
 #include "StrConverter.h"
+#include "SpriteCache.h"
 // to breack an include loop This class can't use the static Level::tilesize
 // that is why the macro where the size is based on is moved to here
 // this also gives a small speed optimization (less function calls)
@@ -85,6 +86,6 @@ namespace isgp {
 
 	private:
 		// a bitmap cache based with string as a key
-		map<string, Sprite*>* _bitmapCache;
+		SpriteCache<string>* _sprites;
 	};
 }
