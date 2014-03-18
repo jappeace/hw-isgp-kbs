@@ -1,6 +1,6 @@
 width=20
 height=20
-start=15,17
+start=1,14
 finish=15,17
 0,18=tile
 0,19=tile

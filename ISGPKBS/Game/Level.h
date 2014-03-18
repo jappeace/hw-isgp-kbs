@@ -15,7 +15,7 @@ namespace isgp{
 		Level(int width, int height);
 		~Level(void);
 		Vector2D *start;
-		Vector2D *finish;
+		Vector2D finish;
 		void ReceiveTile(Tile* tile) override;
 		void Paint(Graphics* g) override;
 		void Update(double elapsed);

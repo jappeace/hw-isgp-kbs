@@ -30,7 +30,6 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 	{
 		delete _grid;
 		delete start;
-		delete finish;
 		delete _player;
 		for (auto it = entities.begin(); it != entities.end(); ++it) {
 			delete (*it);
@@ -41,12 +40,9 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 		// Update player
 		_player->Update(elapsed);
 
-		double collisionRange = sqrt(pow(finish->X() - _player->GetPosition().X(), 2) + pow(finish->Y() - _player->GetPosition().Y(), 2));
-
+		double collisionRange = sqrt(pow(finish.X() - _player->GetPosition().X(), 2) + pow(finish.Y() - _player->GetPosition().Y(), 2));
 		if (collisionRange < 26) {
 			//player finished
-			//_player->Kill();
-			OutputDebugString("A");
 		}
 
 		// Update enemies.

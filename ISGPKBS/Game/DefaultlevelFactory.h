@@ -25,11 +25,8 @@ namespace isgp{
 		vector<string> v,ghost,patrol,tile, jumpplatform, gravityboots;
 		int tile_X,tile_Y,ghost_X,ghost_Y,patrol_X,patrol_Y;
 
-
 	private :
 		Level *level;
-		
-
 	};
 
 
