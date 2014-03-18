@@ -7,19 +7,16 @@ namespace isgp {
 		HDC forCreation = CreateCompatibleDC(NULL);
 		BITMAPINFO i;
 		ZeroMemory( &i.bmiHeader, sizeof(BITMAPINFOHEADER) );
-		i.bmiHeader.biWidth=s.GetWidth(); // Set size you need
-		i.bmiHeader.biHeight=s.GetHeight(); // Set size you need
+		i.bmiHeader.biWidth=s.GetWidth();
+		i.bmiHeader.biHeight=s.GetHeight();
 		i.bmiHeader.biPlanes=1;
-		i.bmiHeader.biBitCount=24; // Can be 8, 16, 32 bpp or
-		// other number
+		i.bmiHeader.biBitCount=24;
 		i.bmiHeader.biSizeImage=0;
 		i.bmiHeader.biSize=sizeof(BITMAPINFOHEADER);
 		i.bmiHeader.biClrUsed= 0;
 		i.bmiHeader.biClrImportant= 0;
 		VOID *pvBits;
-		HBITMAP b = CreateDIBSection(forCreation, &i, DIB_RGB_COLORS, &pvBits, NULL, 0 );
-		::BitBlt(forCreation, 0, 0, s.GetWidth(), s.GetHeight(), NULL, NULL, NULL, WHITENESS);
-		//Graphics::FillRect(forCreation, Vector2D(0,0),s,kKeyColor);
+		HBITMAP b = CreateDIBSection(forCreation, &i, DIB_RGB_COLORS, &pvBits, NULL, 0);
 		DeleteDC(forCreation);
 		Init(b);
 	}
