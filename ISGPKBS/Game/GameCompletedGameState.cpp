@@ -6,8 +6,8 @@ namespace isgp {
 	}
 
 	void GameCompletedGameState::Paint(Graphics* g) {
-		g->_cam = NULL;
-		g->FillStaticRect(0, 0, 800, 600, this->_brush);
+		g->SetTranslator(NULL);
+		g->FillRect(Vector2D(), Size(800, 600), RGB(0, 0, 0));
 		g->DrawBitmap("../tiles/yourock.bmp", Vector2D(95, 122), Size(609, 356));
 	}
 
@@ -23,12 +23,10 @@ namespace isgp {
 	GameCompletedGameState::GameCompletedGameState(Window* window)
 	{
 		_window = window;
-		this->_brush = CreateSolidBrush(RGB(0, 0, 0));
 	}
 
 
 	GameCompletedGameState::~GameCompletedGameState(void)
 	{
-		DeleteObject(this->_brush);
 	}
 }

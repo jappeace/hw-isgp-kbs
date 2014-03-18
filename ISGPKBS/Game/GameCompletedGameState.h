@@ -17,6 +17,5 @@ namespace isgp {
 		void KeyUp(int keyCode) override;
 	private:
 		Window* _window;
-		HBRUSH _brush;
 	};
 }

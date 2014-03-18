@@ -80,6 +80,7 @@
     <ClCompile Include="GravityBootsBehaviour.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="GridGraphicTranslator.cpp" />
+    <ClCompile Include="GameCompletedGameState.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="MenuItem.cpp" />
     <ClCompile Include="Patrol.cpp" />
@@ -146,7 +147,7 @@
     <ClInclude Include="WindowGraphics.h" />
     <ClInclude Include="WorldBlock.h" />
   </ItemGroup>
-    <ClCompile Include="GameCompletedGameState.cpp" />
+    
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
