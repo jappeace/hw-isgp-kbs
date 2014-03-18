@@ -39,10 +39,8 @@ void Window::ClientResize(HWND hWnd, int nWidth, int nHeight)
 }
 
 void Window::AfterCreate(HWND hWnd) {
-	int random = rand() % 5 + 1;
 	Theme* tmp;
-
-	switch (random) {
+	switch (_currentLevel) {
 	case 1 :
 		tmp = new Theme1();
 		break;
