@@ -14,7 +14,9 @@ namespace isgp {
 		DefaultlevelFactory factory;
 		_level = factory.CreateLevel();
 		_camera = new Camera(_level->_player, _level->GetGrid());
-		_graphics->SetCam(_camera);
+		_graphics->SetTranslator(_camera);
+		_artist = new BackgroundArtist(_camera, _level);
+		_artist->RenderBackground();
 	}
 
 	PlayingGameState::~PlayingGameState() {
@@ -23,6 +25,7 @@ namespace isgp {
 	}
 
 	void PlayingGameState::Paint(Graphics* g) {
+		_artist->Paint(g);
 		_level->Paint(g);
 	}
 

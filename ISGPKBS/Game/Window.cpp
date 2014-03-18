@@ -44,8 +44,6 @@ void Window::AfterCreate(HWND hWnd) {
 	_graphics->LoadBitmapFile("../tiles/link.bmp");
 	_graphics->LoadBitmapFile("../tiles/boots.bmp");
 	_graphics->LoadBitmapFile("../tiles/smile.bmp");
-	_artist = new BackgroundArtist(_cam, _level);
-	_artist->RenderBackground();
 }
 
 INT_PTR CALLBACK dialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
@@ -107,7 +105,7 @@ void Window::RestartGame() {
 
 void Window::GameOver() {
 	delete _gameState;
-	_graphics->SetCam(NULL);
+	_graphics->SetTranslator(NULL);
 	_gameState = new GameOverGameState(_graphics, this,
 		&Window::RestartGame, &Window::QuitGame);
 }

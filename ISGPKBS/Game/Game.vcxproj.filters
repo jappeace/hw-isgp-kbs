@@ -107,6 +107,9 @@
     <ClCompile Include="PlayingGameState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DefaultlevelFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractWindow.h">

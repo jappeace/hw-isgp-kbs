@@ -67,6 +67,7 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="BackgroundArtist.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="DefaultlevelFactory.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Gadget.cpp" />
     <ClCompile Include="GadgetGravityBoots.cpp" />

@@ -4,6 +4,7 @@
 #include "Level.h"
 #include "Camera.h"
 #include "Window.h"
+#include "BackgroundArtist.h"
 
 namespace isgp {
 	class PlayingGameState : public IGameState {
@@ -22,5 +23,6 @@ namespace isgp {
 		Camera* _camera;
 		Window* _window;
 		void(Window::*_gameOver)();
+		BackgroundArtist* _artist;
 	};
 }
