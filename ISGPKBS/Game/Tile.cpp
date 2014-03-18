@@ -27,6 +27,7 @@ namespace isgp{
 
 	void Tile::SetData(ITileData* paintable){
 		paintable->ReceiveTile(this);
+		delete _tiledata;
 		_tiledata = paintable;
 		_hasData = true;
 	}

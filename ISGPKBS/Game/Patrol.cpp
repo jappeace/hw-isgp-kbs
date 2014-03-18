@@ -1,3 +1,10 @@
+#ifdef _DEBUG
+    #define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
+    #define DEBUG_NEW new(_NORMAL_BLOCK, __FILE__, __LINE__)
+    #define new DEBUG_NEW
+#endif
 #include "Patrol.h"
 #include "gravitybehaviour.h"
 #include "CollisionDetection.h"
@@ -24,6 +31,9 @@ namespace isgp {
 
 	Patrol::~Patrol() {
 		delete _velocity;
+		for (auto it = _behaviours->begin(); it != _behaviours->end(); ++it) {
+			delete (*it);
+		}
 		delete _behaviours;
 		delete _animation;
 		delete _size;
