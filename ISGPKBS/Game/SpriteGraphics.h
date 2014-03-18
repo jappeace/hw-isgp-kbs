@@ -19,7 +19,7 @@ namespace isgp {
 		void EndRendering() override;
 
 		// draw a sprite from memory instead of path
-		void DrawSprite(Sprite* sprite, Vector2D& position, Vector2D& offset, Size& size) override;
+		void DrawSprite(Sprite* sprite, Vector2D position, Vector2D& offset, Size& size) override;
 	protected:
 		HDC getHDC() override;
 	private:

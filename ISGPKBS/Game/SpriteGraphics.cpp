@@ -21,12 +21,10 @@ namespace isgp {
 
 	}
 
-	void SpriteGraphics::DrawSprite(Sprite* sprite, Vector2D& position, Vector2D& offset, Size& size){
-
-		Vector2D correctedVector2D = position;
+	void SpriteGraphics::DrawSprite(Sprite* sprite, Vector2D position, Vector2D& offset, Size& size){
 
 		if (_translator != NULL) {
-			correctedVector2D = _translator->FromTo(position);
+			position = _translator->FromTo(position);
 		}
 
 		HDC input_hdc = CreateCompatibleDC(NULL);
@@ -38,7 +36,7 @@ namespace isgp {
 			// Dest Context
 			getHDC(), 
 			// Position
-			correctedVector2D,
+			position,
 			size,
 			// Source Context
 			input_hdc, 
@@ -51,7 +49,7 @@ namespace isgp {
 			// Dest Context
 			getHDC(), 
 			// Position
-			correctedVector2D,
+			position,
 			size,
 			// Source Context
 			input_hdc, 

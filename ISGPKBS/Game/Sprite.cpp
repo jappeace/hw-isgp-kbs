@@ -10,6 +10,7 @@ namespace isgp {
 				s.GetWidth(),
 				s.GetHeight()
 			);
+		::BitBlt(forCreation, 0, 0, s.GetWidth(), s.GetHeight(), NULL, NULL, NULL, WHITENESS);
 		Graphics::FillRect(forCreation, Vector2D(0,0),s,kKeyColor);
 		DeleteDC(forCreation);
 		Init(b);

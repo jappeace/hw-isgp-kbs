@@ -20,8 +20,8 @@ namespace isgp {
 		void BeginRendering() override;
 		void EndRendering() override;
 
-		void DrawSprite(Sprite* sprite, Vector2D& position, Vector2D& offset, Size& size) override;
-		void DrawBackground(Sprite* sprite, Vector2D& position, Vector2D& offset, Size& size) override;
+		void DrawSprite(Sprite* sprite, Vector2D position, Vector2D& offset, Size& size) override;
+		void DrawBackground(Sprite* sprite, Vector2D position, Vector2D& offset, Size& size) override;
 	protected:
 		HDC getHDC() override;
 	private:
