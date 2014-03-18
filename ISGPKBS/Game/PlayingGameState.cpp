@@ -22,6 +22,7 @@ namespace isgp {
 	PlayingGameState::~PlayingGameState() {
 		delete _camera;
 		delete _level;
+		delete _artist;
 	}
 
 	void PlayingGameState::Paint(Graphics* g) {
