@@ -1,6 +1,8 @@
-#include "Level.h"
-#include "GridGraphicTranslator.h"
 #include "Camera.h"
+#include "CollisionHelper.h"
+#include "GridGraphicTranslator.h"
+#include "Level.h"
+
 namespace isgp{
 // default amount of tiles in level
 const Size Level::defaultTileAmount = Size(500,30);
@@ -55,8 +57,7 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 	}
 
 	bool Level::IsFinished() {
-		double collisionRange = sqrt(pow(finish.X() - _player->GetPosition().X(), 2) + pow(finish.Y() - _player->GetPosition().Y(), 2));
-		return (collisionRange < 26);
+		return CollisionHelper::IsColliding(_player->GetPosition(), *_player->GetSize(), finish, Size(16, 16));
 	}
 
 	Grid* Level::GetGrid() const{

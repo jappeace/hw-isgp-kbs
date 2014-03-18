@@ -1,4 +1,5 @@
 #include "Gadget.h"
+#include "CollisionHelper.h"
 
 namespace isgp {
 	void Entity::AddToVelocityY(double d) {
@@ -13,7 +14,7 @@ namespace isgp {
 		double x0 = _position.X();
 		double y0 = _position.Y();
 
-		if ((x + w > x0 && y + h > y0 && x < x0 + _size->X() && y < y0 + _size->Y())) {
+		if (CollisionHelper::IsColliding(_position, *_size, _player->GetPosition(), *_player->GetSize())) {
 			OnCollide();
 		}
 	}
