@@ -2,17 +2,18 @@
 #include "GameOverGameState.h"
 #include "DefaultlevelFactory.h"
 #include "Camera.h"
+#include "Theme.h"
 #include <Windows.h>
 
 namespace isgp {
-	PlayingGameState::PlayingGameState(Graphics* graphics, Window* window, int level,
+	PlayingGameState::PlayingGameState(Graphics* graphics, Window* window, int level, Theme* theme,
 		void(Window::*gameOver)()) {
 		_window = window;
 		_gameOver = gameOver;
 		_graphics = graphics;
 		_graphics->SetTextBackgroundColor(RGB(255, 255, 255));
 		DefaultlevelFactory factory;
-		_level = factory.CreateLevel(level);
+		_level = factory.CreateLevel(level, theme);
 		_level->LoadContent(_graphics, GridGraphicTranslator().FromTo(*_level->GetGrid()->GetSize()).X());
 		_camera = new Camera(_level->_player, _level->GetGrid());
 		_graphics->SetTranslator(_camera);

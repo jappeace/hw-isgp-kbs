@@ -4,6 +4,7 @@
 #include "MenuItem.h"
 #include "PlayingGameState.h"
 #include "GameOverGameState.h"
+#include "Theme1.h"
 
 namespace isgp {
 
@@ -34,7 +35,7 @@ void Window::ClientResize(HWND hWnd, int nWidth, int nHeight)
 }
 
 void Window::AfterCreate(HWND hWnd) {
-	_gameState = new PlayingGameState(_graphics, this, _currentLevel, &Window::GameOver);
+	_gameState = new PlayingGameState(_graphics, this, _currentLevel, new Theme1(), &Window::GameOver);
 	ClientResize(hWnd, WindowSize.GetWidth(), WindowSize.GetHeight());
 }
 
