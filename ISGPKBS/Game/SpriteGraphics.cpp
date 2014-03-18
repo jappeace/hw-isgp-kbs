@@ -9,7 +9,7 @@ namespace isgp {
 	void SpriteGraphics::BeginRendering(){
 		this->_visibleHdc = CreateCompatibleDC(NULL);
 		::SelectObject(this->_visibleHdc, _target->GetBitmap());
-		Graphics::FillRect(this->_visibleHdc, Vector2D(), _target->GetSize(), _target->GetTransparant());
+		//Graphics::FillRect(this->_visibleHdc, Vector2D(), _target->GetSize(), _target->GetTransparant());
 	}
 
 	void SpriteGraphics::EndRendering(){
@@ -23,8 +23,10 @@ namespace isgp {
 
 	void SpriteGraphics::DrawSprite(Sprite* sprite, Vector2D position, Vector2D& offset, Size& size){
 
+		Vector2D correctedVector2D = position;
+
 		if (_translator != NULL) {
-			position = _translator->FromTo(position);
+			correctedVector2D = _translator->FromTo(position);
 		}
 
 		HDC input_hdc = CreateCompatibleDC(NULL);
@@ -36,26 +38,26 @@ namespace isgp {
 			// Dest Context
 			getHDC(), 
 			// Position
-			position,
-			size,
-			// Source Context
-			input_hdc, 
-			offset,
-			// Operation
-			SRCAND);
-
-		::SelectObject(input_hdc, sprite->GetMask());
-		BitBlockTransfer(
-			// Dest Context
-			getHDC(), 
-			// Position
-			position,
+			correctedVector2D,
 			size,
 			// Source Context
 			input_hdc, 
 			offset,
 			// Operation
 			SRCPAINT);
+
+		::SelectObject(input_hdc, sprite->GetMask());
+		BitBlockTransfer(
+			// Dest Context
+			getHDC(), 
+			// Position
+			correctedVector2D,
+			size,
+			// Source Context
+			input_hdc, 
+			offset,
+			// Operation
+			SRCAND);
 		// release the resource
 		DeleteDC(input_hdc);
 	}
