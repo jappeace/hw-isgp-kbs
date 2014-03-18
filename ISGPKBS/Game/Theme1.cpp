@@ -3,7 +3,7 @@
 namespace isgp {
 	Theme1::Theme1()
 	{
-		_tilePath = "../tiles/ground1.bmp";
+		_tilePath = "../tiles/ground4.bmp";
 		_bg1 = "../tiles/mountain.bmp";
 		_bg2 = "../tiles/ground.bmp";
 	}
