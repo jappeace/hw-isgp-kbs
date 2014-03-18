@@ -96,6 +96,9 @@
     <ClCompile Include="SpriteGraphics.cpp" />
     <ClCompile Include="Theme1.cpp" />
     <ClCompile Include="Theme2.cpp" />
+    <ClCompile Include="Theme3.cpp" />
+    <ClCompile Include="Theme4.cpp" />
+    <ClCompile Include="Theme5.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TimesPerSecondCounter.cpp" />
     <ClCompile Include="Vector2D.cpp" />
@@ -149,6 +152,9 @@
     <ClInclude Include="SpriteGraphics.h" />
     <ClInclude Include="StrConverter.h" />
     <ClInclude Include="Theme2.h" />
+    <ClInclude Include="Theme3.h" />
+    <ClInclude Include="Theme4.h" />
+    <ClInclude Include="Theme5.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TimesPerSecondCounter.h" />
     <ClInclude Include="Vector2D.h" />

@@ -122,6 +122,15 @@
     <ClCompile Include="Theme2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Theme3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Theme4.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Theme5.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractWindow.h">
@@ -278,6 +287,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Theme2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Theme3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Theme4.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Theme5.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
