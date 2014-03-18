@@ -31,8 +31,7 @@ namespace isgp {
 		_camera->Update(elapsed);
 		if (!_level->_player->IsAlive()) {
 			(_window->*_gameOver)();
-		}
-		if (_level->IsFinished()) {
+		} else if (_level->IsFinished()) {
 			_window->NextLevel();
 		}
 	}
