@@ -1,4 +1,5 @@
 #include "Gadget.h"
+#include "CollisionHelper.h"
 
 namespace isgp {
 	void Entity::AddToVelocityY(double d) {
@@ -6,9 +7,14 @@ namespace isgp {
 	}
 
 	void Gadget::Update(const double ms) {
-		double collisionRange = sqrt(pow(_position.X() - _player->GetPosition().X(), 2) + pow(_position.Y() - _player->GetPosition().Y(), 2));
+		double x = _player->GetPosition().X();
+		double y = _player->GetPosition().Y();
+		double w = _player->GetSize()->X();
+		double h = _player->GetSize()->Y();
+		double x0 = _position.X();
+		double y0 = _position.Y();
 
-		if (collisionRange < 26) {
+		if (CollisionHelper::IsColliding(_position, *_size, _player->GetPosition(), *_player->GetSize())) {
 			OnCollide();
 		}
 	}

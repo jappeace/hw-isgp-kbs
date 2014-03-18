@@ -110,7 +110,7 @@ HRESULT AbstractWindow::Create()
 	  return FALSE;
 	}
 
-	_graphics = new Graphics(_hWnd);
+	_graphics = new WindowGraphics(_hWnd);
 	AfterCreate(_hWnd);
 	ShowWindow(_hWnd, _dwCreationFlags);
 	UpdateWindow(_hWnd);
@@ -143,9 +143,9 @@ LRESULT AbstractWindow::MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 			break;
 
 		case WM_PAINT:
-			_graphics->BeginRendering(_hWnd);
+			_graphics->BeginRendering();
 			OnPaint(_graphics);
-			_graphics->EndRendering(_hWnd);
+			_graphics->EndRendering();
 			break;
 
 		case WM_DESTROY:

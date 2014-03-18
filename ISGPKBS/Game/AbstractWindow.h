@@ -3,7 +3,7 @@
 #include <windows.h>
 #include <tchar.h>
 #include "resource.h"
-#include "Graphics.h"
+#include "WindowGraphics.h"
 #include "Size.h"
 
 namespace isgp {

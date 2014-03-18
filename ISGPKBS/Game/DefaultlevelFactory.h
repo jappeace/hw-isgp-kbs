@@ -14,10 +14,11 @@ namespace isgp{
 		public ILevelFactory
 	{
 	public:
-		void OutputLevel();
+		void OutputLevel(int currentLevel);
 		void Error();
 		void inputString();
-		Level *CreateLevel() override;
+		Level *CreateLevel(int level) override;
+		bool LevelExists(int level) override;
 		void get_size();
 		int width;
 		int height;
@@ -25,11 +26,8 @@ namespace isgp{
 		vector<string> v,ghost,patrol,tile, jumpplatform, gravityboots;
 		int tile_X,tile_Y,ghost_X,ghost_Y,patrol_X,patrol_Y;
 
-
 	private :
 		Level *level;
-		
-
 	};
 
 

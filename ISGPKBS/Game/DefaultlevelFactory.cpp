@@ -6,12 +6,24 @@
     #define new DEBUG_NEW
 #endif
 #include "DefaultlevelFactory.h"
+#include "Theme1.h"
 
 namespace isgp{
 
-	void DefaultlevelFactory::OutputLevel()
+	bool DefaultlevelFactory::LevelExists(int currentLevel) {
+		ifstream f("./levels/level" + StrConverter::IntToString(currentLevel) + ".level");
+		if (f.good()) {
+			f.close();
+			return true;
+		} else {
+			f.close();
+			return false;
+		}  
+	}
+
+	void DefaultlevelFactory::OutputLevel(int currentLevel)
 	{
-		ifstream infile("level.txt");
+		ifstream infile("./levels/level" + StrConverter::IntToString(currentLevel) + ".level");
 
 		//infile.open("level.txt");
 		
@@ -69,8 +81,7 @@ namespace isgp{
 			
 		
 
-		
-		level->finish = new Vector2D(finish_X,finish_Y);
+		level->finish = GridGraphicTranslator().FromTo(Vector2D(finish_X,finish_Y));
 		level->_player = new Player(Vector2D(start_X,start_Y));
 	////////////////information (x,y)of ghost,patrol,tile	
 		int size = v.size();
@@ -170,10 +181,13 @@ namespace isgp{
 
 }
 
-	Level *DefaultlevelFactory::CreateLevel()
+	Level *DefaultlevelFactory::CreateLevel(int currentLevel)
 	{
-		OutputLevel();
+		OutputLevel(currentLevel);
 		get_size();
+
+		level->_theme = new Theme1();
+
 		return level;
 	}
 	void DefaultlevelFactory::Error()

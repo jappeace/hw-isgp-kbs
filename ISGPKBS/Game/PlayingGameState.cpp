@@ -5,16 +5,19 @@
 #include <Windows.h>
 
 namespace isgp {
-	PlayingGameState::PlayingGameState(Graphics* graphics, Window* window,
+	PlayingGameState::PlayingGameState(Graphics* graphics, Window* window, int level,
 		void(Window::*gameOver)()) {
 		_window = window;
 		_gameOver = gameOver;
 		_graphics = graphics;
 		_graphics->SetTextBackgroundColor(RGB(255, 255, 255));
 		DefaultlevelFactory factory;
-		_level = factory.CreateLevel();
+		_level = factory.CreateLevel(level);
+		_level->LoadContent(_graphics, GridGraphicTranslator().FromTo(*_level->GetGrid()->GetSize()).X());
 		_camera = new Camera(_level->_player, _level->GetGrid());
-		_graphics->SetCam(_camera);
+		_graphics->SetTranslator(_camera);
+		_artist = new BackgroundArtist(_camera, _level);
+		_artist->RenderBackground();
 	}
 
 	PlayingGameState::~PlayingGameState() {
@@ -24,6 +27,7 @@ namespace isgp {
 
 	void PlayingGameState::Paint(Graphics* g) {
 		_level->Paint(g);
+		_artist->Paint(g);
 	}
 
 	void PlayingGameState::Update(double elapsed) {
@@ -31,6 +35,8 @@ namespace isgp {
 		_camera->Update(elapsed);
 		if (!_level->_player->IsAlive()) {
 			(_window->*_gameOver)();
+		} else if (_level->IsFinished()) {
+			_window->NextLevel();
 		}
 	}
 
