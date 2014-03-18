@@ -12,10 +12,6 @@ namespace isgp {
 		_graphics = graphics;
 		_graphics->SetTextBackgroundColor(RGB(255, 255, 255));
 		DefaultlevelFactory factory;
-		for (int i = 0; i < 100; i++) {
-		_level = factory.CreateLevel();
-		delete _level;
-		}
 		_level = factory.CreateLevel();
 		_camera = new Camera(_level->_player, _level->GetGrid());
 		_graphics->SetCam(_camera);
