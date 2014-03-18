@@ -43,7 +43,7 @@ void Window::AfterCreate(HWND hWnd) {
 	_graphics->LoadBitmapFile("../tiles/megaman.bmp");
 	_graphics->LoadBitmapFile("../tiles/boo.bmp");
 	_graphics->LoadBitmapFile("../tiles/link.bmp");
-	_graphics->LoadBitmapFile("../tiles/boots.bmp");
+	_graphics->LoadBitmapFile("../tiles/gravityBoots.bmp");
 	_graphics->LoadBitmapFile("../tiles/smile.bmp");
 }
 
@@ -120,7 +120,7 @@ void Window::RestartGame() {
 
 void Window::GameOver() {
 	delete _gameState;
-	_graphics->SetCam(NULL);
+	_graphics->SetTranslator(NULL);
 	_gameState = new GameOverGameState(_graphics, this,
 		&Window::RestartGame, &Window::QuitGame);
 }

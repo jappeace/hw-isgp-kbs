@@ -14,7 +14,9 @@ namespace isgp {
 		DefaultlevelFactory factory;
 		_level = factory.CreateLevel(level);
 		_camera = new Camera(_level->_player, _level->GetGrid());
-		_graphics->SetCam(_camera);
+		_graphics->SetTranslator(_camera);
+		_artist = new BackgroundArtist(_camera, _level);
+		_artist->RenderBackground();
 	}
 
 	PlayingGameState::~PlayingGameState() {
@@ -23,6 +25,24 @@ namespace isgp {
 	}
 
 	void PlayingGameState::Paint(Graphics* g) {
+		static double mountainWidth = (GridGraphicTranslator().FromTo(*_level->GetGrid()->GetSize()).X() * 0.5) + AbstractWindow::WindowSize.GetWidth();
+		static double groundWidth = (GridGraphicTranslator().FromTo(*_level->GetGrid()->GetSize()).X() * 0.5) + AbstractWindow::WindowSize.GetWidth();
+		static Vector2D fix = ((AbstractWindow::WindowSize - Player::InitSize) * Vector2D(1.0,1.35)) / Vector2D(2);
+		for (int i = 0; i < mountainWidth; i += 1920) {
+			g->DrawBitmap("../tiles/mountain.bmp",
+				Vector2D(((_camera->GetPosition().X() - fix.X()) * 0.5) + i,
+				(_camera->GetPosition().Y() - fix.Y()) * 0.5),
+				Size(1920, 791));
+		}
+
+		//Draw ground
+		for (int i = 0; i < groundWidth; i += 1920) {
+			g->DrawBitmap("../tiles/ground.bmp",
+				Vector2D(((_camera->GetPosition().X() - fix.X()) * 0.25) + i,
+				(_camera->GetPosition().Y() + 2000) * 0.25),
+				Size(1920, 321));
+		}
+		_artist->Paint(g);
 		_level->Paint(g);
 	}
 

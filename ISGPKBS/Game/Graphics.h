@@ -26,18 +26,14 @@ namespace isgp {
 	*/
 	class Graphics {
 	public:
-		Graphics(HWND);
-		~Graphics(void);
-
-		ITranslator* _cam;
-		void SetCam(ITranslator*);
+		void SetTranslator(ITranslator*);
 
 		void SetColor(COLORREF color);
 
-		// Prepares the device context to start rendering
-		void BeginRendering(HWND);
-		// Ends the rendering state and draws the backbuffer onto the screen
-		void EndRendering(HWND);
+		// Prepares the win32 api rendering proces
+		virtual void BeginRendering(){}
+		// Ends the rendering
+		virtual void EndRendering(){}
 		// get a bitmap from the cache or load it from a file and put it in the cache and return
 		Sprite* LoadBitmapFile(string path);
 
@@ -49,11 +45,11 @@ namespace isgp {
 		void DrawStr(Vector2D& position, const char* str, int length);
 		void DrawStr(Vector2D& position, const char* str, int length, HFONT font);
 		
-		void FillStaticRect(int x1, int y1, int x2, int y2, HBRUSH brush);
-		void DrawRect(Vector2D& one, Vector2D& two);
+		void DrawRect(Vector2D one, Vector2D two);
 		void DrawRect(int xone, int yone, int xtwo, int ytwo);
 		void DrawStaticRect(Vector2D& one, Vector2D& two);
 
+		void FillRect(Vector2D position, const Size& size, COLORREF color);
 		// Draws a bitmap at the given position with the default tile size
 		void DrawBitmap(string path, Vector2D& position);
 		// Draws a bitmap at the given position with the default tile size
@@ -66,36 +62,29 @@ namespace isgp {
 		void DrawBitmap(string path, Vector2D& position, Vector2D& offset, Size& size);
 
 		// draw a sprite from memory instead of path
-		void DrawSprite(Sprite* sprite, Vector2D& position, Vector2D& offset, Size& size);
+		void DrawSprite(Sprite* sprite, Vector2D position, Vector2D& offset, Size& size);
 
-		// link the backbuffer as the current graphics to the front buffer of the created graphics
-		Graphics* CreateLinkedGraphics(const Size&);
+		void DrawLine(Vector2D one,Vector2D two);
 
-		// set the backbuffur clearing to a value, it somtimes desirable to not do this (for cashes)
-		void SetIsClearingBackbuffer(bool);
-	private:
-		// create a graphics without initilizing the target hdc
-		Graphics(void);
-
-		// commen logic for both constructors
-		void Init(void);
+		// translates a position and size into a C Rectangle structure
+		static void FillRect(HDC hdc, Vector2D position, const Size& size, COLORREF color);
+	protected:
 		//does the final api call for BitBLT
 		BOOL BitBlockTransfer(HDC destination, const Vector2D& destPosition, const Size& bothSize, HDC source, const Vector2D& /** offset */positionSrc , DWORD actionFlag);
-		// creates a backbuffer based on
-		void CreateBackbuffer(HDC& hdc, const Size& size);
+
+		// should call this on construction, allows the cache to be created and put all members on NULL
+		virtual void Init();
+		// gets the hdc all preimplemnted methods should draw on
+		virtual HDC getHDC() = 0;
 
 		// The device context which is visible on the screen
 		HDC _visibleHdc;
-		// The hidden device context on which we render to prevent flickering
-		HDC _backBuffer;
-		// The bitmap on which we are actually rendering in the background
-		HBITMAP _bitmap;
-		PAINTSTRUCT* _paintStructure;
-		HPEN _pen;
-		// FPScounter.
-		TimesPerSecondCounter _fpsCounter;
-		map<string, Sprite*>* _bitmapCache;
 
-		bool _isClearBackbuffer;
+		ITranslator* _translator;
+		HPEN _pen;
+
+	private:
+		// a bitmap cache based with string as a key
+		map<string, Sprite*>* _bitmapCache;
 	};
 }
