@@ -7,6 +7,7 @@ namespace isgp {
 	// the tiles in the row column or grid.
 	class IGridTraveller{
 	public:
+		virtual ~IGridTraveller() {}
 		virtual void ReceiveTile(Tile* tile) = 0;
 	};
 }
