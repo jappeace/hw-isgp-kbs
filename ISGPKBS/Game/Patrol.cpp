@@ -22,10 +22,17 @@ namespace isgp {
 		_size = new Vector2D(32, 32);
 	}
 
+	Patrol::~Patrol() {
+		delete _velocity;
+		delete _behaviours;
+		delete _animation;
+		delete _size;
+	}
+
 	void Patrol::Update(double milisec) {
 		double elapsed = milisec / 1000;
 		double range = _position.X() - _startingPoint.X();
-		double collisionRange = sqrt(pow(_position.X() - _player->_position.X(), 2) + pow(_position.Y() - _player->_position.Y(), 2));
+		double collisionRange = sqrt(pow(_position.X() - _player->GetPosition().X(), 2) + pow(_position.Y() - _player->GetPosition().Y(), 2));
 
 		if (collisionRange < 26) {
 			// Collision with player, kill it!
@@ -66,9 +73,9 @@ namespace isgp {
 		}
 
 		//this is a tmp fix
-		if (_oldPosition == _position) {
+		/*if (_oldPosition == _position) {
 			_velocity->X(-_velocity->X());
-		}
+		}*/
 
 		_oldPosition = _position;
 	}

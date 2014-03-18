@@ -19,6 +19,7 @@ namespace isgp {
 
 	GadgetGravityBoots::~GadgetGravityBoots(void) {
 		delete this->GetSize();
+		delete this->_gravityBootsBehaviour;
 	}
 
 	void GadgetGravityBoots::OnCollide() {

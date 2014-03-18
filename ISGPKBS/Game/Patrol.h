@@ -12,6 +12,7 @@ namespace isgp {
 	{
 	public:
 		Patrol(Vector2D, int, Player*);
+		~Patrol();
 		void Update(const double) override;
 		void Paint(Graphics* g) override;
 	private:
@@ -21,7 +22,6 @@ namespace isgp {
 		Animation* _animation;
 		Player* _player;
 		bool _facingRight;
-		vector<IBehaviour*>* _behaviours;
 		void AddToVelocityY(double) override;
 		Vector2D _oldPosition;
 	};

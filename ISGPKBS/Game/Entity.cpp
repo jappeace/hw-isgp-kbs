@@ -19,6 +19,10 @@ namespace isgp {
 		return collision;
 	}
 
+	Vector2D Entity::GetPosition() const {
+		return _position;
+	}
+
 	Vector2D* Entity::GetVelocity() const {
 		return _velocity;
 	}
@@ -27,10 +31,39 @@ namespace isgp {
 		return _size;
 	}
 
+	void Entity::AddBehaviour(IBehaviour* behaviour) {
+		_behaviours->push_back(behaviour);
+	}
+
+	void Entity::RemoveBehaviour(IBehaviour* behaviour) {
+		for (unsigned int i = 0; i < _behaviours->size(); ++i) {
+			if(_behaviours->at(i) == behaviour) {
+				_behaviours->erase(_behaviours->begin() + i);
+			}
+		}
+	}
 	
 	int Entity::Collides(double x, double y) {
 		_position += Vector2D(x, y);
-		int collision = CheckCollision();
+
+		int collision = None;
+		GridGraphicTranslator ggt;
+		Vector2D maxPos = ggt.FromTo(Vector2D((int) _grid->GetSize()->GetWidth(), (int) _grid->GetSize()->GetHeight()));
+		if (_position.X() <= 0) {
+			collision = Left;
+		} else if (_position.X() + (GetSize()->X() * 1.25) >= maxPos.X()) {
+			collision = Right;
+		}
+		if (_position.Y() <= 0) {
+			collision = Up;
+		} else if (_position.Y() + (GetSize()->Y() * 1.25) >= maxPos.Y()) {
+			collision = Down;
+		} 
+
+		if (collision == None) {
+			collision = CheckCollision();
+		}
+
 		_position -= Vector2D(x, y);
 		return collision;
 	}
@@ -83,11 +116,12 @@ namespace isgp {
 
 		int xCol = Collides(x, 0);
 		int yCol = Collides(0, y);
-		collision = (xCol & (Left | Right)) | (yCol & (Up | Down));
 
 #ifdef _DEBUG
 		Collides(x, y);
 #endif
+
+		collision = (xCol & (Left | Right)) | (yCol & (Up | Down));
 	}
 
 	bool Entity::IsColliding(Collision collisionSide) {

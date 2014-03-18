@@ -8,7 +8,7 @@ const Size Player::InitSize(32, 32);
 		_accel = 2200;
 		_deAccel = 1100;
 
-		_position = position;
+		_position = GridGraphicTranslator().FromTo(position);
 		_velocity = new Vector2D();
 		_leftKey = false;
 		_rightKey = false;
@@ -32,18 +32,6 @@ const Size Player::InitSize(32, 32);
 		delete _size;
 		delete _velocity;
 		delete _animation;
-	}
-
-	void Player::AddBehaviour(IBehaviour* behaviour) {
-		_behaviours->push_back(behaviour);
-	}
-
-	void Player::RemoveBehaviour(IBehaviour* behaviour) {
-		for (unsigned int i = 0; i < _behaviours->size(); ++i) {
-			if(_behaviours->at(i) == behaviour) {
-				_behaviours->erase(_behaviours->begin() + i);
-			}
-		}
 	}
 
 	void Player::Set_has_gravity_boots(bool hasBoots) {

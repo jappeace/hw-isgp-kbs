@@ -7,8 +7,7 @@
 #include "WorldBlock.h"
 #include "Camera.h"
 #include "IMenu.h"
-#include "GameState.h"
-#include "BackgroundArtist.h"
+#include "IGameState.h"
 
 namespace isgp {
 	class Window : public AbstractWindow {
@@ -27,8 +26,9 @@ namespace isgp {
 		Level* _level;
 		void ClientResize(HWND hWnd, int nWidth, int nHeight);
 		IMenu* _currentMenu;
-		GameState _gameState;
+		IGameState* _gameState;
 		void RestartGame();
-		BackgroundArtist* _artist;
+		void QuitGame();
+		void GameOver();
 	};
 }

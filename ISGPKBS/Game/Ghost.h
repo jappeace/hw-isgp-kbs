@@ -8,6 +8,7 @@ namespace isgp {
 	{
 	public:
 		Ghost(Vector2D, Player*);
+		~Ghost();
 		void Update(const double) override;
 		void Paint(Graphics*) override;
 		void AddToVelocityY(double) override;
@@ -15,7 +16,6 @@ namespace isgp {
 		// If the player is facing right
 		bool _facingRight;
 		Graphics* _graphics;
-		vector<IBehaviour*>* _behaviours;
 		double _aVel;
 		Player* _player;
 		double _radAngle;

@@ -14,6 +14,8 @@ namespace isgp {
 		void ExecuteSelection() override;
 		void Paint(Graphics* g) override;
 	private:
+		HFONT _font;
+		HBRUSH _brush;
 		std::vector<MenuItem*> _menuItems;
 		int _selectedMenuItem;
 	};

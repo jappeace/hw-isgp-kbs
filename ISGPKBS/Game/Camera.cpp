@@ -3,7 +3,7 @@
 namespace isgp{
 	Camera::Camera(Player* player, Grid* grid) {
 		_player = player;
-		_position = player->_position;
+		_position = player->GetPosition();
 		_camFix = 0;
 		_grid = grid;
 	}
@@ -22,12 +22,12 @@ namespace isgp{
 		_position.X(
 			_position.X() + 
 			(
-				(_player->_position.X() - _position.X()
+				(_player->GetPosition().X() - _position.X()
 			) + _camFix) * (4 * elapsed)
 		);
 		_position.Y(
 			_position.Y() + (
-				_player->_position.Y() - _position.Y()
+				_player->GetPosition().Y() - _position.Y()
 			) * (4 * elapsed)
 		);
 

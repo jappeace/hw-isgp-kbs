@@ -66,6 +66,12 @@ namespace LevelEditor.Models.IO
 				case GridObjectType.Patrol:
 					typeName = "patrol";
 					break;
+                case GridObjectType.GravityBoots:
+			        typeName = "gravityboots";
+			        break;
+                case GridObjectType.JumpPlatform:
+			        typeName = "jumpplatform";
+			        break;
 			}
 			return string.Format("{0},{1}={2}", position.X, position.Y, typeName);
 		}
