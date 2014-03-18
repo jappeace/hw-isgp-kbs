@@ -13,10 +13,15 @@ Window::Window() {
 	_cam = NULL;
 	_currentMenu = NULL;
 	_gameState = NULL;
+	_level = NULL;
 }
 
 Window::~Window()
 {
+	delete _gameState;
+	delete _cam;
+	delete _level;
+	delete _currentMenu;
 }
 
 /////////////////////////////////////
