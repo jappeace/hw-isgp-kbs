@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Animation.h"
 #include "Entity.h"
 #include "Player.h"
 
@@ -19,6 +20,7 @@ namespace isgp {
 		double _aVel;
 		Player* _player;
 		double _radAngle;
+		Animation* _animation;
 	};
 }
 
