@@ -43,7 +43,7 @@ void Window::AfterCreate(HWND hWnd) {
 	_graphics->LoadBitmapFile("../tiles/megaman.bmp");
 	_graphics->LoadBitmapFile("../tiles/boo.bmp");
 	_graphics->LoadBitmapFile("../tiles/link.bmp");
-	_graphics->LoadBitmapFile("../tiles/boots.bmp");
+	_graphics->LoadBitmapFile("../tiles/gravityBoots.bmp");
 	_graphics->LoadBitmapFile("../tiles/smile.bmp");
 }
 
@@ -74,9 +74,18 @@ void Window::OnKeyUp(int which) {
 	}
 }
 
+void Window::FullRestart() {
+	_currentLevel = 1;
+	RestartGame();
+}
+
 void Window::NextLevel() {
 	_currentLevel++;
-	RestartGame();
+	if(DefaultlevelFactory().LevelExists(_currentLevel)) {
+		RestartGame();
+	} else { //Completed all levels, wat do?
+		_gameState = new GameCompletedGameState(this);
+	}
 }
 
 void Window::OnCommand(int from, int command) {

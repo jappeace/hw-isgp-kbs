@@ -8,7 +8,8 @@
 #include "Camera.h"
 #include "IMenu.h"
 #include "IGameState.h"
-
+#include "DefaultLevelFactory.h"
+#include "GameCompletedGameState.h"
 namespace isgp {
 	class Window : public AbstractWindow {
 	public:
@@ -22,6 +23,7 @@ namespace isgp {
 		void GameLoop(double) override;
 		void AfterCreate(HWND) override;
 		void NextLevel();
+		void FullRestart();
 		Camera* _cam;
 	private:
 		Level* _level;
