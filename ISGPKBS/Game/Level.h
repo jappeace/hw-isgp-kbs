@@ -16,6 +16,7 @@ namespace isgp{
 		~Level(void);
 		Vector2D *start;
 		Vector2D finish;
+		bool IsFinished();
 		void Paint(Graphics* g) override;
 		void Update(double elapsed);
 		static const Size tileSize;
