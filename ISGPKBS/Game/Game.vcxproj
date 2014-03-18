@@ -71,6 +71,7 @@
     <ClCompile Include="Gadget.cpp" />
     <ClCompile Include="GadgetGravityBoots.cpp" />
     <ClCompile Include="GadgetJumpPlatform.cpp" />
+    <ClCompile Include="GameOverGameState.cpp" />
     <ClCompile Include="GameOverMenu.cpp" />
     <ClCompile Include="Ghost.cpp" />
     <ClCompile Include="Graphics.cpp" />
@@ -82,6 +83,7 @@
     <ClCompile Include="MenuItem.cpp" />
     <ClCompile Include="Patrol.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayingGameState.cpp" />
     <ClCompile Include="Size.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteGraphics.cpp" />
@@ -114,6 +116,7 @@
     <ClInclude Include="GravityBootsBehaviour.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="GridGraphicTranslator.h" />
+    <ClInclude Include="IBehaviour.h" />
     <ClInclude Include="IGameState.h" />
     <ClInclude Include="IGridTraveller.h" />
     <ClInclude Include="IKeyHandler.h" />
