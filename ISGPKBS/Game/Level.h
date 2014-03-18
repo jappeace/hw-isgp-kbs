@@ -6,7 +6,9 @@
 #include "Ghost.h"
 #include "Patrol.h"
 #include "Gadget.h"
+#include "Theme.h"
 namespace isgp{
+	class Theme;
 	// represents a level in the game
 	class Level : public IPaintable{
 	public:
@@ -24,6 +26,8 @@ namespace isgp{
 		vector<Entity*> entities;
 		Grid* GetGrid() const;
 		static const Size defaultTileAmount;
+		Theme* _theme;
+		void LoadContent(Graphics*, double);
 	private:
 		Grid* _grid;
 	};

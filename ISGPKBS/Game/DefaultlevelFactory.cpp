@@ -1,4 +1,5 @@
 #include "DefaultlevelFactory.h"
+#include "Theme1.h"
 
 namespace isgp{
 
@@ -177,6 +178,9 @@ namespace isgp{
 	{
 		OutputLevel(currentLevel);
 		get_size();
+
+		level->_theme = new Theme1();
+
 		return level;
 	}
 	void DefaultlevelFactory::Error()

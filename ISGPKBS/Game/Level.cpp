@@ -48,7 +48,13 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 		}
 	}
 
+	void Level::LoadContent(Graphics* g, double width) {
+		_theme->LoadContent(g, width);
+	}
+
 	void Level::Paint(Graphics* g) {
+		_theme->Paint(g);
+
 		_player->Paint(g);
 		// Update entities.
 		for (auto it = entities.begin(); it != entities.end(); ++it) {

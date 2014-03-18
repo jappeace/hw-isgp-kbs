@@ -113,7 +113,7 @@
     <ClCompile Include="GameCompletedGameState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CollisionHelper.cpp">
+    <ClCompile Include="Theme1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -262,7 +262,10 @@
     <ClInclude Include="GameCompletedGameState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CollisionHelper.h">
+    <ClInclude Include="Theme.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Theme1.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
