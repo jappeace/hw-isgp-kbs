@@ -81,7 +81,7 @@ namespace isgp{
 			
 		
 
-		level->finish = GridGraphicTranslator().FromTo(Vector2D(finish_X,finish_Y));
+		level->finish = new Finish(Vector2D(finish_X, finish_Y));
 		level->_player = new Player(Vector2D(start_X,start_Y));
 	////////////////information (x,y)of ghost,patrol,tile	
 		int size = v.size();

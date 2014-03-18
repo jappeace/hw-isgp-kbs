@@ -11,19 +11,16 @@ const Size Level::defaultTileAmount = Size(500,30);
 const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 	Level::Level(){
 		start = NULL;
-		finish = NULL;
 		_player = NULL;
 		_grid = new Grid(defaultTileAmount.GetWidth(), defaultTileAmount.GetHeight());
 	}
 	Level::Level(int width, int height) {
 		start = NULL;
-		finish = NULL;
 		_player = NULL;
 		_grid = new Grid(width, height);
 	}
 	Level::Level(Grid* grid) {
 		start = NULL;
-		finish = NULL;
 		_player = NULL;
 		_grid = grid;
 	}
@@ -41,7 +38,7 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 	void Level::Update(double elapsed) {
 		// Update player
 		_player->Update(elapsed);
-
+		finish->Update(elapsed);
 		// Update enemies.
 		for (auto it = entities.begin(); it != entities.end(); ++it) {
 			(*it)->Update(elapsed);
@@ -54,7 +51,7 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 
 	void Level::Paint(Graphics* g) {
 		_theme->Paint(g);
-
+		finish->Paint(g);
 		_player->Paint(g);
 		// Update entities.
 		for (auto it = entities.begin(); it != entities.end(); ++it) {
@@ -63,7 +60,7 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 	}
 
 	bool Level::IsFinished() {
-		return CollisionHelper::IsColliding(_player->GetPosition(), *_player->GetSize(), finish, Size(16, 16));
+		return CollisionHelper::IsColliding(_player->GetPosition(), *_player->GetSize(), finish->GetPosition(), Size(16, 16));
 	}
 
 	Grid* Level::GetGrid() const{
