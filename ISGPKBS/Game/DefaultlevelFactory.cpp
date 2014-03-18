@@ -1,10 +1,11 @@
 #include "DefaultlevelFactory.h"
+#include "Theme1.h"
 
 namespace isgp{
 
 	void DefaultlevelFactory::OutputLevel()
 	{
-		ifstream infile("level.txt");
+		ifstream infile("wut.level");
 
 		//infile.open("level.txt");
 		
@@ -19,7 +20,6 @@ namespace isgp{
 			getline(infile,word);
 		}
 		infile.close();
-
 	}
 
 	
@@ -166,6 +166,9 @@ namespace isgp{
 	{
 		OutputLevel();
 		get_size();
+
+		level->_theme = new Theme1();
+
 		return level;
 	}
 	void DefaultlevelFactory::Error()

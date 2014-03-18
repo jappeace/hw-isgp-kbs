@@ -51,29 +51,16 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 		}
 	}
 
+	void Level::LoadContent(double width) {
+		_theme->LoadContent(_graphics, width);
+	}
+
+	void Level::SetGraphics(Graphics* g) {
+		_graphics = g;
+	}
+
 	void Level::Paint(Graphics* g) {
-		Size windowSize(800, 600);
-		double width1 = (GridGraphicTranslator().FromTo(*GetGrid()->GetSize()).X() * 0.5) + windowSize.GetWidth();
-		double width2 = (GridGraphicTranslator().FromTo(*GetGrid()->GetSize()).X() * 0.75) + windowSize.GetWidth();
-
-		Vector2D fix = ((windowSize - Player::InitSize) * Vector2D(1.0,1.35)) / Vector2D(2);
-
-		//Draw sky
-		Camera* cam = (Camera*)g->_cam;
-		for (int i = 0; i < width1; i += 1920) {
-			g->DrawBitmap("../tiles/mountain.bmp",
-				Vector2D(((cam->GetPosition().X() - fix.X()) * 0.5) + i,
-				(cam->GetPosition().Y() - fix.Y()) * 0.5),
-				Size(1920, 791));
-		}
-
-		//Draw ground
-		for (int i = 0; i < width2; i += 1920) {
-			g->DrawBitmap("../tiles/ground.bmp",
-				Vector2D(((cam->GetPosition().X() - fix.X()) * 0.25) + i,
-				(cam->GetPosition().Y() + 2000) * 0.25),
-				Size(1920, 321));
-		}
+		_theme->Paint(g);
 
 		_graphics = g;
 		_grid->TraverseTiles(this);

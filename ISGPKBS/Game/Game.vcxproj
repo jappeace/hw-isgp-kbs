@@ -103,6 +103,8 @@
     <ClInclude Include="Size.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="StrConverter.h" />
+    <ClInclude Include="Theme.h" />
+    <ClInclude Include="Theme1.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TimesPerSecondCounter.h" />
     <ClInclude Include="Vector2D.h" />
@@ -134,6 +136,7 @@
     <ClCompile Include="PlayingGameState.cpp" />
     <ClCompile Include="Size.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="Theme1.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TimesPerSecondCounter.cpp" />
     <ClCompile Include="Vector2D.cpp" />

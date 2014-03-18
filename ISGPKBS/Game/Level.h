@@ -6,7 +6,9 @@
 #include "Ghost.h"
 #include "Patrol.h"
 #include "Gadget.h"
+#include "Theme.h"
 namespace isgp{
+	class Theme;
 	// represents a level in the game
 	class Level : public IPaintable, public IGridTraveller {
 	public:
@@ -24,6 +26,9 @@ namespace isgp{
 		vector<Entity*> entities;
 		Grid* GetGrid() const;
 		static const Size defaultTileAmount;
+		Theme* _theme;
+		void LoadContent(double);
+		void SetGraphics(Graphics*);
 	private:
 		Graphics* _graphics; // bridge between paint and receive tile
 		Grid* _grid;

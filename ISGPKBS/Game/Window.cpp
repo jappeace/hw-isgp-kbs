@@ -35,15 +35,6 @@ void Window::ClientResize(HWND hWnd, int nWidth, int nHeight)
 void Window::AfterCreate(HWND hWnd) {
 	_gameState = new PlayingGameState(_graphics, this, &Window::GameOver);
 	ClientResize(hWnd, WindowSize.GetWidth(), WindowSize.GetHeight());
-	
-	_graphics->LoadBitmapFile("../tiles/mountain.bmp");
-	_graphics->LoadBitmapFile("../tiles/ground.bmp");
-
-	_graphics->LoadBitmapFile("../tiles/megaman.bmp");
-	_graphics->LoadBitmapFile("../tiles/boo.bmp");
-	_graphics->LoadBitmapFile("../tiles/link.bmp");
-	_graphics->LoadBitmapFile("../tiles/boots.bmp");
-	_graphics->LoadBitmapFile("../tiles/smile.bmp");
 }
 
 INT_PTR CALLBACK dialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam){

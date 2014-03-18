@@ -13,6 +13,8 @@ namespace isgp {
 		_graphics->SetTextBackgroundColor(RGB(255, 255, 255));
 		DefaultlevelFactory factory;
 		_level = factory.CreateLevel();
+		_level->SetGraphics(_graphics);
+		_level->LoadContent(GridGraphicTranslator().FromTo(*_level->GetGrid()->GetSize()).X());
 		_camera = new Camera(_level->_player, _level->GetGrid());
 		_graphics->SetCam(_camera);
 	}
