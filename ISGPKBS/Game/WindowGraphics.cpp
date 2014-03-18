@@ -131,7 +131,7 @@ namespace isgp {
 			bitmap_hdc, 
 			offset,
 			// Operation
-			SRCAND);
+			SRCCOPY);
 
 		// release the resource
 		DeleteDC(bitmap_hdc);

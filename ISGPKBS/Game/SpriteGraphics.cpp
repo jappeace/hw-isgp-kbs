@@ -9,7 +9,7 @@ namespace isgp {
 	void SpriteGraphics::BeginRendering(){
 		this->_visibleHdc = CreateCompatibleDC(NULL);
 		::SelectObject(this->_visibleHdc, _target->GetBitmap());
-		BitBlockTransfer(this->_visibleHdc, Vector2D(), _target->GetSize(), NULL, NULL, WHITENESS);
+		Graphics::FillRect(this->_visibleHdc, Vector2D(), _target->GetSize(), _target->GetTransparant());
 	}
 
 	void SpriteGraphics::EndRendering(){

@@ -7,8 +7,7 @@ using namespace std;
 
 namespace isgp {
 	/** 
-	* this class makes it easier to use win32, it has also some internal speed optimizations,
-	* basicly you should use an instance of this class instead of win32
+	* should allow painting on sprites
 	*/
 	class SpriteGraphics : public Graphics {
 	public:

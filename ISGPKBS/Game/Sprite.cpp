@@ -55,7 +55,7 @@ namespace isgp {
 		// Define some constants which contain the values for transparancy correction.
 		static const int kPreserveColor  = 0xffffff; // A color which honors the backbuffer data instead of the image
 		static const int kOverwriteColor = 0x000000; // A color which honors the image data instead of the backbuffer
-		static const int kBlack          = 0x000000; // The hex value of the color black
+		static const int kBlack          = kOverwriteColor; // The hex value of the color black
 
 		// Generate alpha-mask and overwrite image pixels if needed.
 		for (int y = 0; y < from.bmHeight; ++y) {
