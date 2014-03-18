@@ -36,7 +36,7 @@ namespace isgp {
 
 		if (collisionRange < 26) {
 			// Collision with player, kill it!
-			_player->Kill();
+			//_player->Kill();
 		}
 
 		if (range > _range) {

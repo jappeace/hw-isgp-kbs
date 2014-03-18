@@ -8,7 +8,7 @@ const Size Player::InitSize(32, 32);
 		_accel = 2200;
 		_deAccel = 1100;
 
-		_position = position;
+		_position = GridGraphicTranslator().FromTo(position);
 		_velocity = new Vector2D();
 		_leftKey = false;
 		_rightKey = false;
