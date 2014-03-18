@@ -23,7 +23,7 @@ namespace isgp{
 
 	void DefaultlevelFactory::OutputLevel(int currentLevel)
 	{
-		ifstream infile("../wut.level");
+		ifstream infile("./levels/level" + StrConverter::IntToString(currentLevel) + ".level");
 
 		//infile.open("level.txt");
 		
