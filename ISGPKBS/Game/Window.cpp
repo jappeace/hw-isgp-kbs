@@ -4,6 +4,11 @@
 #include "MenuItem.h"
 #include "PlayingGameState.h"
 #include "GameOverGameState.h"
+#include "Theme1.h"
+#include "Theme2.h"
+#include "Theme3.h"
+#include "Theme4.h"
+#include "Theme5.h"
 
 namespace isgp {
 
@@ -39,7 +44,26 @@ void Window::ClientResize(HWND hWnd, int nWidth, int nHeight)
 }
 
 void Window::AfterCreate(HWND hWnd) {
-	_gameState = new PlayingGameState(_graphics, this, _currentLevel, &Window::GameOver);
+	Theme* tmp;
+	switch (_currentLevel) {
+	case 1 :
+		tmp = new Theme1();
+		break;
+	case 2 :
+		tmp = new Theme2();
+		break;
+	case 3 :
+		tmp = new Theme3();
+		break;
+	case 4 :
+		tmp = new Theme4();
+		break;
+	case 5 :
+		tmp = new Theme5();
+		break;
+	}
+
+	_gameState = new PlayingGameState(_graphics, this, _currentLevel, tmp, &Window::GameOver);
 	ClientResize(hWnd, WindowSize.GetWidth(), WindowSize.GetHeight());
 }
 

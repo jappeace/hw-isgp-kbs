@@ -42,7 +42,7 @@ namespace isgp{
 	}
 
 	
-	void DefaultlevelFactory::get_size()
+	void DefaultlevelFactory::get_size(Theme* theme)
 	{
 		GridGraphicTranslator fromto;
 		char *result =NULL;
@@ -62,6 +62,7 @@ namespace isgp{
 				result = strtok_s(ch,"=",&j);
 				height = atoi(j);
 				level = new Level(width,height);
+				level->_theme = theme;
 				//start
 				strcpy_s(ch,30,v[2].c_str());
 			
@@ -110,7 +111,7 @@ namespace isgp{
 			result=strtok_s(v_for,",",&m);
 			tile_Y=atoi(m);
 			//level->ReceiveTile(new Tile(tile_X,tile_Y));
-			level->GetGrid()->GetTileAt(tile_X,tile_Y)->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
+			level->GetGrid()->GetTileAt(tile_X,tile_Y)->SetData(new WorldBlock(level->_theme->GetTilePath()));
 
 		}
 		level->_player->SetGrid(level->GetGrid());
@@ -181,12 +182,10 @@ namespace isgp{
 
 }
 
-	Level *DefaultlevelFactory::CreateLevel(int currentLevel)
+	Level *DefaultlevelFactory::CreateLevel(int currentLevel, Theme* theme)
 	{
 		OutputLevel(currentLevel);
-		get_size();
-
-		level->_theme = new Theme1();
+		get_size(theme);
 
 		return level;
 	}
