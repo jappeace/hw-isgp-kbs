@@ -3,71 +3,18 @@
 namespace isgp {
 
 	void Graphics::Init(void){
-		_isClearBackbuffer = true;
-		_cam = NULL;
+		_translator = NULL;
+		_visibleHdc = NULL;
+		_pen = NULL;
 		_bitmapCache = new map<string, Sprite*>();
 	}
 
-	Graphics::Graphics(HWND hWnd) {
-		Init();
-
-		this->_backBuffer = CreateCompatibleDC(NULL);
-
-		//get the DC for the front buffer
-		HDC hdc = GetDC(hWnd);
-
-		CreateBackbuffer(hdc, AbstractWindow::WindowSize);
-
-		//Don't forget to release the DC
-		ReleaseDC(hWnd, hdc); 
-	}
-	Graphics::Graphics(void){
-		Init();
-	}
-	void Graphics::CreateBackbuffer(HDC& hdc, const Size& size){
-		this->_bitmap = CreateCompatibleBitmap(hdc, size.GetWidth(), size.GetHeight());
-		//select the bitmap into the memory device context
-		SelectObject(this->_backBuffer, this->_bitmap);
-	}
-	Graphics::~Graphics(void) {
-		if(_bitmapCache) {
-			for (map<string, Sprite*>::iterator it = _bitmapCache->begin(); it != _bitmapCache->end(); ++it) {
-				delete it->second;
-			}
-
-			delete _bitmapCache;
-		}
+	ITranslator* Graphics::GetTranslator() {
+		return _translator;
 	}
 
-	void Graphics::BeginRendering(HWND hWnd) {
-		_paintStructure = new PAINTSTRUCT();
-		// Begin the drawing state of WIN32
-		_visibleHdc = BeginPaint(hWnd, _paintStructure);
-
-		
-		// allows graphics to be cached
-		if(_isClearBackbuffer){
-			// Clear the backbuffer.
-			BitBlockTransfer(this->_backBuffer, Vector2D(), AbstractWindow::WindowSize, NULL, NULL, WHITENESS);
-		}
-	}
-
-	void Graphics::EndRendering(HWND hWnd) {
-		this->_fpsCounter.Update();
-		SetTextColor(RGB(0, 0, 0));
-		DrawStr(Vector2D(10, 10), "FPS: " + StrConverter::IntToString(this->_fpsCounter.Get()));
-
-		// Blit the new frame to the screen
-		BitBlockTransfer(_paintStructure->hdc, Vector2D(), AbstractWindow::WindowSize, this->_backBuffer, Vector2D(), SRCCOPY);
-		
-
-		// End the drawing state of WIN32
-		EndPaint(hWnd, _paintStructure);
-		delete _paintStructure;
-	}
-
-	void Graphics::SetCam(ITranslator* cam) {
-		_cam = cam;
+	void Graphics::SetTranslator(ITranslator* cam) {
+		_translator = cam;
 	}
 
 	void Graphics::DrawStr(Vector2D& position, string str) {
@@ -79,50 +26,40 @@ namespace isgp {
 	}
 
 	void Graphics::DrawStr(Vector2D& position, const char* str, int length) {
-		TextOut(_backBuffer, (int) position.X(), (int) position.Y(), str, length);
+		TextOut(getHDC(), (int) position.X(), (int) position.Y(), str, length);
 	}
 
 	void Graphics::DrawStr(Vector2D& position, const char* str, int length, HFONT font) {
-		HGDIOBJ oldFont = SelectObject(this->_backBuffer, font);
+		HGDIOBJ oldFont = SelectObject(getHDC(), font);
 		RECT rect;
 		SetRect(&rect, (int)position.X(), (int)position.Y(), 200, 200);
-		DrawText(this->_backBuffer, str, length, &rect, DT_NOCLIP);
-		//TextOut(_backBuffer, (int) position.X(), (int) position.Y(), str, length);
-		SelectObject(this->_backBuffer, oldFont);
+		DrawText(getHDC(), str, length, &rect, DT_NOCLIP);
+		//TextOut(getHDC(), (int) position.X(), (int) position.Y(), str, length);
+		SelectObject(getHDC(), oldFont);
 	}
 
 	void Graphics::SetColor(COLORREF color) {
 		if(_pen)
 			DeleteObject(_pen);
 		_pen = CreatePen(PS_SOLID, 1, color);
-		SelectObject(this->_backBuffer, _pen);
+		SelectObject(getHDC(), _pen);
 	}
 
 	void Graphics::SetTextColor(COLORREF color) {
-		::SetTextColor(_backBuffer, color);
+		::SetTextColor(getHDC(), color);
 	}
 
 	void Graphics::SetTextBackgroundColor(COLORREF color) {
-		SetBkColor(_backBuffer, color);
+		::SetBkColor(getHDC(), color);
 	}
 
-	void Graphics::DrawRect(Vector2D& one, Vector2D& two) {
-		if (_cam != NULL) {
-			Vector2D one1 = _cam->FromTo(one);
-			Vector2D two1 = _cam->FromTo(two);
-			this->DrawRect((int)one1.X(),(int) one1.Y(),(int) two1.X(),(int) two1.Y());
-		} else {
-			this->DrawRect((int)one.X(),(int) one.Y(),(int) two.X(),(int) two.Y());
-		}
-	}
-
-	void Graphics::FillStaticRect(int x1, int y1, int x2, int y2, HBRUSH brush) {
-		RECT r;
-		r.left = x1;
-		r.top = y1;
-		r.right = x2;
-		r.bottom = y2;
-		FillRect(this->_backBuffer, &r, brush);
+	void Graphics::DrawRect(Vector2D one, Vector2D two) {
+		if (_translator != NULL) {
+			one = _translator->FromTo(one);
+			two = _translator->FromTo(two);
+		} 
+		this->DrawRect((int)one.X(),(int) one.Y(),(int) two.X(),(int) two.Y());
+		
 	}
 
 	void Graphics::DrawStaticRect(Vector2D& one, Vector2D& two) {
@@ -130,11 +67,27 @@ namespace isgp {
 	}
 
 	void Graphics::DrawRect(int xone, int yone, int xtwo, int ytwo) {
-		Rectangle(_backBuffer, xone, yone, xtwo, ytwo);
+		::Rectangle(getHDC(), xone, yone, xtwo, ytwo);
+	}
+	void Graphics::FillRect(Vector2D position, const Size& size, COLORREF color){
+		if (_translator != NULL) {
+			position = _translator->FromTo(position);
+		}
+		// pass into the static method
+		Graphics::FillRect(getHDC(), position, size, color);
+	}
+	void Graphics::FillRect(HDC hdc, Vector2D position, const Size& size, COLORREF color){
+		RECT r;
+		r.left = (LONG)position.X();
+		r.top = (LONG)position.Y();
+		position += size;
+		r.right = (LONG)position.X();
+		r.bottom = (LONG)position.Y();
+		::FillRect(hdc, &r, CreateSolidBrush(color));
 	}
 
 	Sprite* Graphics::LoadBitmapFile(string path) {
-		if(_bitmapCache->count(path)) {
+		if(Graphics::_bitmapCache->count(path)) {
 			// Return cached item
 			return _bitmapCache->find(path)->second;
 		}
@@ -164,14 +117,6 @@ namespace isgp {
 		Sprite* sprite = this->LoadBitmapFile(path);
 		DrawSprite(sprite, position, offset, size);
 	}
-
-	Graphics* Graphics::CreateLinkedGraphics(const Size& size){
-		Graphics* result = new Graphics();
-		result->_visibleHdc = this->_backBuffer;
-		result->CreateBackbuffer(this->_backBuffer, size);
-		return result;
-	}
-
 	BOOL Graphics::BitBlockTransfer(HDC destination, const Vector2D& destPosition, const Size& bothSize, HDC source, const Vector2D& positionSrc, DWORD actionFlag){
 		return BitBlt(
 			// Dest Context
@@ -187,25 +132,34 @@ namespace isgp {
 			// Operation
 			actionFlag);
 	}
-	void Graphics::DrawSprite(Sprite* sprite, Vector2D& position, Vector2D& offset, Size& size){
-
-		Vector2D correctedVector2D = position;
-
-		if (_cam != NULL) {
-			correctedVector2D = _cam->FromTo(position);
+	void Graphics::DrawLine(Vector2D one, Vector2D two){
+		if(_translator != NULL){
+			one = _translator->FromTo(one);
+			two = _translator->FromTo(two);
+		}
+		POINT points[2];
+		points[0].x = (long) one.X();
+		points[0].y = (long) one.Y();
+		points[1].x = (long) two.X();
+		points[1].y = (long) two.Y();
+		::Polyline(getHDC(), points, 2);
+	}
+	void Graphics::DrawSprite(Sprite* sprite, Vector2D position, Vector2D& offset, Size& size){
+		if (_translator != NULL) {
+			position = _translator->FromTo(position);
 		}
 
 		HDC bitmap_hdc = CreateCompatibleDC(NULL);
 
 		// link the bitmap to a device context
-		SelectObject(bitmap_hdc, sprite->GetMask());
+		::SelectObject(bitmap_hdc, sprite->GetMask());
 
 		// OR the image on the mask to apply transparancy
 		BitBlockTransfer(
 			// Dest Context
-			_backBuffer, 
+			getHDC(), 
 			// Position
-			correctedVector2D,
+			position,
 			size, 
 			// Source Context
 			bitmap_hdc, 
@@ -213,14 +167,14 @@ namespace isgp {
 			SRCAND);
 
 		// link the bitmap to a device context
-		SelectObject(bitmap_hdc, sprite->GetBitmap());
+		::SelectObject(bitmap_hdc, sprite->GetBitmap());
 
 		// OR the image on the mask to apply transparancy
 		BitBlockTransfer(
 			// Dest Context
-			_backBuffer, 
+			getHDC(), 
 			// Position
-			correctedVector2D,
+			position,
 			size,
 			// Source Context
 			bitmap_hdc, 
@@ -231,8 +185,4 @@ namespace isgp {
 		// release the resource
 		DeleteDC(bitmap_hdc);
 	}
-	void Graphics::SetIsClearingBackbuffer(bool is){
-		_isClearBackbuffer = is;
-	}
-
 }

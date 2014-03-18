@@ -40,52 +40,31 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 		// Update player
 		_player->Update(elapsed);
 
-		double collisionRange = sqrt(pow(finish.X() - _player->GetPosition().X(), 2) + pow(finish.Y() - _player->GetPosition().Y(), 2));
-		if (collisionRange < 26) {
-			//player finished
-		}
-
 		// Update enemies.
 		for (auto it = entities.begin(); it != entities.end(); ++it) {
 			(*it)->Update(elapsed);
 		}
 	}
 
-	void Level::LoadContent(double width) {
-		_theme->LoadContent(_graphics, width);
-	}
-
-	void Level::SetGraphics(Graphics* g) {
-		_graphics = g;
+	void Level::LoadContent(Graphics* g, double width) {
+		_theme->LoadContent(g, width);
 	}
 
 	void Level::Paint(Graphics* g) {
 		_theme->Paint(g);
 
-		_graphics = g;
-		_grid->TraverseTiles(this);
 		_player->Paint(g);
 		// Update entities.
 		for (auto it = entities.begin(); it != entities.end(); ++it) {
 			(*it)->Paint(g);
 		}
 	}
-	void Level::ReceiveTile(Tile* tile) {
-#ifdef _DEBUG
-		Vector2D position = *tile->GetPosition();
-		position.X(position.X() * Level::tileSize.GetWidth());
-		position.Y(position.Y() * Level::tileSize.GetHeight());
 
-		_graphics->DrawRect(
-			position, 
-			Vector2D(
-				position.X() + Level::tileSize.GetWidth(),
-				position.Y() + Level::tileSize.GetHeight()
-			)
-		);
-#endif
-		tile->Paint(_graphics);
+	bool Level::IsFinished() {
+		double collisionRange = sqrt(pow(finish.X() - _player->GetPosition().X(), 2) + pow(finish.Y() - _player->GetPosition().Y(), 2));
+		return (collisionRange < 26);
 	}
+
 	Grid* Level::GetGrid() const{
 		return _grid;
 	}

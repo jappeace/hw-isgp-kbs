@@ -6,7 +6,6 @@ namespace isgp {
 		this->_selectedMenuItem = 0;
 		this->_font = CreateFont(48,0,0,0,FW_DONTCARE,FALSE,FALSE,FALSE,DEFAULT_CHARSET,OUT_OUTLINE_PRECIS,
 			CLIP_DEFAULT_PRECIS,DEFAULT_QUALITY, VARIABLE_PITCH,TEXT("Lucida Console"));
-		this->_brush = CreateSolidBrush(RGB(0, 0, 0));
 	}
 
 	GameOverMenu::~GameOverMenu() {
@@ -15,7 +14,6 @@ namespace isgp {
 			delete (*it);
 		}
 		DeleteObject(this->_font);
-		DeleteObject(this->_brush);
 	}
 
 	// Add menu item to the menu.
@@ -47,9 +45,8 @@ namespace isgp {
 
 	// Paints the menu on the screen.
 	void GameOverMenu::Paint(Graphics* g) {
-		g->SetTextBackgroundColor(RGB(255, 255, 255));
 		g->SetTextBackgroundColor(RGB(0, 0, 0));
-		g->FillStaticRect(0, 0, 800, 600, this->_brush);
+		g->FillRect(Vector2D(0, 0), Size(800, 600),RGB(0, 0, 0));
 
 		Vector2D location(285, 200);
 		for (auto item = _menuItems.begin(); item != _menuItems.end(); ++item) {

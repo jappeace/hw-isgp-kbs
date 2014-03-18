@@ -10,7 +10,7 @@
 namespace isgp{
 	class Theme;
 	// represents a level in the game
-	class Level : public IPaintable, public IGridTraveller {
+	class Level : public IPaintable{
 	public:
 		Level();
 		Level(Grid* grid);
@@ -18,7 +18,7 @@ namespace isgp{
 		~Level(void);
 		Vector2D *start;
 		Vector2D finish;
-		void ReceiveTile(Tile* tile) override;
+		bool IsFinished();
 		void Paint(Graphics* g) override;
 		void Update(double elapsed);
 		static const Size tileSize;
@@ -27,10 +27,8 @@ namespace isgp{
 		Grid* GetGrid() const;
 		static const Size defaultTileAmount;
 		Theme* _theme;
-		void LoadContent(double);
-		void SetGraphics(Graphics*);
+		void LoadContent(Graphics*, double);
 	private:
-		Graphics* _graphics; // bridge between paint and receive tile
 		Grid* _grid;
 	};
 }

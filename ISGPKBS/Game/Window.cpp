@@ -9,6 +9,7 @@ namespace isgp {
 
 // Constructors / Destructors      //
 Window::Window() {
+	_currentLevel = 1;
 	_cam = NULL;
 	_currentMenu = NULL;
 	_gameState = NULL;
@@ -33,7 +34,7 @@ void Window::ClientResize(HWND hWnd, int nWidth, int nHeight)
 }
 
 void Window::AfterCreate(HWND hWnd) {
-	_gameState = new PlayingGameState(_graphics, this, &Window::GameOver);
+	_gameState = new PlayingGameState(_graphics, this, _currentLevel, &Window::GameOver);
 	ClientResize(hWnd, WindowSize.GetWidth(), WindowSize.GetHeight());
 }
 
@@ -61,6 +62,20 @@ void Window::OnKeyDown(int which) {
 void Window::OnKeyUp(int which) {
 	if (_gameState != NULL) {
 		_gameState->KeyUp(which);
+	}
+}
+
+void Window::FullRestart() {
+	_currentLevel = 1;
+	RestartGame();
+}
+
+void Window::NextLevel() {
+	_currentLevel++;
+	if(DefaultlevelFactory().LevelExists(_currentLevel)) {
+		RestartGame();
+	} else { //Completed all levels, wat do?
+		_gameState = new GameCompletedGameState(this);
 	}
 }
 
@@ -96,7 +111,7 @@ void Window::RestartGame() {
 
 void Window::GameOver() {
 	delete _gameState;
-	_graphics->SetCam(NULL);
+	_graphics->SetTranslator(NULL);
 	_gameState = new GameOverGameState(_graphics, this,
 		&Window::RestartGame, &Window::QuitGame);
 }

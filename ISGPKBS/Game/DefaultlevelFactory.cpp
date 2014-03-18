@@ -3,9 +3,20 @@
 
 namespace isgp{
 
-	void DefaultlevelFactory::OutputLevel()
+	bool DefaultlevelFactory::LevelExists(int currentLevel) {
+		ifstream f("./levels/level" + StrConverter::IntToString(currentLevel) + ".level");
+		if (f.good()) {
+			f.close();
+			return true;
+		} else {
+			f.close();
+			return false;
+		}  
+	}
+
+	void DefaultlevelFactory::OutputLevel(int currentLevel)
 	{
-		ifstream infile("wut.level");
+		ifstream infile("./levels/level" + StrConverter::IntToString(currentLevel) + ".level");
 
 		//infile.open("level.txt");
 		
@@ -20,6 +31,7 @@ namespace isgp{
 			getline(infile,word);
 		}
 		infile.close();
+
 	}
 
 	
@@ -162,9 +174,9 @@ namespace isgp{
 
 }
 
-	Level *DefaultlevelFactory::CreateLevel()
+	Level *DefaultlevelFactory::CreateLevel(int currentLevel)
 	{
-		OutputLevel();
+		OutputLevel(currentLevel);
 		get_size();
 
 		level->_theme = new Theme1();
