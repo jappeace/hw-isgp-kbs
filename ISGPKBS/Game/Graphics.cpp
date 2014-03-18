@@ -140,4 +140,45 @@ namespace isgp {
 		points[1].y = (long) two.Y();
 		::Polyline(getHDC(), points, 2);
 	}
+	void Graphics::DrawSprite(Sprite* sprite, Vector2D position, Vector2D& offset, Size& size){
+		if (_translator != NULL) {
+			position = _translator->FromTo(position);
+		}
+
+		HDC bitmap_hdc = CreateCompatibleDC(NULL);
+
+		// link the bitmap to a device context
+		::SelectObject(bitmap_hdc, sprite->GetMask());
+
+		// OR the image on the mask to apply transparancy
+		BitBlockTransfer(
+			// Dest Context
+			getHDC(), 
+			// Position
+			position,
+			size, 
+			// Source Context
+			bitmap_hdc, 
+			offset,
+			SRCAND);
+
+		// link the bitmap to a device context
+		::SelectObject(bitmap_hdc, sprite->GetBitmap());
+
+		// OR the image on the mask to apply transparancy
+		BitBlockTransfer(
+			// Dest Context
+			getHDC(), 
+			// Position
+			position,
+			size,
+			// Source Context
+			bitmap_hdc, 
+			offset,
+			// Operation
+			SRCPAINT);
+
+		// release the resource
+		DeleteDC(bitmap_hdc);
+	}
 }

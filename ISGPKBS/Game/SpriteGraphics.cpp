@@ -20,45 +20,4 @@ namespace isgp {
 		return this->_visibleHdc;
 
 	}
-
-	void SpriteGraphics::DrawSprite(Sprite* sprite, Vector2D position, Vector2D& offset, Size& size){
-
-		Vector2D correctedVector2D = position;
-
-		if (_translator != NULL) {
-			correctedVector2D = _translator->FromTo(position);
-		}
-
-		HDC input_hdc = CreateCompatibleDC(NULL);
-
-		// link the bitmap to a device context
-		::SelectObject(input_hdc, sprite->GetBitmap());
-		// OR the image on the mask to apply transparancy
-		BitBlockTransfer(
-			// Dest Context
-			getHDC(), 
-			// Position
-			correctedVector2D,
-			size,
-			// Source Context
-			input_hdc, 
-			offset,
-			// Operation
-			SRCAND);
-
-		::SelectObject(input_hdc, sprite->GetMask());
-		BitBlockTransfer(
-			// Dest Context
-			getHDC(), 
-			// Position
-			correctedVector2D,
-			size,
-			// Source Context
-			input_hdc, 
-			offset,
-			// Operation
-			SRCPAINT);
-		// release the resource
-		DeleteDC(input_hdc);
-	}
 }
