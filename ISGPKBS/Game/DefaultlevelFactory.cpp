@@ -23,7 +23,7 @@ namespace isgp{
 
 	void DefaultlevelFactory::OutputLevel(int currentLevel)
 	{
-		ifstream infile("./levels/level" + StrConverter::IntToString(currentLevel) + ".level");
+		ifstream infile("../wut.level");
 
 		//infile.open("level.txt");
 		
@@ -62,7 +62,7 @@ namespace isgp{
 				result = strtok_s(ch,"=",&j);
 				height = atoi(j);
 				level = new Level(width,height);
-				level->_theme = new Theme1();
+				level->_theme = theme;
 				//start
 				strcpy_s(ch,30,v[2].c_str());
 			
