@@ -111,7 +111,7 @@ void Window::RestartGame() {
 
 void Window::GameOver() {
 	delete _gameState;
-	_graphics->SetCam(NULL);
+	_graphics->SetTranslator(NULL);
 	_gameState = new GameOverGameState(_graphics, this,
 		&Window::RestartGame, &Window::QuitGame);
 }
