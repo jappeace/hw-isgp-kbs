@@ -114,6 +114,7 @@ void Window::NextLevel() {
 		RestartGame();
 	} else { //Completed all levels, wat do?
 		_gameState = new GameCompletedGameState(this);
+	
 	}
 }
 
