@@ -85,13 +85,13 @@ namespace isgp {
 	Sprite* Graphics::LoadBitmapFile(string path) {
 		if(_sprites->IsAt(path)) {
 			// Return cached item
-			return &_sprites->GetAt(path);
+			return _sprites->GetAt(path);
 		}
 
 		HBITMAP bitmap = (HBITMAP)LoadImage(NULL, path.c_str(), IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		Sprite* sprite = new Sprite(bitmap);
 
-		(*_sprites)[path] = *sprite;
+		(*_sprites)[path] = sprite;
 
 		return sprite;
 	}

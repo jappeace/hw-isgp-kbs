@@ -13,6 +13,7 @@ Window::Window() {
 	_cam = NULL;
 	_currentMenu = NULL;
 	_gameState = NULL;
+	_levelBackgrounds = new SpriteCache<int>();
 }
 
 Window::~Window()
@@ -34,7 +35,6 @@ void Window::ClientResize(HWND hWnd, int nWidth, int nHeight)
 }
 
 void Window::AfterCreate(HWND hWnd) {
-	_gameState = new PlayingGameState(_graphics, this, _currentLevel, &Window::GameOver);
 	ClientResize(hWnd, WindowSize.GetWidth(), WindowSize.GetHeight());
 	
 	_graphics->LoadBitmapFile("../tiles/mountain.bmp");
@@ -126,7 +126,17 @@ void Window::GameOver() {
 }
 
 void Window::QuitGame() {
+	// deleting stuff is irrelevant, kernel will handle it
 	PostQuitMessage(0);
 }
 
+void Window::LoadLevel(){
+
+}
+void Window::StartLevel(){
+	_gameState = new PlayingGameState(_graphics, this, _currentLevel, &Window::GameOver);
+}
+SpriteCache<int>* Window::GetLevelTileSnapshots(){
+	return _levelTileSnapshots;
+}
 }

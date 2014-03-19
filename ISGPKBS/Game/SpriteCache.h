@@ -15,8 +15,8 @@ namespace isgp{
 			_spriteCache->clear();
 			delete _spriteCache;
 		}
-		Sprite& GetAt(keyType key) const{
-			return *(*_spriteCache)[key];
+		Sprite*& GetAt(keyType key) const{
+			return (*_spriteCache)[key];
 		}
 		bool IsAt(keyType key) const{
 			return _spriteCache->count(key) != 0;
@@ -24,10 +24,7 @@ namespace isgp{
 		void SetAt(keyType key, Sprite* sprite){
 			(_spriteCache*)[key] = sprite;
 		}
-		Sprite& operator[](keyType key){
-			return GetAt(key);
-		}
-		const Sprite& operator[](keyType key) const{
+		Sprite*& operator[](keyType key){
 			return GetAt(key);
 		}
 	private:

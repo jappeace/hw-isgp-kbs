@@ -25,14 +25,18 @@ namespace isgp {
 		void NextLevel();
 		void FullRestart();
 		Camera* _cam;
+		SpriteCache<int>* GetLevelTileSnapshots();
 	private:
 		Level* _level;
 		int _currentLevel;
 		void ClientResize(HWND hWnd, int nWidth, int nHeight);
 		IMenu* _currentMenu;
 		IGameState* _gameState;
+		SpriteCache<int>* _levelTileSnapshots;
 		void RestartGame();
 		void QuitGame();
 		void GameOver();
+		void LoadLevel();
+		void StartLevel();
 	};
 }

@@ -24,7 +24,10 @@ namespace isgp{
 		vector<Entity*> entities;
 		Grid* GetGrid() const;
 		static const Size defaultTileAmount;
+		int GetStageNumber();
+		void SetStageNumber(int nr);
 	private:
 		Grid* _grid;
+		int _stagenr;
 	};
 }
