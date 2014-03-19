@@ -15,11 +15,13 @@ namespace isgp {
 
 	}
 
-	void Theme4::LoadContent(Graphics* g, double width) {
-		_gridWidth = width;
-
+	void Theme4::LoadContent(Graphics* g) {
 		g->LoadBitmapFile(_bg1);
 		g->LoadBitmapFile(_bg2);
+	}
+
+	void Theme4::SetWidth(double width) {
+		_gridWidth = width;
 	}
 
 	string Theme4::GetTilePath() {

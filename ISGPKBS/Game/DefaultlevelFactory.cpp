@@ -23,7 +23,7 @@ namespace isgp{
 
 	void DefaultlevelFactory::OutputLevel(int currentLevel)
 	{
-		ifstream infile("./levels/level" + StrConverter::IntToString(currentLevel) + ".level");
+		ifstream infile("C:/wut.level");
 
 		//infile.open("level.txt");
 		
@@ -63,6 +63,7 @@ namespace isgp{
 				height = atoi(j);
 				level = new Level(width,height);
 				level->_theme = theme;
+				level->_theme->SetWidth(GridGraphicTranslator().FromTo(Vector2D(width)).X());
 				//start
 				strcpy_s(ch,30,v[2].c_str());
 			

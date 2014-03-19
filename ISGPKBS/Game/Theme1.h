@@ -9,7 +9,8 @@ namespace isgp {
 	public:
 		Theme1();
 		~Theme1(void);
-		void LoadContent(Graphics*, double) override;
+		void LoadContent(Graphics*) override;
+		void SetWidth(double) override;
 		void Paint(Graphics*) override;
 		string GetTilePath() override;
 	};

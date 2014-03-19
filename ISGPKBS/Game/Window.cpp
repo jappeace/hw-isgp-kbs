@@ -18,10 +18,15 @@ Window::Window() {
 	_cam = NULL;
 	_currentMenu = NULL;
 	_gameState = NULL;
+	_level = NULL;
 }
 
 Window::~Window()
 {
+	delete _gameState;
+	delete _cam;
+	delete _level;
+	delete _currentMenu;
 }
 
 /////////////////////////////////////
@@ -57,7 +62,7 @@ void Window::AfterCreate(HWND hWnd) {
 		tmp = new Theme5();
 		break;
 	}
-
+	tmp->LoadContent(_graphics);
 	_gameState = new PlayingGameState(_graphics, this, _currentLevel, tmp, &Window::GameOver);
 	ClientResize(hWnd, WindowSize.GetWidth(), WindowSize.GetHeight());
 }
