@@ -13,16 +13,19 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 		start = NULL;
 		_player = NULL;
 		_grid = new Grid(defaultTileAmount.GetWidth(), defaultTileAmount.GetHeight());
+		_timePlayed = 0;
 	}
 	Level::Level(int width, int height) {
 		start = NULL;
 		_player = NULL;
 		_grid = new Grid(width, height);
+		_timePlayed = 0;
 	}
 	Level::Level(Grid* grid) {
 		start = NULL;
 		_player = NULL;
 		_grid = grid;
+		_timePlayed = 0;
 	}
 
 	Level::~Level(void)
@@ -35,8 +38,13 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 		}
 	}
 
+	double Level::GetPlayTime() {
+		return _timePlayed;
+	}
+
 	void Level::Update(double elapsed) {
 		// Update player
+		_timePlayed += elapsed;
 		_player->Update(elapsed);
 		finish->Update(elapsed);
 		// Update enemies.
@@ -49,6 +57,13 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 		_theme->LoadContent(g, width);
 	}
 
+	string FormatTime(double time) {
+		int hours = (int) (time / 3600);
+		int minutes = (int) (time / 60) % 60;
+		int seconds = (int)time  % 60;
+		return hours + ":" + minutes + ':' + seconds;
+	}
+
 	void Level::Paint(Graphics* g) {
 		_theme->Paint(g);
 		finish->Paint(g);
@@ -57,6 +72,8 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 		for (auto it = entities.begin(); it != entities.end(); ++it) {
 			(*it)->Paint(g);
 		}
+		//string elapsed = FormatTime(_timePlayed);
+		//g->DrawStr(Vector2D(60, 60), elapsed);
 	}
 
 	bool Level::IsFinished() {

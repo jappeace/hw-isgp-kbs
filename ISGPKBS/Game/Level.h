@@ -29,7 +29,9 @@ namespace isgp{
 		static const Size defaultTileAmount;
 		Theme* _theme;
 		void LoadContent(Graphics*, double);
+		double GetPlayTime();
 	private:
+		double _timePlayed;
 		Grid* _grid;
 	};
 }
