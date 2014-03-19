@@ -131,6 +131,9 @@
     <ClCompile Include="Theme5.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Finish.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractWindow.h">
@@ -296,6 +299,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Theme5.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Finish.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeFormatter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
