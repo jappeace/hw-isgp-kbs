@@ -9,7 +9,7 @@
 namespace isgp {
 	class PlayingGameState : public IGameState {
 	public:
-		PlayingGameState(Graphics* graphics, Window* window, int level,
+		PlayingGameState(Graphics* graphics, Window* window, int level, Theme*,
 			void(Window::*gameOver)());
 		~PlayingGameState();
 		void Paint(Graphics* g) override;

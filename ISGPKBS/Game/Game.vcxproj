@@ -63,12 +63,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Finish.h" />
+    <ClInclude Include="resource3.h" />
+    <ClInclude Include="Sound.h" />
+    <ClInclude Include="Theme.h" />
+    <ClInclude Include="Theme1.h" />
     <ClCompile Include="AbstractWindow.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="BackgroundArtist.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CollisionHelper.cpp" />
     <ClCompile Include="DefaultlevelFactory.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="Finish.cpp" />
     <ClCompile Include="Gadget.cpp" />
     <ClCompile Include="GadgetGravityBoots.cpp" />
     <ClCompile Include="GadgetJumpPlatform.cpp" />
@@ -87,8 +94,14 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayingGameState.cpp" />
     <ClCompile Include="Size.cpp" />
+    <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteGraphics.cpp" />
+    <ClCompile Include="Theme1.cpp" />
+    <ClCompile Include="Theme2.cpp" />
+    <ClCompile Include="Theme3.cpp" />
+    <ClCompile Include="Theme4.cpp" />
+    <ClCompile Include="Theme5.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TimesPerSecondCounter.cpp" />
     <ClCompile Include="Vector2D.cpp" />
@@ -100,6 +113,7 @@
   <ItemGroup>
     <ClInclude Include="AbstractWindow.h" />
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="CollisionHelper.h" />
     <ClInclude Include="DefaultlevelFactory.h" />
     <ClInclude Include="BackgroundArtist.h" />
     <ClInclude Include="Camera.h" />
@@ -140,14 +154,21 @@
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteGraphics.h" />
     <ClInclude Include="StrConverter.h" />
+    <ClInclude Include="Theme2.h" />
+    <ClInclude Include="Theme3.h" />
+    <ClInclude Include="Theme4.h" />
+    <ClInclude Include="Theme5.h" />
     <ClInclude Include="Tile.h" />
+    <ClInclude Include="TimeFormatter.h" />
     <ClInclude Include="TimesPerSecondCounter.h" />
     <ClInclude Include="Vector2D.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="WindowGraphics.h" />
     <ClInclude Include="WorldBlock.h" />
   </ItemGroup>
-    
+  <ItemGroup>
+    <ResourceCompile Include="Game.rc" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

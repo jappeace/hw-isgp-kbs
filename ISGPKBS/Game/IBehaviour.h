@@ -6,6 +6,7 @@ namespace isgp {
 	class IBehaviour
 	{
 	public:
+		virtual ~IBehaviour() {}
 		// Executes the implemented behaviour.
 		// The executing will keep in mind how many milliseconds have passed.
 		// This method must be overridden in a child class

@@ -68,6 +68,7 @@ namespace isgp {
 
 		// translates a position and size into a C Rectangle structure
 		static void FillRect(HDC hdc, Vector2D position, const Size& size, COLORREF color);
+		ITranslator* GetTranslator();
 	protected:
 		//does the final api call for BitBLT
 		BOOL BitBlockTransfer(HDC destination, const Vector2D& destPosition, const Size& bothSize, HDC source, const Vector2D& /** offset */positionSrc , DWORD actionFlag);
