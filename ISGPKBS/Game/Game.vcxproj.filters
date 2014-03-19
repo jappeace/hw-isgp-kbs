@@ -307,6 +307,12 @@
     <ClInclude Include="Finish.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TimeFormatter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Finish.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="Sound.h">
       <Filter>Header Files</Filter>
     </ClInclude>

@@ -159,6 +159,7 @@
     <ClInclude Include="Theme4.h" />
     <ClInclude Include="Theme5.h" />
     <ClInclude Include="Tile.h" />
+    <ClInclude Include="TimeFormatter.h" />
     <ClInclude Include="TimesPerSecondCounter.h" />
     <ClInclude Include="Vector2D.h" />
     <ClInclude Include="Window.h" />

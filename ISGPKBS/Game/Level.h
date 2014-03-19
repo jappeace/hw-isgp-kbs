@@ -8,6 +8,8 @@
 #include "Gadget.h"
 #include "Theme.h"
 #include "Finish.h"
+#include "TimeFormatter.h"
+
 namespace isgp{
 	class Theme;
 	// represents a level in the game
