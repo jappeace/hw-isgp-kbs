@@ -4,7 +4,7 @@
 #include<mmsystem.h>
 #pragma comment(lib,"winmm.lib")
 namespace isgp{
-	enum{JUMP,END_LOSE,COLLISION,END_WIN};
+	enum{JUMP,END_LOSE,KILL_ENEMY,END_WIN,CHANGE_DIREC};
 class Sound
 {
 public :

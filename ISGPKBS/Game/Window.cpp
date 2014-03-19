@@ -9,7 +9,7 @@
 #include "Theme3.h"
 #include "Theme4.h"
 #include "Theme5.h"
-
+#include "Sound.h"
 namespace isgp {
 
 // Constructors / Destructors      //
@@ -109,12 +109,14 @@ void Window::FullRestart() {
 }
 
 void Window::NextLevel() {
+	Sound().Play(END_WIN);
 	_currentLevel++;
 	if(DefaultlevelFactory().LevelExists(_currentLevel)) {
 		RestartGame();
 	} else { //Completed all levels, wat do?
+		
 		_gameState = new GameCompletedGameState(this);
-	
+
 	}
 }
 
