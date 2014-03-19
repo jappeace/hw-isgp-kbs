@@ -19,7 +19,7 @@ Window::Window() {
 	_currentMenu = NULL;
 	_gameState = NULL;
 	_level = NULL;
-	_oldTheme = NULL;
+	_theme = NULL;
 }
 
 Window::~Window()
@@ -45,6 +45,11 @@ void Window::ClientResize(HWND hWnd, int nWidth, int nHeight)
 }
 
 void Window::AfterCreate(HWND hWnd) {
+	if (_theme != NULL) {
+		//delete _theme;
+		//_theme = NULL;
+	}
+
 	switch (_currentLevel) {
 		case 1 :
 			_theme = new Theme1();
@@ -61,20 +66,14 @@ void Window::AfterCreate(HWND hWnd) {
 		case 5 :
 			_theme = new Theme5();
 			break;
-	}
-
-	if (_theme != _oldTheme) {
-		if (_oldTheme != NULL) {
-			delete _oldTheme;
-			_oldTheme = NULL;
-		}
+		default:
+			_theme = new Theme1();
+			break;
 	}
 
 	_theme->LoadContent(_graphics);
 	_gameState = new PlayingGameState(_graphics, this, _currentLevel, _theme, &Window::GameOver);
 	ClientResize(hWnd, WindowSize.GetWidth(), WindowSize.GetHeight());
-
-	_oldTheme = _theme;
 }
 
 INT_PTR CALLBACK dialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam){

@@ -35,6 +35,5 @@ namespace isgp {
 		void QuitGame();
 		void GameOver();
 		Theme* _theme;
-		Theme* _oldTheme;
 	};
 }

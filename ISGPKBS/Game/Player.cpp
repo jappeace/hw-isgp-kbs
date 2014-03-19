@@ -25,7 +25,7 @@ const Size Player::InitSize(32, 32);
 	Player::~Player(void) {
 		// Delete references in vector
 		for (IBehaviour* behaviour = _behaviours->front(); behaviour != _behaviours->back(); ++behaviour) {
-			delete behaviour;
+			//delete behaviour;
 		}
 		// Delete vector
 		delete _behaviours;
