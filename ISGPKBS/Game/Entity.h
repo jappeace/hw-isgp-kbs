@@ -11,6 +11,7 @@ class Entity : public IPaintable
 {
 public:
 	Entity();
+	virtual ~Entity() {}
 	// Paints the entity onto the graphics context
 	virtual void Paint(Graphics* g) override = 0;
 	// Update the entity state

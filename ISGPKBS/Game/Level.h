@@ -7,6 +7,7 @@
 #include "Patrol.h"
 #include "Gadget.h"
 #include "Theme.h"
+#include "Finish.h"
 namespace isgp{
 	class Theme;
 	// represents a level in the game
@@ -17,7 +18,7 @@ namespace isgp{
 		Level(int width, int height);
 		~Level(void);
 		Vector2D *start;
-		Vector2D finish;
+		Finish* finish;
 		bool IsFinished();
 		void Paint(Graphics* g) override;
 		void Update(double elapsed);
@@ -27,8 +28,11 @@ namespace isgp{
 		Grid* GetGrid() const;
 		static const Size defaultTileAmount;
 		Theme* _theme;
-		void LoadContent(Graphics*, double);
+		void LoadContent(Graphics*);
+		double GetPlayTime();
 	private:
+		void Init();
+		double _timePlayed;
 		Grid* _grid;
 	};
 }

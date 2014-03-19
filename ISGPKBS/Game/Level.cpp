@@ -1,6 +1,8 @@
-#include "Level.h"
-#include "GridGraphicTranslator.h"
 #include "Camera.h"
+#include "CollisionHelper.h"
+#include "GridGraphicTranslator.h"
+#include "Level.h"
+
 namespace isgp{
 // default amount of tiles in level
 const Size Level::defaultTileAmount = Size(500,30);
@@ -8,22 +10,27 @@ const Size Level::defaultTileAmount = Size(500,30);
 // tile size, should equal the width and height of spritesheet tiles
 const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 	Level::Level(){
-		start = NULL;
-		finish = NULL;
-		_player = NULL;
+		Init();
 		_grid = new Grid(defaultTileAmount.GetWidth(), defaultTileAmount.GetHeight());
+		_timePlayed = 0;
 	}
+
 	Level::Level(int width, int height) {
-		start = NULL;
-		finish = NULL;
-		_player = NULL;
+		Init();
 		_grid = new Grid(width, height);
+		_timePlayed = 0;
 	}
+
 	Level::Level(Grid* grid) {
-		start = NULL;
-		finish = NULL;
-		_player = NULL;
+		Init();
 		_grid = grid;
+	}
+
+	void Level::Init() {
+		start = NULL;
+		_player = NULL;
+		_theme = NULL;
+		_timePlayed = 0;
 	}
 
 	Level::~Level(void)
@@ -31,38 +38,52 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 		delete _grid;
 		delete start;
 		delete _player;
+		delete _theme;
 		for (auto it = entities.begin(); it != entities.end(); ++it) {
 			delete (*it);
 		}
 	}
 
+	double Level::GetPlayTime() {
+		return _timePlayed;
+	}
+
 	void Level::Update(double elapsed) {
 		// Update player
+		_timePlayed += elapsed;
 		_player->Update(elapsed);
-
+		finish->Update(elapsed);
 		// Update enemies.
 		for (auto it = entities.begin(); it != entities.end(); ++it) {
 			(*it)->Update(elapsed);
 		}
 	}
 
-	void Level::LoadContent(Graphics* g, double width) {
-		_theme->LoadContent(g, width);
+	void Level::LoadContent(Graphics* g) {
+		_theme->LoadContent(g);
+	}
+
+	string FormatTime(double time) {
+		int hours = (int) (time / 3600);
+		int minutes = (int) (time / 60) % 60;
+		int seconds = (int)time  % 60;
+		return hours + ":" + minutes + ':' + seconds;
 	}
 
 	void Level::Paint(Graphics* g) {
 		_theme->Paint(g);
-
+		finish->Paint(g);
 		_player->Paint(g);
 		// Update entities.
 		for (auto it = entities.begin(); it != entities.end(); ++it) {
 			(*it)->Paint(g);
 		}
+		//string elapsed = FormatTime(_timePlayed);
+		//g->DrawStr(Vector2D(60, 60), elapsed);
 	}
 
 	bool Level::IsFinished() {
-		double collisionRange = sqrt(pow(finish.X() - _player->GetPosition().X(), 2) + pow(finish.Y() - _player->GetPosition().Y(), 2));
-		return (collisionRange < 26);
+		return CollisionHelper::IsColliding(_player->GetPosition(), *_player->GetSize(), finish->GetPosition(), Size(16, 16));
 	}
 
 	Grid* Level::GetGrid() const{

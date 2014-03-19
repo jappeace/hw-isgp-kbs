@@ -3,7 +3,7 @@
 namespace isgp {
 	Theme1::Theme1()
 	{
-		_tilePath = "../tiles/ground1.bmp";
+		_tilePath = "../tiles/ground4.bmp";
 		_bg1 = "../tiles/mountain.bmp";
 		_bg2 = "../tiles/ground.bmp";
 	}
@@ -13,11 +13,13 @@ namespace isgp {
 
 	}
 
-	void Theme1::LoadContent(Graphics* g, double width) {
-		_gridWidth = width;
-
+	void Theme1::LoadContent(Graphics* g) {
 		g->LoadBitmapFile(_bg1);
 		g->LoadBitmapFile(_bg2);
+	}
+
+	void Theme1::SetWidth(double width) {
+		_gridWidth = width;
 	}
 
 	string Theme1::GetTilePath() {

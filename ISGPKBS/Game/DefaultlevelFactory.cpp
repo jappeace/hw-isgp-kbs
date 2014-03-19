@@ -1,3 +1,10 @@
+#ifdef _DEBUG
+    #define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
+    #define DEBUG_NEW new(_NORMAL_BLOCK, __FILE__, __LINE__)
+    #define new DEBUG_NEW
+#endif
 #include "DefaultlevelFactory.h"
 #include "Theme1.h"
 
@@ -35,7 +42,7 @@ namespace isgp{
 	}
 
 	
-	void DefaultlevelFactory::get_size()
+	void DefaultlevelFactory::get_size(Theme* theme)
 	{
 		GridGraphicTranslator fromto;
 		char *result =NULL;
@@ -55,6 +62,8 @@ namespace isgp{
 				result = strtok_s(ch,"=",&j);
 				height = atoi(j);
 				level = new Level(width,height);
+				level->_theme = theme;
+				level->_theme->SetWidth(GridGraphicTranslator().FromTo(Vector2D(width)).X());
 				//start
 				strcpy_s(ch,30,v[2].c_str());
 			
@@ -73,9 +82,9 @@ namespace isgp{
 				finish_Y=atoi(j);
 			
 		
-
-		level->finish = GridGraphicTranslator().FromTo(Vector2D(finish_X,finish_Y));
 		level->_player = new Player(Vector2D(start_X,start_Y));
+		level->finish = new Finish(Vector2D(finish_X, finish_Y), level->_player);
+		
 	////////////////information (x,y)of ghost,patrol,tile	
 		int size = v.size();
 		for(int k=4;k<size;k++)
@@ -103,7 +112,7 @@ namespace isgp{
 			result=strtok_s(v_for,",",&m);
 			tile_Y=atoi(m);
 			//level->ReceiveTile(new Tile(tile_X,tile_Y));
-			level->GetGrid()->GetTileAt(tile_X,tile_Y)->SetData(new WorldBlock(".\\tiles\\smile.bmp"));
+			level->GetGrid()->GetTileAt(tile_X,tile_Y)->SetData(new WorldBlock(level->_theme->GetTilePath()));
 
 		}
 		level->_player->SetGrid(level->GetGrid());
@@ -174,12 +183,10 @@ namespace isgp{
 
 }
 
-	Level *DefaultlevelFactory::CreateLevel(int currentLevel)
+	Level *DefaultlevelFactory::CreateLevel(int currentLevel, Theme* theme)
 	{
 		OutputLevel(currentLevel);
-		get_size();
-
-		level->_theme = new Theme1();
+		get_size(theme);
 
 		return level;
 	}
