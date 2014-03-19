@@ -72,7 +72,7 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 			(*it)->Paint(g);
 		}
 		string elapsed = TimeFormatter::FormatTime(_timePlayed);
-		g->DrawStr(Vector2D(60, 60), elapsed);
+		g->DrawStr(Vector2D(10, 30), elapsed);
 	}
 
 	bool Level::IsFinished() {
