@@ -63,14 +63,6 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 		_theme->LoadContent(g);
 	}
 
-	string FormatTime(double time) {
-		int timeInSeconds = time/1000;
-		int minutes = (int) (timeInSeconds / 60) % 60;
-		int seconds = (int)timeInSeconds  % 60;
-		int ms = (int)time % 60;
-		return StrConverter::IntToString(minutes) + ":" + StrConverter::IntToString(seconds) + ":" + StrConverter::IntToString(ms);
-	}
-
 	void Level::Paint(Graphics* g) {
 		_theme->Paint(g);
 		finish->Paint(g);
@@ -79,7 +71,7 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 		for (auto it = entities.begin(); it != entities.end(); ++it) {
 			(*it)->Paint(g);
 		}
-		string elapsed = FormatTime(_timePlayed);
+		string elapsed = TimeFormatter::FormatTime(_timePlayed);
 		g->DrawStr(Vector2D(60, 60), elapsed);
 	}
 
