@@ -82,6 +82,7 @@
     <ClCompile Include="GridGraphicTranslator.cpp" />
     <ClCompile Include="GameCompletedGameState.cpp" />
     <ClCompile Include="Level.cpp" />
+    <ClCompile Include="LoadLevelGameState.cpp" />
     <ClCompile Include="MenuItem.cpp" />
     <ClCompile Include="Patrol.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -129,6 +130,7 @@
     <ClInclude Include="ITileData.h" />
     <ClInclude Include="ITranslator.h" />
     <ClInclude Include="Level.h" />
+    <ClInclude Include="LoadLevelGameState.h" />
     <ClInclude Include="MenuItem.h" />
     <ClInclude Include="Patrol.h" />
     <ClInclude Include="Player.h" />

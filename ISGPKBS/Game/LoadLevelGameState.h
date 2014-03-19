@@ -1,11 +1,13 @@
 #pragma once
-#include "Window.h"
 #include "BackgroundArtist.h"
 #include "DefaultLevelFactory.h"
+#include "IGameState.h"
 namespace isgp{
-	class LoadLevelGameState : IGameState {
+	class Window;
+	class LoadLevelGameState : public IGameState {
 	public:
-		LoadLevelGameState(Window* parent, int levelnr, SpriteCache<int>* cache, void(Window::*startLevel)());
+		LoadLevelGameState(Window* parent, int levelnr, SpriteCache<int>* cache, void(Window::*startLevelCalback)(Level* level, Camera*));
+		
 		~LoadLevelGameState(void);
 		void Update(double elapsed) override;
 		void Paint(Graphics* g) override;
@@ -16,7 +18,7 @@ namespace isgp{
 		SpriteCache<int>* _cache;
 		int _levelnr;
 		bool _hasDrawn;
-		void(Window::*_startLevelmfp)();
+		void(Window::*_startLevelCalback)(Level* level, Camera*);
 	};
 
 

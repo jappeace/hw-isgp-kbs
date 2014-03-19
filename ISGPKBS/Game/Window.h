@@ -37,6 +37,6 @@ namespace isgp {
 		void QuitGame();
 		void GameOver();
 		void LoadLevel();
-		void StartLevel();
+		void StartLevel(Level*, Camera*);
 	};
 }

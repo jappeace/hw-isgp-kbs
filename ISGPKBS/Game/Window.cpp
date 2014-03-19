@@ -134,10 +134,10 @@ void Window::QuitGame() {
 }
 
 void Window::LoadLevel(){
-	_gameState = new LoadLevelGameState();
+	_gameState = new LoadLevelGameState(this, _currentLevel,_levelTileSnapshots, &Window::StartLevel);
 }
-void Window::StartLevel(){
-	_gameState = new PlayingGameState(_graphics, this, _currentLevel, &Window::GameOver);
+void Window::StartLevel(Level* which, Camera* cam){
+	_gameState = new PlayingGameState(this, which, cam, &Window::GameOver);
 }
 SpriteCache<int>* Window::GetLevelTileSnapshots(){
 	return _levelTileSnapshots;

@@ -66,6 +66,7 @@ namespace isgp {
 		void DrawSprite(Sprite* sprite, Vector2D position, Vector2D& offset, Size& size);
 
 		void DrawLine(Vector2D one,Vector2D two);
+		void DeleteTranslater(void);
 
 		// translates a position and size into a C Rectangle structure
 		static void FillRect(HDC hdc, Vector2D position, const Size& size, COLORREF color);

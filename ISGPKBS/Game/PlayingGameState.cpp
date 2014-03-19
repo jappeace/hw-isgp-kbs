@@ -11,9 +11,6 @@ namespace isgp {
 		DefaultlevelFactory factory;
 		_level = level;
 		_camera = camera;
-		graphics->SetTextBackgroundColor(RGB(255, 255, 255));
-		_camera = new Camera(_level->_player, _level->GetGrid());
-		graphics->SetTranslator(_camera);
 		_artist = new BackgroundArtist(_camera, _level, window->GetLevelTileSnapshots());
 		_artist->RenderBackground();
 	}

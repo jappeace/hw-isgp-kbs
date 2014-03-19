@@ -13,6 +13,10 @@ namespace isgp {
 		_translator = cam;
 	}
 
+	void Graphics::DeleteTranslater(){
+		delete _translator;
+		_translator = NULL;
+	}
 	void Graphics::DrawStr(Vector2D& position, string str) {
 		this->DrawStr(position,str.c_str(), str.length());
 	}
