@@ -14,7 +14,7 @@ namespace isgp {
 		_graphics->SetTextBackgroundColor(RGB(255, 255, 255));
 		DefaultlevelFactory factory;
 		_level = factory.CreateLevel(level, theme);
-		_level->LoadContent(_graphics, GridGraphicTranslator().FromTo(*_level->GetGrid()->GetSize()).X());
+		_level->LoadContent(_graphics);
 		_camera = new Camera(_level->_player, _level->GetGrid());
 		_graphics->SetTranslator(_camera);
 		_artist = new BackgroundArtist(_camera, _level);

@@ -27,7 +27,7 @@ namespace isgp{
 		Grid* GetGrid() const;
 		static const Size defaultTileAmount;
 		Theme* _theme;
-		void LoadContent(Graphics*, double);
+		void LoadContent(Graphics*);
 	private:
 		Grid* _grid;
 	};

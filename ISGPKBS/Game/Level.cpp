@@ -48,8 +48,8 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 		}
 	}
 
-	void Level::LoadContent(Graphics* g, double width) {
-		_theme->LoadContent(g, width);
+	void Level::LoadContent(Graphics* g) {
+		_theme->LoadContent(g);
 	}
 
 	void Level::Paint(Graphics* g) {

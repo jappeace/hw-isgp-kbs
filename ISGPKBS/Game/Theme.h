@@ -12,7 +12,8 @@ namespace isgp {
 		string _bg3;
 		string _bg4;
 	public:
-		virtual void LoadContent(Graphics*, double) = 0;
+		virtual void LoadContent(Graphics*) = 0;
+		virtual void SetWidth(double) = 0;
 		virtual void Paint(Graphics*) = 0;
 		virtual string GetTilePath() = 0;
 	};
