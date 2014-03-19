@@ -30,6 +30,7 @@ namespace isgp{
 		Theme* _theme;
 		void LoadContent(Graphics*);
 	private:
+		void Init();
 		Grid* _grid;
 	};
 }
