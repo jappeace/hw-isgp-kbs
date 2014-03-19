@@ -9,7 +9,7 @@ namespace isgp{
 	class BackgroundArtist : IPaintable, IGridTraveller
 	{
 	public:
-		BackgroundArtist(Camera* cam, Level* level);
+		BackgroundArtist(Camera* cam, Level* level, SpriteCache<int>* cache);
 		~BackgroundArtist(void);
 		// renders the actual background, takes a while, and should only be done once per level
 		void RenderBackground(void);

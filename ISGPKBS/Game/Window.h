@@ -10,6 +10,7 @@
 #include "IGameState.h"
 #include "DefaultLevelFactory.h"
 #include "GameCompletedGameState.h"
+#include "LoadLevelGameState.h"
 namespace isgp {
 	class Window : public AbstractWindow {
 	public:
@@ -27,7 +28,6 @@ namespace isgp {
 		Camera* _cam;
 		SpriteCache<int>* GetLevelTileSnapshots();
 	private:
-		Level* _level;
 		int _currentLevel;
 		void ClientResize(HWND hWnd, int nWidth, int nHeight);
 		IMenu* _currentMenu;

@@ -5,17 +5,16 @@
 #include <Windows.h>
 
 namespace isgp {
-	PlayingGameState::PlayingGameState(Graphics* graphics, Window* window, int level,
-		void(Window::*gameOver)()) {
+	PlayingGameState::PlayingGameState(Window* window, Level* level, Camera* camera, void(Window::*gameOver)()) {
 		_window = window;
 		_gameOver = gameOver;
-		_graphics = graphics;
-		_graphics->SetTextBackgroundColor(RGB(255, 255, 255));
 		DefaultlevelFactory factory;
-		_level = factory.CreateLevel(level);
+		_level = level;
+		_camera = camera;
+		graphics->SetTextBackgroundColor(RGB(255, 255, 255));
 		_camera = new Camera(_level->_player, _level->GetGrid());
-		_graphics->SetTranslator(_camera);
-		_artist = new BackgroundArtist(_camera, _level, level);
+		graphics->SetTranslator(_camera);
+		_artist = new BackgroundArtist(_camera, _level, window->GetLevelTileSnapshots());
 		_artist->RenderBackground();
 	}
 

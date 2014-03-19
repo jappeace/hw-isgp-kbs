@@ -13,7 +13,7 @@ Window::Window() {
 	_cam = NULL;
 	_currentMenu = NULL;
 	_gameState = NULL;
-	_levelBackgrounds = new SpriteCache<int>();
+	_levelTileSnapshots = new SpriteCache<int>();
 }
 
 Window::~Window()
@@ -45,6 +45,8 @@ void Window::AfterCreate(HWND hWnd) {
 	_graphics->LoadBitmapFile("../tiles/link.bmp");
 	_graphics->LoadBitmapFile("../tiles/gravityBoots.bmp");
 	_graphics->LoadBitmapFile("../tiles/smile.bmp");
+
+	LoadLevel();
 }
 
 INT_PTR CALLBACK dialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
@@ -115,7 +117,8 @@ LRESULT Window::MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 
 void Window::RestartGame() {
 	delete _gameState;
-	AfterCreate(_hWnd);
+	_gameState = NULL;
+	LoadLevel();
 }
 
 void Window::GameOver() {
@@ -131,7 +134,7 @@ void Window::QuitGame() {
 }
 
 void Window::LoadLevel(){
-
+	_gameState = new LoadLevelGameState();
 }
 void Window::StartLevel(){
 	_gameState = new PlayingGameState(_graphics, this, _currentLevel, &Window::GameOver);
