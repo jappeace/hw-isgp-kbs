@@ -17,7 +17,7 @@ namespace isgp {
 
 		static string FormatTime(double time) {
 			string elapsedString = "";
-			int timeInSeconds = (int)(time/1000);
+			int timeInSeconds = (int) time/1000;
 			int minutes = (int) (timeInSeconds / 60) % 60;
 			int seconds = (int)timeInSeconds  % 60;
 			int ms = (int)time % 60;
