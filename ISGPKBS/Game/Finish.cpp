@@ -16,7 +16,7 @@ namespace isgp {
 			_animationOffset = Vector2D();
 		} else if(_position.X() < _player->GetPosition().X() && _lastWasLeft) {
 			_lastWasLeft = false;
-			_animationOffset = Vector2D(96, 0);
+			_animationOffset = Vector2D(160, 0);
 		}
 	}
 	void Finish::Paint(Graphics* graphics) {

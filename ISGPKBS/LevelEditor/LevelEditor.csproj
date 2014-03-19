@@ -83,6 +83,9 @@
     <EmbeddedResource Include="Forms\LevelEditorForm.resx">
       <DependentUpon>LevelEditorForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LevelPanel.resx">
+      <DependentUpon>LevelPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\NewLevelForm.resx">
       <DependentUpon>NewLevelForm.cs</DependentUpon>
     </EmbeddedResource>
