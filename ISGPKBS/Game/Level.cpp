@@ -10,19 +10,27 @@ const Size Level::defaultTileAmount = Size(500,30);
 // tile size, should equal the width and height of spritesheet tiles
 const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 	Level::Level(){
-		start = NULL;
-		_player = NULL;
+		Init();
 		_grid = new Grid(defaultTileAmount.GetWidth(), defaultTileAmount.GetHeight());
+		_timePlayed = 0;
 	}
+
 	Level::Level(int width, int height) {
-		start = NULL;
-		_player = NULL;
+		Init();
 		_grid = new Grid(width, height);
+		_timePlayed = 0;
 	}
+
 	Level::Level(Grid* grid) {
+		Init();
+		_grid = grid;
+	}
+
+	void Level::Init() {
 		start = NULL;
 		_player = NULL;
-		_grid = grid;
+		_theme = NULL;
+		_timePlayed = 0;
 	}
 
 	Level::~Level(void)
@@ -30,13 +38,19 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 		delete _grid;
 		delete start;
 		delete _player;
+		delete _theme;
 		for (auto it = entities.begin(); it != entities.end(); ++it) {
 			delete (*it);
 		}
 	}
 
+	double Level::GetPlayTime() {
+		return _timePlayed;
+	}
+
 	void Level::Update(double elapsed) {
 		// Update player
+		_timePlayed += elapsed;
 		_player->Update(elapsed);
 		finish->Update(elapsed);
 		// Update enemies.
@@ -49,6 +63,13 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 		_theme->LoadContent(g);
 	}
 
+	string FormatTime(double time) {
+		int hours = (int) (time / 3600);
+		int minutes = (int) (time / 60) % 60;
+		int seconds = (int)time  % 60;
+		return hours + ":" + minutes + ':' + seconds;
+	}
+
 	void Level::Paint(Graphics* g) {
 		_theme->Paint(g);
 		finish->Paint(g);
@@ -57,6 +78,8 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 		for (auto it = entities.begin(); it != entities.end(); ++it) {
 			(*it)->Paint(g);
 		}
+		//string elapsed = FormatTime(_timePlayed);
+		//g->DrawStr(Vector2D(60, 60), elapsed);
 	}
 
 	bool Level::IsFinished() {
