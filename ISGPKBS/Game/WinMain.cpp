@@ -12,5 +12,6 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 	if (!app.Create())
 		return 0;
 
-	return app.Run();
+	app.Run();
+	return 0;
 }
