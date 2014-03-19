@@ -91,6 +91,7 @@
     <ClCompile Include="Patrol.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayingGameState.cpp" />
+    <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Size.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteGraphics.cpp" />
@@ -164,7 +165,7 @@
     <ClInclude Include="WindowGraphics.h" />
     <ClInclude Include="WorldBlock.h" />
   </ItemGroup>
-    <ClCompile Include="Sound.cpp" />
+    
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
