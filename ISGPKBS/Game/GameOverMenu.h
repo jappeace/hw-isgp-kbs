@@ -1,21 +1,12 @@
 #pragma once
 
-#include "IMenu.h"
+#include "ListMenu.h"
 #include <vector>
 
 namespace isgp {
-	class GameOverMenu : public IMenu {
+	class GameOverMenu : public ListMenu {
 	public:
-		GameOverMenu();
 		~GameOverMenu();
-		void AddMenuItem(MenuItem* menuItem) override;
-		void MoveCursorUp() override;
-		void MoveCursorDown() override;
-		void ExecuteSelection() override;
-		void Paint(Graphics* g) override;
-	private:
-		HFONT _font;
-		std::vector<MenuItem*> _menuItems;
-		int _selectedMenuItem;
+		void PaintDecoration(Graphics* g);
 	};
 }

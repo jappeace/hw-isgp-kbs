@@ -3,6 +3,7 @@
 #include "DefaultlevelFactory.h"
 #include "MenuItem.h"
 #include "PlayingGameState.h"
+#include "MainMenuState.h"
 #include "GameOverGameState.h"
 #include "Theme1.h"
 #include "Theme2.h"
@@ -73,6 +74,7 @@ void Window::AfterCreate(HWND hWnd) {
 
 	_theme->LoadContent(_graphics);
 	_gameState = new PlayingGameState(_graphics, this, _currentLevel, _theme, &Window::GameOver);
+	//_gameState = new MainMenuState(_graphics
 	ClientResize(hWnd, WindowSize.GetWidth(), WindowSize.GetHeight());
 }
 
@@ -148,6 +150,10 @@ LRESULT Window::MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 void Window::RestartGame() {
 	delete _gameState;
 	AfterCreate(_hWnd);
+}
+
+void Window::ContinueGame() {
+	
 }
 
 void Window::GameOver() {
