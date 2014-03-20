@@ -39,7 +39,9 @@ namespace isgp{
 		pair<Level*, Camera*> result;
 
 		graphics->SetTranslator(_window->_cam);
-		result.first = DefaultlevelFactory().CreateLevel(_levelnr);
+		Theme* theme = Theme::CreateTheme(_levelnr);
+		theme->LoadContent(graphics);
+		result.first = DefaultlevelFactory().CreateLevel(_levelnr, theme);
 		BackgroundArtist artist = BackgroundArtist(_window->_cam, result.first, /* out */_cache);
 		artist.RenderBackground(); // wil handle caching by itself
 

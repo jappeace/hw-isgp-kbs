@@ -25,7 +25,6 @@ Window::~Window()
 {
 	delete _gameState;
 	delete _cam;
-	delete _level;
 	delete _currentMenu;
 }
 
@@ -44,34 +43,7 @@ void Window::ClientResize(HWND hWnd, int nWidth, int nHeight)
 }
 
 void Window::AfterCreate(HWND hWnd) {
-	if (_theme != NULL) {
-		//delete _theme;
-		//_theme = NULL;
-	}
-
-	switch (_currentLevel) {
-		case 1 :
-			_theme = new Theme1();
-			break;
-		case 2 :
-			_theme = new Theme2();
-			break;
-		case 3 :
-			_theme = new Theme3();
-			break;
-		case 4 :
-			_theme = new Theme4();
-			break;
-		case 5 :
-			_theme = new Theme5();
-			break;
-		default:
-			_theme = new Theme1();
-			break;
-	}
-
-	_theme->LoadContent(_graphics);
-	_gameState = new PlayingGameState(_graphics, this, _currentLevel, _theme, &Window::GameOver);
+	LoadLevel();
 	ClientResize(hWnd, WindowSize.GetWidth(), WindowSize.GetHeight());
 }
 
