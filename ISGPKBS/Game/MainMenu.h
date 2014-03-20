@@ -1,12 +1,11 @@
 #pragma once
-
 #include "ListMenu.h"
-#include <vector>
 
 namespace isgp {
-	class GameOverMenu : public ListMenu {
+	class MainMenu : public ListMenu
+	{
 	public:
-		~GameOverMenu();
+		~MainMenu();
 		void PaintDecoration(Graphics* g);
 	};
 }

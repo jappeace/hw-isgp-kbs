@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -64,7 +64,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Finish.h" />
+    <ClInclude Include="ListMenu.h" />
+    <ClInclude Include="MainMenu.h" />
+    <ClInclude Include="MainMenuState.h" />
     <ClInclude Include="resource3.h" />
+    <ClInclude Include="SaveGame.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="Theme.h" />
     <ClInclude Include="Theme1.h" />
@@ -89,11 +93,14 @@
     <ClCompile Include="GridGraphicTranslator.cpp" />
     <ClCompile Include="GameCompletedGameState.cpp" />
     <ClCompile Include="Level.cpp" />
-    <ClCompile Include="LoadLevelGameState.cpp" />
+    <ClCompile Include="ListMenu.cpp" />
+    <ClCompile Include="MainMenu.cpp" />
+    <ClCompile Include="MainMenuState.cpp" />
     <ClCompile Include="MenuItem.cpp" />
     <ClCompile Include="Patrol.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayingGameState.cpp" />
+    <ClCompile Include="SaveGame.cpp" />
     <ClCompile Include="Size.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Sprite.cpp" />
