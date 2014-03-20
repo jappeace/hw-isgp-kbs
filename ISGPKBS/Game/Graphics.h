@@ -42,6 +42,7 @@ namespace isgp {
 		void SetTextBackgroundColor(COLORREF color);
 
 		void DrawStr(Vector2D& position, string str);
+		void DrawStr(Vector2D& position, string str, int fontsize);
 		void DrawStr(Vector2D& position, string str, HFONT font);
 		void DrawStr(Vector2D& position, const char* str, int length);
 		void DrawStr(Vector2D& position, const char* str, int length, HFONT font);

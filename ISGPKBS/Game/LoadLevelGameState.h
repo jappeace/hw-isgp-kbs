@@ -19,6 +19,8 @@ namespace isgp{
 		int _levelnr;
 		bool _hasDrawn;
 		void(Window::*_startLevelCalback)(Level* level, Camera*);
+		void RenderSplashScreen(Graphics* graphics);
+		pair<Level*, Camera*> LoadLevel(Graphics* graphics);
 	};
 
 

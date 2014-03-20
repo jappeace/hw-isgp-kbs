@@ -14,13 +14,19 @@ namespace isgp {
 	}
 
 	void Graphics::DeleteTranslater(){
-		delete _translator;
+		if(_translator){
+			delete _translator;
+		}
 		_translator = NULL;
 	}
 	void Graphics::DrawStr(Vector2D& position, string str) {
 		this->DrawStr(position,str.c_str(), str.length());
 	}
 
+	void Graphics::DrawStr(Vector2D& position, string str, int fontsize){
+		this->DrawStr(position, str, CreateFont(fontsize,fontsize,0,0,FW_DONTCARE,FALSE,FALSE,FALSE,DEFAULT_CHARSET,OUT_OUTLINE_PRECIS,
+			CLIP_DEFAULT_PRECIS,DEFAULT_QUALITY, VARIABLE_PITCH,TEXT("Lucida Console")));
+	}
 	void Graphics::DrawStr(Vector2D& position, string str, HFONT font) {
 		this->DrawStr(position,str.c_str(), str.length(), font);
 	}

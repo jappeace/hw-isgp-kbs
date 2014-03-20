@@ -13,23 +13,41 @@ namespace isgp{
 	LoadLevelGameState::~LoadLevelGameState(void) {
 	}
 	void LoadLevelGameState::Paint(Graphics* graphics) {
-		// disable the anoying camera
-		graphics->DeleteTranslater();
 
-		// render splash screen
-		graphics->DrawStr(AbstractWindow::WindowSize / Vector2D(2), "Don't forget, this game is awesome");
-		graphics->SetTranslator(_window->_cam);
-
-		Level* level = DefaultlevelFactory().CreateLevel(_levelnr);
-		BackgroundArtist artist = BackgroundArtist(_window->_cam, level, /* out */_cache);
-		artist.RenderBackground(); // wil handle caching by itself
-
-		graphics->SetTextBackgroundColor(RGB(255, 255, 255));
-		Camera* cam = new Camera(level->_player, level->GetGrid());
-		graphics->SetTranslator(cam);
-		(_window->*_startLevelCalback)(level, cam);
+		if(!_hasDrawn){
+			RenderSplashScreen(graphics);
+			return;
+		}
+		pair<Level*, Camera*> loaded = LoadLevel(graphics);
+		(_window->*_startLevelCalback)(loaded.first, loaded.second);
 	}
 	void LoadLevelGameState::KeyDown(int keyCode) { /** ignore keys */}
 	void LoadLevelGameState::KeyUp(int keyCode) { /** ignore */}
 	void LoadLevelGameState::Update(double elapsed) { /** ignore */}
+
+	void LoadLevelGameState::RenderSplashScreen(Graphics* graphics){
+
+		// disable the anoying camera
+		graphics->DeleteTranslater();
+		_hasDrawn = true;
+		// render splash screen
+		graphics->DrawStr(AbstractWindow::WindowSize / Vector2D(2.5,2.2), "Loading level");
+		graphics->DrawStr(AbstractWindow::WindowSize / Vector2D(3,2), "Don't forget, this game is awesome");
+	}
+	pair<Level*, Camera*> LoadLevelGameState::LoadLevel(Graphics* graphics){
+		// to store results in
+		pair<Level*, Camera*> result;
+
+		graphics->SetTranslator(_window->_cam);
+		result.first = DefaultlevelFactory().CreateLevel(_levelnr);
+		BackgroundArtist artist = BackgroundArtist(_window->_cam, result.first, /* out */_cache);
+		artist.RenderBackground(); // wil handle caching by itself
+
+		graphics->SetTextBackgroundColor(RGB(255, 255, 255));
+		result.second = new Camera(result.first->_player, result.first->GetGrid());
+		graphics->SetTranslator(result.second);
+
+		// returns a copy of the pointer pair
+		return result;
+	}
 }
