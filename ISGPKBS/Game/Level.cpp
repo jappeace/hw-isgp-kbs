@@ -64,7 +64,6 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 	}
 
 	void Level::Paint(Graphics* g) {
-		_theme->Paint(g);
 		finish->Paint(g);
 		_player->Paint(g);
 		// Update entities.
