@@ -177,6 +177,7 @@ namespace isgp{
 	{
 		OutputLevel(currentLevel);
 		get_size();
+		level->SetStageNumber(currentLevel);
 		return level;
 	}
 	void DefaultlevelFactory::Error()

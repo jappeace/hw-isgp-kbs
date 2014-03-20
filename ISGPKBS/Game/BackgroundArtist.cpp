@@ -13,9 +13,6 @@ namespace isgp{
 	BackgroundArtist::~BackgroundArtist(void)
 	{
 		// don't delete level because we did not create it
-		if(_background){
-			delete _background;
-		}
 		if(_quil){
 			delete _quil;
 		}

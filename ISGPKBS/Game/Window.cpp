@@ -116,13 +116,19 @@ LRESULT Window::MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 }
 
 void Window::RestartGame() {
-	delete _gameState;
-	_gameState = NULL;
+	ClearGameState();
 	LoadLevel();
+}
+void Window::ClearGameState(){
+
+	if(_gameState){
+		delete _gameState;
+	}
+	_gameState = NULL;
 }
 
 void Window::GameOver() {
-	delete _gameState;
+	ClearGameState();
 	_graphics->SetTranslator(NULL);
 	_gameState = new GameOverGameState(_graphics, this,
 		&Window::RestartGame, &Window::QuitGame);
@@ -134,9 +140,11 @@ void Window::QuitGame() {
 }
 
 void Window::LoadLevel(){
+	ClearGameState();
 	_gameState = new LoadLevelGameState(this, _currentLevel,_levelTileSnapshots, &Window::StartLevel);
 }
 void Window::StartLevel(Level* which, Camera* cam){
+	ClearGameState();
 	_gameState = new PlayingGameState(this, which, cam, &Window::GameOver);
 }
 SpriteCache<int>* Window::GetLevelTileSnapshots(){
