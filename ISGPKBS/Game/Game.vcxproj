@@ -105,6 +105,7 @@
     <ClCompile Include="Size.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="SpriteCache.cpp" />
     <ClCompile Include="SpriteGraphics.cpp" />
     <ClCompile Include="Theme.cpp" />
     <ClCompile Include="Theme1.cpp" />
@@ -113,6 +114,7 @@
     <ClCompile Include="Theme4.cpp" />
     <ClCompile Include="Theme5.cpp" />
     <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="TimeFormatter.cpp" />
     <ClCompile Include="TimesPerSecondCounter.cpp" />
     <ClCompile Include="Vector2D.cpp" />
     <ClCompile Include="Window.cpp" />

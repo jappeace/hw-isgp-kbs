@@ -18,7 +18,6 @@ namespace isgp {
 Window::Window() {
 	_currentLevel = 1;
 	_cam = NULL;
-	_currentMenu = NULL;
 	_gameState = NULL;
 	_levelTileSnapshots = new SpriteCache<int>();
 }
@@ -27,7 +26,6 @@ Window::~Window()
 {
 	delete _gameState;
 	delete _cam;
-	delete _currentMenu;
 }
 
 /////////////////////////////////////
