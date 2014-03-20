@@ -1,5 +1,5 @@
 #include "MainMenuState.h"
-#include "GameOverMenu.h"
+#include "MainMenu.h"
 #include "MenuItem.h"
 #include "Window.h"
 
@@ -8,8 +8,9 @@ namespace isgp {
 		void (Window::*restart)(),
 		void (Window::*continueGame)(),
 		void (Window::*exit)()) {
-		_menu = new GameOverMenu();
-		_menu->AddMenuItem(new MenuItem("Retry", window, restart));
+		_menu = new MainMenu();
+		_menu->AddMenuItem(new MenuItem("New Game", window, restart));
+		_menu->AddMenuItem(new MenuItem("Continue", window, continueGame));
 		_menu->AddMenuItem(new MenuItem("Exit", window, exit));
 	}
 

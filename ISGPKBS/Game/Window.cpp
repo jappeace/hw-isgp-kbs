@@ -73,8 +73,8 @@ void Window::AfterCreate(HWND hWnd) {
 	}
 
 	_theme->LoadContent(_graphics);
-	_gameState = new PlayingGameState(_graphics, this, _currentLevel, _theme, &Window::GameOver);
-	//_gameState = new MainMenuState(_graphics
+	//_gameState = new PlayingGameState(_graphics, this, _currentLevel, _theme, &Window::GameOver);
+	_gameState = new MainMenuState(_graphics, this, &Window::RestartGame, &Window::ContinueGame, &Window::QuitGame);
 	ClientResize(hWnd, WindowSize.GetWidth(), WindowSize.GetHeight());
 }
 

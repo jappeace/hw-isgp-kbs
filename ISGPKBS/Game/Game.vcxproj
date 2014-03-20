@@ -65,6 +65,7 @@
   <ItemGroup>
     <ClInclude Include="Finish.h" />
     <ClInclude Include="ListMenu.h" />
+    <ClInclude Include="MainMenu.h" />
     <ClInclude Include="MainMenuState.h" />
     <ClInclude Include="resource3.h" />
     <ClInclude Include="Sound.h" />
@@ -92,6 +93,7 @@
     <ClCompile Include="GameCompletedGameState.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="ListMenu.cpp" />
+    <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="MainMenuState.cpp" />
     <ClCompile Include="MenuItem.cpp" />
     <ClCompile Include="Patrol.cpp" />
