@@ -6,6 +6,7 @@
 #include "Grid.h"
 #include "Entity.h"
 
+
 namespace isgp {
 	class Player : public Entity {
 	public:

@@ -2,7 +2,7 @@
 #include "Player.h"
 #include "CollisionDetection.h"
 #include "Sound.h"
-
+#include "PlayingGameState.h"
 
 namespace isgp{
 const Size Player::InitSize(32, 32);
@@ -117,7 +117,8 @@ const Size Player::InitSize(32, 32);
 	}
 
 	void Player::Paint(Graphics* g) {
-#ifdef _DEBUG
+	if(PlayingGameState::_debugMode)
+	{
 		GridGraphicTranslator translator = GridGraphicTranslator();
 		vector<Tile*> includedTiles = _grid->GetTilesInRectangle(_position, _position + *_size + Vector2D(2));
 		g->SetColor(RGB(255, 0, 0));
@@ -148,7 +149,7 @@ const Size Player::InitSize(32, 32);
 		} else {
 			g->DrawRect(Vector2D(_position.X(), _position.Y() + 8), Vector2D(_position.X() - 8, _position.Y() + 16));
 		}
-#endif
+	}
 		static int const kSpriteSize = 32;
 
 		// Check the facing of the player
@@ -180,9 +181,10 @@ const Size Player::InitSize(32, 32);
 			Vector2D offset(0, facingOffset + armorUpgradeOffset);
 			_animation->Render(g, posFix, offset);
 		}
-#ifdef _DEBUG
+if(PlayingGameState::_debugMode)
+{
 		g->DrawStaticRect(Vector2D(395, 395), Vector2D(405, 405));
-#endif
+}
 	}
 
 	// Check if the player is alive.

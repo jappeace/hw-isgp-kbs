@@ -59,7 +59,10 @@ namespace isgp {
 			_level->_player->_spaceKey = true;
 			break;
 		case VK_F1:
-			PlayingGameState::_debugMode=true;
+			if(PlayingGameState::_debugMode)
+				PlayingGameState::_debugMode=false;
+			else
+				PlayingGameState::_debugMode=true;
 		}
 	}
 
