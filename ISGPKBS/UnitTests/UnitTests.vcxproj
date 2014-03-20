@@ -86,12 +86,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Game\Highscore.h" />
+    <ClInclude Include="..\Game\Highscores.h" />
+    <ClInclude Include="..\Game\TimeFormatter.h" />
     <ClInclude Include="..\Game\Vector2D.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Game\Highscore.cpp" />
+    <ClCompile Include="..\Game\Highscores.cpp" />
     <ClCompile Include="..\Game\Vector2D.cpp" />
+    <ClCompile Include="Highscores_unittest.cpp" />
     <ClCompile Include="point_unittest.cpp" />
   </ItemGroup>
   <ItemGroup>

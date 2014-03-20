@@ -110,6 +110,14 @@ void Window::FullRestart() {
 
 void Window::NextLevel() {
 	Sound().Play(END_WIN);
+
+	_highscores = Highscores(_currentLevel);
+	
+	double playtime = _level->GetPlayTime();
+	if(_highscores.IsHighscore(playtime)) {
+		_highscores.InsertHighscore(Highscore("naam", playtime));
+	}
+
 	_currentLevel++;
 	if(DefaultlevelFactory().LevelExists(_currentLevel)) {
 		RestartGame();

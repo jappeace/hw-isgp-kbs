@@ -10,6 +10,8 @@
 #include "IGameState.h"
 #include "DefaultLevelFactory.h"
 #include "GameCompletedGameState.h"
+#include "Highscores.h"
+
 namespace isgp {
 	class Window : public AbstractWindow {
 	public:
@@ -35,5 +37,6 @@ namespace isgp {
 		void QuitGame();
 		void GameOver();
 		Theme* _theme;
+		Highscores _highscores;
 	};
 }

@@ -64,6 +64,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Finish.h" />
+    <ClInclude Include="Highscore.h" />
+    <ClInclude Include="Highscores.h" />
     <ClInclude Include="resource3.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="Theme.h" />
@@ -88,6 +90,8 @@
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="GridGraphicTranslator.cpp" />
     <ClCompile Include="GameCompletedGameState.cpp" />
+    <ClCompile Include="Highscore.cpp" />
+    <ClCompile Include="Highscores.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="MenuItem.cpp" />
     <ClCompile Include="Patrol.cpp" />
