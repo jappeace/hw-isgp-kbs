@@ -46,35 +46,7 @@ void Window::ClientResize(HWND hWnd, int nWidth, int nHeight)
 }
 
 void Window::AfterCreate(HWND hWnd) {
-	if (_theme != NULL) {
-		//delete _theme;
-		//_theme = NULL;
-	}
-
-	switch (_currentLevel) {
-		case 1 :
-			_theme = new Theme1();
-			break;
-		case 2 :
-			_theme = new Theme2();
-			break;
-		case 3 :
-			_theme = new Theme3();
-			break;
-		case 4 :
-			_theme = new Theme4();
-			break;
-		case 5 :
-			_theme = new Theme5();
-			break;
-		default:
-			_theme = new Theme1();
-			break;
-	}
-
-	_theme->LoadContent(_graphics);
-	//_gameState = new PlayingGameState(_graphics, this, _currentLevel, _theme, &Window::GameOver);
-	_gameState = new MainMenuState(_graphics, this, &Window::RestartGame, &Window::ContinueGame, &Window::QuitGame);
+	_gameState = new MainMenuState(_graphics, this, &Window::FullRestart, &Window::RestartGame, &Window::QuitGame);
 	ClientResize(hWnd, WindowSize.GetWidth(), WindowSize.GetHeight());
 }
 
@@ -149,11 +121,35 @@ LRESULT Window::MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 
 void Window::RestartGame() {
 	delete _gameState;
-	AfterCreate(_hWnd);
-}
-
-void Window::ContinueGame() {
 	
+	if (_theme != NULL) {
+		//delete _theme;
+		//_theme = NULL;
+	}
+
+	switch (_currentLevel) {
+		case 1 :
+			_theme = new Theme1();
+			break;
+		case 2 :
+			_theme = new Theme2();
+			break;
+		case 3 :
+			_theme = new Theme3();
+			break;
+		case 4 :
+			_theme = new Theme4();
+			break;
+		case 5 :
+			_theme = new Theme5();
+			break;
+		default:
+			_theme = new Theme1();
+			break;
+	}
+
+	_theme->LoadContent(_graphics);
+	_gameState = new PlayingGameState(_graphics, this, _currentLevel, _theme, &Window::GameOver);
 }
 
 void Window::GameOver() {

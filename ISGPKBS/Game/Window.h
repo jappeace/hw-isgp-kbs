@@ -32,7 +32,6 @@ namespace isgp {
 		IMenu* _currentMenu;
 		IGameState* _gameState;
 		void RestartGame();
-		void ContinueGame();
 		void QuitGame();
 		void GameOver();
 		Theme* _theme;
