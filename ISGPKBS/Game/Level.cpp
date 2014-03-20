@@ -74,18 +74,18 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 		}
 		if(PlayingGameState::_debugMode)
 	{
-		unsigned int tileSize = TILE_WIDTH;
-		unsigned int height = _grid->GetSize()->Y()*tileSize;
+		double tileSize = TILE_WIDTH;
+		double height = _grid->GetSize()->Y()*tileSize;
 		
-		unsigned int width = _grid->GetSize()->X()*tileSize;
-		for(int i = tileSize; i<width;i+=tileSize)
+		double width = _grid->GetSize()->X()*tileSize;
+		for(double i = tileSize; i<width;i+=tileSize)
 		{
-			g->DrawLine(Vector2D(i,0),Vector2D(i,height));
+			g->DrawLine(Vector2D(i,0.0),Vector2D(i,height));
 		}
 		
-		for(int i = tileSize; i<height;i+=tileSize)
+		for(double i = tileSize; i<height;i+=tileSize)
 		{
-			g->DrawLine(Vector2D(0,i),Vector2D(width,i));
+			g->DrawLine(Vector2D(0.0,i),Vector2D(width,i));
 		}
 
 

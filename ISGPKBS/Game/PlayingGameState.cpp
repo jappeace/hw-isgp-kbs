@@ -7,7 +7,7 @@
 
 namespace isgp {
 	bool PlayingGameState::_debugMode=false;
-	PlayingGameState::PlayingGameState(Graphics* graphics, Window* window, int level, Theme* theme,
+	PlayingGameState::PlayingGameState(Window* window, Level* level, Camera* camera,
 		void(Window::*gameOver)()) {
 
 		_window = window;
