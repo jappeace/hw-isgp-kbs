@@ -38,7 +38,7 @@ namespace isgp {
 		if (!_level->_player->IsAlive()) {
 			(_window->*_gameOver)();
 		} else if (_level->IsFinished()) {
-			_window->NextLevel();
+			_window->NextLevel(_level->GetPlayTime());
 		}
 	}
 

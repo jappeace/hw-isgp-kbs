@@ -24,7 +24,7 @@ namespace isgp {
 		void OnKeyUp(int which) override;
 		void GameLoop(double) override;
 		void AfterCreate(HWND) override;
-		void NextLevel();
+		void NextLevel(double playtime);
 		void FullRestart();
 		Camera* _cam;
 	private:

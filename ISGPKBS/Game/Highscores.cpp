@@ -17,12 +17,41 @@ Highscores::~Highscores(void)
 
 Highscores::Highscores() {}
 
-void Highscores::LoadHighscores() {
+bool Highscores::FileExists() {
+	ifstream f("./highscores/" + StrConverter::IntToString(_level) + ".highscore");
+	if (f.good()) {
+		f.close();
+		return true;
+	} else {
+		f.close();
+		return false;
+	}  
+}
 
+void Highscores::LoadHighscores() {
+	if(!FileExists())
+		return;
+	std::ifstream input("./highscores/" + StrConverter::IntToString(_level) + ".highscore");
+	for(unsigned i = 0; i < 5; i++) {
+		string name;
+		double time;
+		input >> name >> time;
+		Highscore h(name, time);
+		this->InsertHighscore(h);
+	}
 }
 
 void Highscores::SaveHighscores() {
-
+	std::fstream f;
+	f.open(("./highscores/" + StrConverter::IntToString(_level) + ".highscore"), ios_base::in|ios_base::out|ios_base::trunc );
+	f.seekg(0, std::ios::end);
+	f.seekg(0, std::ios::beg);
+	for(unsigned i = 0; i < _highscores.size(); i++) {
+		Highscore hs = _highscores.at(i);
+		f << hs.GetName() << "\n" << hs.GetTime() << "\n";
+	}
+	f.flush();
+	f.close();
 }
 
 bool HighscoreSort(Highscore h1, Highscore h2) {

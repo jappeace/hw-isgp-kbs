@@ -34,5 +34,11 @@ namespace UnitTests
 			Assert::AreEqual(11.0, h.GetHighscores().front().GetTime());
 			Assert::AreEqual(25.0, h.GetHighscores().back().GetTime());
 		}
+
+		TEST_METHOD(Saving) {
+			Highscores h(1337);
+			h.InsertHighscore(Highscore("Test", 20));
+			h.SaveHighscores();
+		}
 	};
 }

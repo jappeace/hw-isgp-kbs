@@ -108,15 +108,15 @@ void Window::FullRestart() {
 	RestartGame();
 }
 
-void Window::NextLevel() {
+void Window::NextLevel(double playtime) {
 	Sound().Play(END_WIN);
 
 	_highscores = Highscores(_currentLevel);
-	
-	double playtime = _level->GetPlayTime();
+	_highscores.LoadHighscores();
 	if(_highscores.IsHighscore(playtime)) {
 		_highscores.InsertHighscore(Highscore("naam", playtime));
 	}
+	_highscores.SaveHighscores();
 
 	_currentLevel++;
 	if(DefaultlevelFactory().LevelExists(_currentLevel)) {
