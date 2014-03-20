@@ -92,6 +92,8 @@
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="GridGraphicTranslator.cpp" />
     <ClCompile Include="GameCompletedGameState.cpp" />
+    <ClCompile Include="Highscore.cpp" />
+    <ClCompile Include="Highscores.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="ListMenu.cpp" />
     <ClCompile Include="MainMenu.cpp" />
