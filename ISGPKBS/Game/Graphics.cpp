@@ -6,7 +6,7 @@ namespace isgp {
 		_translator = NULL;
 		_visibleHdc = NULL;
 		_pen = NULL;
-		_bitmapCache = new map<string, Sprite*>();
+		_sprites = new SpriteCache<string>();
 	}
 
 	ITranslator* Graphics::GetTranslator() {
@@ -17,10 +17,20 @@ namespace isgp {
 		_translator = cam;
 	}
 
+	void Graphics::DeleteTranslater(){
+		if(_translator){
+			delete _translator;
+		}
+		_translator = NULL;
+	}
 	void Graphics::DrawStr(Vector2D& position, string str) {
 		this->DrawStr(position,str.c_str(), str.length());
 	}
 
+	void Graphics::DrawStr(Vector2D& position, string str, int fontsize){
+		this->DrawStr(position, str, CreateFont(fontsize,fontsize,0,0,FW_DONTCARE,FALSE,FALSE,FALSE,DEFAULT_CHARSET,OUT_OUTLINE_PRECIS,
+			CLIP_DEFAULT_PRECIS,DEFAULT_QUALITY, VARIABLE_PITCH,TEXT("Lucida Console")));
+	}
 	void Graphics::DrawStr(Vector2D& position, string str, HFONT font) {
 		this->DrawStr(position,str.c_str(), str.length(), font);
 	}
@@ -87,15 +97,15 @@ namespace isgp {
 	}
 
 	Sprite* Graphics::LoadBitmapFile(string path) {
-		if(Graphics::_bitmapCache->count(path)) {
+		if(_sprites->IsAt(path)) {
 			// Return cached item
-			return _bitmapCache->find(path)->second;
+			return _sprites->GetAt(path);
 		}
 
 		HBITMAP bitmap = (HBITMAP)LoadImage(NULL, path.c_str(), IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 		Sprite* sprite = new Sprite(bitmap);
 
-		(*_bitmapCache)[path] = sprite;
+		(*_sprites)[path] = sprite;
 
 		return sprite;
 	}

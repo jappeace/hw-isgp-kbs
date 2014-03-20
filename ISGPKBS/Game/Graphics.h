@@ -11,6 +11,7 @@
 #include "Sprite.h"
 #include "GridGraphicTranslator.h"
 #include "StrConverter.h"
+#include "SpriteCache.h"
 // to breack an include loop This class can't use the static Level::tilesize
 // that is why the macro where the size is based on is moved to here
 // this also gives a small speed optimization (less function calls)
@@ -41,6 +42,7 @@ namespace isgp {
 		void SetTextBackgroundColor(COLORREF color);
 
 		void DrawStr(Vector2D& position, string str);
+		void DrawStr(Vector2D& position, string str, int fontsize);
 		void DrawStr(Vector2D& position, string str, HFONT font);
 		void DrawStr(Vector2D& position, const char* str, int length);
 		void DrawStr(Vector2D& position, const char* str, int length, HFONT font);
@@ -65,6 +67,7 @@ namespace isgp {
 		void DrawSprite(Sprite* sprite, Vector2D position, Vector2D& offset, Size& size);
 
 		void DrawLine(Vector2D one,Vector2D two);
+		void DeleteTranslater(void);
 
 		// translates a position and size into a C Rectangle structure
 		static void FillRect(HDC hdc, Vector2D position, const Size& size, COLORREF color);
@@ -86,6 +89,6 @@ namespace isgp {
 
 	private:
 		// a bitmap cache based with string as a key
-		map<string, Sprite*>* _bitmapCache;
+		SpriteCache<string>* _sprites;
 	};
 }

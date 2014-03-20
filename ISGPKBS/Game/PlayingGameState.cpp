@@ -12,20 +12,19 @@ namespace isgp {
 
 		_window = window;
 		_gameOver = gameOver;
-		_graphics = graphics;
-		_graphics->SetTextBackgroundColor(RGB(255, 255, 255));
-		DefaultlevelFactory factory;
-		_level = factory.CreateLevel(level, theme);
-		_level->LoadContent(_graphics);
-		_camera = new Camera(_level->_player, _level->GetGrid());
-		_graphics->SetTranslator(_camera);
-		_artist = new BackgroundArtist(_camera, _level);
+		_level = level;
+		_window = window;
+		_gameOver = gameOver;
+		_level = level;
+		_camera = camera;
+		_artist = new BackgroundArtist(_camera, _level, window->GetLevelTileSnapshots());
 		_artist->RenderBackground();
 	}
 
 	PlayingGameState::~PlayingGameState() {
 		delete _camera;
 		delete _level;
+		delete _artist;
 	}
 
 	void PlayingGameState::Paint(Graphics* g) {

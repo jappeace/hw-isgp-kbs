@@ -103,4 +103,10 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 	Grid* Level::GetGrid() const{
 		return _grid;
 	}
+	int Level::GetStageNumber(){
+		return _stagenr;
+	}
+	void Level::SetStageNumber(int nr){
+		_stagenr = nr;
+	}
 }

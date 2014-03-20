@@ -1,33 +1,31 @@
-#include "Window.h"
-#include "GameOverMenu.h"
 #include "DefaultlevelFactory.h"
-#include "MenuItem.h"
-#include "PlayingGameState.h"
 #include "GameOverGameState.h"
+#include "GameOverMenu.h"
+#include "MenuItem.h"
+#include "MainMenuState.h"
+#include "PlayingGameState.h"
+#include "SaveGame.h"
+#include "Sound.h"
 #include "Theme1.h"
 #include "Theme2.h"
 #include "Theme3.h"
 #include "Theme4.h"
 #include "Theme5.h"
-#include "Sound.h"
+#include "Window.h"
 namespace isgp {
 
 // Constructors / Destructors      //
 Window::Window() {
 	_currentLevel = 1;
 	_cam = NULL;
-	_currentMenu = NULL;
 	_gameState = NULL;
-	_level = NULL;
-	_theme = NULL;
+	_levelTileSnapshots = new SpriteCache<int>();
 }
 
 Window::~Window()
 {
 	delete _gameState;
 	delete _cam;
-	delete _level;
-	delete _currentMenu;
 }
 
 /////////////////////////////////////
@@ -45,34 +43,8 @@ void Window::ClientResize(HWND hWnd, int nWidth, int nHeight)
 }
 
 void Window::AfterCreate(HWND hWnd) {
-	if (_theme != NULL) {
-		//delete _theme;
-		//_theme = NULL;
-	}
-
-	switch (_currentLevel) {
-		case 1 :
-			_theme = new Theme1();
-			break;
-		case 2 :
-			_theme = new Theme2();
-			break;
-		case 3 :
-			_theme = new Theme3();
-			break;
-		case 4 :
-			_theme = new Theme4();
-			break;
-		case 5 :
-			_theme = new Theme5();
-			break;
-		default:
-			_theme = new Theme1();
-			break;
-	}
-
-	_theme->LoadContent(_graphics);
-	_gameState = new PlayingGameState(_graphics, this, _currentLevel, _theme, &Window::GameOver);
+	_currentLevel = SaveGame().ReadCurrentLevel();
+	LoadLevel();
 	ClientResize(hWnd, WindowSize.GetWidth(), WindowSize.GetHeight());
 }
 
@@ -112,6 +84,7 @@ void Window::NextLevel() {
 	Sound().Play(END_WIN);
 	_currentLevel++;
 	if(DefaultlevelFactory().LevelExists(_currentLevel)) {
+		SaveGame().WriteCurrentLevel(_currentLevel);
 		RestartGame();
 	} else { //Completed all levels, wat do?
 		
@@ -146,19 +119,38 @@ LRESULT Window::MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 }
 
 void Window::RestartGame() {
-	delete _gameState;
-	AfterCreate(_hWnd);
+	ClearGameState();
+	LoadLevel();
+}
+void Window::ClearGameState(){
+
+	if(_gameState){
+		delete _gameState;
+	}
+	_gameState = NULL;
 }
 
 void Window::GameOver() {
-	delete _gameState;
+	ClearGameState();
 	_graphics->SetTranslator(NULL);
 	_gameState = new GameOverGameState(_graphics, this,
 		&Window::RestartGame, &Window::QuitGame);
 }
 
 void Window::QuitGame() {
+	// deleting stuff is irrelevant, kernel will handle it
 	PostQuitMessage(0);
 }
 
+void Window::LoadLevel(){
+	ClearGameState();
+	_gameState = new LoadLevelGameState(this, _currentLevel,_levelTileSnapshots, &Window::StartLevel);
+}
+void Window::StartLevel(Level* which, Camera* cam){
+	ClearGameState();
+	_gameState = new PlayingGameState(this, which, cam, &Window::GameOver);
+}
+SpriteCache<int>* Window::GetLevelTileSnapshots(){
+	return _levelTileSnapshots;
+}
 }
