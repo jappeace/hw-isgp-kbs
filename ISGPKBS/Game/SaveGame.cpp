@@ -1,5 +1,7 @@
 #include <fstream>
+#include <ostream>
 #include "SaveGame.h"
+#include "StrConverter.h"
 
 namespace isgp {
 
@@ -40,6 +42,10 @@ namespace isgp {
 		return levelNumber;
 	}
 
-	void SaveGame::WriteCurrentLevel() {
+	void SaveGame::WriteCurrentLevel(int currentLevel) {
+		using namespace std;
+		ofstream outStream("./levels/autosave.save", ios::out);
+		outStream << StrConverter::IntToString(currentLevel) << endl;
+		outStream.close();
 	}
 }

@@ -11,6 +11,6 @@ namespace isgp {
 		// Reads the current level number
 		int ReadCurrentLevel();
 		// Writes the current level number
-		void WriteCurrentLevel();
+		void WriteCurrentLevel(int currentLevel);
 	};
 }

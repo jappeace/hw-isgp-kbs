@@ -88,6 +88,7 @@ void Window::NextLevel() {
 	Sound().Play(END_WIN);
 	_currentLevel++;
 	if(DefaultlevelFactory().LevelExists(_currentLevel)) {
+		SaveGame().WriteCurrentLevel(_currentLevel);
 		RestartGame();
 	} else { //Completed all levels, wat do?
 		
