@@ -8,10 +8,12 @@ namespace isgp {
 		_player = player;
 		
 		_velocity = new Vector2D(0,0);
+		_animation = new Animation("../tiles/boo.bmp", Size(32, 32), 2, 250);
 	}
 
 	Ghost::~Ghost() {
 		delete _velocity;
+		delete _animation;
 	}
 
 	void Ghost::Update(double milisec) {
@@ -55,15 +57,16 @@ namespace isgp {
 
 		_position.X(_position.X() + (_velocity->X() * elapsed));
 		_position.Y(_position.Y() + (_velocity->Y() * elapsed));
+		_animation->OnUpdate(milisec);
 	}
 
 	void Ghost::AddToVelocityY(double) {}
 
 	void Ghost::Paint(Graphics* g) {
-		if (_facingRight) {
-			g->DrawBitmap("../tiles/boo.bmp", this->_position, Size(32, 32));
-		}else{
-			g->DrawBitmap("../tiles/boo.bmp", this->_position, Vector2D(32, 0), Size(32, 32));
+		Vector2D offset(0, 0);
+		if (!_facingRight) {
+			offset.Y(32);
 		}
+		_animation->Render(g, _position, offset);
 	}
 }

@@ -6,7 +6,12 @@
 #include "Ghost.h"
 #include "Patrol.h"
 #include "Gadget.h"
+#include "Theme.h"
+#include "Finish.h"
+#include "TimeFormatter.h"
+
 namespace isgp{
+	class Theme;
 	// represents a level in the game
 	class Level : public IPaintable{
 	public:
@@ -15,7 +20,7 @@ namespace isgp{
 		Level(int width, int height);
 		~Level(void);
 		Vector2D *start;
-		Vector2D finish;
+		Finish* finish;
 		bool IsFinished();
 		void Paint(Graphics* g) override;
 		void Update(double elapsed);
@@ -24,9 +29,14 @@ namespace isgp{
 		vector<Entity*> entities;
 		Grid* GetGrid() const;
 		static const Size defaultTileAmount;
+		Theme* _theme;
+		void LoadContent(Graphics*);
+		double GetPlayTime();
 		int GetStageNumber();
 		void SetStageNumber(int nr);
 	private:
+		void Init();
+		double _timePlayed;
 		Grid* _grid;
 		int _stagenr;
 	};

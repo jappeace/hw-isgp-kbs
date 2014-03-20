@@ -4,7 +4,12 @@
 #include "MenuItem.h"
 #include "PlayingGameState.h"
 #include "GameOverGameState.h"
-
+#include "Theme1.h"
+#include "Theme2.h"
+#include "Theme3.h"
+#include "Theme4.h"
+#include "Theme5.h"
+#include "Sound.h"
 namespace isgp {
 
 // Constructors / Destructors      //
@@ -18,6 +23,10 @@ Window::Window() {
 
 Window::~Window()
 {
+	delete _gameState;
+	delete _cam;
+	delete _level;
+	delete _currentMenu;
 }
 
 /////////////////////////////////////
@@ -35,18 +44,35 @@ void Window::ClientResize(HWND hWnd, int nWidth, int nHeight)
 }
 
 void Window::AfterCreate(HWND hWnd) {
+	if (_theme != NULL) {
+		//delete _theme;
+		//_theme = NULL;
+	}
+
+	switch (_currentLevel) {
+		case 1 :
+			_theme = new Theme1();
+			break;
+		case 2 :
+			_theme = new Theme2();
+			break;
+		case 3 :
+			_theme = new Theme3();
+			break;
+		case 4 :
+			_theme = new Theme4();
+			break;
+		case 5 :
+			_theme = new Theme5();
+			break;
+		default:
+			_theme = new Theme1();
+			break;
+	}
+
+	_theme->LoadContent(_graphics);
+	_gameState = new PlayingGameState(_graphics, this, _currentLevel, _theme, &Window::GameOver);
 	ClientResize(hWnd, WindowSize.GetWidth(), WindowSize.GetHeight());
-	
-	_graphics->LoadBitmapFile("../tiles/mountain.bmp");
-	_graphics->LoadBitmapFile("../tiles/ground.bmp");
-
-	_graphics->LoadBitmapFile("../tiles/megaman.bmp");
-	_graphics->LoadBitmapFile("../tiles/boo.bmp");
-	_graphics->LoadBitmapFile("../tiles/link.bmp");
-	_graphics->LoadBitmapFile("../tiles/gravityBoots.bmp");
-	_graphics->LoadBitmapFile("../tiles/smile.bmp");
-
-	LoadLevel();
 }
 
 INT_PTR CALLBACK dialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
@@ -82,11 +108,14 @@ void Window::FullRestart() {
 }
 
 void Window::NextLevel() {
+	Sound().Play(END_WIN);
 	_currentLevel++;
 	if(DefaultlevelFactory().LevelExists(_currentLevel)) {
 		RestartGame();
 	} else { //Completed all levels, wat do?
+		
 		_gameState = new GameCompletedGameState(this);
+
 	}
 }
 

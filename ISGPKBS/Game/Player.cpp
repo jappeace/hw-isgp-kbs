@@ -1,6 +1,9 @@
 #include "gravitybehaviour.h"
 #include "Player.h"
 #include "CollisionDetection.h"
+#include "Sound.h"
+
+
 namespace isgp{
 const Size Player::InitSize(32, 32);
 	Player::Player(Vector2D position) {
@@ -18,6 +21,7 @@ const Size Player::InitSize(32, 32);
 		_behaviours = new vector<IBehaviour*>();
 		_behaviours->push_back(new GravityBehaviour(this));
 		_has_gravity_boots = false;
+	
 		_facingRight = true;
 		_animation = new Animation("../tiles/megaman.bmp", (Size) *_size, 4, 200);
 	}
@@ -25,13 +29,15 @@ const Size Player::InitSize(32, 32);
 	Player::~Player(void) {
 		// Delete references in vector
 		for (IBehaviour* behaviour = _behaviours->front(); behaviour != _behaviours->back(); ++behaviour) {
-			delete behaviour;
+			//delete behaviour;
 		}
 		// Delete vector
 		delete _behaviours;
 		delete _size;
 		delete _velocity;
 		delete _animation;
+
+		
 	}
 
 	void Player::Set_has_gravity_boots(bool hasBoots) {
@@ -47,6 +53,7 @@ const Size Player::InitSize(32, 32);
 
 		if(_leftKey && _velocity->X() > -_maxVel) {
 			if(collision & Down){
+				
 				_velocity->X(_velocity->X() - (_accel * elapsed));
 			} else {
 				_velocity->X(_velocity->X() - (_deAccel * elapsed));
@@ -83,6 +90,7 @@ const Size Player::InitSize(32, 32);
 		}
 
 		if(_upKey && (collision & Down)) {
+			Sound().Play(JUMP);
 			_velocity->Y(-650);
 		}
 

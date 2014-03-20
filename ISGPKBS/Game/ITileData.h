@@ -8,6 +8,7 @@ namespace isgp{
 	// The receive tile is used to tell the data who is rendering it
 	class ITileData : public IPaintable, public IGridTraveller {
 	public:
+		virtual ~ITileData() {}
 		bool IsSolid;
 	};
 }

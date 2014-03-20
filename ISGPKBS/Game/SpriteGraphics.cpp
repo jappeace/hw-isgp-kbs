@@ -18,6 +18,6 @@ namespace isgp {
 
 	HDC SpriteGraphics::getHDC(){
 		return this->_visibleHdc;
-
+		
 	}
 }

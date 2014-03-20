@@ -9,6 +9,10 @@ namespace isgp {
 		_sprites = new SpriteCache<string>();
 	}
 
+	ITranslator* Graphics::GetTranslator() {
+		return _translator;
+	}
+
 	void Graphics::SetTranslator(ITranslator* cam) {
 		_translator = cam;
 	}
