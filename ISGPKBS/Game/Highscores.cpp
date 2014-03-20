@@ -31,6 +31,7 @@ bool Highscores::FileExists() {
 void Highscores::LoadHighscores() {
 	if(!FileExists())
 		return;
+	_highscores.clear();
 	std::ifstream input("./highscores/" + StrConverter::IntToString(_level) + ".highscore");
 	for(unsigned i = 0; i < 5; i++) {
 		string name;

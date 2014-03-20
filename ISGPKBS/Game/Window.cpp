@@ -113,6 +113,7 @@ void Window::NextLevel(double playtime) {
 
 	_highscores = Highscores(_currentLevel);
 	_highscores.LoadHighscores();
+
 	if(_highscores.IsHighscore(playtime)) {
 		_highscores.InsertHighscore(Highscore("naam", playtime));
 	}
