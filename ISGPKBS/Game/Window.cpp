@@ -1,16 +1,17 @@
-#include "Window.h"
-#include "GameOverMenu.h"
 #include "DefaultlevelFactory.h"
-#include "MenuItem.h"
-#include "PlayingGameState.h"
-#include "MainMenuState.h"
 #include "GameOverGameState.h"
+#include "GameOverMenu.h"
+#include "MenuItem.h"
+#include "MainMenuState.h"
+#include "PlayingGameState.h"
+#include "SaveGame.h"
+#include "Sound.h"
 #include "Theme1.h"
 #include "Theme2.h"
 #include "Theme3.h"
 #include "Theme4.h"
 #include "Theme5.h"
-#include "Sound.h"
+#include "Window.h"
 namespace isgp {
 
 // Constructors / Destructors      //
@@ -47,6 +48,7 @@ void Window::ClientResize(HWND hWnd, int nWidth, int nHeight)
 
 void Window::AfterCreate(HWND hWnd) {
 	_gameState = new MainMenuState(_graphics, this, &Window::FullRestart, &Window::RestartGame, &Window::QuitGame);
+	_currentLevel = SaveGame().ReadCurrentLevel();
 	ClientResize(hWnd, WindowSize.GetWidth(), WindowSize.GetHeight());
 }
 
