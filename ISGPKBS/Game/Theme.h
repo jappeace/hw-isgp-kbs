@@ -4,6 +4,8 @@
 
 namespace isgp {
 	class Theme {
+	public:
+		virtual ~Theme(void) {}
 	protected:
 		double _gridWidth;
 		string _tilePath;

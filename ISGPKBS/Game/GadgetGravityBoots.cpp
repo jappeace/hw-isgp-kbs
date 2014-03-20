@@ -63,6 +63,13 @@ namespace isgp {
 			}
 
 			_position.Y(_position.Y() + _vel);
+
+			//tmp cheap fix
+			double range = sqrt(pow(_position.X() - _player->GetPosition().X(), 2) + pow(_position.Y() - _player->GetPosition().Y(), 2));
+			if (range > 1000) {
+				_position.Y(_spawnPos);
+				_vel = 0;
+			}
 		}
 	}
 

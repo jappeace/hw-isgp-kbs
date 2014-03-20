@@ -27,8 +27,9 @@ namespace isgp {
 	}
 
 	void PlayingGameState::Paint(Graphics* g) {
-		_level->Paint(g);
+		_level->_theme->Paint(g);
 		_artist->Paint(g);
+		_level->Paint(g);
 	}
 
 	void PlayingGameState::Update(double elapsed) {

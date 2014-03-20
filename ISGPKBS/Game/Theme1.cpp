@@ -10,7 +10,7 @@ namespace isgp {
 
 	Theme1::~Theme1(void)
 	{
-
+		
 	}
 
 	void Theme1::LoadContent(Graphics* g) {

@@ -9,7 +9,7 @@
 #include "Theme3.h"
 #include "Theme4.h"
 #include "Theme5.h"
-
+#include "Sound.h"
 namespace isgp {
 
 // Constructors / Destructors      //
@@ -19,6 +19,7 @@ Window::Window() {
 	_currentMenu = NULL;
 	_gameState = NULL;
 	_level = NULL;
+	_theme = NULL;
 }
 
 Window::~Window()
@@ -44,26 +45,34 @@ void Window::ClientResize(HWND hWnd, int nWidth, int nHeight)
 }
 
 void Window::AfterCreate(HWND hWnd) {
-	Theme* tmp;
-	switch (_currentLevel) {
-	case 1 :
-		tmp = new Theme1();
-		break;
-	case 2 :
-		tmp = new Theme2();
-		break;
-	case 3 :
-		tmp = new Theme3();
-		break;
-	case 4 :
-		tmp = new Theme4();
-		break;
-	case 5 :
-		tmp = new Theme5();
-		break;
+	if (_theme != NULL) {
+		//delete _theme;
+		//_theme = NULL;
 	}
-	tmp->LoadContent(_graphics);
-	_gameState = new PlayingGameState(_graphics, this, _currentLevel, tmp, &Window::GameOver);
+
+	switch (_currentLevel) {
+		case 1 :
+			_theme = new Theme1();
+			break;
+		case 2 :
+			_theme = new Theme2();
+			break;
+		case 3 :
+			_theme = new Theme3();
+			break;
+		case 4 :
+			_theme = new Theme4();
+			break;
+		case 5 :
+			_theme = new Theme5();
+			break;
+		default:
+			_theme = new Theme1();
+			break;
+	}
+
+	_theme->LoadContent(_graphics);
+	_gameState = new PlayingGameState(_graphics, this, _currentLevel, _theme, &Window::GameOver);
 	ClientResize(hWnd, WindowSize.GetWidth(), WindowSize.GetHeight());
 }
 
@@ -100,11 +109,14 @@ void Window::FullRestart() {
 }
 
 void Window::NextLevel() {
+	Sound().Play(END_WIN);
 	_currentLevel++;
 	if(DefaultlevelFactory().LevelExists(_currentLevel)) {
 		RestartGame();
 	} else { //Completed all levels, wat do?
+		
 		_gameState = new GameCompletedGameState(this);
+
 	}
 }
 

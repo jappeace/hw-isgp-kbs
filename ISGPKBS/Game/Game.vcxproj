@@ -64,6 +64,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Finish.h" />
+    <ClInclude Include="resource3.h" />
+    <ClInclude Include="Sound.h" />
     <ClInclude Include="Theme.h" />
     <ClInclude Include="Theme1.h" />
     <ClCompile Include="AbstractWindow.cpp" />
@@ -92,6 +94,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayingGameState.cpp" />
     <ClCompile Include="Size.cpp" />
+    <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteGraphics.cpp" />
     <ClCompile Include="Theme1.cpp" />
@@ -156,11 +159,15 @@
     <ClInclude Include="Theme4.h" />
     <ClInclude Include="Theme5.h" />
     <ClInclude Include="Tile.h" />
+    <ClInclude Include="TimeFormatter.h" />
     <ClInclude Include="TimesPerSecondCounter.h" />
     <ClInclude Include="Vector2D.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="WindowGraphics.h" />
     <ClInclude Include="WorldBlock.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Game.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
