@@ -17,6 +17,7 @@ namespace isgp {
 
 		void KeyDown(int keyCode) override;
 		void KeyUp(int keyCode) override;
+		static bool _debugMode;
 	private:
 		Level* _level;
 		Graphics* _graphics;
