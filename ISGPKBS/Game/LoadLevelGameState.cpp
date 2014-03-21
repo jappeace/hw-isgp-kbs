@@ -35,7 +35,6 @@ namespace isgp {
 		graphics->LoadBitmapFile(fileName, false);
 		graphics->DrawBitmap(fileName,
 			Vector2D(0, 0), Size(800, 600));
-		graphics->DrawStr(Vector2D(100, 100), "LOADING");
 	}
 
 	pair<Level*, Camera*> LoadLevelGameState::LoadLevel(Graphics* graphics) {
