@@ -31,7 +31,9 @@ namespace isgp {
 		// Disable the anoying camera
 		graphics->DeleteTranslater();
 		_hasDrawn = true;
-		graphics->DrawBitmap(".\\tiles\\theme2.bmp",
+		string fileName = ".\\tiles\\theme2.bmp";
+		graphics->LoadBitmapFile(fileName, false);
+		graphics->DrawBitmap(fileName,
 			Vector2D(0, 0), Vector2D(0, 0), Size(800, 600));
 	}
 
