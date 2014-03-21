@@ -7,6 +7,7 @@ namespace isgp {
 		_target = sprite;
 	}
 	void SpriteGraphics::BeginRendering(){
+		this->_target->CreateMaskBitmap();
 		this->_visibleHdc = CreateCompatibleDC(NULL);
 		this->_maskHdc = CreateCompatibleDC(NULL);
 		::SelectObject(this->_maskHdc, _target->GetMask());
@@ -38,8 +39,17 @@ namespace isgp {
 			img_hdc, 
 			offset,
 			SRCCOPY);
+		::SelectObject(img_hdc, sprite->GetBitmap());
+		BitBlockTransfer(
+			// Dest Context
+			this->_visibleHdc, 
+			// Position
+			position,
+			size, 
+			// Source Context
+			img_hdc, 
+			offset,
+			SRCCOPY);
 		::DeleteDC(img_hdc);
-		Graphics::DrawSprite(sprite, position, offset, size);
-
 	}
 }

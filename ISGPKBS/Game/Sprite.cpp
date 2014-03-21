@@ -41,6 +41,14 @@ namespace isgp {
 		DeleteObject(this->_mask);
 	}
 
+	void Sprite::CreateMaskBitmap() {
+		BITMAP imagebitmap = DereferenceBitmap(this->_image);
+		Size size(imagebitmap.bmWidth, imagebitmap.bmHeight);
+		HDC maskHDC = CreateCompatibleDC(NULL);
+		this->_mask = CreateCompatibleBitmap(maskHDC, size.GetWidth(), size.GetHeight());
+		DeleteDC(maskHDC);
+	}
+
 	HBITMAP Sprite::GetBitmap() {
 		return _image;
 	}
