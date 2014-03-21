@@ -11,6 +11,7 @@
 #include "DefaultLevelFactory.h"
 #include "GameCompletedGameState.h"
 #include "Highscores.h"
+#include "LoadLevelGameState.h"
 #include "InsertNameState.h"
 
 namespace isgp {
@@ -32,15 +33,17 @@ namespace isgp {
 		void SaveScore(Highscore* h);
 		void StartNextLevel();
 		Camera* _cam;
+		SpriteCache<int>* GetLevelTileSnapshots();
 	private:
-		Level* _level;
 		int _currentLevel;
 		void ClientResize(HWND hWnd, int nWidth, int nHeight);
-		IMenu* _currentMenu;
 		IGameState* _gameState;
+		SpriteCache<int>* _levelTileSnapshots;
 		void RestartGame();
 		void QuitGame();
 		void GameOver();
-		Theme* _theme;
+		void LoadLevel();
+		void StartLevel(Level*, Camera*);
+		void ClearGameState();
 	};
 }

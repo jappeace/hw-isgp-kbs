@@ -6,6 +6,11 @@ namespace isgp {
 	class Theme {
 	public:
 		virtual ~Theme(void) {}
+		virtual void LoadContent(Graphics*) = 0;
+		virtual void SetWidth(double) = 0;
+		virtual void Paint(Graphics*) = 0;
+		virtual string GetTilePath() = 0;
+		static Theme* CreateTheme(int nr);
 	protected:
 		double _gridWidth;
 		string _tilePath;
@@ -13,10 +18,5 @@ namespace isgp {
 		string _bg2;
 		string _bg3;
 		string _bg4;
-	public:
-		virtual void LoadContent(Graphics*) = 0;
-		virtual void SetWidth(double) = 0;
-		virtual void Paint(Graphics*) = 0;
-		virtual string GetTilePath() = 0;
 	};
 }

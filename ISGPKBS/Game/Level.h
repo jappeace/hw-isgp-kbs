@@ -32,9 +32,12 @@ namespace isgp{
 		Theme* _theme;
 		void LoadContent(Graphics*);
 		double GetPlayTime();
+		int GetStageNumber();
+		void SetStageNumber(int nr);
 	private:
 		void Init();
 		double _timePlayed;
 		Grid* _grid;
+		int _stagenr;
 	};
 }

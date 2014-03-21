@@ -100,6 +100,7 @@
     <ClCompile Include="InsertNameState.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="ListMenu.cpp" />
+    <ClCompile Include="LoadLevelGameState.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="MainMenuState.cpp" />
     <ClCompile Include="MenuItem.cpp" />
@@ -110,7 +111,9 @@
     <ClCompile Include="Size.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="SpriteCache.cpp" />
     <ClCompile Include="SpriteGraphics.cpp" />
+    <ClCompile Include="Theme.cpp" />
     <ClCompile Include="Theme1.cpp" />
     <ClCompile Include="Theme2.cpp" />
     <ClCompile Include="Theme3.cpp" />
@@ -158,6 +161,7 @@
     <ClInclude Include="ITileData.h" />
     <ClInclude Include="ITranslator.h" />
     <ClInclude Include="Level.h" />
+    <ClInclude Include="LoadLevelGameState.h" />
     <ClInclude Include="MenuItem.h" />
     <ClInclude Include="Patrol.h" />
     <ClInclude Include="Player.h" />
@@ -167,6 +171,7 @@
     <ClInclude Include="resource2.h" />
     <ClInclude Include="Size.h" />
     <ClInclude Include="Sprite.h" />
+    <ClInclude Include="SpriteCache.h" />
     <ClInclude Include="SpriteGraphics.h" />
     <ClInclude Include="StrConverter.h" />
     <ClInclude Include="Theme2.h" />

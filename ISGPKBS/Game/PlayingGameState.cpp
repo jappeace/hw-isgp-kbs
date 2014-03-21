@@ -6,18 +6,18 @@
 #include <Windows.h>
 
 namespace isgp {
-	PlayingGameState::PlayingGameState(Graphics* graphics, Window* window, int level, Theme* theme,
+	bool PlayingGameState::_debugMode=false;
+	PlayingGameState::PlayingGameState(Window* window, Level* level, Camera* camera,
 		void(Window::*gameOver)()) {
+
 		_window = window;
 		_gameOver = gameOver;
-		_graphics = graphics;
-		_graphics->SetTextBackgroundColor(RGB(255, 255, 255));
-		DefaultlevelFactory factory;
-		_level = factory.CreateLevel(level, theme);
-		_level->LoadContent(_graphics);
-		_camera = new Camera(_level->_player, _level->GetGrid());
-		_graphics->SetTranslator(_camera);
-		_artist = new BackgroundArtist(_camera, _level);
+		_level = level;
+		_window = window;
+		_gameOver = gameOver;
+		_level = level;
+		_camera = camera;
+		_artist = new BackgroundArtist(_camera, _level, window->GetLevelTileSnapshots());
 		_artist->RenderBackground();
 		_highscoreState = new ViewHighscoreGameState(level, this);
 		_isPaused = false;
@@ -27,6 +27,7 @@ namespace isgp {
 		delete _camera;
 		delete _level;
 		delete _highscoreState;
+		delete _artist;
 	}
 
 	void PlayingGameState::Paint(Graphics* g) {
@@ -83,7 +84,11 @@ namespace isgp {
 			case VK_SPACE:
 				_level->_player->_spaceKey = true;
 				break;
-			}
+		case VK_F1:
+			if(PlayingGameState::_debugMode)
+				PlayingGameState::_debugMode=false;
+			else
+				PlayingGameState::_debugMode=true;
 		}
 	}
 
