@@ -10,8 +10,13 @@
 #include "IGameState.h"
 #include "DefaultLevelFactory.h"
 #include "GameCompletedGameState.h"
+#include "Highscores.h"
 #include "LoadLevelGameState.h"
+#include "InsertNameState.h"
+
 namespace isgp {
+	class InsertNameState;
+
 	class Window : public AbstractWindow {
 	public:
 		Window();
@@ -23,8 +28,10 @@ namespace isgp {
 		void OnKeyUp(int which) override;
 		void GameLoop(double) override;
 		void AfterCreate(HWND) override;
-		void NextLevel();
+		void NextLevel(double playtime);
 		void FullRestart();
+		void SaveScore(Highscore* h);
+		void StartNextLevel();
 		Camera* _cam;
 		SpriteCache<int>* GetLevelTileSnapshots();
 	private:
@@ -36,8 +43,8 @@ namespace isgp {
 		void QuitGame();
 		void GameOver();
 		void LoadLevel();
+		Highscores _highscores;
 		void StartLevel(Level*, Camera*);
 		void ClearGameState();
-		Theme* _theme;
 	};
 }

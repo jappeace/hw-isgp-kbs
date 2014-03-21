@@ -36,7 +36,11 @@ namespace isgp {
 		// Ends the rendering
 		virtual void EndRendering(){}
 		// get a bitmap from the cache or load it from a file and put it in the cache and return
+		// this method WILL generates a bitmask
 		Sprite* LoadBitmapFile(string path);
+		// get a bitmap from the cache or load it from a file and put it in the cache and return
+		// this method optionally generates a bitmask
+		Sprite* LoadBitmapFile(string path, bool generateBitmask);
 
 		void SetTextColor(COLORREF color);
 		void SetTextBackgroundColor(COLORREF color);
@@ -64,7 +68,7 @@ namespace isgp {
 		void DrawBitmap(string path, Vector2D& position, Vector2D& offset, Size& size);
 
 		// draw a sprite from memory instead of path
-		void DrawSprite(Sprite* sprite, Vector2D position, Vector2D& offset, Size& size);
+		virtual void DrawSprite(Sprite* sprite, Vector2D position, Vector2D& offset, Size& size);
 
 		void DrawLine(Vector2D one,Vector2D two);
 		void DeleteTranslater(void);

@@ -8,10 +8,13 @@ namespace isgp{
 		_levelnr = levelnr;
 		_hasDrawn = false;
 		_startLevelCalback = startLevelCalback;
+		_loadedLevel = NULL;
+		_loadedCamera = NULL;
 	}
 
 	LoadLevelGameState::~LoadLevelGameState(void) {
 	}
+
 	void LoadLevelGameState::Paint(Graphics* graphics) {
 
 		if(!_hasDrawn){
@@ -19,11 +22,20 @@ namespace isgp{
 			return;
 		}
 		pair<Level*, Camera*> loaded = LoadLevel(graphics);
-		(_window->*_startLevelCalback)(loaded.first, loaded.second);
+		_loadedLevel = loaded.first;
+		_loadedCamera = loaded.second;
 	}
+
 	void LoadLevelGameState::KeyDown(int keyCode) { /** ignore keys */}
 	void LoadLevelGameState::KeyUp(int keyCode) { /** ignore */}
-	void LoadLevelGameState::Update(double elapsed) { /** ignore */}
+
+	void LoadLevelGameState::Update(double elapsed) {
+		if (_loadedCamera == NULL || _loadedLevel == NULL) {
+			return;
+		}
+
+		(_window->*_startLevelCalback)(_loadedLevel, _loadedCamera);
+	}
 
 	void LoadLevelGameState::RenderSplashScreen(Graphics* graphics){
 
@@ -34,10 +46,19 @@ namespace isgp{
 		graphics->DrawStr(AbstractWindow::WindowSize / Vector2D(2.5,2.2), "Loading level");
 		graphics->DrawStr(AbstractWindow::WindowSize / Vector2D(3,2), "Don't forget, this game is awesome");
 	}
+
 	pair<Level*, Camera*> LoadLevelGameState::LoadLevel(Graphics* graphics){
 		// to store results in
 		pair<Level*, Camera*> result;
 
+		// Load common level assets
+		graphics->LoadBitmapFile("../tiles/jumpPad.bmp");
+		graphics->LoadBitmapFile("../tiles/link.bmp");
+		graphics->LoadBitmapFile("../tiles/megaman.bmp");
+		graphics->LoadBitmapFile("../tiles/boo.bmp");
+		graphics->LoadBitmapFile("../tiles/toad.bmp");
+
+		// Load Level
 		graphics->SetTranslator(_window->_cam);
 		Theme* theme = Theme::CreateTheme(_levelnr);
 		theme->LoadContent(graphics);

@@ -3,21 +3,27 @@
 #include "Window.h"
 
 namespace isgp {
+	class Window;
 
-	class MainMenuState :
+	class InsertNameState :
 		public IGameState
 	{
 	public:
-		MainMenuState(Window* window,
-			void (Window::*start)(), void (Window::*continueFunc)(), void (Window::*exit)());
-		~MainMenuState();
+		InsertNameState(Window* window, double elapsedTime);
+		~InsertNameState();
 		void Paint(Graphics* g) override;
 		void Update(double elapsed) override;
 
 		void KeyDown(int keyCode) override;
 		void KeyUp(int keyCode) override;
+
 	private:
-		IMenu* _menu;
+		string _name;
+		double _elapsedTime;
+		Window* _window;
+		HFONT _font;
+		bool _showUnderscore;
+		double _totalElapsed;
 	};
 
 }

@@ -15,13 +15,13 @@ namespace isgp {
 			return str;
 		}
 
-		static string FormatTime(double time) {
-			string elapsedString = "";
-			int timeInSeconds = (int) time/1000;
-			int minutes = (int) (timeInSeconds / 60) % 60;
-			int seconds = (int)timeInSeconds  % 60;
-			int ms = (int)time % 60;
-			return FormatLessThanTen(minutes) + ":" + FormatLessThanTen(seconds) + ":" + FormatLessThanTen(ms);
+
+		static string FormatTime(double milliseconds) {
+
+			int millis  = (int) ((int)milliseconds % 1000);
+			int seconds = (int) (milliseconds / 1000) % 60;
+			int minutes = (int) ((int)milliseconds / (1000*60) % 60);
+			return FormatLessThanTen(minutes) + ":" + FormatLessThanTen(seconds) + ":" + FormatLessThanTen(millis / 10);
 		}
 
 	};

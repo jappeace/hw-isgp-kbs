@@ -18,6 +18,8 @@ namespace isgp{
 		SpriteCache<int>* _cache;
 		int _levelnr;
 		bool _hasDrawn;
+		Level* _loadedLevel;
+		Camera* _loadedCamera;
 		void(Window::*_startLevelCalback)(Level* level, Camera*);
 		void RenderSplashScreen(Graphics* graphics);
 		pair<Level*, Camera*> LoadLevel(Graphics* graphics);
