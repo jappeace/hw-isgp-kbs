@@ -86,6 +86,11 @@ namespace isgp {
 		// pass into the static method
 		Graphics::FillRect(getHDC(), position, size, color);
 	}
+
+	void Graphics::FillStaticRect(Vector2D position, const Size& size, COLORREF color){
+		Graphics::FillRect(getHDC(), position, size, color);
+	}
+
 	void Graphics::FillRect(HDC hdc, Vector2D position, const Size& size, COLORREF color){
 		RECT r;
 		r.left = (LONG)position.X();
@@ -93,7 +98,9 @@ namespace isgp {
 		position += size;
 		r.right = (LONG)position.X();
 		r.bottom = (LONG)position.Y();
-		::FillRect(hdc, &r, CreateSolidBrush(color));
+		HBRUSH brush = CreateSolidBrush(color);
+		::FillRect(hdc, &r, brush);
+		DeleteObject(brush);
 	}
 
 	Sprite* Graphics::LoadBitmapFile(string path, bool generateMask) {
