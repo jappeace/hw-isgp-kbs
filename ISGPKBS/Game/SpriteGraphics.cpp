@@ -7,7 +7,6 @@ namespace isgp {
 		_target = sprite;
 	}
 	void SpriteGraphics::BeginRendering(){
-		this->_target->CreateMaskBitmap();
 		this->_visibleHdc = CreateCompatibleDC(NULL);
 		this->_maskHdc = CreateCompatibleDC(NULL);
 		::SelectObject(this->_maskHdc, _target->GetMask());
