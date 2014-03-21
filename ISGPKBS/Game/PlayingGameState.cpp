@@ -19,20 +19,20 @@ namespace isgp {
 		_camera = camera;
 		_artist = new BackgroundArtist(_camera, _level, window->GetLevelTileSnapshots());
 		_artist->RenderBackground();
-		_highscoreState = new ViewHighscoreGameState(levelNumber, this);
+		_highscoreMenu = new ViewHighscoreMenu(levelNumber, this);
 		_isPaused = false;
 	}
 
 	PlayingGameState::~PlayingGameState() {
 		delete _camera;
 		delete _level;
-		delete _highscoreState;
+		delete _highscoreMenu;
 		delete _artist;
 	}
 
 	void PlayingGameState::Paint(Graphics* g) {
 		if(_isPaused) {
-			_highscoreState->Paint(g);
+			_highscoreMenu->Paint(g);
 		} else {
 			_level->_theme->Paint(g);
 			_artist->Paint(g);
@@ -49,9 +49,7 @@ namespace isgp {
 	}
 
 	void PlayingGameState::Update(double elapsed) {
-		if(_isPaused) {
-			_highscoreState->Update(elapsed);
-		} else {
+		if(!_isPaused) {
 			_level->Update(elapsed);
 			_camera->Update(elapsed);
 			if (!_level->_player->IsAlive()) {

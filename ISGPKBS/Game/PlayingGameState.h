@@ -5,10 +5,10 @@
 #include "Camera.h"
 #include "Window.h"
 #include "BackgroundArtist.h"
-#include "ViewHighscoreGameState.h"
+#include "ViewHighscoreMenu.h"
 
 namespace isgp {
-	class ViewHighscoreGameState;
+	class ViewHighscoreMenu;
 
 	class PlayingGameState : public IGameState {
 	public:
@@ -31,6 +31,6 @@ namespace isgp {
 		void(Window::*_gameOver)();
 		BackgroundArtist* _artist;
 		bool _isPaused;
-		ViewHighscoreGameState* _highscoreState;
+		ViewHighscoreMenu* _highscoreMenu;
 	};
 }
