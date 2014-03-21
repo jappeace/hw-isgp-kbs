@@ -117,6 +117,7 @@
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TimesPerSecondCounter.cpp" />
     <ClCompile Include="Vector2D.cpp" />
+    <ClCompile Include="ViewHighscoreGameState.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="WindowGraphics.cpp" />
     <ClCompile Include="WinMain.cpp" />
@@ -174,6 +175,7 @@
     <ClInclude Include="TimeFormatter.h" />
     <ClInclude Include="TimesPerSecondCounter.h" />
     <ClInclude Include="Vector2D.h" />
+    <ClInclude Include="ViewHighscoreGameState.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="WindowGraphics.h" />
     <ClInclude Include="WorldBlock.h" />

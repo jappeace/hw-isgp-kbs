@@ -20,6 +20,7 @@ namespace isgp {
 		void InsertHighscore(Highscore* h);
 		bool FileExists();
 	private:
+		void Sort();
 		void Init();
 		vector<Highscore*>* _highscores;
 		int _level;

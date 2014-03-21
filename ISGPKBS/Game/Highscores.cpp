@@ -38,7 +38,8 @@ bool Highscores::FileExists() {
 void Highscores::LoadHighscores() {
 	if(!FileExists())
 		return;
-	_highscores->clear();
+	if(_highscores->size() > 0)
+		_highscores->clear();
 	std::ifstream input("./highscores/" + StrConverter::IntToString(_level) + ".highscore");
 
 	while (true) {
@@ -68,7 +69,9 @@ void Highscores::SaveHighscores() {
 bool HighscoreSort(Highscore* h1, Highscore* h2) {
 	return h1->GetTime() < h2->GetTime();
 }
-
+void Highscores::Sort() {
+	std::sort(_highscores->begin(), _highscores->end(), HighscoreSort);
+}
 void Highscores::InsertHighscore(Highscore* highscore) {
 	double time = highscore->GetTime();
 	if(!this->IsHighscore(time)) {
@@ -76,7 +79,7 @@ void Highscores::InsertHighscore(Highscore* highscore) {
 	}
 
 	_highscores->push_back(highscore);
-	std::sort(_highscores->begin(), _highscores->end(), HighscoreSort);
+	Sort();
 	if(_highscores->size() > 5) {
 		_highscores->resize(5);
 	}
@@ -92,6 +95,7 @@ bool Highscores::IsHighscore(double time) {
 }
 
 vector<Highscore*>* Highscores::GetHighscores() {
+	Sort();
 	return _highscores;
 }
 
