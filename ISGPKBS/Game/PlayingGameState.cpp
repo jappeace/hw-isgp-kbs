@@ -8,7 +8,7 @@
 namespace isgp {
 	bool PlayingGameState::_debugMode=false;
 	PlayingGameState::PlayingGameState(Window* window, Level* level, Camera* camera,
-		void(Window::*gameOver)()) {
+		void(Window::*gameOver)(), int levelNumber) {
 
 		_window = window;
 		_gameOver = gameOver;
@@ -19,7 +19,7 @@ namespace isgp {
 		_camera = camera;
 		_artist = new BackgroundArtist(_camera, _level, window->GetLevelTileSnapshots());
 		_artist->RenderBackground();
-		_highscoreState = new ViewHighscoreGameState(level, this);
+		_highscoreState = new ViewHighscoreGameState(levelNumber, this);
 		_isPaused = false;
 	}
 
@@ -84,11 +84,12 @@ namespace isgp {
 			case VK_SPACE:
 				_level->_player->_spaceKey = true;
 				break;
-		case VK_F1:
-			if(PlayingGameState::_debugMode)
-				PlayingGameState::_debugMode=false;
-			else
-				PlayingGameState::_debugMode=true;
+			case VK_F1:
+				if(PlayingGameState::_debugMode)
+					PlayingGameState::_debugMode=false;
+				else
+					PlayingGameState::_debugMode=true;
+			}
 		}
 	}
 
