@@ -25,7 +25,7 @@ namespace isgp {
 			_velocity->X(-_velocity->X());
 			_velocity->Y(-_velocity->Y());
 		}else if (range < 800) {
-			if (_aVel < 700) {
+			if (_aVel < 550) {
 				_aVel += (1000 * elapsed);
 			}
 			
