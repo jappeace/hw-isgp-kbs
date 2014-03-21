@@ -11,29 +11,8 @@ namespace isgp {
 		return x + y * _size->GetWidth();
 	}
 
-	void Grid::GuardInit(unsigned width, unsigned height) {
-		GridToLargeException exception = GridToLargeException(
-				"The max limit of tiles for a grid is set to:" +
-				StrConverter::IntToString(MAX_TILES) +
-				". To change this number define the macro "
-				"MAX_TILES before including the header file Grid.h -- "
-				"width: " + StrConverter::IntToString(width) +
-				", height: " + StrConverter::IntToString(height)
-				, width, height);
-		if (width > MAX_TILES) {
-			throw exception;
-		}
-		if (height > MAX_TILES) {
-			throw exception;
-		}
-		if (_tilesLength > MAX_TILES) {
-			throw exception;
-		}
-	}
-
 	void Grid::Init(unsigned width, unsigned height) {
 		_tilesLength = (unsigned) (width * height);
-		GuardInit(width, height);
 		_size = new Size(width, height);
 		_tiles = new vector<Tile*>();
 		for (unsigned y = 0; y < height; y++) {
