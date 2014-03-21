@@ -54,13 +54,16 @@ void Highscores::LoadHighscores() {
 }
 
 void Highscores::SaveHighscores() {
-	std::fstream f;
-	f.open(("./highscores/" + StrConverter::IntToString(_level) + ".highscore"), ios_base::in|ios_base::out|ios_base::trunc );
-	f.seekg(0, std::ios::end);
-	f.seekg(0, std::ios::beg);
+	std::ofstream f;
+	f.open(("./highscores/" + StrConverter::IntToString(_level) + ".highscore"));
+	//f.seekg(0, std::ios::end);
+	//f.seekg(0, std::ios::beg);
 	for(unsigned i = 0; i < _highscores->size(); i++) {
 		Highscore* hs = _highscores->at(i);
-		f << hs->GetName() << "\n" << (int)(hs->GetTime() * 1000) << "\n";
+		f << hs->GetName() << "\n" << (int)(hs->GetTime() * 1000);
+		if(i != _highscores->size() - 1) {
+			f << "\n";
+		}
 	}
 	f.flush();
 	f.close();
@@ -99,7 +102,4 @@ bool Highscores::IsHighscore(double time) {
 vector<Highscore*>* Highscores::GetHighscores() {
 	return _highscores;
 }
-
-
-
 }
