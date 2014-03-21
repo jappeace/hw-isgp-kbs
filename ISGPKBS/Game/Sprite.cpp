@@ -3,6 +3,7 @@
 namespace isgp {
 
 	const int Sprite::kKeyColor = 0xff00ff; // Transparancy key color
+
 	Sprite::Sprite(const Size& s) {
 		HDC forCreation = CreateCompatibleDC(NULL);
 		BITMAPINFO i;
@@ -18,16 +19,25 @@ namespace isgp {
 		VOID *pvBits;
 		HBITMAP b = CreateDIBSection(forCreation, &i, DIB_RGB_COLORS, &pvBits, NULL, 0);
 		DeleteDC(forCreation);
-		Init(b);
+		Init(b, false);
+	}
+
+	Sprite::Sprite(HBITMAP bitmap, bool generateBitmask) {
+		Init(bitmap, generateBitmask);
 	}
 
 	Sprite::Sprite(HBITMAP bitmap)
 	{
-		Init(bitmap);
-		GenerateMask();
+		Init(bitmap, true);
 	}
-	void Sprite::Init(HBITMAP bitmapPointer){
+
+	void Sprite::Init(HBITMAP bitmapPointer, bool generateBitmask){
 		_image = bitmapPointer;
+		if (generateBitmask) {
+			GenerateMask();
+		} else {
+			CreateMaskBitmap();
+		}
 	}
 
 	BITMAP Sprite::DereferenceBitmap(HBITMAP pointer){

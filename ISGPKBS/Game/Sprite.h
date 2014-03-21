@@ -8,6 +8,9 @@ namespace isgp {
 	{
 	public:
 		Sprite(const Size&);
+		// Creates a sprite with an optional bitmask
+		// If set to false sprite will not have an alpha channel
+		Sprite(HBITMAP bitmap, bool generateMask);
 		Sprite(HBITMAP bitmap);
 		~Sprite(void);
 
@@ -15,8 +18,6 @@ namespace isgp {
 		HBITMAP GetMask();
 		// calls the size of bitmap
 		Size GetSize();
-		// Creates an empty mask for the alpha
-		void CreateMaskBitmap();
 		// render an alpha mask, this is a O(bitmap.width * bitmap.height) operation, beware
 		void GenerateMask();
 		void GenerateMask(Vector2D topleft, Size size);
@@ -25,8 +26,10 @@ namespace isgp {
 	private:
 		HBITMAP _image;
 		HBITMAP _mask;
+		// Creates an empty mask for the alpha
+		void CreateMaskBitmap();
 		static const int Sprite::kKeyColor;
-		void Init(HBITMAP);
+		void Init(HBITMAP, bool);
 	
 	};
 }
