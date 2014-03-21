@@ -8,7 +8,7 @@ namespace isgp {
 		public IGameState
 	{
 	public:
-		MainMenuState(Graphics* graphics, Window* window,
+		MainMenuState(Window* window,
 			void (Window::*start)(), void (Window::*continueFunc)(), void (Window::*exit)());
 		~MainMenuState();
 		void Paint(Graphics* g) override;

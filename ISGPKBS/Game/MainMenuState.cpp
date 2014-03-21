@@ -4,7 +4,7 @@
 #include "Window.h"
 
 namespace isgp {
-	MainMenuState::MainMenuState(Graphics* graphics, Window* window,
+	MainMenuState::MainMenuState(Window* window,
 		void (Window::*restart)(),
 		void (Window::*continueGame)(),
 		void (Window::*exit)()) {

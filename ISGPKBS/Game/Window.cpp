@@ -44,7 +44,7 @@ void Window::ClientResize(HWND hWnd, int nWidth, int nHeight)
 
 void Window::AfterCreate(HWND hWnd) {
 	_currentLevel = SaveGame().ReadCurrentLevel();
-	LoadLevel();
+	_gameState = new MainMenuState(this, &Window::FullRestart, &Window::LoadLevel, &Window::QuitGame);
 	ClientResize(hWnd, WindowSize.GetWidth(), WindowSize.GetHeight());
 }
 
