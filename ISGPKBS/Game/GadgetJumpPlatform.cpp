@@ -1,5 +1,5 @@
 #include "GadgetJumpPlatform.h"
-
+#include "Sound.h"
 namespace isgp {
 
 	GadgetJumpPlatform::GadgetJumpPlatform(Vector2D position, Player* player) {
@@ -29,8 +29,11 @@ namespace isgp {
 
 	void GadgetJumpPlatform::OnCollide() {
 		if (!this->_player->IsColliding(Down))
+		{
+			//Sound().Play(JUMP_PLATFORM);
 			return;
-
+		}
+		Sound().Play(JUMP_PLATFORM);
 		this->_ms_till_next_launch = 500;
 		this->_player->GetVelocity()->Y(-800);
 	}
