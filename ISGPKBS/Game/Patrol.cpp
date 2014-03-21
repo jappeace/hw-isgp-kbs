@@ -1,13 +1,8 @@
-#ifdef _DEBUG
-    #define _CRTDBG_MAP_ALLOC
-#include <stdlib.h>
-#include <crtdbg.h>
-    #define DEBUG_NEW new(_NORMAL_BLOCK, __FILE__, __LINE__)
-    #define new DEBUG_NEW
-#endif
+
 #include "Patrol.h"
 #include "gravitybehaviour.h"
 #include "CollisionDetection.h"
+#include "PlayingGameState.h"
 
 namespace isgp {
 	Patrol::Patrol(Vector2D point, int range, Player* player) : _movement_speed(200) {
@@ -95,7 +90,8 @@ namespace isgp {
 	}
 
 	void Patrol::Paint(Graphics* g) {
-#ifdef _DEBUG
+if(PlayingGameState::_debugMode)
+{
 		GridGraphicTranslator translator = GridGraphicTranslator();
 		vector<Tile*> includedTiles = _grid->GetTilesInRectangle(_position, _position + *_size + Vector2D(2));
 		g->SetColor(RGB(255, 0, 0));
@@ -115,7 +111,7 @@ namespace isgp {
 			g->DrawRect(Vector2D((int)p->X(), (int)p->Y()), Vector2D((int)p->X() + 16, (int)p->Y() + 16));
 		}
 		g->SetColor(RGB(0, 0, 0));
-#endif
+}
 
 		static int const kSpriteSize = 32;
 		

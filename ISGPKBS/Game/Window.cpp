@@ -18,18 +18,14 @@ namespace isgp {
 Window::Window() {
 	_currentLevel = 1;
 	_cam = NULL;
-	_currentMenu = NULL;
 	_gameState = NULL;
-	_level = NULL;
-	_theme = NULL;
+	_levelTileSnapshots = new SpriteCache<int>();
 }
 
 Window::~Window()
 {
 	delete _gameState;
 	delete _cam;
-	delete _level;
-	delete _currentMenu;
 }
 
 /////////////////////////////////////
@@ -47,8 +43,8 @@ void Window::ClientResize(HWND hWnd, int nWidth, int nHeight)
 }
 
 void Window::AfterCreate(HWND hWnd) {
-	_gameState = new MainMenuState(_graphics, this, &Window::FullRestart, &Window::RestartGame, &Window::QuitGame);
 	_currentLevel = SaveGame().ReadCurrentLevel();
+	_gameState = new MainMenuState(this, &Window::FullRestart, &Window::LoadLevel, &Window::QuitGame);
 	ClientResize(hWnd, WindowSize.GetWidth(), WindowSize.GetHeight());
 }
 
@@ -131,47 +127,38 @@ LRESULT Window::MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 }
 
 void Window::RestartGame() {
-	delete _gameState;
-	
-	if (_theme != NULL) {
-		//delete _theme;
-		//_theme = NULL;
-	}
+	ClearGameState();
+	LoadLevel();
+}
+void Window::ClearGameState(){
 
-	switch (_currentLevel) {
-		case 1 :
-			_theme = new Theme1();
-			break;
-		case 2 :
-			_theme = new Theme2();
-			break;
-		case 3 :
-			_theme = new Theme3();
-			break;
-		case 4 :
-			_theme = new Theme4();
-			break;
-		case 5 :
-			_theme = new Theme5();
-			break;
-		default:
-			_theme = new Theme1();
-			break;
+	if(_gameState){
+		delete _gameState;
 	}
-
-	_theme->LoadContent(_graphics);
-	_gameState = new PlayingGameState(_graphics, this, _currentLevel, _theme, &Window::GameOver);
+	_gameState = NULL;
 }
 
 void Window::GameOver() {
-	delete _gameState;
+	ClearGameState();
 	_graphics->SetTranslator(NULL);
 	_gameState = new GameOverGameState(_graphics, this,
 		&Window::RestartGame, &Window::QuitGame);
 }
 
 void Window::QuitGame() {
+	// deleting stuff is irrelevant, kernel will handle it
 	PostQuitMessage(0);
 }
 
+void Window::LoadLevel(){
+	ClearGameState();
+	_gameState = new LoadLevelGameState(this, _currentLevel,_levelTileSnapshots, &Window::StartLevel);
+}
+void Window::StartLevel(Level* which, Camera* cam){
+	ClearGameState();
+	_gameState = new PlayingGameState(this, which, cam, &Window::GameOver);
+}
+SpriteCache<int>* Window::GetLevelTileSnapshots(){
+	return _levelTileSnapshots;
+}
 }
