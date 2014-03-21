@@ -7,27 +7,46 @@ namespace isgp {
 		_name = "";
 		_window = window;
 		_elapsedTime = elapsedTime;
+		_font = CreateFont(48,0,0,0,FW_DONTCARE,FALSE,FALSE,FALSE,DEFAULT_CHARSET,OUT_OUTLINE_PRECIS,
+			CLIP_DEFAULT_PRECIS,DEFAULT_QUALITY, VARIABLE_PITCH,TEXT("Lucida Console"));
+		_totalElapsed = 0.0;
+		_showUnderscore = false;
 	}
 
 
 	InsertNameState::~InsertNameState(void)
 	{
+		DeleteObject(_font);
 	}
 
 	void InsertNameState::Paint(Graphics* g) {
-		g->DrawStr(Vector2D(360, 390), _name);
+		string nameString = _name;
+		if(_showUnderscore) {
+			nameString += "_";
+		}
+		g->DrawStr(Vector2D(330, 200), "Name:", _font);
+		g->DrawStr(Vector2D(400 - (_name.length() * 15), 260), nameString, _font);
 	}
 
 	void InsertNameState::Update(double elapsed) {
+		_totalElapsed += elapsed;
+		if(_totalElapsed > 450) {
+			_showUnderscore = !_showUnderscore;
+			_totalElapsed = 0;
+		}
 	}
 
 	void InsertNameState::KeyDown(int keyCode) {
+
 		if(keyCode == VK_BACK) {
-			_name = _name.substr(0, _name.size() - 2);
+			_name = _name.substr(0, _name.length() - 1);
 		} else if(keyCode == VK_RETURN) {
 			_window->SaveScore(new Highscore(_name, _elapsedTime));
-		} else if(keyCode > 32 && keyCode < 126) {
-			_name += (char)keyCode;
+		} else if(keyCode == 32 || keyCode == 45 || (keyCode >= 48 && keyCode<= 57) 
+				|| (keyCode >= 65 && keyCode <= 90) || (keyCode >= 97 && keyCode <= 122)) {
+			if(_name.length() <= 20) {
+				_name += (char)keyCode;
+			}
 		}
 	}
 

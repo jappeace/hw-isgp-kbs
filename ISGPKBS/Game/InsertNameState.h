@@ -16,10 +16,14 @@ namespace isgp {
 
 		void KeyDown(int keyCode) override;
 		void KeyUp(int keyCode) override;
+
 	private:
 		string _name;
 		double _elapsedTime;
 		Window* _window;
+		HFONT _font;
+		bool _showUnderscore;
+		double _totalElapsed;
 	};
 
 }
