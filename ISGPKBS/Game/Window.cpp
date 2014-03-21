@@ -4,6 +4,7 @@
 #include "MenuItem.h"
 #include "MainMenuState.h"
 #include "PlayingGameState.h"
+
 #include "SaveGame.h"
 #include "Sound.h"
 #include "Theme1.h"
@@ -80,25 +81,40 @@ void Window::FullRestart() {
 	RestartGame();
 }
 
-void Window::NextLevel() {
+void Window::NextLevel(double playtime) {
 	Sound().Play(END_WIN);
 
-	_highscores = Highscores(_currentLevel);
-	
-	double playtime = _level->GetPlayTime();
-	if(_highscores.IsHighscore(playtime)) {
-		_highscores.InsertHighscore(Highscore("naam", playtime));
-	}
+	Highscores _highscores = Highscores(_currentLevel);
+	_highscores.LoadHighscores();
 
+	if(_highscores.IsHighscore(playtime)) {
+		_gameState = new InsertNameState(this, playtime);
+	} else {
+		StartNextLevel();
+	}
+	
+
+
+
+}
+
+void Window::StartNextLevel() {
 	_currentLevel++;
 	if(DefaultlevelFactory().LevelExists(_currentLevel)) {
 		SaveGame().WriteCurrentLevel(_currentLevel);
 		RestartGame();
 	} else { //Completed all levels, wat do?
-		
+		delete _gameState;
 		_gameState = new GameCompletedGameState(this);
-
 	}
+}
+
+void Window::SaveScore(Highscore* h) {
+	Highscores _highscores = Highscores(_currentLevel);
+	_highscores.LoadHighscores();
+	_highscores.InsertHighscore(h);
+	_highscores.SaveHighscores();
+	StartNextLevel();
 }
 
 void Window::OnCommand(int from, int command) {
@@ -156,7 +172,7 @@ void Window::LoadLevel(){
 }
 void Window::StartLevel(Level* which, Camera* cam){
 	ClearGameState();
-	_gameState = new PlayingGameState(this, which, cam, &Window::GameOver);
+	_gameState = new PlayingGameState(this, which, cam, &Window::GameOver, _currentLevel);
 }
 SpriteCache<int>* Window::GetLevelTileSnapshots(){
 	return _levelTileSnapshots;
