@@ -45,7 +45,7 @@ namespace isgp {
 
 		if(keyCode == VK_BACK) {
 			_name = _name.substr(0, _name.length() - 1);
-		} else if(keyCode == VK_RETURN) {
+		} else if(_name.length() > 0 && keyCode == VK_RETURN) {
 			_window->SaveScore(new Highscore(_name, _elapsedTime));
 		}  else {
 			if(_name.length() <= 20) {
