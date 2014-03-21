@@ -12,12 +12,12 @@ namespace isgp {
 	}
 
 	void GameCompletedGameState::KeyDown(int keyCode) {
-
-	}
-	void GameCompletedGameState::KeyUp(int keyCode) {
 		if(keyCode == VK_RETURN || keyCode == VK_SPACE) {
 			_window->FullRestart();
 		}
+	}
+	void GameCompletedGameState::KeyUp(int keyCode) {
+
 	}
 
 	GameCompletedGameState::GameCompletedGameState(Window* window)
