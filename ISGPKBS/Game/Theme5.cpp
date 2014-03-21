@@ -17,7 +17,6 @@ namespace isgp {
 	}
 
 	void Theme5::LoadContent(Graphics* g) {
-		return;
 		g->LoadBitmapFile(_tilePath);
 		g->LoadBitmapFile(_bg1);
 		g->LoadBitmapFile(_bg2);
@@ -34,7 +33,6 @@ namespace isgp {
 	}
 
 	void Theme5::Paint(Graphics* g) {
-		return;
 		const Size windowSize(800, 600);
 
 		int imgWidth = 3174;
