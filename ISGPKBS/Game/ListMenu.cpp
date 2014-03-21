@@ -61,5 +61,6 @@ namespace isgp {
 			location.Y(location.Y() + 50);
 		}
 		this->PaintDecoration(g);
+		g->SetTextBackgroundColor(RGB(255, 255, 255));
 	}
 }

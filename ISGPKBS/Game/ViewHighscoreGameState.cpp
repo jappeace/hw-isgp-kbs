@@ -33,6 +33,7 @@ namespace isgp {
 			g->DrawStr(Vector2D(50, 180 + (i * 32)), score->GetName(), _highscoreListFont);
 			g->DrawStr(Vector2D(500, 180 + (i * 32)), score->GetTimeFormatted(), _highscoreListFont);
 		}
+		g->SetTextBackgroundColor(RGB(255, 255, 255));
 	}
 
 	void ViewHighscoreGameState::Update(double elapsed) {
