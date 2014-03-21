@@ -8,10 +8,13 @@ namespace isgp{
 		_levelnr = levelnr;
 		_hasDrawn = false;
 		_startLevelCalback = startLevelCalback;
+		_loadedLevel = NULL;
+		_loadedCamera = NULL;
 	}
 
 	LoadLevelGameState::~LoadLevelGameState(void) {
 	}
+
 	void LoadLevelGameState::Paint(Graphics* graphics) {
 
 		if(!_hasDrawn){
@@ -19,11 +22,20 @@ namespace isgp{
 			return;
 		}
 		pair<Level*, Camera*> loaded = LoadLevel(graphics);
-		(_window->*_startLevelCalback)(loaded.first, loaded.second);
+		_loadedLevel = loaded.first;
+		_loadedCamera = loaded.second;
 	}
+
 	void LoadLevelGameState::KeyDown(int keyCode) { /** ignore keys */}
 	void LoadLevelGameState::KeyUp(int keyCode) { /** ignore */}
-	void LoadLevelGameState::Update(double elapsed) { /** ignore */}
+
+	void LoadLevelGameState::Update(double elapsed) {
+		if (_loadedCamera == NULL || _loadedLevel == NULL) {
+			return;
+		}
+
+		(_window->*_startLevelCalback)(_loadedLevel, _loadedCamera);
+	}
 
 	void LoadLevelGameState::RenderSplashScreen(Graphics* graphics){
 
