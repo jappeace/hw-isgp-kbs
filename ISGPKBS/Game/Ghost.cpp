@@ -26,7 +26,7 @@ namespace isgp {
 			_velocity->Y(-_velocity->Y());
 		}else if (range < 800) {
 			if (_aVel < 700) {
-				_aVel += (2000 * elapsed);
+				_aVel += (1000 * elapsed);
 			}
 			
 			_radAngle = atan2(_player->GetPosition().Y() - _position.Y(), _player->GetPosition().X() - _position.X());

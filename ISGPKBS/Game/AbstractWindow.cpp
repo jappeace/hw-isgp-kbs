@@ -37,7 +37,7 @@ AbstractWindow::AbstractWindow()
 	_dwCreationHeight	= WindowSize.GetHeight();
 	_hbrWindowColor		= (HBRUSH)(COLOR_WINDOW+1);
 	_hIcon				= LoadIcon(_hInstance, (LPCTSTR)IDI_APPLICATION);
-	_strWindowTitle		= _T("Win32 OO Skeleton Program...");
+	_strWindowTitle		= _T("Megadude++");
 	_hMenu				= NULL; 	
 	_graphics			= NULL;
 }

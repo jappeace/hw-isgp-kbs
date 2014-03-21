@@ -196,6 +196,8 @@ if(PlayingGameState::_debugMode)
 
 	// Kill the player by setting it's Alive status to false.
 	void Player::Kill() {
+		Sound sound;
+		sound.Play(END_LOSE);
 		_isAlive = false;
 	}
 }
