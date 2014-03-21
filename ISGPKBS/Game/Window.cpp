@@ -4,6 +4,7 @@
 #include "MenuItem.h"
 #include "MainMenuState.h"
 #include "PlayingGameState.h"
+
 #include "SaveGame.h"
 #include "Sound.h"
 #include "Theme1.h"
@@ -91,20 +92,33 @@ void Window::NextLevel(double playtime) {
 	_highscores.LoadHighscores();
 
 	if(_highscores.IsHighscore(playtime)) {
-		_highscores.InsertHighscore(new Highscore("naam", playtime));
+		_gameState = new InsertNameState(this, playtime);
+	} else {
+		StartNextLevel();
 	}
-	_highscores.SaveHighscores();
+	
 
 
+
+}
+
+void Window::StartNextLevel() {
 	_currentLevel++;
 	if(DefaultlevelFactory().LevelExists(_currentLevel)) {
 		SaveGame().WriteCurrentLevel(_currentLevel);
 		RestartGame();
 	} else { //Completed all levels, wat do?
-		
+		delete _gameState;
 		_gameState = new GameCompletedGameState(this);
-
 	}
+}
+
+void Window::SaveScore(Highscore* h) {
+	Highscores _highscores = Highscores(_currentLevel);
+	_highscores.LoadHighscores();
+	_highscores.InsertHighscore(h);
+	_highscores.SaveHighscores();
+	StartNextLevel();
 }
 
 void Window::OnCommand(int from, int command) {

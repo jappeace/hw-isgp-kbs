@@ -72,11 +72,13 @@ void Highscores::SaveHighscores() {
 bool HighscoreSort(Highscore* h1, Highscore* h2) {
 	return h1->GetTime() < h2->GetTime();
 }
+
 void Highscores::Sort() {
 	vector<Highscore*>* hs = _highscores;
 	std::sort(_highscores->begin(), _highscores->end(), HighscoreSort);
 	hs = _highscores;
 }
+
 void Highscores::InsertHighscore(Highscore* highscore) {
 	double time = highscore->GetTime();
 	if(!this->IsHighscore(time)) {

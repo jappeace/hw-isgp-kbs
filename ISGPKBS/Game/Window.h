@@ -11,8 +11,11 @@
 #include "DefaultLevelFactory.h"
 #include "GameCompletedGameState.h"
 #include "Highscores.h"
+#include "InsertNameState.h"
 
 namespace isgp {
+	class InsertNameState;
+
 	class Window : public AbstractWindow {
 	public:
 		Window();
@@ -26,6 +29,8 @@ namespace isgp {
 		void AfterCreate(HWND) override;
 		void NextLevel(double playtime);
 		void FullRestart();
+		void SaveScore(Highscore* h);
+		void StartNextLevel();
 		Camera* _cam;
 	private:
 		Level* _level;
