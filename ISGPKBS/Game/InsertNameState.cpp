@@ -27,6 +27,7 @@ namespace isgp {
 		if(_showUnderscore) {
 			nameString += "_";
 		}
+		g->DrawStr(Vector2D(220, 140), "New highscore!", _font);
 		g->DrawStr(Vector2D(330, 200), "Name:", _font);
 		g->DrawStr(Vector2D(400 - (_name.length() * 15), 260), nameString, _font);
 		g->SetTextBackgroundColor(RGB(255, 255, 255));
@@ -44,7 +45,7 @@ namespace isgp {
 
 		if(keyCode == VK_BACK) {
 			_name = _name.substr(0, _name.length() - 1);
-		} else if(keyCode == VK_RETURN) {
+		} else if(_name.length() > 0 && keyCode == VK_RETURN) {
 			_window->SaveScore(new Highscore(_name, _elapsedTime));
 		}  else {
 			if(_name.length() <= 20) {
@@ -52,7 +53,6 @@ namespace isgp {
 					_name += "-";
 				} else if((keyCode >= 48 && keyCode<= 57) || (keyCode >= 65 && keyCode <= 90) 
 					|| (keyCode >= 97 && keyCode <= 122)) {
-			
 					_name += (char)keyCode;
 				}
 			}
