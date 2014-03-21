@@ -62,12 +62,12 @@ namespace isgp {
 
 	void PlayingGameState::KeyDown(int keyCode) {
 		if(_isPaused) {
-			if(keyCode == VK_RETURN || keyCode == VK_SPACE || keyCode == VK_ESCAPE) {
+			if(keyCode == VK_TAB) {
 				Resume();
 			}
 		} else {
 			switch (keyCode) {
-			case VK_ESCAPE:
+			case VK_TAB:
 				Pause();
 				break;
 			case VK_LEFT:

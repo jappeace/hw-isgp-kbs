@@ -32,6 +32,7 @@ namespace isgp {
 		void FullRestart();
 		void SaveScore(Highscore* h);
 		void StartNextLevel();
+		void OpenMainMenu();
 		Camera* _cam;
 		SpriteCache<int>* GetLevelTileSnapshots();
 	private:
