@@ -48,7 +48,7 @@ namespace isgp {
 		g->SetTextBackgroundColor(RGB(0, 0, 0));
 		g->FillRect(Vector2D(0, 0), Size(800, 600),RGB(0, 0, 0));
 
-		Vector2D location(285, 200);
+		Vector2D location(250, 200);
 		for (auto item = _menuItems.begin(); item != _menuItems.end(); ++item) {
 			if (std::distance(_menuItems.begin(), item) == this->_selectedMenuItem) {
 				g->SetTextColor(RGB(255, 255, 255));

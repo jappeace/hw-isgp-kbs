@@ -198,4 +198,6 @@ Desktop.ini
 $RECYCLE.BIN/
 
 *.orig
+*.save
+*.highscore
 hiscores/
