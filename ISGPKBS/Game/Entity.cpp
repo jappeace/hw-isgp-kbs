@@ -136,6 +136,7 @@ if(PlayingGameState::_debugMode)
 		return (vel > 0.0) ? min(vel, 0.5) : max(vel, -0.5);
 	}
 
+
 	int Entity::CheckCollision() {
 		if(!_grid) {
 			return None;
