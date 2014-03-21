@@ -1,21 +1,18 @@
 #pragma once
-#include "IGameState.h"
+#include "IPaintable.h"
 #include "Window.h"
 #include "PlayingGameState.h"
 namespace isgp {
 	class PlayingGameState;
 
-	class ViewHighscoreGameState :
-		public IGameState
+	class ViewHighscoreMenu :
+		public IPaintable
 	{
 	public:
-		ViewHighscoreGameState(int level, PlayingGameState* parentState);
-		~ViewHighscoreGameState();
+		ViewHighscoreMenu(int level, PlayingGameState* parentState);
+		~ViewHighscoreMenu();
 		void Paint(Graphics* g) override;
-		void Update(double elapsed) override;
 
-		void KeyDown(int keyCode) override;
-		void KeyUp(int keyCode) override;
 	private:
 		int _level;
 		Highscores* _highscore;

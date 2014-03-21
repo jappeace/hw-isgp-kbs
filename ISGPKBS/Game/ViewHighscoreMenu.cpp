@@ -1,7 +1,7 @@
-#include "ViewHighscoreGameState.h"
+#include "ViewHighscoreMenu.h"
 #include <vector>
 namespace isgp {
-	ViewHighscoreGameState::ViewHighscoreGameState(int level, PlayingGameState* parentState) {
+	ViewHighscoreMenu::ViewHighscoreMenu(int level, PlayingGameState* parentState) {
 		_level = level;
 		_highscore = new Highscores(level);
 		_highscore->LoadHighscores();
@@ -13,13 +13,13 @@ namespace isgp {
 			CLIP_DEFAULT_PRECIS,DEFAULT_QUALITY, VARIABLE_PITCH,TEXT("Lucida Console"));
 	}
 
-	ViewHighscoreGameState::~ViewHighscoreGameState() {
+	ViewHighscoreMenu::~ViewHighscoreMenu() {
 		delete _highscore;
 		DeleteObject(_highscoreTitleFont);
 		DeleteObject(_highscoreListFont);
 	}
 
-	void ViewHighscoreGameState::Paint(Graphics* g) {
+	void ViewHighscoreMenu::Paint(Graphics* g) {
 		g->SetTextBackgroundColor(RGB(0, 0, 0));
 		g->FillStaticRect(Vector2D(0, 0), Size(800, 600),RGB(0, 0, 0));
 		g->SetTextColor(RGB(255, 255, 255));
@@ -36,13 +36,4 @@ namespace isgp {
 		g->SetTextBackgroundColor(RGB(255, 255, 255));
 	}
 
-	void ViewHighscoreGameState::Update(double elapsed) {
-	}
-
-	void ViewHighscoreGameState::KeyDown(int keyCode) {
-	}
-
-	void ViewHighscoreGameState::KeyUp(int keyCode) {
-		// Nothing to do here!
-	}
 }
