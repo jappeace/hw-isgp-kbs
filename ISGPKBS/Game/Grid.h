@@ -1,8 +1,4 @@
 #pragma once
-#ifndef MAX_TILES
-	// unit test started to fail when the number got to high on construction.
-	#define MAX_TILES 100000
-#endif
 
 #include <vector>
 #include "Tile.h"
@@ -57,9 +53,6 @@ namespace isgp {
 		// functionpointer has to be called
 		void Traverse(unsigned x, unsigned y, IGridTraveller* travellar);
 		
-		// A gaurd for the init function so It won't take etherinity to init the grid but
-		// just throw an GridToLarge exception
-		void GuardInit(unsigned width, unsigned height);
 		// comman code for both contructors
 		void Init(unsigned width, unsigned height);
 		// this function prevents the same calculation showing up in several places
