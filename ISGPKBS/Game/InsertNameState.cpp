@@ -20,6 +20,9 @@ namespace isgp {
 	}
 
 	void InsertNameState::Paint(Graphics* g) {
+		g->SetTextBackgroundColor(RGB(0, 0, 0));
+		g->FillRect(Vector2D(0, 0), Size(800, 600),RGB(0, 0, 0));
+		g->SetTextColor(RGB(255, 255, 255));
 		string nameString = _name;
 		if(_showUnderscore) {
 			nameString += "_";
@@ -42,10 +45,15 @@ namespace isgp {
 			_name = _name.substr(0, _name.length() - 1);
 		} else if(keyCode == VK_RETURN) {
 			_window->SaveScore(new Highscore(_name, _elapsedTime));
-		} else if(keyCode == 32 || keyCode == 45 || (keyCode >= 48 && keyCode<= 57) 
-				|| (keyCode >= 65 && keyCode <= 90) || (keyCode >= 97 && keyCode <= 122)) {
+		}  else {
 			if(_name.length() <= 20) {
-				_name += (char)keyCode;
+				if(keyCode == 189) {
+					_name += "-";
+				} else if((keyCode >= 48 && keyCode<= 57) || (keyCode >= 65 && keyCode <= 90) 
+					|| (keyCode >= 97 && keyCode <= 122)) {
+			
+					_name += (char)keyCode;
+				}
 			}
 		}
 	}

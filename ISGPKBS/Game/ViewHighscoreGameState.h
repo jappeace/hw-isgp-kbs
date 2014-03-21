@@ -20,6 +20,9 @@ namespace isgp {
 		int _level;
 		Highscores* _highscore;
 		PlayingGameState* _parentState;
+
+		HFONT _highscoreTitleFont;
+		HFONT _highscoreListFont;
 	};
 
 }
