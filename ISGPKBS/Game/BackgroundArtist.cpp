@@ -3,7 +3,6 @@
 namespace isgp{
 	BackgroundArtist::BackgroundArtist(Camera* cam, Level* level, SpriteCache<int>* cache)
 	{
-
 		_background = NULL;
 		_quil = NULL;
 		_cam = cam;

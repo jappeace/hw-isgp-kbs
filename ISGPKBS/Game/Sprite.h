@@ -15,6 +15,8 @@ namespace isgp {
 		HBITMAP GetMask();
 		// calls the size of bitmap
 		Size GetSize();
+		// Creates an empty mask for the alpha
+		void CreateMaskBitmap();
 		// render an alpha mask, this is a O(bitmap.width * bitmap.height) operation, beware
 		void GenerateMask();
 		void GenerateMask(Vector2D topleft, Size size);
