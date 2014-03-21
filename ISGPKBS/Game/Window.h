@@ -38,6 +38,5 @@ namespace isgp {
 		void LoadLevel();
 		void StartLevel(Level*, Camera*);
 		void ClearGameState();
-		Theme* _theme;
 	};
 }
