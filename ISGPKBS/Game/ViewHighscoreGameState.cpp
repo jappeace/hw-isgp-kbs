@@ -26,9 +26,6 @@ namespace isgp {
 	}
 
 	void ViewHighscoreGameState::KeyDown(int keyCode) {
-		if(keyCode == VK_RETURN || keyCode == VK_SPACE) {
-
-		}
 	}
 
 	void ViewHighscoreGameState::KeyUp(int keyCode) {

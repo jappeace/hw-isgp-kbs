@@ -20,6 +20,7 @@ namespace isgp {
 		_artist = new BackgroundArtist(_camera, _level);
 		_artist->RenderBackground();
 		_highscoreState = new ViewHighscoreGameState(level, this);
+		_isPaused = false;
 	}
 
 	PlayingGameState::~PlayingGameState() {
@@ -62,7 +63,7 @@ namespace isgp {
 
 	void PlayingGameState::KeyDown(int keyCode) {
 		if(_isPaused) {
-			if(keyCode == VK_RETURN || keyCode == VK_SPACE) {
+			if(keyCode == VK_RETURN || keyCode == VK_SPACE || keyCode == VK_ESCAPE) {
 				Resume();
 			}
 		} else {
