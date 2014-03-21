@@ -76,6 +76,11 @@ void Window::OnKeyUp(int which) {
 	}
 }
 
+void Window::OpenMainMenu() {
+	delete _gameState;
+	_gameState = new MainMenuState(this, &Window::FullRestart, &Window::LoadLevel, &Window::QuitGame);
+}
+
 void Window::FullRestart() {
 	_currentLevel = 1;
 	RestartGame();
