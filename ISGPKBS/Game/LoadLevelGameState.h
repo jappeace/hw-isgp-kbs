@@ -6,8 +6,8 @@ namespace isgp{
 	class Window;
 	class LoadLevelGameState : public IGameState {
 	public:
-		LoadLevelGameState(Window* parent, int levelnr, SpriteCache<int>* cache, void(Window::*startLevelCalback)(Level* level, Camera*));
-		
+		LoadLevelGameState(Window* parent, int levelnr, SpriteCache<int>* cache,
+			void(Window::*startLevelCalback)(Level* level, Camera*));
 		~LoadLevelGameState(void);
 		void Update(double elapsed) override;
 		void Paint(Graphics* g) override;
@@ -23,7 +23,6 @@ namespace isgp{
 		void(Window::*_startLevelCalback)(Level* level, Camera*);
 		void RenderSplashScreen(Graphics* graphics);
 		pair<Level*, Camera*> LoadLevel(Graphics* graphics);
+		Theme* _theme;
 	};
-
-
 }

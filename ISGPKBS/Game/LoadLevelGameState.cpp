@@ -1,8 +1,9 @@
 #include "LoadLevelGameState.h"
 #include "Window.h"
 
-namespace isgp{
-	LoadLevelGameState::LoadLevelGameState(Window* parent, int levelnr, SpriteCache<int>* cache, void(Window::*startLevelCalback)(Level*, Camera*)) {
+namespace isgp {
+	LoadLevelGameState::LoadLevelGameState(Window* parent, int levelnr,
+			SpriteCache<int>* cache, void(Window::*startLevelCalback)(Level*, Camera*)) {
 		_window = parent;
 		_cache = cache;
 		_levelnr = levelnr;
@@ -10,13 +11,12 @@ namespace isgp{
 		_startLevelCalback = startLevelCalback;
 		_loadedLevel = NULL;
 		_loadedCamera = NULL;
+		_theme = Theme::CreateTheme(_levelnr);
 	}
 
-	LoadLevelGameState::~LoadLevelGameState(void) {
-	}
+	LoadLevelGameState::~LoadLevelGameState(void) { }
 
 	void LoadLevelGameState::Paint(Graphics* graphics) {
-
 		if(!_hasDrawn){
 			RenderSplashScreen(graphics);
 			return;
@@ -26,9 +26,6 @@ namespace isgp{
 		_loadedCamera = loaded.second;
 	}
 
-	void LoadLevelGameState::KeyDown(int keyCode) { /** ignore keys */}
-	void LoadLevelGameState::KeyUp(int keyCode) { /** ignore */}
-
 	void LoadLevelGameState::Update(double elapsed) {
 		if (_loadedCamera == NULL || _loadedLevel == NULL) {
 			return;
@@ -37,18 +34,21 @@ namespace isgp{
 		(_window->*_startLevelCalback)(_loadedLevel, _loadedCamera);
 	}
 
-	void LoadLevelGameState::RenderSplashScreen(Graphics* graphics){
+	void LoadLevelGameState::KeyDown(int keyCode) { /* ignore keys */ }
+	void LoadLevelGameState::KeyUp(int keyCode) { /* ignore */ }
 
-		// disable the anoying camera
+	void LoadLevelGameState::RenderSplashScreen(Graphics* graphics) {
+		// Disable the anoying camera
 		graphics->DeleteTranslater();
 		_hasDrawn = true;
-		// render splash screen
-		graphics->DrawStr(AbstractWindow::WindowSize / Vector2D(2.5,2.2), "Loading level");
-		graphics->DrawStr(AbstractWindow::WindowSize / Vector2D(3,2), "Don't forget, this game is awesome");
+		string fileName = _theme->GetLoadPath();
+		graphics->LoadBitmapFile(fileName, false);
+		graphics->DrawBitmap(fileName,
+			Vector2D(0, 0), Size(800, 600));
 	}
 
-	pair<Level*, Camera*> LoadLevelGameState::LoadLevel(Graphics* graphics){
-		// to store results in
+	pair<Level*, Camera*> LoadLevelGameState::LoadLevel(Graphics* graphics) {
+		// To store results in
 		pair<Level*, Camera*> result;
 
 		// Load common level assets
@@ -60,17 +60,16 @@ namespace isgp{
 
 		// Load Level
 		graphics->SetTranslator(_window->_cam);
-		Theme* theme = Theme::CreateTheme(_levelnr);
-		theme->LoadContent(graphics);
-		result.first = DefaultlevelFactory().CreateLevel(_levelnr, theme);
-		BackgroundArtist artist = BackgroundArtist(_window->_cam, result.first, /* out */_cache);
-		artist.RenderBackground(); // wil handle caching by itself
+		result.first = DefaultlevelFactory().CreateLevel(_levelnr, _theme);
+		result.second = new Camera(result.first->_player, result.first->GetGrid());
+		BackgroundArtist artist = BackgroundArtist(result.second, result.first, /* out */_cache);
+		_theme->LoadContent(graphics);
+		artist.RenderBackground(); // Will handle caching by itself
 
 		graphics->SetTextBackgroundColor(RGB(255, 255, 255));
-		result.second = new Camera(result.first->_player, result.first->GetGrid());
 		graphics->SetTranslator(result.second);
 
-		// returns a copy of the pointer pair
+		// Returns a copy of the pointer pair
 		return result;
 	}
 }

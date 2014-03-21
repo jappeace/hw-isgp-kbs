@@ -8,6 +8,7 @@
 namespace isgp{
 
 	Theme* Theme::CreateTheme(int nr){
+		return new Theme4();
 		switch(nr) {
 		case 1:
 			return new Theme1();
