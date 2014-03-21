@@ -1,4 +1,5 @@
 #include "BackgroundArtist.h"
+#include "PlayingGameState.h"
 
 namespace isgp{
 	BackgroundArtist::BackgroundArtist(Camera* cam, Level* level, SpriteCache<int>* cache)
@@ -46,13 +47,10 @@ namespace isgp{
 	}
 	void BackgroundArtist::Paint(Graphics* g) {
 		g->DrawSprite(_background,_cam->ToFrom(Vector2D()), _cam->GetPosition() - Vector2D(384,384), Size(AbstractWindow::WindowSize));
+		
 	}
 	void BackgroundArtist::ReceiveTile(Tile* tile) {
-#ifdef _DEBUG
-		Vector2D position = *tile->GetPosition() * Level::tileSize;
-		_quil->DrawLine(position, position + Vector2D(Level::tileSize.GetWidth(), 0));
-		_quil->DrawLine(position, position + Vector2D(0, Level::tileSize.GetHeight()));
-#endif
+
 		tile->Paint(_quil);
 	}
 

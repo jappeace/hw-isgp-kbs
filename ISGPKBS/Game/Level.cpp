@@ -2,6 +2,7 @@
 #include "CollisionHelper.h"
 #include "GridGraphicTranslator.h"
 #include "Level.h"
+#include "PlayingGameState.h"
 
 namespace isgp{
 // default amount of tiles in level
@@ -65,13 +66,34 @@ const Size	Level::tileSize = Size(TILE_WIDTH, TILE_HEIGHT);
 
 	void Level::Paint(Graphics* g) {
 		finish->Paint(g);
-		_player->Paint(g);
+		
 		// Update entities.
+
 		for (auto it = entities.begin(); it != entities.end(); ++it) {
 			(*it)->Paint(g);
 		}
+		if(PlayingGameState::_debugMode)
+	{
+		double tileSize = TILE_WIDTH;
+		double height = _grid->GetSize()->Y()*tileSize;
+		
+		double width = _grid->GetSize()->X()*tileSize;
+		for(double i = tileSize; i<width;i+=tileSize)
+		{
+			g->DrawLine(Vector2D(i,0.0),Vector2D(i,height));
+		}
+		
+		for(double i = tileSize; i<height;i+=tileSize)
+		{
+			g->DrawLine(Vector2D(0.0,i),Vector2D(width,i));
+		}
+
+
+		
+	}
+		_player->Paint(g);
 		string elapsed = TimeFormatter::FormatTime(_timePlayed);
-		g->DrawStr(Vector2D(60, 60), elapsed);
+		g->DrawStr(Vector2D(730,10), elapsed);
 	}
 
 	bool Level::IsFinished() {

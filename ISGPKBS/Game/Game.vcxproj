@@ -105,6 +105,7 @@
     <ClCompile Include="Size.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="SpriteCache.cpp" />
     <ClCompile Include="SpriteGraphics.cpp" />
     <ClCompile Include="Theme.cpp" />
     <ClCompile Include="Theme1.cpp" />

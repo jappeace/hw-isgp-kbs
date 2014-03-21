@@ -30,7 +30,6 @@ namespace isgp {
 	private:
 		int _currentLevel;
 		void ClientResize(HWND hWnd, int nWidth, int nHeight);
-		IMenu* _currentMenu;
 		IGameState* _gameState;
 		SpriteCache<int>* _levelTileSnapshots;
 		void RestartGame();
