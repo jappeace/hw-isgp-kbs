@@ -6,6 +6,7 @@ namespace isgp {
 		_tilePath = "../tiles/ground2.bmp";
 		_bg1 = "../tiles/bg3.bmp";
 		_bg2 = "../tiles/bg3Bottom.bmp";
+		_loadFilePath = "../tiles/theme3.bmp";
 	}
 
 	Theme3::~Theme3(void)
@@ -14,6 +15,7 @@ namespace isgp {
 	}
 
 	void Theme3::LoadContent(Graphics* g) {
+		g->LoadBitmapFile(_tilePath);
 		g->LoadBitmapFile(_bg1);
 		g->LoadBitmapFile(_bg2);
 	}

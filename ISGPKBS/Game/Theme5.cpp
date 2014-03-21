@@ -8,6 +8,7 @@ namespace isgp {
 		_bg2 = "../tiles/mbg2.bmp";
 		_bg3 = "../tiles/mbg3.bmp";
 		_bg4 = "../tiles/mbg4.bmp";
+		_loadFilePath = "../tiles/theme5.bmp";
 	}
 
 	Theme5::~Theme5(void)
@@ -16,8 +17,11 @@ namespace isgp {
 	}
 
 	void Theme5::LoadContent(Graphics* g) {
+		g->LoadBitmapFile(_tilePath);
 		g->LoadBitmapFile(_bg1);
 		g->LoadBitmapFile(_bg2);
+		g->LoadBitmapFile(_bg3);
+		g->LoadBitmapFile(_bg4);
 	}
 
 	void Theme5::SetWidth(double width) {

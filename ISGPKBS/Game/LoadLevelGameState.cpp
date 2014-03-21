@@ -31,7 +31,7 @@ namespace isgp {
 		// Disable the anoying camera
 		graphics->DeleteTranslater();
 		_hasDrawn = true;
-		string fileName = "..\\tiles\\theme3.bmp";
+		string fileName = _theme->GetLoadPath();
 		graphics->LoadBitmapFile(fileName, false);
 		graphics->DrawBitmap(fileName,
 			Vector2D(0, 0), Size(800, 600));
@@ -43,11 +43,12 @@ namespace isgp {
 
 		graphics->SetTranslator(_window->_cam);
 		result.first = DefaultlevelFactory().CreateLevel(_levelnr, _theme);
-		BackgroundArtist artist = BackgroundArtist(_window->_cam, result.first, /* out */_cache);
+		result.second = new Camera(result.first->_player, result.first->GetGrid());
+		BackgroundArtist artist = BackgroundArtist(result.second, result.first, /* out */_cache);
+		_theme->LoadContent(graphics);
 		artist.RenderBackground(); // Will handle caching by itself
 
 		graphics->SetTextBackgroundColor(RGB(255, 255, 255));
-		result.second = new Camera(result.first->_player, result.first->GetGrid());
 		graphics->SetTranslator(result.second);
 
 		// Returns a copy of the pointer pair
