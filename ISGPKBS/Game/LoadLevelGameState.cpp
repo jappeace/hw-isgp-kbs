@@ -31,10 +31,11 @@ namespace isgp {
 		// Disable the anoying camera
 		graphics->DeleteTranslater();
 		_hasDrawn = true;
-		string fileName = ".\\tiles\\theme2.bmp";
+		string fileName = "..\\tiles\\theme3.bmp";
 		graphics->LoadBitmapFile(fileName, false);
 		graphics->DrawBitmap(fileName,
-			Vector2D(0, 0), Vector2D(0, 0), Size(800, 600));
+			Vector2D(0, 0), Size(800, 600));
+		graphics->DrawStr(Vector2D(100, 100), "LOADING");
 	}
 
 	pair<Level*, Camera*> LoadLevelGameState::LoadLevel(Graphics* graphics) {
