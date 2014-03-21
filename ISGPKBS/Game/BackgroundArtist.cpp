@@ -4,7 +4,6 @@
 namespace isgp{
 	BackgroundArtist::BackgroundArtist(Camera* cam, Level* level, SpriteCache<int>* cache)
 	{
-
 		_background = NULL;
 		_quil = NULL;
 		_cam = cam;
@@ -42,7 +41,6 @@ namespace isgp{
 		_quil->BeginRendering();
 		_level->GetGrid()->TraverseTiles(this);
 		_quil->EndRendering();
-		_background->GenerateMask(); // this call is actualy most work, but it allows transparancy
 
 		// fill the cache, to speed up loading
 		(*_cache)[_level->GetStageNumber()] = _background;
