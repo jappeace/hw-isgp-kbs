@@ -48,14 +48,14 @@ namespace isgp {
 	HBITMAP Sprite::GetMask() {
 		return _mask;
 	}
-	void Sprite::GenerateMask(){
-		BITMAP from = DereferenceBitmap(_image);
+
+	void Sprite::GenerateMask(Vector2D topleft, Size size){
 		HDC sourceHDC = CreateCompatibleDC(NULL);
 		SelectObject(sourceHDC, this->_image);
 
 		// Create variables to create the mask
 		HDC maskHDC = CreateCompatibleDC(NULL);
-		this->_mask = CreateCompatibleBitmap(maskHDC, from.bmWidth, from.bmHeight);
+		this->_mask = CreateCompatibleBitmap(maskHDC, size.GetWidth(), size.GetHeight());
 		SelectObject(maskHDC, this->_mask);
 
 		// Define some constants which contain the values for transparancy correction.
@@ -64,8 +64,8 @@ namespace isgp {
 		static const int kBlack          = kOverwriteColor; // The hex value of the color black
 
 		// Generate alpha-mask and overwrite image pixels if needed.
-		for (int y = 0; y < from.bmHeight; ++y) {
-			for (int x = 0; x < from.bmWidth; ++x) {
+		for (int y = (int)topleft.Y(); y < (int)size.GetHeight(); ++y) {
+			for (int x = (int)topleft.X(); x < (int)size.GetWidth(); ++x) {
 				int color = GetPixel(sourceHDC, x, y);
 				if (color == kKeyColor) {
 					SetPixel(sourceHDC, x, y, kBlack); // Set to BLACK to prevent any color merging to happen
@@ -79,6 +79,10 @@ namespace isgp {
 		// Clean up no longer needed resources
 		DeleteDC(sourceHDC);
 		DeleteDC(maskHDC);
+	}
+	void Sprite::GenerateMask(){
+		BITMAP from = DereferenceBitmap(_image);
+		GenerateMask(Vector2D(), Size(from.bmWidth, from.bmHeight));
 	}
 	Size Sprite::GetSize(){
 		BITMAP b = DereferenceBitmap(this->_image);

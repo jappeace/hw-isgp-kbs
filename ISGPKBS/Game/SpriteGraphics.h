@@ -17,9 +17,11 @@ namespace isgp {
 		void BeginRendering() override;
 		// Ends the sprite rendering, releases the lock so the sprite can be drawn on other stuff
 		void EndRendering() override;
+		void DrawSprite(Sprite* sprite, Vector2D position, Vector2D& offset, Size& size) override;
 	protected:
 		HDC getHDC() override;
 	private:
 		Sprite* _target;
+		HDC _maskHdc;
 	};
 }

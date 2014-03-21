@@ -64,7 +64,7 @@ namespace isgp {
 		void DrawBitmap(string path, Vector2D& position, Vector2D& offset, Size& size);
 
 		// draw a sprite from memory instead of path
-		void DrawSprite(Sprite* sprite, Vector2D position, Vector2D& offset, Size& size);
+		virtual void DrawSprite(Sprite* sprite, Vector2D position, Vector2D& offset, Size& size);
 
 		void DrawLine(Vector2D one,Vector2D two);
 		void DeleteTranslater(void);

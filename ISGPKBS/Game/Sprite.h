@@ -17,6 +17,7 @@ namespace isgp {
 		Size GetSize();
 		// render an alpha mask, this is a O(bitmap.width * bitmap.height) operation, beware
 		void GenerateMask();
+		void GenerateMask(Vector2D topleft, Size size);
 		COLORREF GetTransparant();
 		static BITMAP DereferenceBitmap(HBITMAP);
 	private:
