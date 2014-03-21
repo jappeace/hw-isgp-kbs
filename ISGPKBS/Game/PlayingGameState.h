@@ -5,18 +5,24 @@
 #include "Camera.h"
 #include "Window.h"
 #include "BackgroundArtist.h"
+#include "ViewHighscoreGameState.h"
 
 namespace isgp {
+	class ViewHighscoreGameState;
+
 	class PlayingGameState : public IGameState {
 	public:
-		PlayingGameState(Window* window, Level* level, Camera*, void(Window::*gameOver)());
+		PlayingGameState(Window* window, Level* level, Camera*, void(Window::*gameOver)(), int levelNumber);
 		~PlayingGameState();
 		void Paint(Graphics* g) override;
 		void Update(double elapsed) override;
 
 		void KeyDown(int keyCode) override;
 		void KeyUp(int keyCode) override;
+
 		static bool _debugMode;
+		void Pause();
+		void Resume();
 	private:
 		Level* _level;
 		Camera* _camera;
@@ -24,5 +30,7 @@ namespace isgp {
 		int _currentLevel;
 		void(Window::*_gameOver)();
 		BackgroundArtist* _artist;
+		bool _isPaused;
+		ViewHighscoreGameState* _highscoreState;
 	};
 }
