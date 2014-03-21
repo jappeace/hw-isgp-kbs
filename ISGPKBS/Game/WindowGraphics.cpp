@@ -36,7 +36,7 @@ namespace isgp {
 	void WindowGraphics::EndRendering() {
 		this->_fpsCounter.Update();
 		SetTextColor(RGB(0, 0, 0));
-		DrawStr(Vector2D(10, 10), "FPS: " + StrConverter::IntToString(this->_fpsCounter.Get()));
+		//DrawStr(Vector2D(10, 10), "FPS: " + StrConverter::IntToString(this->_fpsCounter.Get()));
 
 		// Blit the new frame to the screen
 		BitBlockTransfer(_paintStructure->hdc, Vector2D(), AbstractWindow::WindowSize, this->_backBuffer, Vector2D(), SRCCOPY);

@@ -31,11 +31,8 @@ namespace isgp {
 		// Disable the anoying camera
 		graphics->DeleteTranslater();
 		_hasDrawn = true;
-		// Render splash screen
-		graphics->DrawStr(AbstractWindow::WindowSize / Vector2D(2.5,2.2),
-			"Loading level");
-		graphics->DrawStr(AbstractWindow::WindowSize / Vector2D(3,2),
-			"Don't forget, this game is awesome");
+		graphics->DrawBitmap(".\\tiles\\theme2.bmp",
+			Vector2D(0, 0), Vector2D(0, 0), Size(800, 600));
 	}
 
 	pair<Level*, Camera*> LoadLevelGameState::LoadLevel(Graphics* graphics) {

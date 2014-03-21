@@ -40,18 +40,26 @@ namespace isgp {
 
 		//Draw sky
 		Camera* cam = (Camera*)g->GetTranslator();
+		double x, y;
+		if (cam) {
+			x = cam->GetPosition().X();
+			y = cam->GetPosition().Y();
+		} else {
+			x = 0;
+			y = 0;
+		}
 		for (int i = 0; i < width1; i += imgWidth) {
 			g->DrawBitmap(_bg1,
-				Vector2D(((cam->GetPosition().X() - fix.X()) * 0.5) + i,
-				(cam->GetPosition().Y() - fix.Y()) * 0.5),
+				Vector2D(((x - fix.X()) * 0.5) + i,
+				(y - fix.Y()) * 0.5),
 				Size(imgWidth, imgHeight1));
 		}
 
 		//Draw ground
 		for (int i = 0; i < width2; i += imgWidth) {
 			g->DrawBitmap(_bg2,
-				Vector2D(((cam->GetPosition().X() - fix.X()) * 0.25) + i,
-				(cam->GetPosition().Y() + 2000) * 0.25),
+				Vector2D(((x - fix.X()) * 0.25) + i,
+				(y + 2000) * 0.25),
 				Size(imgWidth, imgHeight2));
 		}
 	}
