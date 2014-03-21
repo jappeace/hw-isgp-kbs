@@ -181,6 +181,7 @@ namespace isgp{
 	{
 		OutputLevel(currentLevel);
 		get_size(theme);
+		level->SetStageNumber(currentLevel);
 
 		return level;
 	}

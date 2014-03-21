@@ -9,6 +9,8 @@ namespace isgp {
 		_levelnr = levelnr;
 		_hasDrawn = false;
 		_startLevelCalback = startLevelCalback;
+		_loadedLevel = NULL;
+		_loadedCamera = NULL;
 		_theme = Theme::CreateTheme(_levelnr);
 	}
 
@@ -20,12 +22,20 @@ namespace isgp {
 			return;
 		}
 		pair<Level*, Camera*> loaded = LoadLevel(graphics);
-		(_window->*_startLevelCalback)(loaded.first, loaded.second);
+		_loadedLevel = loaded.first;
+		_loadedCamera = loaded.second;
+	}
+
+	void LoadLevelGameState::Update(double elapsed) {
+		if (_loadedCamera == NULL || _loadedLevel == NULL) {
+			return;
+		}
+
+		(_window->*_startLevelCalback)(_loadedLevel, _loadedCamera);
 	}
 
 	void LoadLevelGameState::KeyDown(int keyCode) { /* ignore keys */ }
 	void LoadLevelGameState::KeyUp(int keyCode) { /* ignore */ }
-	void LoadLevelGameState::Update(double elapsed) { /* ignore */ }
 
 	void LoadLevelGameState::RenderSplashScreen(Graphics* graphics) {
 		// Disable the anoying camera
@@ -41,6 +51,14 @@ namespace isgp {
 		// To store results in
 		pair<Level*, Camera*> result;
 
+		// Load common level assets
+		graphics->LoadBitmapFile("../tiles/jumpPad.bmp");
+		graphics->LoadBitmapFile("../tiles/link.bmp");
+		graphics->LoadBitmapFile("../tiles/megaman.bmp");
+		graphics->LoadBitmapFile("../tiles/boo.bmp");
+		graphics->LoadBitmapFile("../tiles/toad.bmp");
+
+		// Load Level
 		graphics->SetTranslator(_window->_cam);
 		result.first = DefaultlevelFactory().CreateLevel(_levelnr, _theme);
 		result.second = new Camera(result.first->_player, result.first->GetGrid());
