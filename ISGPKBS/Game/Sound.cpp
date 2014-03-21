@@ -36,9 +36,9 @@ void Sound::Play(int ID)
 		return ;
 		}
 		
-	case CHANGE_DIREC:
+	case JUMP_PLATFORM:
 		{
-		PlaySound(TEXT("CHANGE_DIREC.wav"),GetModuleHandle(NULL),SND_FILENAME|SND_ASYNC);
+		PlaySound(TEXT("JUMP_PLATFORM.wav"),GetModuleHandle(NULL),SND_FILENAME|SND_ASYNC);
 		return ;
 		}
 	}

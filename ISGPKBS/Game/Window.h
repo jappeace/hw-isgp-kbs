@@ -43,6 +43,7 @@ namespace isgp {
 		void QuitGame();
 		void GameOver();
 		void LoadLevel();
+		Highscores _highscores;
 		void StartLevel(Level*, Camera*);
 		void ClearGameState();
 	};

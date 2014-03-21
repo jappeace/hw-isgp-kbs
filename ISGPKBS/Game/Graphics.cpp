@@ -19,7 +19,7 @@ namespace isgp {
 
 	void Graphics::DeleteTranslater(){
 		if(_translator){
-			delete _translator;
+			//delete _translator;
 		}
 		_translator = NULL;
 	}
