@@ -1,6 +1,6 @@
 #include "Entity.h"
 #include "GridGraphicTranslator.h"
-
+#include "PlayingGameState.h"
 namespace isgp {
 
 	Entity::Entity() {
@@ -117,9 +117,10 @@ namespace isgp {
 		int xCol = Collides(x, 0);
 		int yCol = Collides(0, y);
 
-#ifdef _DEBUG
+if(PlayingGameState::_debugMode)
+{
 		Collides(x, y);
-#endif
+}
 
 		collision = (xCol & (Left | Right)) | (yCol & (Up | Down));
 	}

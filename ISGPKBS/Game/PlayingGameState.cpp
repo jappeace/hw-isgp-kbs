@@ -6,7 +6,10 @@
 #include <Windows.h>
 
 namespace isgp {
-	PlayingGameState::PlayingGameState(Window* window, Level* level, Camera* camera, void(Window::*gameOver)()) {
+	bool PlayingGameState::_debugMode=false;
+	PlayingGameState::PlayingGameState(Window* window, Level* level, Camera* camera,
+		void(Window::*gameOver)()) {
+
 		_window = window;
 		_gameOver = gameOver;
 		_level = level;
@@ -54,6 +57,11 @@ namespace isgp {
 		case VK_SPACE:
 			_level->_player->_spaceKey = true;
 			break;
+		case VK_F1:
+			if(PlayingGameState::_debugMode)
+				PlayingGameState::_debugMode=false;
+			else
+				PlayingGameState::_debugMode=true;
 		}
 	}
 

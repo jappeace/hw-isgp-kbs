@@ -15,6 +15,7 @@ namespace isgp {
 	private:
 		// the sprite that will be renderd for this block
 		static ITranslator* _gridToGraphics;
+		
 		string _texturePath;
 		Tile* _containingTile;
 	};
