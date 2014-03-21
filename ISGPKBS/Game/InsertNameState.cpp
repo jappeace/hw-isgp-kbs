@@ -29,7 +29,7 @@ namespace isgp {
 		}
 		g->DrawStr(Vector2D(220, 140), "New highscore!", _font);
 		g->DrawStr(Vector2D(330, 200), "Name:", _font);
-		g->DrawStr(Vector2D(400 - (_name.length() * 15), 260), nameString, _font);
+		g->DrawStr(Vector2D(400 - ((_name.length() + 1) * 15), 260), nameString, _font);
 		g->SetTextBackgroundColor(RGB(255, 255, 255));
 	}
 

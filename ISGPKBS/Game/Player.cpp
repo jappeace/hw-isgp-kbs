@@ -149,6 +149,8 @@ const Size Player::InitSize(32, 32);
 		} else {
 			g->DrawRect(Vector2D(_position.X(), _position.Y() + 8), Vector2D(_position.X() - 8, _position.Y() + 16));
 		}
+
+		g->DrawStr(GetPosition() - Vector2D(GetSize()->X() / 2, 10.0), "X: " + StrConverter::IntToString((int)GetPosition().X()) + ", Y: " + StrConverter::IntToString((int)GetPosition().Y()));
 	}
 		static int const kSpriteSize = 32;
 

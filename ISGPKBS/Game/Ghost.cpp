@@ -67,6 +67,7 @@ namespace isgp {
 		if (!_facingRight) {
 			offset.Y(32);
 		}
+
 		_animation->Render(g, _position, offset);
 	}
 }
