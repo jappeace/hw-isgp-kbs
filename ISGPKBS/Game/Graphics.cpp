@@ -86,6 +86,9 @@ namespace isgp {
 		// pass into the static method
 		Graphics::FillRect(getHDC(), position, size, color);
 	}
+	void Graphics::FillStaticRect(Vector2D position, const Size& size, COLORREF color){
+		Graphics::FillRect(getHDC(), position, size, color);
+	}
 	void Graphics::FillRect(HDC hdc, Vector2D position, const Size& size, COLORREF color){
 		RECT r;
 		r.left = (LONG)position.X();

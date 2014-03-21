@@ -21,7 +21,7 @@ namespace isgp {
 
 	void ViewHighscoreGameState::Paint(Graphics* g) {
 		g->SetTextBackgroundColor(RGB(0, 0, 0));
-		g->FillRect(Vector2D(0, 0), Size(800, 600),RGB(0, 0, 0));
+		g->FillStaticRect(Vector2D(0, 0), Size(800, 600),RGB(0, 0, 0));
 		g->SetTextColor(RGB(255, 255, 255));
 		g->DrawStr(Vector2D(240, 100), "Highscores", _highscoreTitleFont);
 

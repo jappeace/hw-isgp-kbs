@@ -54,7 +54,7 @@ namespace isgp {
 		void DrawRect(Vector2D one, Vector2D two);
 		void DrawRect(int xone, int yone, int xtwo, int ytwo);
 		void DrawStaticRect(Vector2D& one, Vector2D& two);
-
+		void FillStaticRect(Vector2D position, const Size& size, COLORREF color);
 		void FillRect(Vector2D position, const Size& size, COLORREF color);
 		// Draws a bitmap at the given position with the default tile size
 		void DrawBitmap(string path, Vector2D& position);
