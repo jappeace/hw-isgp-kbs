@@ -87,13 +87,14 @@ void Window::FullRestart() {
 void Window::NextLevel(double playtime) {
 	Sound().Play(END_WIN);
 
-	_highscores = Highscores(_currentLevel);
+	Highscores _highscores = Highscores(_currentLevel);
 	_highscores.LoadHighscores();
 
 	if(_highscores.IsHighscore(playtime)) {
-		_highscores.InsertHighscore(Highscore("naam", playtime));
+		_highscores.InsertHighscore(new Highscore("naam", playtime));
 	}
 	_highscores.SaveHighscores();
+
 
 	_currentLevel++;
 	if(DefaultlevelFactory().LevelExists(_currentLevel)) {

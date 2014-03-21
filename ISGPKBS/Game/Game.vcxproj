@@ -64,6 +64,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Finish.h" />
+    <ClInclude Include="Highscore.h" />
+    <ClInclude Include="Highscores.h" />
     <ClInclude Include="ListMenu.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="MainMenuState.h" />

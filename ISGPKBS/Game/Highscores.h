@@ -13,14 +13,15 @@ namespace isgp {
 		Highscores();
 		~Highscores(void);
 		
-		vector<Highscore> GetHighscores();
+		vector<Highscore*>* GetHighscores();
 		void SaveHighscores();
 		void LoadHighscores();
 		bool IsHighscore(double time);
-		void InsertHighscore(Highscore h);
+		void InsertHighscore(Highscore* h);
 		bool FileExists();
 	private:
-		vector<Highscore> _highscores;
+		void Init();
+		vector<Highscore*>* _highscores;
 		int _level;
 	};
 

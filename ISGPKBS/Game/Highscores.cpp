@@ -4,18 +4,25 @@ namespace isgp {
 Highscores::Highscores(int level)
 {
 	_level = level;
-	for(unsigned i = 0; i < 5; i++) {
-		_highscores.push_back(Highscore("None", DBL_MAX));
-	}
-	LoadHighscores();
+	Init();
+
 }
 
 
 Highscores::~Highscores(void)
 {
+	for(unsigned i = 0; i < _highscores->size(); i++)
+		delete _highscores->at(i);
+	delete _highscores;
 }
 
-Highscores::Highscores() {}
+Highscores::Highscores() {
+	Init();
+}
+
+void Highscores::Init() {
+	_highscores = new vector<Highscore*>();
+}
 
 bool Highscores::FileExists() {
 	ifstream f("./highscores/" + StrConverter::IntToString(_level) + ".highscore");
@@ -31,14 +38,17 @@ bool Highscores::FileExists() {
 void Highscores::LoadHighscores() {
 	if(!FileExists())
 		return;
-	_highscores.clear();
+	_highscores->clear();
 	std::ifstream input("./highscores/" + StrConverter::IntToString(_level) + ".highscore");
-	for(unsigned i = 0; i < 5; i++) {
+
+	while (true) {
 		string name;
-		double time;
-		input >> name >> time;
-		Highscore h(name, time);
-		this->InsertHighscore(h);
+		int time;
+		input >> name;
+		input >> time;
+		this->InsertHighscore(new Highscore(name, time/1000));
+		if( input.eof() ) break;
+		
 	}
 }
 
@@ -47,38 +57,41 @@ void Highscores::SaveHighscores() {
 	f.open(("./highscores/" + StrConverter::IntToString(_level) + ".highscore"), ios_base::in|ios_base::out|ios_base::trunc );
 	f.seekg(0, std::ios::end);
 	f.seekg(0, std::ios::beg);
-	for(unsigned i = 0; i < _highscores.size(); i++) {
-		Highscore hs = _highscores.at(i);
-		f << hs.GetName() << "\n" << hs.GetTime() << "\n";
+	for(unsigned i = 0; i < _highscores->size(); i++) {
+		Highscore* hs = _highscores->at(i);
+		f << hs->GetName() << "\n" << (int)(hs->GetTime() * 1000) << "\n";
 	}
 	f.flush();
 	f.close();
 }
 
-bool HighscoreSort(Highscore h1, Highscore h2) {
-	return h1.GetTime() < h2.GetTime();
+bool HighscoreSort(Highscore* h1, Highscore* h2) {
+	return h1->GetTime() < h2->GetTime();
 }
 
-void Highscores::InsertHighscore(Highscore highscore) {
-	if(!IsHighscore(highscore.GetTime())) {
+void Highscores::InsertHighscore(Highscore* highscore) {
+	double time = highscore->GetTime();
+	if(!this->IsHighscore(time)) {
 		return;
 	}
 
-	_highscores.push_back(highscore);
-	std::sort(_highscores.begin(), _highscores.end(), HighscoreSort);
-	_highscores.resize(5);
+	_highscores->push_back(highscore);
+	std::sort(_highscores->begin(), _highscores->end(), HighscoreSort);
+	if(_highscores->size() > 5) {
+		_highscores->resize(5);
+	}
 }
 
 
 
 bool Highscores::IsHighscore(double time) {
-	if(_highscores.size() == 0)
+	if(_highscores->size() < 5)
 		return true;
-	Highscore last = _highscores.back();
-	return last.GetTime() > time;
+	Highscore* last = _highscores->back();
+	return last->GetTime() > time;
 }
 
-vector<Highscore> Highscores::GetHighscores() {
+vector<Highscore*>* Highscores::GetHighscores() {
 	return _highscores;
 }
 
