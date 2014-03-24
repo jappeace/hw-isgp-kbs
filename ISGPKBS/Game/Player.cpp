@@ -138,6 +138,7 @@ const Size Player::InitSize(32, 32);
 			g->DrawRect(Vector2D((int)p->X(), (int)p->Y()), Vector2D((int)p->X() + 16, (int)p->Y() + 16));
 		}
 		g->SetColor(RGB(0, 0, 0));
+		g->DrawStr(Vector2D(10, 25), "Collision:");
 		g->DrawStr(Vector2D(10, 40), collision & Up ? "Up: true" : "Up: false");
 		g->DrawStr(Vector2D(10, 55), collision & Down ? "Down: true" : "Down: false");
 		g->DrawStr(Vector2D(10, 70), collision & Left ? "Left: true" : "Left: false");
@@ -149,8 +150,6 @@ const Size Player::InitSize(32, 32);
 		} else {
 			g->DrawRect(Vector2D(_position.X(), _position.Y() + 8), Vector2D(_position.X() - 8, _position.Y() + 16));
 		}
-
-		g->DrawStr(GetPosition() - Vector2D(GetSize()->X() / 2, 10.0), "X: " + StrConverter::IntToString((int)GetPosition().X()) + ", Y: " + StrConverter::IntToString((int)GetPosition().Y()));
 	}
 		static int const kSpriteSize = 32;
 

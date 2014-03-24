@@ -109,9 +109,6 @@ namespace isgp {
 				g->DrawRect(Vector2D((int)p->X(), (int)p->Y()), Vector2D((int)p->X() + 16, (int)p->Y() + 16));
 			}
 			g->SetColor(RGB(0, 0, 0));
-			g->DrawStr(GetPosition() - Vector2D(GetSize()->X() / 2, 10.0),
-				"X: " + StrConverter::IntToString((int)GetPosition().X())
-				+ ", Y: " + StrConverter::IntToString((int)GetPosition().Y()));
 		}
 
 		static int const kSpriteSize = 32;
