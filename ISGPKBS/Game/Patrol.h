@@ -8,8 +8,8 @@
 #include "Player.h"
 
 namespace isgp {
-	class Patrol : public Entity
-	{
+	// A simple enemy that walks to the left and right.
+	class Patrol : public Entity {
 	public:
 		Patrol(Vector2D, int, Player*);
 		~Patrol();

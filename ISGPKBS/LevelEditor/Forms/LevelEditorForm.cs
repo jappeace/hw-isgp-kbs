@@ -186,15 +186,15 @@ namespace LevelEditor.Forms
 			ChangeType();
 		}
 
-        private void gravityBootsRadio_CheckedChanged(object sender, EventArgs e)
-        {
-            ChangeType();
-        }
+		private void gravityBootsRadio_CheckedChanged(object sender, EventArgs e)
+		{
+			ChangeType();
+		}
 
-        private void jumpPlatformRadio_CheckedChanged(object sender, EventArgs e)
-        {
-            ChangeType();
-        }
+		private void jumpPlatformRadio_CheckedChanged(object sender, EventArgs e)
+		{
+			ChangeType();
+		}
 
 		private void ChangeType()
 		{
@@ -209,15 +209,15 @@ namespace LevelEditor.Forms
 			else if (patrolRadio.Checked)
 			{
 				levelPanel.SelectedType = GridObjectType.Patrol;
-			} 
-            else if (gravityBootsRadio.Checked)
+			}
+			else if (gravityBootsRadio.Checked)
 			{
-                levelPanel.SelectedType = GridObjectType.GravityBoots;
-            }
-            else if (jumpPlatformRadio.Checked)
-            {
-                levelPanel.SelectedType = GridObjectType.JumpPlatform;
-            }
+				levelPanel.SelectedType = GridObjectType.GravityBoots;
+			}
+			else if (jumpPlatformRadio.Checked)
+			{
+				levelPanel.SelectedType = GridObjectType.JumpPlatform;
+			}
 
 			if (levelPanel.SelectedPoint.X != -1)
 			{
