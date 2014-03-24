@@ -86,12 +86,16 @@ namespace isgp{
 			strcpy_s(v_for,30,v[k].c_str());
 			result = strtok_s(v_for,"=",&m);
 			
-			if(0==strcmp(m,"ghost"))
+			if(0==strcmp(m,"ghost")) {
 				ghost.push_back(string(v[k]));
+			}
 			else if(0==strcmp(m,"tile"))
 				tile.push_back(string(v[k]));
-			else if(0==strcmp(m,"patrol"))
+			else if(0==strcmp(m,"patrol")) {
 				patrol.push_back(string(v[k]));
+				patrol.push_back(string(v[k + 1])); // Contains the range.
+				k++; // Skip the next line, because it will contain the range.
+			}
 			else if(0==strcmp(m, "jumpplatform"))
 				jumpplatform.push_back(string(v[k]));
 			else if(0==strcmp(m, "gravityboots")) 
@@ -127,16 +131,17 @@ namespace isgp{
 		}
 
 		int patrol_size = patrol.size();
+		int patrol_range;
 		Entity * patrol2;
-		for(int n=0;n< patrol_size;n++)
+		for(int n=0;n< patrol_size;n+=2)
 		{
 			patrol_X= atoi(patrol[n].c_str());
 			strcpy_s(v_for,30,patrol[n].c_str());
 			result=strtok_s(v_for,",",&m);
 			patrol_Y=atoi(m);
-			//
+			patrol_range = atoi(patrol[n + 1].c_str());
 
-			patrol2 = new Patrol(fromto.FromTo(Vector2D(patrol_X,patrol_Y)),100,level->_player);
+			patrol2 = new Patrol(fromto.FromTo(Vector2D(patrol_X,patrol_Y)),patrol_range,level->_player);
 			patrol2->SetGrid(level->GetGrid());
 			level->entities.push_back(patrol2); 
 			
@@ -154,7 +159,6 @@ namespace isgp{
 			gadget = new GadgetGravityBoots(fromto.FromTo(Vector2D(patrol_X,patrol_Y)),level->_player);
 			gadget->SetGrid(level->GetGrid());
 			level->entities.push_back(gadget); 
-			
 		}
 
 		gadget_size = jumpplatform.size();
@@ -170,11 +174,7 @@ namespace isgp{
 			gadget = new GadgetJumpPlatform(fromto.FromTo(Vector2D(patrol_X,patrol_Y)),level->_player);
 			gadget->SetGrid(level->GetGrid());
 			level->entities.push_back(gadget); 
-			
 		}
-	//tile, ghost, patrol 있음. 캄 vector 에 ghost가 몇번째에나오는지 확인하고. 그전까지 나온 거를 다 좌표로저장하기 위에처럼
-		//마찬가지로 patrol 나오기전까지 ghost 나온거를 다 좌표로 저장해서 무슨 2d 거기로넘겨야됨.
-
 }
 
 	Level *DefaultlevelFactory::CreateLevel(int currentLevel, Theme* theme)

@@ -51,49 +51,49 @@ namespace LevelEditor.Forms
 			_selectedPen = new Pen(Color.Blue, GridLineWidth * 2);
 			Scroll += OnScroll;
 			MouseClick += levelPanel_MouseClick;
-		    MouseMove += LevelPanel_MouseMove;
-		    MouseDown += LevelPanel_MouseDown;
-		    MouseUp += LevelPanel_MouseUp;
+			MouseMove += LevelPanel_MouseMove;
+			MouseDown += LevelPanel_MouseDown;
+			MouseUp += LevelPanel_MouseUp;
 		}
 
-        private bool _mouseDown = false;
+		private bool _mouseDown = false;
 
-	    private void levelPanel_MouseClick(object sender, MouseEventArgs e)
-	    {
-	        if (_level == null)
-	        {
-	            return;
-	        }
-	        if (e.Button == MouseButtons.Left)
-	        {
-	            if (MouseAction == MouseAction.Select)
-	            {
-	                Point pos = PanelToGridLocation(e.Location);
-	                if (pos.X < Level.Width && pos.Y < Level.Height)
-	                {
-	                    SelectedPoint = PanelToGridLocation(e.Location);
-	                }
-	            }
-	            if (MouseAction == MouseAction.Remove)
-	            {
-	                _level.RemoveGridObject(PanelToGridLocation(e.Location));
-	            }
-	            if (MouseAction == MouseAction.Add)
-	            {
-	                _level.SetGridObject(PanelToGridLocation(e.Location),
-	                    new GridObject(SelectedType));
-	            }
-	            if (MouseAction == MouseAction.Start)
-	            {
-	                Level.Start = PanelToGridLocation(e.Location);
-	            }
-	            if (MouseAction == MouseAction.Finish)
-	            {
-	                Level.Finish = PanelToGridLocation(e.Location);
-	            }
-	        }
+		private void levelPanel_MouseClick(object sender, MouseEventArgs e)
+		{
+			if (_level == null)
+			{
+				return;
+			}
+			if (e.Button == MouseButtons.Left)
+			{
+				if (MouseAction == MouseAction.Select)
+				{
+					Point pos = PanelToGridLocation(e.Location);
+					if (pos.X < Level.Width && pos.Y < Level.Height)
+					{
+						SelectedPoint = PanelToGridLocation(e.Location);
+					}
+				}
+				if (MouseAction == MouseAction.Remove)
+				{
+					_level.RemoveGridObject(PanelToGridLocation(e.Location));
+				}
+				if (MouseAction == MouseAction.Add)
+				{
+					_level.SetGridObject(PanelToGridLocation(e.Location),
+						new GridObject(SelectedType));
+				}
+				if (MouseAction == MouseAction.Start)
+				{
+					Level.Start = PanelToGridLocation(e.Location);
+				}
+				if (MouseAction == MouseAction.Finish)
+				{
+					Level.Finish = PanelToGridLocation(e.Location);
+				}
+			}
 
-	    Invalidate();
+			Invalidate();
 		}
 
 		private Point PanelToGridLocation(Point panelLocation)
@@ -174,20 +174,20 @@ namespace LevelEditor.Forms
 				else if (pair.Value.Type == GridObjectType.Ghost)
 				{
 					tileBrush = new SolidBrush(Color.Gray);
-				} 
-                else if (pair.Value.Type == GridObjectType.GravityBoots)
-				{
-                    tileBrush = new SolidBrush(Color.Gold);
 				}
-                else if (pair.Value.Type == GridObjectType.JumpPlatform)
-                {
-                    tileBrush = new SolidBrush(Color.HotPink);
-                }
+				else if (pair.Value.Type == GridObjectType.GravityBoots)
+				{
+					tileBrush = new SolidBrush(Color.Gold);
+				}
+				else if (pair.Value.Type == GridObjectType.JumpPlatform)
+				{
+					tileBrush = new SolidBrush(Color.HotPink);
+				}
 				else
 				{
-				    tileBrush = new SolidBrush(Color.Brown);
+					tileBrush = new SolidBrush(Color.Brown);
 				}
-			    g.FillRectangle(tileBrush, pair.Key.X * GridSize + GridLineWidth,
+				g.FillRectangle(tileBrush, pair.Key.X * GridSize + GridLineWidth,
 					pair.Key.Y * GridSize + GridLineWidth,
 					GridSize - GridLineWidth, GridSize - GridLineWidth);
 			}
@@ -199,43 +199,44 @@ namespace LevelEditor.Forms
 				GridSize - GridLineWidth, GridSize - GridLineWidth);
 		}
 
-        private void InitializeComponent()
-        {
-            this.SuspendLayout();
-            // 
-            // LevelPanel
-            // 
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LevelPanel_MouseDown);
-            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.LevelPanel_MouseMove);
-            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.LevelPanel_MouseUp);
-            this.ResumeLayout(false);
+		private void InitializeComponent()
+		{
+			this.SuspendLayout();
+			// 
+			// LevelPanel
+			// 
+			this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LevelPanel_MouseDown);
+			this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.LevelPanel_MouseMove);
+			this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.LevelPanel_MouseUp);
+			this.ResumeLayout(false);
 
-        }
+		}
 
-        private void LevelPanel_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (_mouseDown)
-            {
-                if (e.Button == MouseButtons.Right || MouseAction == MouseAction.Remove)
-                {
-                    _level.RemoveGridObject(PanelToGridLocation(e.Location));
-                } else if (MouseAction == MouseAction.Add)
-                {
-                    _level.SetGridObject(PanelToGridLocation(e.Location),
-                        new GridObject(SelectedType));
-                }
-                Invalidate();
-            }
-        }
+		private void LevelPanel_MouseMove(object sender, MouseEventArgs e)
+		{
+			if (_mouseDown)
+			{
+				if (e.Button == MouseButtons.Right || MouseAction == MouseAction.Remove)
+				{
+					_level.RemoveGridObject(PanelToGridLocation(e.Location));
+				}
+				else if (MouseAction == MouseAction.Add)
+				{
+					_level.SetGridObject(PanelToGridLocation(e.Location),
+						new GridObject(SelectedType));
+				}
+				Invalidate();
+			}
+		}
 
-        private void LevelPanel_MouseUp(object sender, MouseEventArgs e)
-        {
-            _mouseDown = false;
-        }
+		private void LevelPanel_MouseUp(object sender, MouseEventArgs e)
+		{
+			_mouseDown = false;
+		}
 
-        private void LevelPanel_MouseDown(object sender, MouseEventArgs e)
-        {
-            _mouseDown = true;
-        }
+		private void LevelPanel_MouseDown(object sender, MouseEventArgs e)
+		{
+			_mouseDown = true;
+		}
 	}
 }

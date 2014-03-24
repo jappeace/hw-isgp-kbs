@@ -1,11 +1,11 @@
-
 #include "Patrol.h"
 #include "gravitybehaviour.h"
 #include "CollisionDetection.h"
 #include "PlayingGameState.h"
 
 namespace isgp {
-	Patrol::Patrol(Vector2D point, int range, Player* player) : _movement_speed(200) {
+	Patrol::Patrol(Vector2D point, int range, Player* player)
+		: _movement_speed(200) {
 		_position = point;
 		_oldPosition = Vector2D(1337, 1337);
 		_player = player;
@@ -37,7 +37,8 @@ namespace isgp {
 	void Patrol::Update(double milisec) {
 		double elapsed = milisec / 1000;
 		double range = _position.X() - _startingPoint.X();
-		double collisionRange = sqrt(pow(_position.X() - _player->GetPosition().X(), 2) + pow(_position.Y() - _player->GetPosition().Y(), 2));
+		double collisionRange = sqrt(pow(_position.X() - _player->GetPosition().X(), 2)
+			+ pow(_position.Y() - _player->GetPosition().Y(), 2));
 
 		if (collisionRange < 26) {
 			// Collision with player, kill it!
@@ -70,17 +71,14 @@ namespace isgp {
 		Move(Vector2D((_velocity->X() * elapsed), (_velocity->Y() * elapsed)));
 
 		//Collision
-		if((collision & Down && _velocity->Y() > 0) || (collision & Up && _velocity->Y() < 0)) { 
+		if((collision & Down && _velocity->Y() > 0)
+			|| (collision & Up && _velocity->Y() < 0)) {
 			_velocity->Y(0);
 		}
-		if((collision & Right && _velocity->X() > 0) || (collision & Left && _velocity->X() < 0)) { 
+		if((collision & Right && _velocity->X() > 0)
+			|| (collision & Left && _velocity->X() < 0)) {
 			_velocity->X(-_velocity->X());
 		}
-
-		//this is a tmp fix
-		/*if (_oldPosition == _position) {
-			_velocity->X(-_velocity->X());
-		}*/
 
 		_oldPosition = _position;
 	}
@@ -90,35 +88,35 @@ namespace isgp {
 	}
 
 	void Patrol::Paint(Graphics* g) {
-if(PlayingGameState::_debugMode)
-{
-		GridGraphicTranslator translator = GridGraphicTranslator();
-		vector<Tile*> includedTiles = _grid->GetTilesInRectangle(_position, _position + *_size + Vector2D(2));
-		g->SetColor(RGB(255, 0, 0));
-		for(unsigned int i = 0; i < includedTiles.size(); i++) {
-			Tile* t = includedTiles.at(i);
-			Vector2D* p = &translator.FromTo(*t->GetPosition());
-			includedTiles.at(i)->Paint(g);
+		if(PlayingGameState::_debugMode) {
+			GridGraphicTranslator translator = GridGraphicTranslator();
+			vector<Tile*> includedTiles =
+				_grid->GetTilesInRectangle(_position, _position + *_size + Vector2D(2));
+			g->SetColor(RGB(255, 0, 0));
 
-			g->DrawRect(Vector2D((int)p->X(), (int)p->Y()), Vector2D((int)p->X() + 16, (int)p->Y() + 16));
+			for(unsigned int i = 0; i < includedTiles.size(); i++) {
+				Tile* t = includedTiles.at(i);
+				Vector2D* p = &translator.FromTo(*t->GetPosition());
+				includedTiles.at(i)->Paint(g);
+				g->DrawRect(Vector2D((int)p->X(), (int)p->Y()), Vector2D((int)p->X() + 16, (int)p->Y() + 16));
+			}
+
+			g->SetColor(RGB(0, 255, 0));
+			for(unsigned int i = 0; i < CollidingTiles.size(); i++) {
+				Tile* t = CollidingTiles.at(i);
+				Vector2D* p = &translator.FromTo(*t->GetPosition());
+				CollidingTiles.at(i)->Paint(g);
+				g->DrawRect(Vector2D((int)p->X(), (int)p->Y()), Vector2D((int)p->X() + 16, (int)p->Y() + 16));
+			}
+			g->SetColor(RGB(0, 0, 0));
+			g->DrawStr(GetPosition() - Vector2D(GetSize()->X() / 2, 10.0),
+				"X: " + StrConverter::IntToString((int)GetPosition().X())
+				+ ", Y: " + StrConverter::IntToString((int)GetPosition().Y()));
 		}
-
-		g->SetColor(RGB(0, 255, 0));
-		for(unsigned int i = 0; i < CollidingTiles.size(); i++) {
-			Tile* t = CollidingTiles.at(i);
-			Vector2D* p = &translator.FromTo(*t->GetPosition());
-			CollidingTiles.at(i)->Paint(g);
-			g->DrawRect(Vector2D((int)p->X(), (int)p->Y()), Vector2D((int)p->X() + 16, (int)p->Y() + 16));
-		}
-		g->SetColor(RGB(0, 0, 0));
-
-		g->DrawStr(GetPosition() - Vector2D(GetSize()->X() / 2, 10.0), "X: " + StrConverter::IntToString((int)GetPosition().X()) + ", Y: " + StrConverter::IntToString((int)GetPosition().Y()));
-}
 
 		static int const kSpriteSize = 32;
 		
 		int facingOffset = 0;
-
 		if (!_facingRight) {
 			facingOffset = kSpriteSize;
 		}

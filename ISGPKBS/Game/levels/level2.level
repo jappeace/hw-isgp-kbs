@@ -240,6 +240,7 @@ finish=229,30
 64,31=tile
 79,59=tile
 65,47=patrol
+100
 74,59=tile
 71,50=tile
 75,31=tile
@@ -355,6 +356,7 @@ finish=229,30
 76,31=tile
 92,36=tile
 75,29=patrol
+100
 92,37=tile
 126,59=tile
 125,59=tile
@@ -582,6 +584,7 @@ finish=229,30
 114,50=tile
 104,48=tile
 86,57=patrol
+100
 112,49=tile
 111,49=tile
 110,49=tile
@@ -1113,4 +1116,6 @@ finish=229,30
 196,58=tile
 195,58=tile
 207,57=patrol
+100
 226,57=patrol
+100

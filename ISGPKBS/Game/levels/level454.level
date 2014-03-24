@@ -388,7 +388,9 @@ finish=200,34
 90,42=tile
 91,42=tile
 76,39=patrol
+100
 67,39=patrol
+100
 92,42=tile
 93,42=tile
 93,41=tile
