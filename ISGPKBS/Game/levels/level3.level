@@ -211,10 +211,15 @@ finish=247,20
 86,31=tile
 85,32=tile
 7,43=patrol
+100
 22,43=patrol
+100
 53,43=patrol
+100
 70,43=patrol
+100
 36,43=patrol
+100
 82,39=tile
 82,38=tile
 94,34=tile
@@ -490,7 +495,9 @@ finish=247,20
 115,30=jumpplatform
 116,30=jumpplatform
 184,28=patrol
+100
 161,28=patrol
+100
 86,30=tile
 118,30=tile
 117,30=jumpplatform
