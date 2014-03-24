@@ -39,10 +39,10 @@ namespace isgp {
 		int imgHeight1 = 791;
 		int imgHeight2 = 791;
 		
-		double width1 = (_gridWidth * 0.2) + AbstractWindow::WindowSize.GetWidth();
-		double width2 = (_gridWidth * 0.4) + AbstractWindow::WindowSize.GetWidth();
-		double width3 = (_gridWidth * 0.6) + AbstractWindow::WindowSize.GetWidth();
-		double width4 = (_gridWidth * 0.8) + AbstractWindow::WindowSize.GetWidth();
+		double width1 = (_gridWidth * 1.2) + AbstractWindow::WindowSize.GetWidth();
+		double width2 = (_gridWidth * 1.4) + AbstractWindow::WindowSize.GetWidth();
+		double width3 = (_gridWidth * 1.6) + AbstractWindow::WindowSize.GetWidth();
+		double width4 = (_gridWidth * 1.8) + AbstractWindow::WindowSize.GetWidth();
 
 		Vector2D fix = ((windowSize - Player::InitSize) * Vector2D(1.0,1.35)) / Vector2D(2);
 

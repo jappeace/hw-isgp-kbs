@@ -35,8 +35,8 @@ namespace isgp {
 		int imgHeight1 = 791;
 		int imgHeight2 = 321;
 
-		double width1 = (_gridWidth * 0.5) + windowSize.GetWidth();
-		double width2 = (_gridWidth * 0.75) + windowSize.GetWidth();
+		double width1 = (_gridWidth * 1.5) + windowSize.GetWidth();
+		double width2 = (_gridWidth * 1.75) + windowSize.GetWidth();
 
 		Vector2D fix = ((windowSize - Player::InitSize) * Vector2D(1.0,1.35)) / Vector2D(2);
 
