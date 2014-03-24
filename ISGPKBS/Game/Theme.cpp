@@ -5,11 +5,12 @@
 #include "Theme3.h"
 #include "Theme4.h"
 #include "Theme5.h"
-namespace isgp{
 
-	Theme* Theme::CreateTheme(int nr){
+namespace isgp {
+	Theme* Theme::CreateTheme(int nr) {
 		switch(nr) {
 		case 1:
+		case 6:
 			return new Theme1();
 			break;
 		case 2:
@@ -27,5 +28,4 @@ namespace isgp{
 		}
 		return new Theme1();
 	}
-
 }

@@ -97,10 +97,6 @@ void Window::NextLevel(double playtime) {
 	} else {
 		StartNextLevel();
 	}
-	
-
-
-
 }
 
 void Window::StartNextLevel() {
