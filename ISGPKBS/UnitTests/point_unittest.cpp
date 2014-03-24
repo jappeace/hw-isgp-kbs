@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "CppUnitTest.h"
 #include <CppUnitTest.h>
 #include "../Game/Vector2D.h"
 
