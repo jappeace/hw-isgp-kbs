@@ -63,6 +63,8 @@ namespace LevelEditor.Models.IO
 						break;
 					case "patrol":
 						gridObjectType = GridObjectType.Patrol;
+						// Skip the range line.
+						tileLine = LevelReader.ReadLine();
 						break;
 					case "gravityboots":
 						gridObjectType = GridObjectType.GravityBoots;
