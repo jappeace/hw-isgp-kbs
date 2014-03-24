@@ -54,6 +54,7 @@ namespace LevelEditor.Models.IO
 		/// </summary>
 		private string TileToString(Point position, GridObject obj)
 		{
+			string result;
 			string typeName = string.Empty;
 			switch (obj.Type)
 			{
@@ -73,7 +74,13 @@ namespace LevelEditor.Models.IO
 					typeName = "jumpplatform";
 					break;
 			}
-			return string.Format("{0},{1}={2}", position.X, position.Y, typeName);
+			result = string.Format("{0},{1}={2}", position.X, position.Y, typeName);
+			if (obj.Type == GridObjectType.Patrol)
+			{
+				result += "\r\n"; // Add a newline.
+				result += "100"; // Add range for patrol.
+			}
+			return result;
 		}
 	}
 }
