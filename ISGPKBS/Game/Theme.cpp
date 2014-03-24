@@ -10,7 +10,6 @@ namespace isgp {
 	Theme* Theme::CreateTheme(int nr) {
 		switch(nr) {
 		case 1:
-		case 6:
 			return new Theme1();
 			break;
 		case 2:
