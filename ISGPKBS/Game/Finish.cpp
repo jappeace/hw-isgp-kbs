@@ -7,7 +7,7 @@ namespace isgp {
 		_player = player;
 		_animationOffset = Vector2D();
 		_position = GridGraphicTranslator().FromTo(position);
-		_animation = new Animation("../tiles/toad.bmp", Size(32, 32), 4, 150);
+		_animation = new Animation("tiles/toad.bmp", Size(32, 32), 4, 150);
 	}
 	void Finish::Update(double elapsed) {
 		_animation->OnUpdate(elapsed);

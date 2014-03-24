@@ -5,7 +5,7 @@
 namespace isgp{
 
 	bool DefaultlevelFactory::LevelExists(int currentLevel) {
-		ifstream f("./levels/level" + StrConverter::IntToString(currentLevel) + ".level");
+		ifstream f("levels/level" + StrConverter::IntToString(currentLevel) + ".level");
 		if (f.good()) {
 			f.close();
 			return true;
@@ -17,7 +17,7 @@ namespace isgp{
 
 	void DefaultlevelFactory::OutputLevel(int currentLevel)
 	{
-		ifstream infile("./levels/level" + StrConverter::IntToString(currentLevel) + ".level");
+		ifstream infile("levels/level" + StrConverter::IntToString(currentLevel) + ".level");
 
 		//infile.open("level.txt");
 		

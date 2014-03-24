@@ -75,6 +75,6 @@ namespace isgp {
 
 	void GadgetGravityBoots::Paint(Graphics* g) {
 		if(!_pickedUp)
-			g->DrawBitmap("../tiles/gravityBoots.bmp", this->_position);
+			g->DrawBitmap("tiles/gravityBoots.bmp", this->_position);
 	}
 }

@@ -17,7 +17,7 @@ namespace isgp {
 	int SaveGame::ReadCurrentLevel() {
 		using namespace std;
 
-		ifstream inStream("./levels/autosave.save");
+		ifstream inStream("levels/autosave.save");
 		if (!inStream.good()) {
 			// There is no save-game, return that we are at the first level.
 			inStream.close();
@@ -44,7 +44,7 @@ namespace isgp {
 
 	void SaveGame::WriteCurrentLevel(int currentLevel) {
 		using namespace std;
-		ofstream outStream("./levels/autosave.save", ios::out);
+		ofstream outStream("levels/autosave.save", ios::out);
 		outStream << StrConverter::IntToString(currentLevel) << endl;
 		outStream.close();
 	}

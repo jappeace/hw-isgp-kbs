@@ -19,7 +19,7 @@ namespace isgp {
 		_behaviours->push_back(new GravityBehaviour(this));
 
 		_facingRight = true;
-		_animation = new Animation("../tiles/link.bmp", Size(32, 32), 2, 200);
+		_animation = new Animation("tiles/link.bmp", Size(32, 32), 2, 200);
 
 		_size = new Vector2D(32, 32);
 	}

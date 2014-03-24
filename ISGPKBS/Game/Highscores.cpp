@@ -25,7 +25,7 @@ void Highscores::Init() {
 }
 
 bool Highscores::FileExists() {
-	ifstream f("./highscores/" + StrConverter::IntToString(_level) + ".highscore");
+	ifstream f("highscores/" + StrConverter::IntToString(_level) + ".highscore");
 	if (f.good()) {
 		f.close();
 		return true;
@@ -40,7 +40,7 @@ void Highscores::LoadHighscores() {
 		return;
 	if(_highscores->size() > 0)
 		_highscores->clear();
-	std::ifstream input("./highscores/" + StrConverter::IntToString(_level) + ".highscore");
+	std::ifstream input("highscores/" + StrConverter::IntToString(_level) + ".highscore");
 
 	while (true) {
 		string name;
@@ -55,7 +55,7 @@ void Highscores::LoadHighscores() {
 
 void Highscores::SaveHighscores() {
 	std::ofstream f;
-	f.open(("./highscores/" + StrConverter::IntToString(_level) + ".highscore"));
+	f.open(("highscores/" + StrConverter::IntToString(_level) + ".highscore"));
 	//f.seekg(0, std::ios::end);
 	//f.seekg(0, std::ios::beg);
 	for(unsigned i = 0; i < _highscores->size(); i++) {

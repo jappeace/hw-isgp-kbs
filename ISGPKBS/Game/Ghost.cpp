@@ -8,7 +8,7 @@ namespace isgp {
 		_player = player;
 		
 		_velocity = new Vector2D(0,0);
-		_animation = new Animation("../tiles/boo.bmp", Size(32, 32), 2, 250);
+		_animation = new Animation("tiles/boo.bmp", Size(32, 32), 2, 250);
 	}
 
 	Ghost::~Ghost() {

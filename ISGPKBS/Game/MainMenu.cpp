@@ -7,7 +7,7 @@ namespace isgp {
 	}
 
 	void MainMenu::PaintDecoration(Graphics* g) {
-		g->LoadBitmapFile("../tiles/mainmenu.bmp", false);
-		g->DrawBitmap("../tiles/mainmenu.bmp", Vector2D(120, 60), Size(560, 83));
+		g->LoadBitmapFile("tiles/mainmenu.bmp", false);
+		g->DrawBitmap("tiles/mainmenu.bmp", Vector2D(120, 60), Size(560, 83));
 	}
 }

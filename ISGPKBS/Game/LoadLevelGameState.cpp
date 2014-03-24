@@ -52,11 +52,11 @@ namespace isgp {
 		pair<Level*, Camera*> result;
 
 		// Load common level assets
-		graphics->LoadBitmapFile("../tiles/jumpPad.bmp");
-		graphics->LoadBitmapFile("../tiles/link.bmp");
-		graphics->LoadBitmapFile("../tiles/megaman.bmp");
-		graphics->LoadBitmapFile("../tiles/boo.bmp");
-		graphics->LoadBitmapFile("../tiles/toad.bmp");
+		graphics->LoadBitmapFile("tiles/jumpPad.bmp");
+		graphics->LoadBitmapFile("tiles/link.bmp");
+		graphics->LoadBitmapFile("tiles/megaman.bmp");
+		graphics->LoadBitmapFile("tiles/boo.bmp");
+		graphics->LoadBitmapFile("tiles/toad.bmp");
 
 		// Load Level
 		graphics->SetTranslator(_window->_cam);

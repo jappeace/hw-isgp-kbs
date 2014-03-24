@@ -3,10 +3,10 @@
 namespace isgp {
 	Theme3::Theme3()
 	{
-		_tilePath = "../tiles/ground2.bmp";
-		_bg1 = "../tiles/bg3.bmp";
-		_bg2 = "../tiles/bg3Bottom.bmp";
-		_loadFilePath = "../tiles/theme3.bmp";
+		_tilePath = "tiles/ground2.bmp";
+		_bg1 = "tiles/bg3.bmp";
+		_bg2 = "tiles/bg3Bottom.bmp";
+		_loadFilePath = "tiles/theme3.bmp";
 	}
 
 	Theme3::~Theme3(void)
