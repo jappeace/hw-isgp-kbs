@@ -191,6 +191,7 @@ SpriteCache<int>* Window::GetLevelTileSnapshots(){
 
 void Window::SetPlayerLives(int playerLives) {
 	_lives = playerLives;
+	SaveGame::WriteCurrentLevel(_currentLevel, playerLives);
 }
 
 int Window::GetPlayerLives() {
