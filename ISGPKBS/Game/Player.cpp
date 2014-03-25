@@ -10,6 +10,7 @@ const Size Player::InitSize(32, 32);
 		_maxVel = 350;
 		_accel = 2200;
 		_deAccel = 1100;
+		_isAlive = true;
 
 		_position = GridGraphicTranslator().FromTo(position);
 		_velocity = new Vector2D();

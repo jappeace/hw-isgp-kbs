@@ -36,7 +36,7 @@ AbstractWindow::AbstractWindow()
 	_dwCreationWidth		= WindowSize.GetWidth();
 	_dwCreationHeight	= WindowSize.GetHeight();
 	_hbrWindowColor		= (HBRUSH)(COLOR_WINDOW+1);
-	_hIcon				= LoadIcon(_hInstance, (LPCTSTR)IDI_APPLICATION);
+	_hIcon				= LoadIcon(_hInstance, (LPCTSTR)"X.ico");
 	_strWindowTitle		= _T("Megadude++");
 	_hMenu				= NULL; 	
 	_graphics			= NULL;

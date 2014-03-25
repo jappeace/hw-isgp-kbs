@@ -190,6 +190,10 @@
   <ItemGroup>
     <ResourceCompile Include="Game.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\..\Users\pobdoq\Dropbox\monogame\X.ico" />
+    <Image Include="X.ico" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
