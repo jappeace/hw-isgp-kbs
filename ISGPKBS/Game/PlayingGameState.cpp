@@ -8,13 +8,15 @@
 namespace isgp {
 	bool PlayingGameState::_debugMode=false;
 	PlayingGameState::PlayingGameState(Window* window, Level* level, Camera* camera,
-		void(Window::*gameOver)(), int levelNumber) {
+		void(Window::*gameOver)(), void(Window::*finalGameOver)(), int levelNumber, int playerLives) {
 
 		_window = window;
 		_gameOver = gameOver;
 		_level = level;
+		_playerLives = playerLives;
 		_window = window;
 		_gameOver = gameOver;
+		_finalGameOver = finalGameOver;
 		_level = level;
 		_camera = camera;
 		_artist = new BackgroundArtist(_camera, _level, window->GetLevelTileSnapshots());
@@ -37,6 +39,11 @@ namespace isgp {
 			_level->_theme->Paint(g);
 			_artist->Paint(g);
 			_level->Paint(g);
+
+			// Paint Lives
+			for (int i = 0; i < _playerLives; ++i) {
+				g->DrawStaticBitmap("./tiles/live.bmp", Vector2D(8 + (i * 24), 32), Size(16, 16));
+			}
 		}
 	}
 
@@ -53,7 +60,13 @@ namespace isgp {
 			_level->Update(elapsed);
 			_camera->Update(elapsed);
 			if (!_level->_player->IsAlive()) {
-				(_window->*_gameOver)();
+				_window->SetPlayerLives(_window->GetPlayerLives() - 1);
+
+				if (_window->GetPlayerLives() > 0) {
+					(_window->*_gameOver)();
+				} else {
+					(_window->*_finalGameOver)();
+				}
 			} else if (_level->IsFinished()) {
 				_window->NextLevel(_level->GetPlayTime());
 			}
