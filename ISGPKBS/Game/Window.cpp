@@ -58,7 +58,7 @@ INT_PTR CALLBACK dialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 
 void Window::SetCurrentLevel(int level) {
 	_currentLevel = level;
-	SaveGame().WriteCurrentLevel(level);
+	SaveGame::WriteCurrentLevel(level, _lives);
 }
 
 void Window::OnPaint(Graphics* g) {
