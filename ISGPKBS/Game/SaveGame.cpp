@@ -5,23 +5,18 @@
 
 namespace isgp {
 
-	SaveGame::SaveGame()
-	{
-	}
-
-
-	SaveGame::~SaveGame()
-	{
-	}
-
-	int SaveGame::ReadCurrentLevel() {
+	std::pair<int, int> SaveGame::ReadCurrentLevel() {
 		using namespace std;
+
+		std::pair<int, int> saveState;
+		saveState.first = 1; // Level
+		saveState.second = 10; // Lives
 
 		ifstream inStream("levels/autosave.save");
 		if (!inStream.good()) {
 			// There is no save-game, return that we are at the first level.
 			inStream.close();
-			return 1;
+			return saveState;
 		}
 
 		// There is a savegame, let's load it
@@ -32,20 +27,27 @@ namespace isgp {
 			// Reading failed, restart game
 			inStream.close();
 			delete levelNumberString;
-			return 1;
+			return saveState;
 		}
+
+		int levelNumber = atoi(levelNumberString);
+		inStream.getline(levelNumberString, 10);
+		int livesRemaining = atoi(levelNumberString);
+
+		saveState.first = levelNumber;
+		saveState.second = livesRemaining;
 
 		inStream.close();
 
-		int levelNumber = atoi(levelNumberString);
 		delete levelNumberString;
-		return levelNumber;
+		return saveState;
 	}
 
-	void SaveGame::WriteCurrentLevel(int currentLevel) {
+	void SaveGame::WriteCurrentLevel(int currentLevel, int lives) {
 		using namespace std;
 		ofstream outStream("levels/autosave.save", ios::out);
 		outStream << StrConverter::IntToString(currentLevel) << endl;
+		outStream << StrConverter::IntToString(lives) << endl;
 		outStream.close();
 	}
 }

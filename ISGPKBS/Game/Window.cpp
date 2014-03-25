@@ -45,7 +45,9 @@ void Window::ClientResize(HWND hWnd, int nWidth, int nHeight)
 }
 
 void Window::AfterCreate(HWND hWnd) {
-	_currentLevel = SaveGame().ReadCurrentLevel();
+	pair<int, int> saveState = SaveGame::ReadCurrentLevel();
+	_currentLevel = saveState.first;
+	_lives = saveState.second;
 	_gameState = new MainMenuState(this, &Window::FullRestart, &Window::LoadLevel, &Window::QuitGame);
 	ClientResize(hWnd, WindowSize.GetWidth(), WindowSize.GetHeight());
 }
@@ -104,7 +106,7 @@ void Window::NextLevel(double playtime) {
 void Window::StartNextLevel() {
 	_currentLevel++;
 	if(DefaultlevelFactory().LevelExists(_currentLevel)) {
-		SaveGame().WriteCurrentLevel(_currentLevel);
+		SaveGame::WriteCurrentLevel(_currentLevel, _lives);
 		RestartGame();
 	} else { //Completed all levels, wat do?
 		delete _gameState;
