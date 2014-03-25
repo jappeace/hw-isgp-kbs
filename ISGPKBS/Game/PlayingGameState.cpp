@@ -42,7 +42,7 @@ namespace isgp {
 
 			// Paint Lives
 			for (int i = 0; i < _playerLives; ++i) {
-				g->DrawStaticBitmap("./tiles/live.bmp", Vector2D(8 + (i * 24), 32), Size(16, 16));
+				g->DrawStaticBitmap("tiles/live.bmp", Vector2D(8 + (i * 24), 32), Size(16, 16));
 			}
 		}
 	}

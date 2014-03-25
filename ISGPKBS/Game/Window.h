@@ -21,7 +21,7 @@ namespace isgp {
 	public:
 		Window();
 		~Window();
-		void SetCurrentLevel(int);
+		void SetCurrentLevel(int, int);
 		void OnPaint(Graphics* graphics);
 		void OnCommand(int from, int command);
 		LRESULT MsgProc(HWND, UINT, WPARAM, LPARAM);

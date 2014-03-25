@@ -13,7 +13,7 @@ namespace isgp {
 
 	void GameCompletedGameState::KeyDown(int keyCode) {
 		if(keyCode == VK_RETURN || keyCode == VK_SPACE) {
-			_window->SetCurrentLevel(1);
+			_window->SetCurrentLevel(1, 10);
 			_window->OpenMainMenu();
 		}
 	}

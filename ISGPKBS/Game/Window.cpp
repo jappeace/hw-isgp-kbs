@@ -56,9 +56,9 @@ INT_PTR CALLBACK dialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 	return NULL;
 }
 
-void Window::SetCurrentLevel(int level) {
+void Window::SetCurrentLevel(int level, int lives) {
 	_currentLevel = level;
-	SaveGame().WriteCurrentLevel(level);
+	SaveGame().WriteCurrentLevel(level, lives);
 }
 
 void Window::OnPaint(Graphics* g) {
@@ -165,6 +165,7 @@ void Window::ClearGameState(){
 }
 
 void Window::GameOver() {
+	SetCurrentLevel(_currentLevel, _lives);
 	ClearGameState();
 	_graphics->SetTranslator(NULL);
 	_gameState = new GameOverGameState(_graphics, this, &Window::RestartGame, &Window::OpenMainMenu);
@@ -174,6 +175,7 @@ void Window::FinalGameOver() {
 	ClearGameState();
 	_graphics->SetTranslator(NULL);
 	_gameState = new GameOverGameState(_graphics, this, &Window::FullRestart, &Window::OpenMainMenu);
+	SetCurrentLevel(1,10);
 }
 
 void Window::QuitGame() {
