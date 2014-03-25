@@ -54,7 +54,12 @@ INT_PTR CALLBACK dialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 	return NULL;
 }
 
-void Window::OnPaint(Graphics* g){
+void Window::SetCurrentLevel(int level) {
+	_currentLevel = level;
+	SaveGame().WriteCurrentLevel(level);
+}
+
+void Window::OnPaint(Graphics* g) {
 	if (_gameState != NULL) {
 		_gameState->Paint(g);
 	}
