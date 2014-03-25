@@ -63,6 +63,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="DeathMenu.h" />
     <ClInclude Include="Finish.h" />
     <ClInclude Include="Highscore.h" />
     <ClInclude Include="Highscores.h" />
@@ -80,6 +81,7 @@
     <ClCompile Include="BackgroundArtist.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CollisionHelper.cpp" />
+    <ClCompile Include="DeathMenu.cpp" />
     <ClCompile Include="DefaultlevelFactory.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Finish.cpp" />

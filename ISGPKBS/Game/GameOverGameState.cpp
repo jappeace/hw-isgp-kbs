@@ -1,3 +1,4 @@
+#include "DeathMenu.h"
 #include "GameOverGameState.h"
 #include "GameOverMenu.h"
 #include "MenuItem.h"
@@ -5,10 +6,14 @@
 
 namespace isgp {
 	GameOverGameState::GameOverGameState(Graphics* graphics, Window* window,
-		void (Window::*restart)(),
-		void (Window::*exit)()) {
-		_menu = new GameOverMenu();
-		_menu->AddMenuItem(new MenuItem("Retry", window, restart));
+		void (Window::*restart)(), void (Window::*exit)()) {
+		if (window->GetPlayerLives() == 0) {
+			_menu = new GameOverMenu();
+			_menu->AddMenuItem(new MenuItem("Restart", window, restart));
+		} else {
+			_menu = new DeathMenu();
+			_menu->AddMenuItem(new MenuItem("Retry", window, restart));
+		}
 		_menu->AddMenuItem(new MenuItem("Main Menu", window, exit));
 	}
 
