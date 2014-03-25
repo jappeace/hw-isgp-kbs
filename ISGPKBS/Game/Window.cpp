@@ -18,6 +18,7 @@ namespace isgp {
 // Constructors / Destructors      //
 Window::Window() {
 	_currentLevel = 1;
+	_lives = 10;
 	_cam = NULL;
 	_gameState = NULL;
 	_levelTileSnapshots = new SpriteCache<int>();
@@ -83,6 +84,7 @@ void Window::OpenMainMenu() {
 
 void Window::FullRestart() {
 	_currentLevel = 1;
+	_lives = 10;
 	RestartGame();
 }
 
@@ -158,8 +160,13 @@ void Window::ClearGameState(){
 void Window::GameOver() {
 	ClearGameState();
 	_graphics->SetTranslator(NULL);
-	_gameState = new GameOverGameState(_graphics, this,
-		&Window::RestartGame, &Window::QuitGame);
+	_gameState = new GameOverGameState(_graphics, this, &Window::RestartGame, &Window::OpenMainMenu);
+}
+
+void Window::FinalGameOver() {
+	ClearGameState();
+	_graphics->SetTranslator(NULL);
+	_gameState = new GameOverGameState(_graphics, this, &Window::FullRestart, &Window::OpenMainMenu);
 }
 
 void Window::QuitGame() {
@@ -171,11 +178,20 @@ void Window::LoadLevel(){
 	ClearGameState();
 	_gameState = new LoadLevelGameState(this, _currentLevel,_levelTileSnapshots, &Window::StartLevel);
 }
+
 void Window::StartLevel(Level* which, Camera* cam){
 	ClearGameState();
-	_gameState = new PlayingGameState(this, which, cam, &Window::GameOver, _currentLevel);
+	_gameState = new PlayingGameState(this, which, cam, &Window::GameOver, &Window::FinalGameOver, _currentLevel, _lives);
 }
 SpriteCache<int>* Window::GetLevelTileSnapshots(){
 	return _levelTileSnapshots;
+}
+
+void Window::SetPlayerLives(int playerLives) {
+	_lives = playerLives;
+}
+
+int Window::GetPlayerLives() {
+	return _lives;
 }
 }
