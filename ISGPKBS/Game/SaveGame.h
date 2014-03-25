@@ -1,16 +1,15 @@
 #pragma once
 
+#include <utility>
+
 namespace isgp {
 
 	class SaveGame
 	{
 	public:
-		SaveGame();
-		~SaveGame();
-
 		// Reads the current level number
-		int ReadCurrentLevel();
+		static std::pair<int, int> ReadCurrentLevel();
 		// Writes the current level number
-		void WriteCurrentLevel(int currentLevel);
+		static void WriteCurrentLevel(int currentLevel, int lives);
 	};
 }
