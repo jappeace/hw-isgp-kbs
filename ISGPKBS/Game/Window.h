@@ -35,14 +35,19 @@ namespace isgp {
 		void OpenMainMenu();
 		Camera* _cam;
 		SpriteCache<int>* GetLevelTileSnapshots();
+		void SetPlayerLives(int lives);
+		int GetPlayerLives();
 	private:
 		int _currentLevel;
+		// The amount of lives the player has left
+		int _lives;
 		void ClientResize(HWND hWnd, int nWidth, int nHeight);
 		IGameState* _gameState;
 		SpriteCache<int>* _levelTileSnapshots;
 		void RestartGame();
 		void QuitGame();
 		void GameOver();
+		void FinalGameOver();
 		void LoadLevel();
 		Highscores _highscores;
 		void StartLevel(Level*, Camera*);

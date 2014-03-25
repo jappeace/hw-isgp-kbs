@@ -9,7 +9,7 @@ namespace isgp {
 		void (Window::*exit)()) {
 		_menu = new GameOverMenu();
 		_menu->AddMenuItem(new MenuItem("Retry", window, restart));
-		_menu->AddMenuItem(new MenuItem("Exit", window, exit));
+		_menu->AddMenuItem(new MenuItem("Main Menu", window, exit));
 	}
 
 	GameOverGameState::~GameOverGameState() {

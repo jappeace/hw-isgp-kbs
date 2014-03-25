@@ -1,4 +1,5 @@
 #include "AbstractWindow.h"
+#include "resource3.h"
 
 #include "StrConverter.h"
 namespace isgp {
@@ -36,7 +37,7 @@ AbstractWindow::AbstractWindow()
 	_dwCreationWidth		= WindowSize.GetWidth();
 	_dwCreationHeight	= WindowSize.GetHeight();
 	_hbrWindowColor		= (HBRUSH)(COLOR_WINDOW+1);
-	_hIcon				= LoadIcon(_hInstance, (LPCTSTR)"X.ico");
+	_hIcon				= LoadIcon(_hInstance, MAKEINTRESOURCE(MEGADUDE_ICON));
 	_strWindowTitle		= _T("Megadude++");
 	_hMenu				= NULL; 	
 	_graphics			= NULL;

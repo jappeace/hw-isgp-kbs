@@ -174,6 +174,45 @@ namespace isgp {
 		::Polyline(getHDC(), points, 2);
 	}
 
+	void Graphics::DrawStaticBitmap(string path, Vector2D& position, Size& size) {
+		Sprite* sprite = this->LoadBitmapFile(path);
+		HDC bitmap_hdc = CreateCompatibleDC(NULL);
+
+		// link the bitmap to a device context
+		::SelectObject(bitmap_hdc, sprite->GetMask());
+
+		// OR the image on the mask to apply transparancy
+		BitBlockTransfer(
+			// Dest Context
+			getHDC(), 
+			// Position
+			position,
+			size, 
+			// Source Context
+			bitmap_hdc, 
+			Vector2D(),
+			SRCAND);
+
+		// link the bitmap to a device context
+		::SelectObject(bitmap_hdc, sprite->GetBitmap());
+
+		// OR the image on the mask to apply transparancy
+		BitBlockTransfer(
+			// Dest Context
+			getHDC(), 
+			// Position
+			position,
+			size,
+			// Source Context
+			bitmap_hdc, 
+			Vector2D(),
+			// Operation
+			SRCPAINT);
+
+		// release the resource
+		DeleteDC(bitmap_hdc);
+	}
+
 	void Graphics::DrawSprite(Sprite* sprite, Vector2D position, Vector2D& offset, Size& size){
 		if (_translator != NULL) {
 			position = _translator->FromTo(position);

@@ -29,7 +29,7 @@ const Size Player::InitSize(32, 32);
 
 	Player::~Player(void) {
 		// Delete references in vector
-		for (IBehaviour* behaviour = _behaviours->front(); behaviour != _behaviours->back(); ++behaviour) {
+		for (auto behaviour = _behaviours->begin(); behaviour != _behaviours->end(); ++behaviour) {
 			//delete behaviour;
 		}
 		// Delete vector
@@ -37,8 +37,6 @@ const Size Player::InitSize(32, 32);
 		delete _size;
 		delete _velocity;
 		delete _animation;
-
-		
 	}
 
 	void Player::Set_has_gravity_boots(bool hasBoots) {
