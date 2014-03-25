@@ -388,6 +388,5 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="X.ico" />
-    <Image Include="..\..\..\..\..\Users\pobdoq\Dropbox\monogame\X.ico" />
   </ItemGroup>
 </Project>
